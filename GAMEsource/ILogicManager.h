@@ -1,4 +1,5 @@
 #pragma once
+#include "UserInputType.h"
 class ILogicManager
 {
 	/*
@@ -6,4 +7,5 @@ class ILogicManager
 	*/
 public:
 	virtual ~ILogicManager() = 0; //<COMMENT FOR MYSELF>virtual destructor to be implemented in the class implementing the interface
+	virtual void executeUserCommand(UserInputType input) = 0;
 };

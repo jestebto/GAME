@@ -25,5 +25,7 @@ UserInputType RandomInputGenerator::getInput()
 		return UserInputType::Down;
 	case 4:
 		return UserInputType::Left;
+	default:
+		return UserInputType::Nothing;
 	}
 }
