@@ -1,10 +1,20 @@
 #include "pch.h"
 #include "ComponentFactory.h"
 
+//Storage managers:
+
+//Input managers:
+#include "KeyboardInputManager.h"
+#include "RandomInputGenerator.h"
+
+//Logic managers:
+
+//Output managers:
+
 
 ComponentFactory::ComponentFactory()
 {
-	throw "Not implemented";
+
 }
 
 
@@ -20,7 +30,8 @@ IStorageManager* ComponentFactory::GetStorageManager()
 
 IInputManager* ComponentFactory::GetInputManager()
 {
-	throw "Not implemented";
+	//return new KeyboardInputManager();
+	return new RandomInputGenerator();
 }
 
 ILogicManager* ComponentFactory::GetLogicManager()

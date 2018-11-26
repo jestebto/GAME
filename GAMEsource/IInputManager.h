@@ -1,4 +1,5 @@
 #pragma once
+#include "UserInputType.h"
 class IInputManager
 {
 	/*
@@ -7,4 +8,5 @@ class IInputManager
 	//<TO DO JOSE> find out if the destructor still needs to be =0 when the interface is properly implemented.
 public:
 	virtual ~IInputManager() = 0; //<COMMENT FOR MYSELF>virtual destructor to be implemented in the class implementing the interface
+	virtual UserInputType getInput();
 };
