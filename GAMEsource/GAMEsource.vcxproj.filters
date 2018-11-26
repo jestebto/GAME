@@ -33,13 +33,13 @@
     <ClInclude Include="IInputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IStorageManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ILogicManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IOutputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IStorageManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -57,6 +57,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ComponentFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IInputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ILogicManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IOutputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IStorageManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

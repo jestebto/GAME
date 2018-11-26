@@ -165,6 +165,10 @@
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GAMEsource.cpp" />
+    <ClCompile Include="IInputManager.cpp" />
+    <ClCompile Include="ILogicManager.cpp" />
+    <ClCompile Include="IOutputManager.cpp" />
+    <ClCompile Include="IStorageManager.cpp" />
     <ClCompile Include="KeyboardInputManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
