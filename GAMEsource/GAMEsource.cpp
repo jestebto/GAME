@@ -6,8 +6,11 @@
 #include "GameManager.h"
 
 int main()
-{
-    std::cout << "Hello World!\n"; 
+{    std::cout << "Hello World!\n";
+
+	GameManager gm = GameManager{};
+
+	gm.StartGame();
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

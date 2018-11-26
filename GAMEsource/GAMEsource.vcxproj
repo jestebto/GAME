@@ -151,12 +151,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="IInputManager.h" />
+    <ClInclude Include="ILogicManager.h" />
+    <ClInclude Include="IOutputManager.h" />
+    <ClInclude Include="IStorageManager.h" />
+    <ClInclude Include="KeyboardInputManager.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="UserInputType.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GAMEsource.cpp" />
+    <ClCompile Include="KeyboardInputManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
