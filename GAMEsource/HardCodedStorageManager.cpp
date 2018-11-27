@@ -16,7 +16,8 @@ HardCodedStorageManager::~HardCodedStorageManager()
 }
 
 
-StorageData HardCodedStorageManager::loadDefaultLevel() {
-	return this->defaultLevel;
+StorageData* HardCodedStorageManager::loadDefaultLevel() {
+	StorageData* defaultLevelCopy = new StorageData(std::string(defLevel)); //<TO DO JOSE> find out if this is actually a copy, create a test
+	return defaultLevelCopy;
 }
 
