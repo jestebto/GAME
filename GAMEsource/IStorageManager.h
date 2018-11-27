@@ -7,5 +7,5 @@ class IStorageManager
 	*/
 public:
 	virtual ~IStorageManager() = 0; //virtual destructor to be implemented in the class implementing the interface
-	virtual StorageData loadDefaultLevel();
+	virtual StorageData loadDefaultLevel() = 0;
 };
