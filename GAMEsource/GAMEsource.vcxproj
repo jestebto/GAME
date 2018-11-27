@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="HardCodedStorageManager.h" />
     <ClInclude Include="IInputManager.h" />
     <ClInclude Include="ILogicManager.h" />
@@ -169,6 +170,7 @@
   <ItemGroup>
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GAMEsource.cpp" />
     <ClCompile Include="HardCodedStorageManager.cpp" />
     <ClCompile Include="IInputManager.cpp" />
