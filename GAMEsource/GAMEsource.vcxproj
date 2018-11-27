@@ -153,24 +153,31 @@
   <ItemGroup>
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="HardCodedStorageManager.h" />
     <ClInclude Include="IInputManager.h" />
     <ClInclude Include="ILogicManager.h" />
     <ClInclude Include="IOutputManager.h" />
     <ClInclude Include="IStorageManager.h" />
     <ClInclude Include="KeyboardInputManager.h" />
+    <ClInclude Include="LogicData.h" />
+    <ClInclude Include="OutputData.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RandomInputGenerator.h" />
+    <ClInclude Include="StorageData.h" />
     <ClInclude Include="UserInputType.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GAMEsource.cpp" />
+    <ClCompile Include="HardCodedStorageManager.cpp" />
     <ClCompile Include="IInputManager.cpp" />
     <ClCompile Include="ILogicManager.cpp" />
     <ClCompile Include="IOutputManager.cpp" />
     <ClCompile Include="IStorageManager.cpp" />
     <ClCompile Include="KeyboardInputManager.cpp" />
+    <ClCompile Include="LogicData.cpp" />
+    <ClCompile Include="OutputData.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -178,6 +185,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="RandomInputGenerator.cpp" />
+    <ClCompile Include="StorageData.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
