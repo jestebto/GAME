@@ -15,8 +15,8 @@ HardCodedStorageManager::~HardCodedStorageManager()
 {
 }
 
-/*
+
 StorageData HardCodedStorageManager::loadDefaultLevel() {
 	return this->defaultLevel;
 }
-*/
+

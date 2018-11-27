@@ -6,7 +6,7 @@ class HardCodedStorageManager : public IStorageManager
 public:
 	HardCodedStorageManager();
 	~HardCodedStorageManager();
-	//StorageData loadDefaultLevel();
+	StorageData loadDefaultLevel();
 
 private:
 	StorageData defaultLevel;
