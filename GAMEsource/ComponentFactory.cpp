@@ -2,6 +2,7 @@
 #include "ComponentFactory.h"
 
 //Storage managers:
+#include "HardCodedStorageManager.h"
 
 //Input managers:
 #include "KeyboardInputManager.h"
@@ -20,12 +21,12 @@ ComponentFactory::ComponentFactory()
 
 ComponentFactory::~ComponentFactory()
 {
-	throw "Not implemented";
+
 }
 
 IStorageManager* ComponentFactory::GetStorageManager()
 {
-	throw "Not implemented";
+	return new HardCodedStorageManager();
 }
 
 IInputManager* ComponentFactory::GetInputManager()
