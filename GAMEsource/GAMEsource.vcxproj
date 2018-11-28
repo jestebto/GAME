@@ -169,6 +169,8 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameSprite.h" />
+    <ClInclude Include="GraphicInterface.h" />
     <ClInclude Include="HardCodedStorageManager.h" />
     <ClInclude Include="IInputManager.h" />
     <ClInclude Include="ILogicManager.h" />
@@ -189,6 +191,8 @@
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GAMEsource.cpp" />
+    <ClCompile Include="GameSprite.cpp" />
+    <ClCompile Include="GraphicInterface.cpp" />
     <ClCompile Include="HardCodedStorageManager.cpp" />
     <ClCompile Include="IInputManager.cpp" />
     <ClCompile Include="ILogicManager.cpp" />
