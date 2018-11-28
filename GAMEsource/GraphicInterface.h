@@ -47,8 +47,12 @@ public:
 	///
 	/// \param objects Objects that are drawn last.
 	void update();
-	// TODO void update(std::vector<GameObjectStruct> objects);
-	
+
+public:
+	// list of GameSprites in use
+	// TODO Lior: get this from the GameManager
+	std::vector<GameSprite*> spriteObjects;
+
 private:
 	void init();
 

@@ -21,13 +21,14 @@ GraphicInterface::GraphicInterface()
 	} };
 
 	this->map = std::move(board);
+	this->spriteObjects.push_back(new GameSprite{ "pacman", 1, 1, PACMAN, UP });
+
+	//On the first iteration, only draw the background:
 
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
-
 	// Draw the walls.
 	drawBackground(map);
-
 	// Update the screen.
 	SDL_RenderPresent(renderer);
 }
@@ -43,6 +44,7 @@ GraphicInterface::~GraphicInterface()
 
 void GraphicInterface::update()
 {
+	
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
 
@@ -56,14 +58,16 @@ void GraphicInterface::update()
 	//drawLives();
 
 	// Loop through all the objects and draw them.
-	/* TODO
-		for (auto &element : objects) {
-		SDL_Rect dst = { element.x * TILESIZE, element.y * TILESIZE, TILESIZE,
+	for (auto &element : this->spriteObjects) {
+		int x = element->getXPosition();
+		int y = element->getYPosition();
+
+		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE,
 						TILESIZE };
-		SDL_RenderCopy(renderer, sheet, &clips[element.type][element.dir],
+		SDL_RenderCopy(renderer, sheet, &clips[element->type][element->direction],
 			&dst);
 	}
-	*/
+	
 
 	// Update the screen.
 	SDL_RenderPresent(renderer);

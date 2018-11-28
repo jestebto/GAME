@@ -17,6 +17,12 @@ void GameManager::StartGame()
 
 	SetupGame();
 
+	// Lior TODO add this??
+	// Start timer for game update, call this function every 100 ms.
+	//SDL_TimerID timer_id =
+		//SDL_AddTimer(100, gameUpdate, static_cast<void *>(nullptr));
+
+
 	while (ExitGame == false) {
 		// set timeout to limit frame rate
 		Uint32 timeout = SDL_GetTicks() + 20;
@@ -49,6 +55,9 @@ void GameManager::StartGame()
 		}
 		Update();
 	}
+
+	// Lior TODO add this??
+	//SDL_RemoveTimer(timer_id);
 }
 
 void GameManager::SetupGame()

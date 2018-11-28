@@ -9,6 +9,7 @@
 #ifndef GAME_SPRITE_H
 #define GAME_SPRITE_H
 #include <string>
+#include "GameObject.h"
 
 /// These enum values denote the sprite sets available for items on screen.
 enum Type {
@@ -56,7 +57,6 @@ public:
 
 	/* Shared functions with GameObject */
 	//void setID(const std::string&);
-
 	std::string getID();
 
 	void setXPosition(int&);
@@ -65,6 +65,8 @@ public:
 	void setYPosition(int&);
 	int getYPosition();
 	
+	Type type;
+	Direction direction;
 
 private:
 	/* Shared properties with GameObject */
@@ -72,8 +74,6 @@ private:
 	int xPosition;
 	int yPosition;
 	
-	Type type;
-	Direction direction;
 
 };
 
