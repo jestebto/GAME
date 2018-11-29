@@ -31,8 +31,8 @@ IStorageManager* ComponentFactory::GetStorageManager()
 
 IInputManager* ComponentFactory::GetInputManager()
 {
-	//return new KeyboardInputManager();
-	return new RandomInputGenerator();
+	return new KeyboardInputManager();
+	//return new RandomInputGenerator();
 }
 
 ILogicManager* ComponentFactory::GetLogicManager()

@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "GameManager.h"
 #include <SDL2/SDL.h> // Lior: this is for the timer functionality to limit frame rate and input rates
+#include <thread> //sleep_for()
+#include <chrono>
+
 
 GameManager::GameManager()
 {
@@ -17,54 +20,19 @@ void GameManager::StartGame()
 
 	SetupGame();
 
-	// Lior TODO add this??
-	// Start timer for game update, call this function every 100 ms.
-	//SDL_TimerID timer_id =
-		//SDL_AddTimer(100, gameUpdate, static_cast<void *>(nullptr));
-
-
 	while (ExitGame == false) {
-		// set timeout to limit frame rate
-		Uint32 timeout = SDL_GetTicks() + 20;
-
-		// Handle the input
-		// Can be moved to InputManager later
-		SDL_Event e;
-		while (SDL_PollEvent(&e)) {
-			// Quit button.
-			if (e.type == SDL_QUIT) {
-				ExitGame = true;
-			}
-
-			// All keydown events
-			if (e.type == SDL_KEYDOWN) {
-				switch (e.key.keysym.sym) {
-				case SDLK_LEFT: // YOUR CODE HERE
-					break;
-				case SDLK_RIGHT: // YOUR CODE HERE
-					break;
-				case SDLK_UP: // YOUR CODE HERE
-					break;
-				case SDLK_DOWN: // YOUR CODE HERE
-					break;
-				case SDLK_ESCAPE:
-					ExitGame = true;
-					break;
-				}
-			}
-		}
+		
 		Update();
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
-
-	// Lior TODO add this??
-	//SDL_RemoveTimer(timer_id);
+	
 }
 
 void GameManager::SetupGame()
 {
 	//Setup all components
-	//storageManager = componentFactory.GetStorageManager();
-	//inputManager = componentFactory.GetInputManager();
+	storageManager = componentFactory.GetStorageManager();
+	inputManager = componentFactory.GetInputManager();
 	//logicManager = componentFactory.GetLogicManager();
 	outputManager = componentFactory.GetOutputManager();
 
@@ -76,7 +44,7 @@ void GameManager::Update()
 {
 	//Updates sequentially the Input, Logic and Output components,
 	//Input
-		//<TO DO JOSE> implement
+	inputManager->getInput();
 	//Logic
 		//<TO DO JOSE> implement
 	//Output
