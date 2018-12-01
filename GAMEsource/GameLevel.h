@@ -34,11 +34,11 @@ private:
 	//check if game is over
 	void checkGameOver();
 
-	int map[20][20];
+	int mapArray[20][20];   
 	int powerUpMap[20][20];
-	std::vector<Enemy*> enemies;
-	std::vector<PowerUp*> powerUps;
-	Player* player1;
+	std::vector<std::shared_ptr<Enemy>> enemies;  
+	std::vector<std::shared_ptr<PowerUp>> powerUps;
+	std::shared_ptr<Player> player1;
 	bool isGameOver{false};
 	bool isGameFinished{false};
 };
