@@ -6,6 +6,7 @@
 
 #include "GraphicInterface.h"
 #include <iostream>
+#include "UserInputType.h"
 
 
 GraphicInterface::GraphicInterface()
@@ -42,20 +43,15 @@ GraphicInterface::~GraphicInterface()
 	SDL_Quit();
 }
 
-void GraphicInterface::update()
+void GraphicInterface::update(UserInputType userInput)
 {
-	
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
 
 	// Draw the walls.
 	drawBackground(map);
-
-	// Draw the score.
-	//drawScore();
-
-	// Draw the lives.
-	//drawLives();
+	
+	GraphicInterface::moveSprite(userInput, PACMAN);
 
 	// Loop through all the objects and draw them.
 	for (auto &element : this->spriteObjects) {
@@ -64,13 +60,51 @@ void GraphicInterface::update()
 
 		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE,
 						TILESIZE };
-		SDL_RenderCopy(renderer, sheet, &clips[element->type][element->direction],
+		SDL_RenderCopy(renderer, sheet, &clips[element->art][element->direction],
 			&dst);
 	}
 	
 
 	// Update the screen.
 	SDL_RenderPresent(renderer);
+}
+
+void GraphicInterface::moveSprite(UserInputType command, ArtType artType)
+{
+	int moveSize= 1;
+	/*  Co-ordinates:
+	*   .---> +x
+	*   |
+	*   v
+	*   +y
+    */
+
+	for (auto &element : this->spriteObjects)
+	{
+		
+		if (element->art == artType)
+		{
+			switch (command) {
+			case UserInputType::Up:
+				element->setYPosition(element->getYPosition() - moveSize);
+				element->direction = UP;
+				break;
+			case UserInputType::Down:
+				element->setYPosition(element->getYPosition() + moveSize);
+				element->direction = DOWN;
+				break;
+			case UserInputType::Left:
+				element->setXPosition(element->getXPosition() - moveSize);
+				element->direction = LEFT;
+				break;
+			case UserInputType::Right:
+				element->setXPosition(element->getXPosition() + moveSize);
+				element->direction = RIGHT;
+				break;
+			}
+		}
+	}
+	
 }
 
 /// Initialises the UI::window and the UI::renderer.
@@ -219,7 +253,7 @@ void GraphicInterface::loadMaps()
 		nr[DOWN] = nr[UP];
 		nr[LEFT] = nr[UP];
 		nr[RIGHT] = nr[UP];
-		clips[(Type)(ZERO + i)] = nr;
+		clips[(ArtType)(ZERO + i)] = nr;
 	}
 }
 

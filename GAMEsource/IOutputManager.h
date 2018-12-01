@@ -1,4 +1,6 @@
 #pragma once
+#include "UserInputType.h"
+
 class IOutputManager
 {
 	/*
@@ -6,5 +8,5 @@ class IOutputManager
 	*/
 public:
 	virtual ~IOutputManager() = 0; //virtual destructor to be implemented in the class implementing the interface
-	virtual void update() = 0;
+	virtual void update(UserInputType) = 0;
 };

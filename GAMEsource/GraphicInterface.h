@@ -11,6 +11,7 @@
 #define GRAPHIC_INTERFACE_H
 
 #include "IOutputManager.h"
+#include "UserInputType.h"
 #include "GameSprite.h"
 
 #include <SDL2/SDL.h>
@@ -46,7 +47,10 @@ public:
 	/// - Draw the objects (last)
 	///
 	/// \param objects Objects that are drawn last.
-	void update();
+	void update(UserInputType);
+
+	/// Move a sprite
+	void moveSprite(UserInputType, ArtType);
 
 public:
 	// list of GameSprites in use
@@ -91,7 +95,7 @@ private:
 	/// `clips[<type>][<direction>]`.
 	/// \see Type
 	/// \see Direction
-	std::map<Type, std::map<Direction, SDL_Rect>> clips;
+	std::map<ArtType, std::map<Direction, SDL_Rect>> clips;
 
 	enum { TILESIZE = 24 };
 };

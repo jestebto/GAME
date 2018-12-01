@@ -44,12 +44,12 @@ void GameManager::Update()
 {
 	//Updates sequentially the Input, Logic and Output components,
 	//Input
-	inputManager->getInput();
+	UserInputType userInput = inputManager->getInput();
 	//Logic
 		//<TO DO JOSE> implement
 	//Output
 		//<TO DO JOSE> implement
-	outputManager->update();
+	outputManager->update(userInput);
 }
 
 int GameManager::Add(int x, int y) {

@@ -26,7 +26,6 @@ UserInputType KeyboardInputManager::getInput()
 	//Uint32 timeout = SDL_GetTicks() + 20; //commented out by Jose
 
 	// Handle the input
-	// Can be moved to InputManager later
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		// Quit button.

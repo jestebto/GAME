@@ -12,7 +12,7 @@
 #include "GameObject.h"
 
 /// These enum values denote the sprite sets available for items on screen.
-enum Type {
+enum ArtType {
 	PACMAN,
 	BLINKY,
 	PINKY,
@@ -49,23 +49,23 @@ enum Direction { UP, DOWN, LEFT, RIGHT };
 class GameSprite
 {
 public:
-	GameSprite(std::string, int, int, Type, Direction);
+	GameSprite(std::string, int, int, ArtType, Direction);
 	virtual ~GameSprite() = default; // vitual destructor
 
-	void setType(Type);
+	void setType(ArtType);
 	void setDirection(Direction);
 
 	/* Shared functions with GameObject */
 	//void setID(const std::string&);
 	std::string getID();
 
-	void setXPosition(int&);
+	void setXPosition(int);
 	int getXPosition();
 
-	void setYPosition(int&);
+	void setYPosition(int);
 	int getYPosition();
 	
-	Type type;
+	ArtType art;
 	Direction direction;
 
 private:
