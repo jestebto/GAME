@@ -15,23 +15,23 @@ public:
 	//destructor
 	//~GameLevel();
 
-	// create all the clases thet form GameLevel
-	void createLevel(std::string);
+	//! create all the clases thet form GameLevel
+	void createLevel(LogicData);
 
-	// evaluate and perform the user's command
-	void executeUserCommand(int);
+	//! evaluate and perform the user's command
+	void executeUserCommand(UserInputType);
 
 private:
-	// check if the player would collide with a wall
+	//! check if the player would collide with a wall
 	bool checkWallCollision(int, int);
 
-	// check if the player would collide with an enemy
+	//! check if the player would collide with an enemy
 	bool checkEnemyCollision(int, int);
 
-	//check if the player would collide with a power up
+	//! check if the player would collide with a power up
 	bool checkPowerUpCollision(int, int);
 	
-	//check if game is over
+	//! check if game is over
 	void checkGameOver();
 
 	int mapArray[20][20];   
