@@ -28,10 +28,12 @@ void GameManager::SetupGame()
 	storageManager = componentFactory.GetStorageManager();
 	inputManager = componentFactory.GetInputManager();
 	logicManager = componentFactory.GetLogicManager();
-	outputManager = componentFactory.GetOutputManager();
+	//outputManager = componentFactory.GetOutputManager();
 
 	//Read the initial data (level) from the Storage component
 	loadedStorageData = storageManager->loadDefaultLevel();
+	
+	logicManager->createLevel(LogicData{ loadedStorageData->data });
 
 }
 

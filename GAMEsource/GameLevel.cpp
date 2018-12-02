@@ -7,7 +7,7 @@
 
 // constructor
 GameLevel::GameLevel() {
-
+	
 };
 
 //prototype functions
@@ -25,7 +25,7 @@ void GameLevel::createLevel(LogicData inputString) {
 	//! Handling each string object in objectVector
 	for (unsigned int i{ 0 }; i < objectVector.size(); ++i) {
 
-		std::size_t amp = objectVector[i].find("&");
+		std::size_t amp = objectVector[i].find("&"); //<TO DO> check if we can specify a specific type
 
 		std::string initialChar{ objectVector[i].at(0) }; //!< String containing the first character of a string 
 		int objectType{stoi(initialChar)}; //!< Conv is the integer corresponding to the first character of a string
@@ -34,11 +34,13 @@ void GameLevel::createLevel(LogicData inputString) {
 		case 0: { //!< 0 is map
 			//! erase the part of the string that contains the object type and the ampersand symbol
 			objectVector[i].erase(0, amp + 1);
+
 			//!loop through the map data
+			unsigned int row{ 0 };
+			unsigned int column{ 0 };
 			for (unsigned int value{ 0 }; value < objectVector[i].size(); value++) {
 				int tempValue = objectVector[i].at(value);
-				unsigned int row{ 0 };
-				unsigned int column{ 0 };
+				
 				if (tempValue == 45) { //!< if dash, add row
 					column = 0;
 					row++;
@@ -56,9 +58,9 @@ void GameLevel::createLevel(LogicData inputString) {
 			//separate the data to construct the new object
 			tempConstructorData = separateData(objectVector[i]);
 			//create a new player and save a shared pointer to it
-			std::shared_ptr<Player> player1 (new Player(tempConstructorData[0], stoi(tempConstructorData[1]),
-			stoi(tempConstructorData[2]), stoi(tempConstructorData[3])));
-			tempConstructorData = {}; //make sure the vector is empty in the next case
+			player1 = new Player(tempConstructorData[0], stoi(tempConstructorData[1]),
+			stoi(tempConstructorData[2]), stoi(tempConstructorData[3]));
+			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
 			break;
 		}
 		case 2: { //!< 2 is an enemy
@@ -124,7 +126,7 @@ std::vector<std::string> separateData(std::string inputString) {
 
 //
 void GameLevel::executeUserCommand(UserInputType userInput) {
-	bool movement = true; //!< bollean that sais if the player is going to move
+	bool movement = true; //!< boolean that sais if the player is going to move
 	//! check the current position of the player
 	int tempX = player1->getXPosition();               
 	int tempY = player1->getYPosition();											
@@ -134,13 +136,13 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		movement = false; //!< if no user input, no movement
 		break;
 	case UserInputType::Up: //!< Move Up
-		tempY++;
+		tempY--;
 		break;
 	case UserInputType::Right: //!< Move Right
 		tempX++;
 		break;
 	case UserInputType::Down: //!< Move Down
-		tempY--;
+		tempY++;
 		break;
 	case UserInputType::Left: //!< Move Left
 		tempX--;

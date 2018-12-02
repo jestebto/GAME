@@ -38,7 +38,7 @@ private:
 	int powerUpMap[20][20];
 	std::vector<std::shared_ptr<Enemy>> enemies;  
 	std::vector<std::shared_ptr<PowerUp>> powerUps;
-	std::shared_ptr<Player> player1;
+	Player* player1;
 	bool isGameOver{false};
 	bool isGameFinished{false};
 };
