@@ -41,7 +41,8 @@ void GameManager::SetupGame()
 	//Read the initial data (level) from the Storage component
 	loadedStorageData = storageManager->loadDefaultLevel();
 	
-	logicManager->createLevel(LogicData{ loadedStorageData->data });
+	logicManager->createLevel(LogicData{ loadedStorageData->logicData });
+	outputManager->loadLevel(OutputData{ loadedStorageData->outputData });
 }
 
 void GameManager::Update()

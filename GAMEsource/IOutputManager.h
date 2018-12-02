@@ -1,5 +1,6 @@
 #pragma once
 #include "UserInputType.h"
+#include "OutputData.h"
 
 class IOutputManager
 {
@@ -8,6 +9,7 @@ class IOutputManager
 	*/
 public:
 	virtual ~IOutputManager() = 0; ///virtual destructor to be implemented in the class implementing the interface
+	virtual void loadLevel(OutputData) = 0;
 	virtual void update() = 0;
 	virtual void updateTest(UserInputType) = 0;/// for test purposes to bypass the logic component 
 };

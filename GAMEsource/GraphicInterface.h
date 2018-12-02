@@ -43,6 +43,9 @@ public:
 	/// Destructor fully de-initializes the UI, including closing the main window.
 	~GraphicInterface();
 
+
+	void loadLevel(OutputData);
+
 	/// Update the screen TODO
 	/// - Draw the background
 	/// - Draw the score

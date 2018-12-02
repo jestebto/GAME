@@ -4,9 +4,10 @@
 class StorageData
 {
 public:
-	StorageData(std::string s);
+	StorageData(std::string ld, std::string od);
 	~StorageData();
 
-	std::string data;
+	std::string logicData;
+	std::string outputData;
 };
 

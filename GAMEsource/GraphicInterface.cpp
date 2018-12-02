@@ -43,6 +43,10 @@ GraphicInterface::~GraphicInterface()
 	SDL_Quit();
 }
 
+void GraphicInterface::loadLevel(OutputData data) {
+	//<TO DO LIOR> implement
+}
+
 void GraphicInterface::update()
 {
 	// Clear the current renderer.
