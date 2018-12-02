@@ -1,5 +1,10 @@
 #include "pch.h"
 #include "GameManager.h"
+
+#include <SDL2/SDL.h> // Lior: this is for the timer functionality to limit frame rate and input rates
+#include <thread> //sleep_for()
+#include <chrono>
+
 #include <string>
 
 GameManager::GameManager()
@@ -18,8 +23,11 @@ void GameManager::StartGame()
 	SetupGame();
 
 	while (ExitGame == false) {
+		
 		Update();
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
+	
 }
 
 void GameManager::SetupGame()
@@ -27,26 +35,26 @@ void GameManager::SetupGame()
 	//Initializes all 4 components making use of the ComponentFactory class
 	storageManager = componentFactory.GetStorageManager();
 	inputManager = componentFactory.GetInputManager();
+	outputManager = componentFactory.GetOutputManager();
 	logicManager = componentFactory.GetLogicManager();
-	//outputManager = componentFactory.GetOutputManager();
 
 	//Read the initial data (level) from the Storage component
 	loadedStorageData = storageManager->loadDefaultLevel();
 	
 	logicManager->createLevel(LogicData{ loadedStorageData->data });
-
 }
 
 void GameManager::Update()
 {
 	//Updates sequentially the Input, Logic and Output components,
 	//Input
-	UserInputType input = inputManager->getInput();
-
+	UserInputType userInput = inputManager->getInput();
+  
 	//Logic
-	logicManager->executeUserCommand(input);
+	logicManager->executeUserCommand(userInput);
 
 	//Output
+	outputManager->updateTest(userInput);
 		//<TO DO JOSE> implement when Class Level is ready to send updates
 }
 
