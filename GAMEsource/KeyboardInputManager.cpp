@@ -29,11 +29,11 @@ UserInputType KeyboardInputManager::getInput()
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		// Quit button.
-		/*
+		
 		if (e.type == SDL_QUIT) {
-			ExitGame = true;
+			std::cout << "Pressed Quit!\n"; //<TO DO JOSE> comment out or remove (DEBUG)
 		}
-		*/ //commented out by Jose
+		 //commented out by Jose
 		//<TO DO JOSE> consider a proper way of checking for the window closed event from GUI and detecting it from GameManager (probably a boolean in the IOuputManager)
 
 		// All keydown events
