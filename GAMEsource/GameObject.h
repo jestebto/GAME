@@ -18,6 +18,9 @@ public:
 	void setYPosition(int&);
 	int getYPosition();
 
+	//save the data in a string
+	std::string dataToString();
+
 private:
 	std::string objectID;
 	int xPosition;

@@ -1,5 +1,6 @@
 #include <string>
 #include "GameObject.h"
+#include <sstream>
 
 GameObject::GameObject(std::string ID, int xPos, int yPos) {
 	objectID = ID;
@@ -26,3 +27,13 @@ void GameObject::setYPosition(int& yPos) {
 
 // return Y-Position
 int GameObject::getYPosition() { return yPosition; }
+
+
+//return a string with the player data
+std::string GameObject::dataToString() {
+	std::ostringstream addData;
+	addData << objectID <<"," << xPosition
+		<<"," << yPosition << ",";
+	std::string totalData = addData.str();
+	return totalData;
+}

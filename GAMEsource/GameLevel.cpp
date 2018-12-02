@@ -170,9 +170,21 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 	checkGameOver();
 }
 
+//return a vector of strings with to update the output
 std::vector<std::string> GameLevel::getLevelState()
-{
-	return std::vector<std::string>();
+{	
+	std::vector<std::string> data;
+
+	data.push_back(player1->dataToString());
+
+	for (std::shared_ptr<Enemy> enemyPtr : enemies) {
+		data.push_back(enemyPtr->dataToString());
+	}
+
+	for (std::shared_ptr<PowerUp> powerUpPtr : powerUps) {
+		data.push_back(powerUpPtr->dataToString());
+	}
+	return data;
 }
 
 
