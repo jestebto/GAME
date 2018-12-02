@@ -21,6 +21,8 @@ public:
 	//! evaluate and perform the user's command
 	void executeUserCommand(UserInputType);
 
+	std::vector<std::string> getLevelState();
+
 private:
 	//! check if the player would collide with a wall
 	bool checkWallCollision(int, int);

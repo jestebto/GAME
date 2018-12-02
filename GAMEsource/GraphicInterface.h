@@ -53,7 +53,7 @@ public:
 	/// - Draw the objects (last)
 	///
 	/// \param objects Objects that are drawn last.
-	void update();
+	void update(std::vector<std::string> data);
 
 	/// A test update that takes in user inputs directly, so that the logic component can be completely bypassed
 	/// This is useful for testing animations

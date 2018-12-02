@@ -53,9 +53,11 @@ void GameManager::Update()
   
 	//Logic
 	logicManager->executeUserCommand(userInput);
+	
 
 	//Output
-	outputManager->updateTest(userInput);
+	//outputManager->updateTest(userInput);
+	outputManager->update(logicManager->getLevelState());
 		//<TO DO JOSE> implement when Class Level is ready to send updates
 }
 

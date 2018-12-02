@@ -47,7 +47,7 @@ void GraphicInterface::loadLevel(OutputData data) {
 	//<TO DO LIOR> implement
 }
 
-void GraphicInterface::update()
+void GraphicInterface::update(std::vector<std::string> data)
 {
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);

@@ -170,6 +170,11 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 	checkGameOver();
 }
 
+std::vector<std::string> GameLevel::getLevelState()
+{
+	return std::vector<std::string>();
+}
+
 
 //! Check collision with a wall
 bool GameLevel::checkWallCollision(int tempX, int tempY) {
