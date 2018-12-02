@@ -1,154 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="ComponentFactory.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="GameLevel.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GAMEsource.cpp" />
+    <ClCompile Include="GameSprite.cpp" />
+    <ClCompile Include="GraphicInterface.cpp" />
+    <ClCompile Include="HardCodedStorageManager.cpp" />
+    <ClCompile Include="IInputManager.cpp" />
+    <ClCompile Include="ILogicManager.cpp" />
+    <ClCompile Include="IOutputManager.cpp" />
+    <ClCompile Include="IStorageManager.cpp" />
+    <ClCompile Include="KeyboardInputManager.cpp" />
+    <ClCompile Include="LogicData.cpp" />
+    <ClCompile Include="OutputData.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
+    <ClCompile Include="RandomInputGenerator.cpp" />
+    <ClCompile Include="StorageData.cpp" />
+    <ClCompile Include="DataToolkit.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UserInputType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardInputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponentFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IInputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ILogicManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IOutputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IStorageManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomInputGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HardCodedStorageManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StorageData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LogicData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OutputData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DummyClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-
-    <ClInclude Include="GraphicInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSprite.h">
-      <Filter>Header Files</Filter>
-    <ClInclude Include="GameLevel.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerUp.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GAMEsource.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardInputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponentFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IInputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ILogicManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IOutputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="IStorageManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RandomInputGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HardCodedStorageManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StorageData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LogicData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="OutputData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSprite.cpp">
-    <ClCompile Include="GameLevel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerUp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="ComponentFactory.h" />
+    <ClInclude Include="DummyClass.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="GameLevel.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameSprite.h" />
+    <ClInclude Include="GraphicInterface.h" />
+    <ClInclude Include="HardCodedStorageManager.h" />
+    <ClInclude Include="IInputManager.h" />
+    <ClInclude Include="ILogicManager.h" />
+    <ClInclude Include="IOutputManager.h" />
+    <ClInclude Include="IStorageManager.h" />
+    <ClInclude Include="KeyboardInputManager.h" />
+    <ClInclude Include="LogicData.h" />
+    <ClInclude Include="OutputData.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="RandomInputGenerator.h" />
+    <ClInclude Include="StorageData.h" />
+    <ClInclude Include="UserInputType.h" />
+    <ClInclude Include="DataToolkit.h" />
   </ItemGroup>
 </Project>

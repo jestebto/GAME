@@ -4,6 +4,7 @@
 #include <cmath>
 #include <array>
 #include "GameLevel.h"
+#include "DataToolkit.h"
 
 // constructor
 GameLevel::GameLevel() {
@@ -20,7 +21,7 @@ void GameLevel::createLevel(LogicData inputString) {
 	std::vector <std::string> tempConstructorData;
 
 	//! separateObjects function creates a vector of string corresponding to different objects
-	objectVector = separateObjects(inputString.data);
+	objectVector = DataToolkit::getSubs(inputString.data, ';');
 	
 	//! Handling each string object in objectVector
 	for (unsigned int i{ 0 }; i < objectVector.size(); ++i) {
@@ -95,6 +96,7 @@ void GameLevel::createLevel(LogicData inputString) {
 
 //! separate the data in the input string into different sub-strings that represent different objects
 std::vector<std::string>  separateObjects(std::string inputString) {
+	//<TO DO LUUK> remove if it worked correctly using DataToolkit::getSubs()
 	std::vector <std::string> objectVector; //!< Creating a vector which stores string values
 	std::size_t del;
 
@@ -107,6 +109,7 @@ std::vector<std::string>  separateObjects(std::string inputString) {
 		inputString.erase(0, del + 1);
 	}
 	return objectVector;
+	
 }
 
 std::vector<std::string> separateData(std::string inputString) {
