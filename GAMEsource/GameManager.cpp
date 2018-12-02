@@ -49,7 +49,7 @@ void GameManager::Update()
 		//<TO DO JOSE> implement
 	//Output
 		//<TO DO JOSE> implement
-	outputManager->update(userInput);
+	outputManager->updateTest(userInput);
 }
 
 int GameManager::Add(int x, int y) {

@@ -4,7 +4,10 @@
  *  Created on: 28 November, 2018
  *      Author: Lior Sinai
  * Description: Graphic user interface using SDL2 library. 
- *              Based on the UI class in the Pacman code 
+ *              Based on the UI class in the Pacman code:
+ *              Created on : Jan 29, 2015
+ *				Author     : frits
+ *				Group      : TA's
  */
 
 #ifndef GRAPHIC_INTERFACE_H
@@ -47,10 +50,16 @@ public:
 	/// - Draw the objects (last)
 	///
 	/// \param objects Objects that are drawn last.
-	void update(UserInputType);
+	void update();
 
-	/// Move a sprite
-	void moveSprite(UserInputType, ArtType);
+	/// A test update that takes in user inputs directly, so that the logic component can be completely bypassed
+	/// This is useful for testing animations
+	void updateTest(UserInputType);
+
+	
+
+	/// Move a sprite on the screen
+	void moveSprite(UserInputType, std::string);
 
 public:
 	// list of GameSprites in use

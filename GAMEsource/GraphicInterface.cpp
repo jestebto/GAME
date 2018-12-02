@@ -22,7 +22,7 @@ GraphicInterface::GraphicInterface()
 	} };
 
 	this->map = std::move(board);
-	this->spriteObjects.push_back(new GameSprite{ "pacman", 1, 1, PACMAN, UP });
+	this->spriteObjects.push_back(new GameSprite{ "User", 1, 1, CLYDE, UP });
 
 	//On the first iteration, only draw the background:
 
@@ -43,7 +43,31 @@ GraphicInterface::~GraphicInterface()
 	SDL_Quit();
 }
 
-void GraphicInterface::update(UserInputType userInput)
+void GraphicInterface::update()
+{
+	// Clear the current renderer.
+	SDL_RenderClear(renderer);
+
+	// Draw the walls.
+	drawBackground(map);
+
+	// Loop through all the objects and draw them.
+	for (auto &element : this->spriteObjects) {
+		int x = element->getXPosition();
+		int y = element->getYPosition();
+
+		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE,
+						TILESIZE };
+		SDL_RenderCopy(renderer, sheet, &clips[element->art][element->direction],
+			&dst);
+	}
+
+
+	// Update the screen.
+	SDL_RenderPresent(renderer);
+}
+
+void GraphicInterface::updateTest(UserInputType userInput)
 {
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
@@ -51,7 +75,7 @@ void GraphicInterface::update(UserInputType userInput)
 	// Draw the walls.
 	drawBackground(map);
 	
-	GraphicInterface::moveSprite(userInput, PACMAN);
+	GraphicInterface::moveSprite(userInput, "User");
 
 	// Loop through all the objects and draw them.
 	for (auto &element : this->spriteObjects) {
@@ -69,7 +93,7 @@ void GraphicInterface::update(UserInputType userInput)
 	SDL_RenderPresent(renderer);
 }
 
-void GraphicInterface::moveSprite(UserInputType command, ArtType artType)
+void GraphicInterface::moveSprite(UserInputType command, std::string name)
 {
 	int moveSize= 1;
 	/*  Co-ordinates:
@@ -82,24 +106,24 @@ void GraphicInterface::moveSprite(UserInputType command, ArtType artType)
 	for (auto &element : this->spriteObjects)
 	{
 		
-		if (element->art == artType)
+		if (element->getID() == name)
 		{
 			switch (command) {
 			case UserInputType::Up:
 				element->setYPosition(element->getYPosition() - moveSize);
-				element->direction = UP;
+				element->direction = UP; //for display purposes only
 				break;
 			case UserInputType::Down:
 				element->setYPosition(element->getYPosition() + moveSize);
-				element->direction = DOWN;
+				element->direction = DOWN; //for display purposes only
 				break;
 			case UserInputType::Left:
 				element->setXPosition(element->getXPosition() - moveSize);
-				element->direction = LEFT;
+				element->direction = LEFT; //for display purposes only
 				break;
 			case UserInputType::Right:
 				element->setXPosition(element->getXPosition() + moveSize);
-				element->direction = RIGHT;
+				element->direction = RIGHT; //for display purposes only
 				break;
 			}
 		}
