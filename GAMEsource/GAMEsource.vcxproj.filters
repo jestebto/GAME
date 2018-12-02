@@ -72,11 +72,17 @@
     <ClInclude Include="DummyClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+
     <ClInclude Include="GraphicInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameSprite.h">
       <Filter>Header Files</Filter>
+    <ClInclude Include="GameLevel.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerUp.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +141,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameSprite.cpp">
+    <ClCompile Include="GameLevel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

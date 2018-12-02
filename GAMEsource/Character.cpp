@@ -9,7 +9,7 @@ Character::Character(const std::string ID, int xPos, int yPos,
 
 // set number of lives
 void Character::setLives(int nrLives) {
-	lives = nrLives;
+	lives += nrLives;
 }
 
 // check if it is alive

@@ -4,6 +4,7 @@
 #include "IInputManager.h"
 #include "ILogicManager.h"
 #include "IOutputManager.h"
+#include "StorageData.h"
 
 
 class GameManager
@@ -17,12 +18,14 @@ public:
 
 private:
 	bool ExitGame;
+	StorageData* loadedStorageData;
 	ComponentFactory componentFactory;
 	IStorageManager* storageManager;
 	IInputManager* inputManager;
 	ILogicManager* logicManager;
 	IOutputManager* outputManager;
 	void SetupGame();
+	void DistributeData();
 	void Update();
 };
 

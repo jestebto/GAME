@@ -9,6 +9,7 @@
 #include "RandomInputGenerator.h"
 
 //Logic managers:
+#include "GameLevel.h"
 
 //Output managers:
 #include "GraphicInterface.h"
@@ -37,7 +38,7 @@ IInputManager* ComponentFactory::GetInputManager()
 
 ILogicManager* ComponentFactory::GetLogicManager()
 {
-	throw "Not implemented"; //George and Luuk: here you can return an instance of your Level class or however you want to call it
+	return new GameLevel();
 }
 
 IOutputManager* ComponentFactory::GetOutputManager()

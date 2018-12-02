@@ -1,0 +1,6 @@
+﻿1>------ Build started: Project: GAMEsource, Configuration: Debug x64 ------
+1>GameLevel.cpp
+1>GAMEsource.vcxproj -> C:\Users\User\source\repos\GAME\x64\Debug\GAMEsource.exe
+2>------ Skipped Build: Project: GAMEtest, Configuration: Debug x64 ------
+2>Project not selected to build for this solution configuration 
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 1 skipped ==========

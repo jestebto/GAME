@@ -2,8 +2,9 @@
 #include "OutputData.h"
 
 
-OutputData::OutputData()
+OutputData::OutputData(std::string s)
 {
+	this->data = s;
 }
 
 
