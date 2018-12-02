@@ -25,15 +25,9 @@
 class GraphicInterface: public IOutputManager
 {
 public:
-	/// Constructor initializes the UI fully.
-	///
-	/// Creates a main (SDL) window for rendering, and loads the sprites from a
-	/// bitmap on disk.
-	///
-	/// \param map the map of the board
+	/// Constructor 
 	GraphicInterface();
 	// TODO: GraphicInterface(std::vector<std::vector<int>> map); // pass the map at the start
-
 
 	// UI objects should not be copied or moved.
 	GraphicInterface(const GraphicInterface&) = delete;
@@ -43,7 +37,11 @@ public:
 	/// Destructor fully de-initializes the UI, including closing the main window.
 	~GraphicInterface();
 
-
+	/// Initialize the UI fully.
+	/// Loads data
+	/// Creates a main (SDL) window for rendering, and loads the sprites from a
+	/// bitmap on disk.
+	/// Public because called by Game Manager
 	void loadLevel(OutputData);
 
 	/// Update the screen TODO
@@ -60,7 +58,6 @@ public:
 	void updateTest(UserInputType);
 
 	
-
 	/// Move a sprite on the screen
 	void moveSprite(UserInputType, std::string);
 
@@ -70,16 +67,16 @@ public:
 	std::vector<GameSprite*> spriteObjects;
 
 private:
-	void init();
+	void init(int,int);
+	void setBackground(const std::string&);
 
     /// Loads the sprite sheet.
     void loadTextures();
 
-	/// Load the maps that contains all the clipping masks.
-	///
-	/// The clipping masks are stored in #clips. Usage is:
-	/// `clips[<type>][<direction>]`.
-	void loadMaps();
+	/// Seperate tiles into a tileSet map. Usage is:
+	/// tileSet[<ArtType>][<Direction>]
+	/// and the tile set itself is in GraphicInterface::sheet
+	void seperateTiles();
 
 	/// Draws walls onto the screen according to \p map
 	/// \param map A 2-by-2 grid indicating which grid locations are walls.
@@ -103,11 +100,11 @@ private:
 
 	/// Map containing all the game objects.
 	///
-	/// Stores the clipping masks related to UI::sheet. Usage is:
-	/// `clips[<type>][<direction>]`.
-	/// \see Type
+	/// Stores tiles to GraphicInterface::sheet. Usage is:
+	/// tileSet[<type>][<direction>]`.
+	/// \see ArtType
 	/// \see Direction
-	std::map<ArtType, std::map<Direction, SDL_Rect>> clips;
+	std::map<SpriteAttributes::ArtType, std::map<SpriteAttributes::Direction, SDL_Rect>> tileSet;
 
 	enum { TILESIZE = 24 };
 };
