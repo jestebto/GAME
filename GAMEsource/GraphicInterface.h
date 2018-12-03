@@ -27,9 +27,8 @@ class GraphicInterface: public IOutputManager
 public:
 	/// Constructor 
 	GraphicInterface();
-	// TODO: GraphicInterface(std::vector<std::vector<int>> map); // pass the map at the start
 
-	// UI objects should not be copied or moved.
+	/// UI objects should not be copied or moved.
 	GraphicInterface(const GraphicInterface&) = delete;
 	GraphicInterface(const GraphicInterface&&) = delete;
 	GraphicInterface &operator=(const GraphicInterface &) = delete;
@@ -49,8 +48,6 @@ public:
 	/// - Draw the score
 	/// - Draw the remaining lives
 	/// - Draw the objects (last)
-	///
-	/// \param objects Objects that are drawn last.
 	void update(std::vector<std::string> data);
 
 	/// A test update that takes in user inputs directly, so that the logic component can be completely bypassed
@@ -67,14 +64,10 @@ public:
 	/// for test purposes only, as this is not connected to the logic
 	void moveSprite(UserInputType, std::string);
 
-public:
-	// Map of GameSprites in use
-	// The key is the ID
-	// TODO Lior: get this from the GameManager
-	std::map<std::string,GameSprite*> spriteObjects;
-
 private:
-	void init(int,int);
+	/// Initialise a window for SDL
+	void init();
+	/// Read the map layout and add into the map array
 	void setBackground(const std::string&);
 
     /// Loads the sprite sheet.
@@ -88,6 +81,7 @@ private:
 	/// Draws walls onto the screen according to \p map
 	/// \param map A 2-by-2 grid indicating which grid locations are walls.
 	void drawBackground(std::vector<std::vector<int>> &map);
+	void drawLives();
 
 	/// Loads an image into a texture on the rendering device
 	/// \param file The image file to load
@@ -101,19 +95,30 @@ private:
 	SDL_Renderer *renderer;
 	/// Loaded SDL texture with all sprite bitmaps.
 	SDL_Texture *sheet;
+	/// Loaded SDL texture with the game over screen
+	SDL_Texture *gameOverScreen;
 
 	/// 2d array containing the map, a 1 is a wall.
 	std::vector<std::vector<int>> map;
+	int mapWidth;
+	int mapHeight;
 
 	/// Map containing all the game objects.
 	///
-	/// Stores tiles to GraphicInterface::sheet. Usage is:
-	/// tileSet[<type>][<direction>]`.
+	/// Stores tiles to use in GraphicInterface::sheet. Usage is:
+	/// tileSet[<type>][<direction>]
 	/// \see ArtType
 	/// \see Direction
 	std::map<SpriteAttributes::ArtType, std::map<SpriteAttributes::Direction, SDL_Rect>> tileSet;
 
+	/// Map of GameSprites in use
+/// The key is the ID
+	std::map<std::string, GameSprite*> spriteObjects;
+
 	enum { TILESIZE = 24 };
+
+	int lives=3;//<store number of lives the character has
+
 };
 
 #endif /* GRAPHIC_INTERFACE_H*/

@@ -10,6 +10,8 @@
 
 GameManager::GameManager()
 {
+	this->ExitGame = false;
+	this->GameOver = false;
 	this->componentFactory = ComponentFactory{};
 }
 
@@ -44,6 +46,9 @@ void GameManager::SetupGame()
 	
 	logicManager->createLevel(LogicData{ loadedStorageData->logicData });
 	outputManager->loadLevel(OutputData{ loadedStorageData->outputData });
+
+	//state of the game is not GameOver anymore (if it was) because we just loaded a new level (will be useful for multilevel game)
+	this->GameOver = false;
 }
 
 void GameManager::Update()
@@ -55,7 +60,7 @@ void GameManager::Update()
 		//<TO DO> send request to outputManager to show "Goodbye screen" (or ask for confirmation)
 		this->ExitGame = true;
 	}
-	else {
+	else if(GameOver == false){
 		//Logic
 		logicManager->executeUserCommand(userInput);
 
@@ -65,8 +70,10 @@ void GameManager::Update()
 		outputManager->update(logicManager->getLevelState());
 
 		if (logicManager->checkGameOver()) {
+			this->GameOver = true;
 			std::cout << "Sadly, it's game over...";
 			outputManager->showGameOverScreen();
+			//std::this_thread::sleep_for(std::chrono::milliseconds(4000));
 		}
 	}
   

@@ -53,7 +53,7 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
 			this->spriteObjects[tempConstructorData[0]] = new GameSprite{ "Player", stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), PACMAN, LEFT };
+				stoi(tempConstructorData[2]), PACMAN, RIGHT };
 
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
 			break;
@@ -82,10 +82,10 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 	this->map = std::move(board);
 	*/
 
-	std::size_t width  = map[0].size();
-	std::size_t height = map.size();
+	this->mapWidth = map[0].size();
+	this->mapHeight = map.size();
 	// Initialize and load textures.
-	this->init(width,height); //indexing starts at 0 so minus 1
+	this->init(); //indexing starts at 0 so minus 1
 	this->loadTextures();
 
 	//this->spriteObjects["099"] = new GameSprite{ "Test", 1, 1, CLYDE, UP };
@@ -141,8 +141,6 @@ void GraphicInterface::update(std::vector<std::string> data)
 		if (mapPair == spriteObjects.end())
 			std::cout << "Element not found" << '\n';
 		else {
-			//mapPair->second->setXPosition(stoi(tempConstructorData[1]));
-			//mapPair->second->setYPosition(stoi(tempConstructorData[2]));
 			moveSprite(mapPair->second, stoi(tempConstructorData[1]), stoi(tempConstructorData[2]));
 		}
 
@@ -159,6 +157,8 @@ void GraphicInterface::update(std::vector<std::string> data)
 			&dst);
 	}
 
+	// Draw the lives.
+	drawLives();
 
 	// Update the screen.
 	SDL_RenderPresent(renderer);
@@ -191,7 +191,16 @@ void GraphicInterface::update(UserInputType userInput)
 }
 
 void GraphicInterface::showGameOverScreen() {
-	throw "Lior, we need a Game Over screen!!!";
+	using namespace SpriteAttributes;
+	SDL_Rect dst = { 0, 0 , (mapWidth+1)*TILESIZE, (mapHeight+1)*TILESIZE };
+	
+	// Clear the current renderer.
+	SDL_RenderClear(renderer);
+
+	SDL_RenderCopy(renderer, gameOverScreen, NULL, &dst);//NULL to show the entire structure
+
+	// Update the screen.
+	SDL_RenderPresent(renderer);
 }
 
 void GraphicInterface::moveSprite(GameSprite* element, int x, int y)
@@ -272,7 +281,7 @@ void GraphicInterface::moveSprite(UserInputType command, std::string ID)
 }
 
 /// Initialises the UI::window and the UI::renderer.
-void GraphicInterface::init(int mapWidth, int mapHeight)
+void GraphicInterface::init()
 {
 	// Init SDL
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -287,14 +296,17 @@ void GraphicInterface::init(int mapWidth, int mapHeight)
 		SDL_RENDERER_PRESENTVSYNC);
 }
 
+/// From the Pacman Code
 void GraphicInterface::loadTextures()
 {
 	// Load sprite sheet
 	sheet = this->loadTexture("resources/sam_gfx.bmp");
-
 	seperateTiles();
+
+	gameOverScreen = this->loadTexture("resources/GAME_OVER.bmp");
 }
 
+/// From the Pacman Code
 void GraphicInterface::seperateTiles()
 {	
 	
@@ -424,6 +436,7 @@ void GraphicInterface::seperateTiles()
 	}
 }
 
+/// From the Pacman Code
 void GraphicInterface::drawBackground(std::vector<std::vector<int>> &map)
 {
 	using namespace SpriteAttributes;
@@ -440,6 +453,19 @@ void GraphicInterface::drawBackground(std::vector<std::vector<int>> &map)
 	}
 }
 
+/// Draws an amount of pacmans corresponding to the amount of lives
+// From the Pacman Code
+void GraphicInterface::drawLives()
+{
+	using namespace SpriteAttributes;
+	for (int i = 0; i < lives; i++) {
+		SDL_Rect dst = { mapHeight * TILESIZE - i * TILESIZE, mapHeight * TILESIZE, TILESIZE,
+						TILESIZE };
+		SDL_RenderCopy(renderer, sheet, &tileSet[PACMAN][LEFT], &dst);
+	}
+}
+
+// From the Pacman Code
 SDL_Texture *GraphicInterface::loadTexture(const std::string &file)
 {
 	SDL_Surface *surf = SDL_LoadBMP(file.c_str());

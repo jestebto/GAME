@@ -18,6 +18,7 @@ public:
 
 private:
 	bool ExitGame;
+	bool GameOver;
 	StorageData* loadedStorageData;
 	ComponentFactory componentFactory;
 	IStorageManager* storageManager;
