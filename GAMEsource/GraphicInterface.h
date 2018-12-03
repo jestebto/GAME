@@ -62,9 +62,10 @@ public:
 	void moveSprite(UserInputType, std::string);
 
 public:
-	// list of GameSprites in use
+	// Map of GameSprites in use
+	// The key is the ID
 	// TODO Lior: get this from the GameManager
-	std::vector<GameSprite*> spriteObjects;
+	std::map<std::string,GameSprite*> spriteObjects;
 
 private:
 	void init(int,int);

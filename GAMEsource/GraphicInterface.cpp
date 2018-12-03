@@ -28,28 +28,41 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 	using namespace SpriteAttributes;
 
 	//Parse data
-	std::vector <std::string> objectsAll; // temporary string for storing the current object
+	std::vector <std::string> objectVector; // temporary string for storing the current object
 	//! getSubs function creates a vector of string corresponding to different objects
-	objectsAll = DataToolkit::getSubs(inputString.data, ';');
-	for (unsigned int i{ 0 }; i < objectsAll.size(); ++i) {
-		std::size_t amp = objectsAll[i].find("&"); //<TO DO> check if we can specify a specific type
+	objectVector = DataToolkit::getSubs(inputString.data, ';');
+	std::vector <std::string> tempConstructorData;
 
-		std::string initialChar{ objectsAll[i].at(0) }; //!< String containing the first character of a string 
+	for (unsigned int i{ 0 }; i < objectVector.size(); ++i) {
+		std::size_t amp = objectVector[i].find("&"); //<TO DO> check if we can specify a specific type
+
+		std::string initialChar{ objectVector[i].at(0) }; //!< String containing the first character of a string 
 		int objectType{ stoi(initialChar) }; //!< Conv is the integer corresponding to the first character of a string
 
 		switch (objectType) {
 		case 0: { //!< 0 is map
 		//! erase the part of the string that contains the object type and the ampersand symbol
-			objectsAll[i].erase(0, amp + 1);
+			// Set the map
+			objectVector[i].erase(0, amp + 1);
+			setBackground(objectVector[i]);
+			break;
+		}
+		case 1: { //1 is player
+	//erase the part of the string that contains the object type and the ampersand symbol
+			objectVector[i].erase(0, amp + 1);
+			//separate the data to construct the new object
+			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
-			setBackground(objectsAll[i]);
+			this->spriteObjects[tempConstructorData[0]] = new GameSprite{ "Player", stoi(tempConstructorData[1]),
+				stoi(tempConstructorData[2]), PACMAN, LEFT };
+
+			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
 			break;
 		}
 		}
 	}
 
-	// Set the map
-	// TODO: pass the map as function parameter
+
 	//Hard coded board for test purposes
 	/*
 	std::vector<std::vector<int>> board = { {
@@ -64,7 +77,8 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 	this->init(width,height); //indexing starts at 0 so minus 1
 	this->loadTextures();
 
-	this->spriteObjects.push_back(new GameSprite{ "User", 1, 1, CLYDE, UP });
+	//this->spriteObjects.push_back(new GameSprite{ "User", 1, 1, CLYDE, UP });
+	this->spriteObjects["099"] = new GameSprite{ "Test", 1, 1, CLYDE, UP };
 
 	//On the first iteration, only draw the background:
 
@@ -105,14 +119,33 @@ void GraphicInterface::update(std::vector<std::string> data)
 	// Draw the walls.
 	drawBackground(map);
 
+	// Update the map based on the incoming data
+	// Format is {"ID,x,y"},{"ID,x,y"},...
+	std::vector <std::string> tempConstructorData;
+	for (const std::string &stringData : data){
+		tempConstructorData = DataToolkit::getSubs(stringData, ',');
+
+		// Look up in the ID in the sprite map
+		auto mapPair = spriteObjects.find(tempConstructorData[0]);
+
+		if (mapPair == spriteObjects.end())
+			std::cout << "Element not found" << '\n';
+		else {
+			mapPair->second->setXPosition(stoi(tempConstructorData[1]));
+			mapPair->second->setXPosition(stoi(tempConstructorData[2]));
+		}
+
+	}
+
+
 	// Loop through all the objects and draw them.
-	for (auto &element : this->spriteObjects) {
-		int x = element->getXPosition();
-		int y = element->getYPosition();
+	for (auto &mapPair : this->spriteObjects) {
+		int x = mapPair.second->getXPosition();
+		int y = mapPair.second->getYPosition();
 
 		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE,
 						TILESIZE };
-		SDL_RenderCopy(renderer, sheet, &tileSet[element->art][element->direction],
+		SDL_RenderCopy(renderer, sheet, &tileSet[mapPair.second->art][mapPair.second->direction],
 			&dst);
 	}
 
@@ -129,16 +162,16 @@ void GraphicInterface::updateTest(UserInputType userInput)
 	// Draw the walls.
 	drawBackground(map);
 	
-	GraphicInterface::moveSprite(userInput, "User");
+	GraphicInterface::moveSprite(userInput, "001");
 
 	// Loop through all the objects and draw them.
-	for (auto &element : this->spriteObjects) {
-		int x = element->getXPosition();
-		int y = element->getYPosition();
+	for (auto &mapPair : this->spriteObjects) {
+		int x = mapPair.second->getXPosition();
+		int y = mapPair.second->getYPosition();
 
 		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE,
 						TILESIZE };
-		SDL_RenderCopy(renderer, sheet, &tileSet[element->art][element->direction],
+		SDL_RenderCopy(renderer, sheet, &tileSet[mapPair.second->art][mapPair.second->direction],
 			&dst);
 	}
 	
@@ -147,7 +180,7 @@ void GraphicInterface::updateTest(UserInputType userInput)
 	SDL_RenderPresent(renderer);
 }
 
-void GraphicInterface::moveSprite(UserInputType command, std::string name)
+void GraphicInterface::moveSprite(UserInputType command, std::string ID)
 {
 	using namespace SpriteAttributes;
 
@@ -159,11 +192,13 @@ void GraphicInterface::moveSprite(UserInputType command, std::string name)
 	*   +y
     */
 
-	for (auto &element : this->spriteObjects)
+	auto mapPair = spriteObjects.find(ID);
+
+	if (mapPair == spriteObjects.end())
+		std::cout << "Element not found" << '\n';
+	else
 	{
-		
-		if (element->getID() == name)
-		{
+		GameSprite* &element= mapPair->second;
 			switch (command) {
 			case UserInputType::Up:
 				element->setYPosition(element->getYPosition() - moveSize);
@@ -181,8 +216,10 @@ void GraphicInterface::moveSprite(UserInputType command, std::string name)
 				element->setXPosition(element->getXPosition() + moveSize);
 				element->direction = RIGHT; //for display purposes only
 				break;
+			default:
+				//Do nothing
+				break;
 			}
-		}
 	}
 	
 }
