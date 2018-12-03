@@ -41,14 +41,13 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 
 		switch (objectType) {
 		case 0: { //!< 0 is map
-		//! erase the part of the string that contains the object type and the ampersand symbol
-			// Set the map
+			//! erase the part of the string that contains the object type and the ampersand symbol
 			objectVector[i].erase(0, amp + 1);
 			setBackground(objectVector[i]);
 			break;
 		}
 		case 1: { //1 is player
-	//erase the part of the string that contains the object type and the ampersand symbol
+		//erase the part of the string that contains the object type and the ampersand symbol
 			objectVector[i].erase(0, amp + 1);
 			//separate the data to construct the new object
 			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
@@ -57,6 +56,18 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 				stoi(tempConstructorData[2]), PACMAN, LEFT };
 
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
+			break;
+		}
+		case 2: { //!< 2 is an enemy
+			//! erase the part of the string that contains the object type and the ampersand symbol
+			objectVector[i].erase(0, amp + 1);
+			//! separate the data to construct the new object
+			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+			//! create a new enemy storing a shared pointer to it
+			this->spriteObjects[tempConstructorData[0]] = new GameSprite{ "Enemy", stoi(tempConstructorData[1]),
+				stoi(tempConstructorData[2]), SCAREDINV, UP };
+
+			tempConstructorData = {}; //!< make sure the vector is empty in the next case
 			break;
 		}
 		}
@@ -77,8 +88,7 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 	this->init(width,height); //indexing starts at 0 so minus 1
 	this->loadTextures();
 
-	//this->spriteObjects.push_back(new GameSprite{ "User", 1, 1, CLYDE, UP });
-	this->spriteObjects["099"] = new GameSprite{ "Test", 1, 1, CLYDE, UP };
+	//this->spriteObjects["099"] = new GameSprite{ "Test", 1, 1, CLYDE, UP };
 
 	//On the first iteration, only draw the background:
 
@@ -131,12 +141,12 @@ void GraphicInterface::update(std::vector<std::string> data)
 		if (mapPair == spriteObjects.end())
 			std::cout << "Element not found" << '\n';
 		else {
-			mapPair->second->setXPosition(stoi(tempConstructorData[1]));
-			mapPair->second->setYPosition(stoi(tempConstructorData[2]));
+			//mapPair->second->setXPosition(stoi(tempConstructorData[1]));
+			//mapPair->second->setYPosition(stoi(tempConstructorData[2]));
+			moveSprite(mapPair->second, stoi(tempConstructorData[1]), stoi(tempConstructorData[2]));
 		}
 
 	}
-
 
 	// Loop through all the objects and draw them.
 	for (auto &mapPair : this->spriteObjects) {
@@ -154,7 +164,7 @@ void GraphicInterface::update(std::vector<std::string> data)
 	SDL_RenderPresent(renderer);
 }
 
-void GraphicInterface::updateTest(UserInputType userInput)
+void GraphicInterface::update(UserInputType userInput)
 {
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
@@ -180,9 +190,42 @@ void GraphicInterface::updateTest(UserInputType userInput)
 	SDL_RenderPresent(renderer);
 }
 
+void GraphicInterface::moveSprite(GameSprite* element, int x, int y)
+{
+	// move a Sprite to a position
+	using namespace SpriteAttributes;
+
+	int x_old = element->getXPosition();
+	int y_old = element->getYPosition();
+
+	element->setXPosition(x);
+	element->setYPosition(y);
+	if (y_old < y) // moving DOWN
+	{
+		element->direction = DOWN;
+	}
+	else if (y_old > y) //moving UP
+	{
+		element->direction = UP;
+	}
+	if (x_old < x) //moving right
+	{
+		element->direction = RIGHT;
+	}
+	else if (x_old > x) //moving left
+	{
+		element->direction = LEFT;
+	}
+
+}
+
+
 void GraphicInterface::moveSprite(UserInputType command, std::string ID)
 {
+	// directly move a Sprite based on user input
+	// for test purposes only, as this is not connected to the logic
 	using namespace SpriteAttributes;
+	
 
 	int moveSize= 1;
 	/*  Co-ordinates:
@@ -255,6 +298,7 @@ void GraphicInterface::seperateTiles()
 	const int size = TILESIZE;
 	const int o = 4; // offset in bitmap (both in x and y)
 	std::map<Direction, SDL_Rect> pacman;
+	//                    x              y      width,height
 	pacman[UP] = { o + size * 1, o + size * 11, size, size };
 	pacman[DOWN] = { o + size * 13, o + size * 7, size, size };
 	pacman[LEFT] = { o + size * 0, o + size * 11, size, size };
