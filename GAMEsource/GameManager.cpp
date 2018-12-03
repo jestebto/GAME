@@ -67,6 +67,8 @@ void GameManager::Update()
 		if (logicManager->checkGameOver()) {
 			std::cout << "Sadly, it's game over...";
 			outputManager->showGameOverScreen();
+			this->ExitGame = true;
+			//std::this_thread::sleep_for(std::chrono::milliseconds(4000));
 		}
 	}
   
