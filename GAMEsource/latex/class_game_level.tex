@@ -1,0 +1,188 @@
+\hypertarget{class_game_level}{}\section{Game\+Level Class Reference}
+\label{class_game_level}\index{Game\+Level@{Game\+Level}}
+Inheritance diagram for Game\+Level\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_level}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_level_a4e520fb697c9f7f62daf02b37c31123c}{create\+Level}} (\mbox{\hyperlink{class_logic_data}{Logic\+Data}})
+\begin{DoxyCompactList}\small\item\em create all the clases thet form \mbox{\hyperlink{class_game_level}{Game\+Level}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_level_a53cd899aa9aeaf3e9579ff32598b0043}{execute\+User\+Command}} (User\+Input\+Type)
+\begin{DoxyCompactList}\small\item\em evaluate and perform the user\textquotesingle{}s command \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_game_level_a057f1b02b0706b60980559badaba4cbf}\label{class_game_level_a057f1b02b0706b60980559badaba4cbf}} 
+std\+::vector$<$ std\+::string $>$ {\bfseries get\+Level\+State} ()
+\item 
+bool \mbox{\hyperlink{class_game_level_a5abb06b252b4593608aae90dac77d7cd}{check\+Game\+Over}} ()
+\begin{DoxyCompactList}\small\item\em check if game is over \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_level_a5abb06b252b4593608aae90dac77d7cd}\label{class_game_level_a5abb06b252b4593608aae90dac77d7cd}} 
+\index{Game\+Level@{Game\+Level}!check\+Game\+Over@{check\+Game\+Over}}
+\index{check\+Game\+Over@{check\+Game\+Over}!Game\+Level@{Game\+Level}}
+\subsubsection{\texorpdfstring{check\+Game\+Over()}{checkGameOver()}}
+{\footnotesize\ttfamily bool Game\+Level\+::check\+Game\+Over (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+check if game is over 
+
+check game over 
+
+Implements \mbox{\hyperlink{class_i_logic_manager}{I\+Logic\+Manager}}.
+
+\mbox{\Hypertarget{class_game_level_a4e520fb697c9f7f62daf02b37c31123c}\label{class_game_level_a4e520fb697c9f7f62daf02b37c31123c}} 
+\index{Game\+Level@{Game\+Level}!create\+Level@{create\+Level}}
+\index{create\+Level@{create\+Level}!Game\+Level@{Game\+Level}}
+\subsubsection{\texorpdfstring{create\+Level()}{createLevel()}}
+{\footnotesize\ttfamily void Game\+Level\+::create\+Level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_logic_data}{Logic\+Data}}}]{input\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+create all the clases thet form \mbox{\hyperlink{class_game_level}{Game\+Level}} 
+
+create all the objects in game level separate\+Objects function creates a vector of string corresponding to different objects
+
+Handling each string object in object\+Vector
+
+$<$ String containing the first character of a string ~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+ $<$ Conv is the integer corresponding to the first character of a string
+
+$<$ 0 is map ~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+ erase the part of the string that contains the object type and the ampersand symbol
+
+loop through the map data
+
+$<$ if dash, add row
+
+$<$ 2 is an enemy ~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+ erase the part of the string that contains the object type and the ampersand symbol
+
+separate the data to construct the new object
+
+create a new enemy storing a shared pointer to it
+
+store the pointer in the vector enemies
+
+$<$ make sure the vector is empty in the next case
+
+$<$ 3 is a Power Up ~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+ erase the part of the string that contains the object type and the ampersand symbol
+
+separate the data to construct the new object
+
+create a new \mbox{\hyperlink{class_power_up}{Power\+Up}} and save a shared vector to it ~\newline
+~\newline
+ store the pointer in the vector powe\+Ups
+
+$<$ make sure the vector is empty in the next case 
+
+Implements \mbox{\hyperlink{class_i_logic_manager}{I\+Logic\+Manager}}.
+
+\mbox{\Hypertarget{class_game_level_a53cd899aa9aeaf3e9579ff32598b0043}\label{class_game_level_a53cd899aa9aeaf3e9579ff32598b0043}} 
+\index{Game\+Level@{Game\+Level}!execute\+User\+Command@{execute\+User\+Command}}
+\index{execute\+User\+Command@{execute\+User\+Command}!Game\+Level@{Game\+Level}}
+\subsubsection{\texorpdfstring{execute\+User\+Command()}{executeUserCommand()}}
+{\footnotesize\ttfamily void Game\+Level\+::execute\+User\+Command (\begin{DoxyParamCaption}\item[{User\+Input\+Type}]{user\+Input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+evaluate and perform the user\textquotesingle{}s command 
+
+$<$ boolean that sais if the player is going to move ~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+~\newline
+ check the current position of the player
+
+check which position the player will go to based on the user input
+
+$<$ No movement
+
+$<$ if no user input, no movement
+
+$<$ Move Up
+
+$<$ Move Right
+
+$<$ Move Down
+
+$<$ Move Left
+
+check whether the movement is valid and if it is perform it ~\newline
+~\newline
+~\newline
+~\newline
+ $<$ if there is valid input
+
+$<$ if no collision, move player
+
+check if the finish has been reached
+
+check if game is over 
+
+Implements \mbox{\hyperlink{class_i_logic_manager}{I\+Logic\+Manager}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Game\+Level.\+h\item 
+Game\+Level.\+cpp\end{DoxyCompactItemize}

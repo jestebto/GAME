@@ -20,7 +20,7 @@ void GameSprite::setType(SpriteAttributes::ArtType artType) {
 	art = artType;
 }
 
-/// set Sprite artwork based on type
+/// set Sprite artwork based on direction the sprite is facing
 void GameSprite::setDirection(SpriteAttributes::Direction dir) {
 	direction = dir;
 }

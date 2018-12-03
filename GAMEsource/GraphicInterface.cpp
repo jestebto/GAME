@@ -29,19 +29,19 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 
 	//Parse data
 	std::vector <std::string> objectVector; // temporary string for storing the current object
-	//! getSubs function creates a vector of string corresponding to different objects
+	// getSubs function creates a vector of string corresponding to different objects
 	objectVector = DataToolkit::getSubs(inputString.data, ';');
 	std::vector <std::string> tempConstructorData;
 
 	for (unsigned int i{ 0 }; i < objectVector.size(); ++i) {
 		std::size_t amp = objectVector[i].find("&"); //<TO DO> check if we can specify a specific type
 
-		std::string initialChar{ objectVector[i].at(0) }; //!< String containing the first character of a string 
-		int objectType{ stoi(initialChar) }; //!< Conv is the integer corresponding to the first character of a string
+		std::string initialChar{ objectVector[i].at(0) }; // String containing the first character of a string 
+		int objectType{ stoi(initialChar) }; // Conv is the integer corresponding to the first character of a string
 
 		switch (objectType) {
-		case 0: { //!< 0 is map
-			//! erase the part of the string that contains the object type and the ampersand symbol
+		case 0: { // 0 is map
+			// erase the part of the string that contains the object type and the ampersand symbol
 			objectVector[i].erase(0, amp + 1);
 			setBackground(objectVector[i]);
 			break;
@@ -58,16 +58,16 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
 			break;
 		}
-		case 2: { //!< 2 is an enemy
-			//! erase the part of the string that contains the object type and the ampersand symbol
+		case 2: { // 2 is an enemy
+			// erase the part of the string that contains the object type and the ampersand symbol
 			objectVector[i].erase(0, amp + 1);
-			//! separate the data to construct the new object
+			// separate the data to construct the new object
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
-			//! create a new enemy storing a shared pointer to it
+			// create a new enemy storing a shared pointer to it
 			this->spriteObjects[tempConstructorData[0]] = new GameSprite{ "Enemy", stoi(tempConstructorData[1]),
 				stoi(tempConstructorData[2]), SCAREDINV, UP };
 
-			tempConstructorData = {}; //!< make sure the vector is empty in the next case
+			tempConstructorData = {}; // make sure the vector is empty in the next case
 			break;
 		}
 		}
@@ -101,7 +101,7 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 }
 
 void GraphicInterface::setBackground(const std::string& mapString) {
-	//!loop through the map data
+	//loop through the map data
 	unsigned int row{ 0 };
 	unsigned int column{ 0 };
 	map.push_back(std::vector<int>());

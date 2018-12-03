@@ -26,6 +26,7 @@ class GraphicInterface: public IOutputManager
 {
 public:
 	/// Constructor 
+	/// Note: all initialisation is done in GraphicInterface::loadlevel()
 	GraphicInterface();
 
 	/// UI objects should not be copied or moved.
@@ -33,7 +34,8 @@ public:
 	GraphicInterface(const GraphicInterface&&) = delete;
 	GraphicInterface &operator=(const GraphicInterface &) = delete;
 
-	/// Destructor fully de-initializes the UI, including closing the main window.
+	/// Destructor 
+	/// Fully de-initializes the UI, including closing the main window.
 	~GraphicInterface();
 
 	/// Initialize the UI fully.
@@ -43,7 +45,7 @@ public:
 	/// Public because called by Game Manager
 	void loadLevel(OutputData);
 
-	/// Update the screen TODO
+	/// Update the screen
 	/// - Draw the background
 	/// - Draw the score
 	/// - Draw the remaining lives
@@ -54,18 +56,21 @@ public:
 	/// This is useful for testing animations
 	void update(UserInputType);
 
-	///Displays the Game Over screen
+	//! Displays the Game Over screen
 	void showGameOverScreen();
 
-	/// Move a sprite to a position (given by the logic manager)
+	/// Move a sprite to a position 
+	/// Data is given by the logic manager
 	void moveSprite(GameSprite*,int, int);
 	
-	/// Move a sprite on the screen using user input
-	/// for test purposes only, as this is not connected to the logic
+	/// Move a sprite on the screen using user input.
+	/// For test purposes only, as this is not connected to the logic
 	void moveSprite(UserInputType, std::string);
 
 private:
+	///
 	/// Initialise a window for SDL
+	///
 	void init();
 	/// Read the map layout and add into the map array
 	void setBackground(const std::string&);
@@ -112,7 +117,7 @@ private:
 	std::map<SpriteAttributes::ArtType, std::map<SpriteAttributes::Direction, SDL_Rect>> tileSet;
 
 	/// Map of GameSprites in use
-/// The key is the ID
+	/// The key is the ID
 	std::map<std::string, GameSprite*> spriteObjects;
 
 	enum { TILESIZE = 24 };
