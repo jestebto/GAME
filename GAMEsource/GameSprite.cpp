@@ -7,7 +7,7 @@
 #include <string>
 #include "GameSprite.h"
 
-GameSprite::GameSprite(std::string ID, int xPos, int yPos, ArtType artType, Direction dir) {
+GameSprite::GameSprite(std::string ID, int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Direction dir) {
 	objectID = ID;
 	xPosition = xPos;
 	yPosition = yPos;
@@ -16,12 +16,12 @@ GameSprite::GameSprite(std::string ID, int xPos, int yPos, ArtType artType, Dire
 }
 
 /// set Sprite artwork based on type
-void GameSprite::setType(ArtType artType) {
+void GameSprite::setType(SpriteAttributes::ArtType artType) {
 	art = artType;
 }
 
 /// set Sprite artwork based on type
-void GameSprite::setDirection(Direction dir) {
+void GameSprite::setDirection(SpriteAttributes::Direction dir) {
 	direction = dir;
 }
 

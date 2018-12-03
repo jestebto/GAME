@@ -1,2 +1,2 @@
 #pragma once
-enum class UserInputType { Nothing, Up , Right, Down, Left};
+enum class UserInputType { Nothing, Quit, Up , Right, Down, Left};
