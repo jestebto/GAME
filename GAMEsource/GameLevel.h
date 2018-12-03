@@ -1,4 +1,4 @@
-#ifndef GAMELEVEL_H
+	#ifndef GAMELEVEL_H
 #define GAMELEVEL_H
 
 #include <vector>
@@ -23,6 +23,9 @@ public:
 
 	std::vector<std::string> getLevelState();
 
+	//! check if game is over
+	bool checkGameOver();
+
 private:
 	//! check if the player would collide with a wall
 	bool checkWallCollision(int, int);
@@ -33,8 +36,7 @@ private:
 	//! check if the player would collide with a power up
 	bool checkPowerUpCollision(int, int);
 	
-	//! check if game is over
-	void checkGameOver();
+	
 
 	int mapArray[20][20];   
 	int powerUpMap[20][20];

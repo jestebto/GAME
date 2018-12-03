@@ -198,8 +198,12 @@ bool GameLevel::checkPowerUpCollision(int tempX, int tempY) {
 }
 
 //! check game over
-void GameLevel::checkGameOver() {
+bool GameLevel::checkGameOver() {
 	if (!player1->isAlive()) {
 		isGameOver = true;
+		return true;
+	}
+	else {
+		return false;
 	}
 }

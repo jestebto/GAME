@@ -14,4 +14,5 @@ public:
 	virtual void createLevel(LogicData level) = 0;
 	virtual void executeUserCommand(UserInputType input) = 0;
 	virtual std::vector<std::string> getLevelState() = 0;
+	virtual bool checkGameOver() = 0 ;
 };
