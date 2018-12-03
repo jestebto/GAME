@@ -172,7 +172,7 @@ bool GameLevel::checkEnemyCollision(int tempX, int tempY) {
 	for (std::shared_ptr<Enemy> enemyPtr : enemies) {   
 		if ((tempX == enemyPtr->getXPosition()) && (tempY == enemyPtr->getYPosition())) {
 			int damage = enemyPtr->getDamage(); //!< get enemy damage
-			player1->setLives(damage); //!< implement damage
+			player1->setLives(-damage); //!< implement damage minus cause of deduction of life
 			collision = true; //!< collision happened
 		}
 	}
