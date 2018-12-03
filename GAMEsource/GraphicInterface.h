@@ -55,10 +55,13 @@ public:
 
 	/// A test update that takes in user inputs directly, so that the logic component can be completely bypassed
 	/// This is useful for testing animations
-	void updateTest(UserInputType);
+	void update(UserInputType);
 
+	/// Move a sprite to a position (given by the logic manager)
+	void moveSprite(GameSprite*,int, int);
 	
-	/// Move a sprite on the screen
+	/// Move a sprite on the screen using user input
+	/// for test purposes only, as this is not connected to the logic
 	void moveSprite(UserInputType, std::string);
 
 public:

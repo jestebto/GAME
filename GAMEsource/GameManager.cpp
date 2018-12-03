@@ -56,8 +56,9 @@ void GameManager::Update()
 	
 
 	//Output
-	//outputManager->updateTest(userInput);
+	//outputManager->update(userInput); // for testing
 	outputManager->update(logicManager->getLevelState());
+	//outputManager->update(std::vector<std::string> {std::string{ "001,1,3," }});
 		//<TO DO JOSE> implement when Class Level is ready to send updates
 }
 
