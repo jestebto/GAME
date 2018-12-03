@@ -155,7 +155,7 @@ std::vector<std::string> GameLevel::getLevelState()
 //! Check collision with a wall
 bool GameLevel::checkWallCollision(int tempX, int tempY) {
 	//map = array of zeros and ones (0 = move, 1 = wall, 2 = finish(move) )
-	if (mapArray[tempX][tempY] == 0 || mapArray[tempX][tempY] == 2) { //!< if not wall, move
+	if (mapArray[tempY][tempX] == 0 || mapArray[tempY][tempX] == 2) { //!< if not wall, move
 		return false;
 	}
 	else {  
