@@ -190,6 +190,10 @@ void GraphicInterface::update(UserInputType userInput)
 	SDL_RenderPresent(renderer);
 }
 
+void GraphicInterface::showGameOverScreen() {
+	throw "Lior, we need a Game Over screen!!!";
+}
+
 void GraphicInterface::moveSprite(GameSprite* element, int x, int y)
 {
 	// move a Sprite to a position

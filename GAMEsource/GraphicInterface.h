@@ -57,6 +57,9 @@ public:
 	/// This is useful for testing animations
 	void update(UserInputType);
 
+	///Displays the Game Over screen
+	void showGameOverScreen();
+
 	/// Move a sprite to a position (given by the logic manager)
 	void moveSprite(GameSprite*,int, int);
 	

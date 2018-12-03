@@ -14,4 +14,6 @@ public:
 	virtual void loadLevel(OutputData) = 0;
 	virtual void update(std::vector<std::string>) = 0;
 	virtual void update(UserInputType) = 0;/// for test purposes to bypass the logic component 
+	virtual void showGameOverScreen() = 0;
+	//virtual void showVictoryScreen() = 0; //future implementation, you can prepare for it from the child class
 };

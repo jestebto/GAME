@@ -4,9 +4,9 @@
 
 #include <SDL2/SDL.h> // Lior: this is for the timer functionality to limit frame rate and input rates
 #include <thread> //sleep_for()
-#include <chrono>
-
+#include <chrono> //milliseconds
 #include <string>
+#include <iostream> //printing the debug console text when game over.
 
 GameManager::GameManager()
 {
@@ -63,6 +63,11 @@ void GameManager::Update()
 		//Output
 		//outputManager->update(userInput); // for testing
 		outputManager->update(logicManager->getLevelState());
+
+		if (logicManager->checkGameOver()) {
+			std::cout << "Sadly, it's game over...";
+			outputManager->showGameOverScreen();
+		}
 	}
   
 	
