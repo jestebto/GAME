@@ -2,8 +2,8 @@
 #include "HardCodedStorageManager.h"
 #include <string>
 
-static std::string defLevelLogic  = "0&0000-0110-0100-0000;1&001,1,2,3,;2&002,2,1,5,1,;";
-static std::string defLevelOutput = "0&0000-0110-0100-0000;1&001,1,2,3,;2&002,2,1,5,1,;";
+static std::string defLevelLogic  = "0&0000-0110-0100-0000;1&001,1,2,3,;2&002,2,0,5,1,;";
+static std::string defLevelOutput = "0&0000-0110-0100-0000;1&001,1,2,3,;2&002,2,0,5,1,;";
 //"001/m&Default Map&0000-0110-0100-0000";
 
 

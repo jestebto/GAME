@@ -71,8 +71,8 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 	this->map = std::move(board);
 	*/
 
-	int width  = map[0].size();
-	int height = map.size();
+	std::size_t width  = map[0].size();
+	std::size_t height = map.size();
 	// Initialize and load textures.
 	this->init(width,height); //indexing starts at 0 so minus 1
 	this->loadTextures();
@@ -132,7 +132,7 @@ void GraphicInterface::update(std::vector<std::string> data)
 			std::cout << "Element not found" << '\n';
 		else {
 			mapPair->second->setXPosition(stoi(tempConstructorData[1]));
-			mapPair->second->setXPosition(stoi(tempConstructorData[2]));
+			mapPair->second->setYPosition(stoi(tempConstructorData[2]));
 		}
 
 	}
