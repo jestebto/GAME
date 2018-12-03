@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "GameManager.h"
+#include "UserInputType.h"
 
 #include <SDL2/SDL.h> // Lior: this is for the timer functionality to limit frame rate and input rates
 #include <thread> //sleep_for()
@@ -50,16 +51,21 @@ void GameManager::Update()
 	//Updates sequentially the Input, Logic and Output components,
 	//Input
 	UserInputType userInput = inputManager->getInput();
-  
-	//Logic
-	logicManager->executeUserCommand(userInput);
-	
+	if (userInput == UserInputType::Quit) {
+		//<TO DO> send request to outputManager to show "Goodbye screen" (or ask for confirmation)
+		this->ExitGame = true;
+	}
+	else {
+		//Logic
+		logicManager->executeUserCommand(userInput);
 
-	//Output
-	//outputManager->update(userInput); // for testing
-	outputManager->update(logicManager->getLevelState());
-	//outputManager->update(std::vector<std::string> {std::string{ "001,1,3," }});
-		//<TO DO JOSE> implement when Class Level is ready to send updates
+
+		//Output
+		//outputManager->update(userInput); // for testing
+		outputManager->update(logicManager->getLevelState());
+	}
+  
+	
 }
 
 void GameManager::DistributeData() {
