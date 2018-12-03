@@ -11,8 +11,8 @@ class ILogicManager
 	*/
 public:
 	virtual ~ILogicManager() = 0; //virtual destructor to be implemented in the class implementing the interface
-	virtual void createLevel(LogicData level) = 0;
-	virtual void executeUserCommand(UserInputType input) = 0;
-	virtual std::vector<std::string> getLevelState() = 0;
-	virtual bool checkGameOver() = 0 ;
+	virtual void createLevel(LogicData level) = 0; /// create game level
+	virtual void executeUserCommand(UserInputType input) = 0; /// execute the users input
+	virtual std::vector<std::string> getLevelState() = 0; /// get objec's data as a vector of strings
+	virtual bool checkGameOver() = 0 ; /// check if the game is over
 };

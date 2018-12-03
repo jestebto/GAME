@@ -14,6 +14,6 @@ public:
 	int getNrOfLives();
 
 private:
-	int nrOfLives;
+	int nrOfLives; /// number of lives it gives to the player
 };
 #endif // !POWERUP_H

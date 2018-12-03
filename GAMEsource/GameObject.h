@@ -22,9 +22,9 @@ public:
 	std::string dataToString();
 
 private:
-	std::string objectID;
-	int xPosition;
-	int yPosition;
+	std::string objectID; /// objects ID
+	int xPosition;/// x-position
+	int yPosition; /// y-position
 
 };
 

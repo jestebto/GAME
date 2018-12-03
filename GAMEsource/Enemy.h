@@ -12,7 +12,7 @@ public:
 	int getDamage() const; // get the damage 
 
 private:
-	int damageValue;  //damage to player 
+	int damageValue;  /// damage to player 
 };
 
 #endif // ENEMY_H

@@ -15,36 +15,36 @@ public:
 	//destructor
 	//~GameLevel();
 
-	//! create all the clases thet form GameLevel
+	// create all the clases thet form GameLevel
 	void createLevel(LogicData);
 
-	//! evaluate and perform the user's command
+	// evaluate and perform the user's command
 	void executeUserCommand(UserInputType);
 
 	std::vector<std::string> getLevelState();
 
-	//! check if game is over
+	// check if game is over
 	bool checkGameOver();
 
 private:
-	//! check if the player would collide with a wall
+	// check if the player would collide with a wall
 	bool checkWallCollision(int, int);
 
-	//! check if the player would collide with an enemy
+	// check if the player would collide with an enemy
 	bool checkEnemyCollision(int, int);
 
-	//! check if the player would collide with a power up
+	// check if the player would collide with a power up
 	bool checkPowerUpCollision(int, int);
 	
 	
 
-	int mapArray[20][20];   
-	int powerUpMap[20][20];
-	std::vector<std::shared_ptr<Enemy>> enemies;  
-	std::vector<std::shared_ptr<PowerUp>> powerUps;
-	Player* player1;
-	bool isGameOver{false};
-	bool isGameFinished{false};
+	int mapArray[20][20];   /// map
+	int powerUpMap[20][20]; /// array with Power-Ups locations
+	std::vector<std::shared_ptr<Enemy>> enemies;  /// list of enemies
+	std::vector<std::shared_ptr<PowerUp>> powerUps; /// list of Power-Ups
+	Player* player1; /// player
+	bool isGameOver{false}; /// indicate if the game is over
+	bool isGameFinished{false}; /// indicate if the level is finished
 };
 
 #endif // !GAMELEVEL_H
