@@ -11,9 +11,6 @@ GameLevel::GameLevel() {
 	
 };
 
-//prototype functions
-std::vector<std::string> separateObjects(std::string);
-std::vector<std::string> separateData(std::string);
 
 //! create all the objects in game level
 void GameLevel::createLevel(LogicData inputString) {
@@ -57,7 +54,7 @@ void GameLevel::createLevel(LogicData inputString) {
 			//erase the part of the string that contains the object type and the ampersand symbol
 			objectVector[i].erase(0, amp + 1);
 			//separate the data to construct the new object
-			tempConstructorData = separateData(objectVector[i]);
+			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 			//create a new player and save a shared pointer to it
 			player1 = new Player(tempConstructorData[0], stoi(tempConstructorData[1]),
 			stoi(tempConstructorData[2]), stoi(tempConstructorData[3]));
@@ -68,7 +65,7 @@ void GameLevel::createLevel(LogicData inputString) {
 			//! erase the part of the string that contains the object type and the ampersand symbol
 			objectVector[i].erase(0, amp + 1);
 			//! separate the data to construct the new object
-			tempConstructorData = separateData(objectVector[i]);
+			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 			//! create a new enemy storing a shared pointer to it
 			std::shared_ptr<Enemy> enemy(new Enemy(tempConstructorData[0], stoi(tempConstructorData[1]),
 				stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), stoi(tempConstructorData[4])));
@@ -81,7 +78,7 @@ void GameLevel::createLevel(LogicData inputString) {
 			//! erase the part of the string that contains the object type and the ampersand symbol
 			objectVector[i].erase(0, amp + 1);
 			//! separate the data to construct the new object
-			tempConstructorData = separateData(objectVector[i]);
+			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 			//! create a new PowerUp and save a shared vector to it 
 			std::shared_ptr<PowerUp> powerUp(new PowerUp(tempConstructorData[0], stoi(tempConstructorData[1]),
 				stoi(tempConstructorData[2]), stoi(tempConstructorData[3])));
@@ -92,39 +89,6 @@ void GameLevel::createLevel(LogicData inputString) {
 		}
 		}
 	}
-}
-
-//! separate the data in the input string into different sub-strings that represent different objects
-std::vector<std::string>  separateObjects(std::string inputString) {
-	//<TO DO LUUK> remove if it worked correctly using DataToolkit::getSubs()
-	std::vector <std::string> objectVector; //!< Creating a vector which stores string values
-	std::size_t del;
-
-	for (unsigned int i{ 0 }; inputString.size() > 0; i++) {
-		//! find the symbol that separates objects (semicolon)
-		del = inputString.find(";");
-		//! store the data from the beggining of the string to the semicolon (not included)
-		objectVector.push_back(inputString.substr(0, del));
-		//! delete the stored data and the semicolon
-		inputString.erase(0, del + 1);
-	}
-	return objectVector;
-	
-}
-
-std::vector<std::string> separateData(std::string inputString) {
-	std::vector <std::string> tempVector;
-	std::size_t del;
-
-	while (inputString.size() > 0) {
-		//! find the symbol that separates the object's data (coma)
-		del = inputString.find(",");
-		//! store the data from the beggining of the string to the coma (not included)
-		tempVector.push_back((inputString.substr(0, del)));
-		//! delete the data that was stored and the coma
-		inputString.erase(0, del + 1);
-	}
-	return tempVector;
 }
 
 //
