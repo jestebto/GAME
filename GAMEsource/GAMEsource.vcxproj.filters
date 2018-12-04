@@ -75,9 +75,6 @@
     <ClInclude Include="DataToolkit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DummyClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ComponentFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
