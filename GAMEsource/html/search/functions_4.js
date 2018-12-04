@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['movesprite',['moveSprite',['../class_graphic_interface.html#a2a52c6fef543c4f130f62ee4552648f9',1,'GraphicInterface::moveSprite(GameSprite *, int, int)'],['../class_graphic_interface.html#a8062b59b90fa4075903ddc122f2ba8ed',1,'GraphicInterface::moveSprite(UserInputType, std::string)']]]
+  ['isalive',['isAlive',['../class_character.html#aa49f985b1b05751b2d4b3de74b4acc8c',1,'Character']]]
 ];
