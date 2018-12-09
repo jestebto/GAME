@@ -57,7 +57,7 @@ void GameLevel::createLevel(LogicData inputString) {
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 			//create a new player and save a shared pointer to it
 			player1 = new Player(tempConstructorData[0], stoi(tempConstructorData[1]),
-			stoi(tempConstructorData[2]), stoi(tempConstructorData[3]));
+			stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), stoi(tempConstructorData[4])); // Added tempContructorData[4] for orientation
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
 			break;
 		}
@@ -93,26 +93,51 @@ void GameLevel::createLevel(LogicData inputString) {
 
 //
 void GameLevel::executeUserCommand(UserInputType userInput) {
-	bool movement = true; //!< boolean that sais if the player is going to move
+	bool movement = true; //!< boolean that says if the player is going to move
 	//! check the current position of the player
 	int tempX = player1->getXPosition();               
-	int tempY = player1->getYPosition();											
+	int tempY = player1->getYPosition();	
+	int tempR = player1->getR();
 	//! check which position the player will go to based on the user input
 	switch (userInput) {
 	case UserInputType::Nothing: //!< No movement
 		movement = false; //!< if no user input, no movement
 		break;
 	case UserInputType::Up: //!< Move Up
-		tempY--;
+		if (tempR != 2) {
+			player1->setR(2);
+			movement = false;
+		}
+		else {
+			tempY--;
+		}
 		break;
 	case UserInputType::Right: //!< Move Right
-		tempX++;
+		if (tempR != 3) {
+			player1->setR(3);
+			movement = false;
+		}
+		else {
+			tempX++;
+		}
 		break;
 	case UserInputType::Down: //!< Move Down
-		tempY++;
+		if (tempR != 4) {
+			player1->setR(4);
+			movement = false;
+		}
+		else {
+			tempY++;
+		}
 		break;
 	case UserInputType::Left: //!< Move Left
-		tempX--;
+		if (tempR != 5) {
+			player1->setR(5);
+			movement = false;
+		}
+		else {
+			tempX--;
+		}
 		break;
 	}
 	//! check whether the movement is valid and if it is perform it 
