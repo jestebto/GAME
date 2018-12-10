@@ -7,6 +7,6 @@ public:
 	LogicData(std::string s);
 	~LogicData();
 
-	std::string data;
+	std::string data;   /// string with the data to create the level
 };
 

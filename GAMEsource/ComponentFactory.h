@@ -15,9 +15,9 @@ public:
 	ComponentFactory();
 	~ComponentFactory();
 
-	IStorageManager* GetStorageManager(); //will return a pointer to an object implementing the IStorageManager
-	IInputManager* GetInputManager();	//will return a pointer to an object implementing the IInputManager
-	ILogicManager* GetLogicManager();	//will return a pointer to an object implementing the ILogicManager
-	IOutputManager* GetOutputManager(); //will return a pointer to an object implementing the IOutputManager
+	IStorageManager* GetStorageManager(); //!< will return a pointer to an object implementing the IStorageManager
+	IInputManager* GetInputManager();	//!< will return a pointer to an object implementing the IInputManager
+	ILogicManager* GetLogicManager();	//!< will return a pointer to an object implementing the ILogicManager
+	IOutputManager* GetOutputManager(); //!< will return a pointer to an object implementing the IOutputManager
 };
 

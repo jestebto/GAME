@@ -7,5 +7,5 @@ Enemy::Enemy(std::string ID, int xPos, int yPos,
 };
 
 
-// return damage value
+/// return damage value
 int Enemy::getDamage() const { return damageValue; }
