@@ -12,6 +12,10 @@ void Character::setLives(int nrLives) {
 	lives += nrLives;
 }
 
+int Character::getLives() {
+	return lives;
+}
+
 // check if it is alive
 bool Character::isAlive() {
 	if (lives <= 0)
