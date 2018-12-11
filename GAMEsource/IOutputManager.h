@@ -15,7 +15,6 @@ class IOutputManager
 public:
 	virtual ~IOutputManager() = 0; //!<virtual destructor to be implemented in the class implementing the interface
 	virtual void loadLevel(OutputData) = 0;//!< initialise SDL screen, read input data and create the maps and gamesprites in use
-	virtual void update(std::vector<std::string>) = 0; //!< update the screen based on the game state as determined by the logic manager
 	virtual void update(std::vector<std::shared_ptr<DataUpdate>>) = 0; //!< update the screen based on the game state as determined by the logic manager
 	virtual void update(UserInputType) = 0;//!< for test purposes to bypass the logic component 
 	virtual void showGameOverScreen() = 0;

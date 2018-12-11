@@ -82,8 +82,8 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 	this->map = std::move(board);
 	*/
 
-	this->mapWidth = map[0].size();
-	this->mapHeight = map.size();
+	this->screenWidth = levelMap[0].size();
+	this->screenHeight = levelMap.size();
 	// Initialize and load textures.
 	this->init(); //indexing starts at 0 so minus 1
 	this->loadTextures();
@@ -95,7 +95,7 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
 	// Draw the walls.
-	drawBackground(map);
+	drawBackground(levelMap);
 	// Update the screen.
 	SDL_RenderPresent(renderer);
 }
@@ -104,65 +104,23 @@ void GraphicInterface::setBackground(const std::string& mapString) {
 	//loop through the map data
 	unsigned int row{ 0 };
 	unsigned int column{ 0 };
-	map.push_back(std::vector<int>());
+	levelMap.push_back(std::vector<int>());
 	for (unsigned int value{ 0 }; value < mapString.length(); value++) {
 		int tempValue = mapString.at(value);
 
 		if (tempValue == 45) { //!< if dash, add row
 			column = 0;
 			row++;
-			map.push_back(std::vector<int>());
+			levelMap.push_back(std::vector<int>());
 		}
 		else {
-			map[row].push_back(tempValue - 48);
+			levelMap[row].push_back(tempValue - 48);
 			column++;
 		}
 	}
 }
 
 
-void GraphicInterface::update(std::vector<std::string> data)
-{
-	// Clear the current renderer.
-	SDL_RenderClear(renderer);
-
-	// Draw the walls.
-	drawBackground(map);
-
-	// Update the map based on the incoming data
-	// Format is {"ID,x,y"},{"ID,x,y"},...
-	std::vector <std::string> tempConstructorData;
-	for (const std::string &stringData : data){
-		tempConstructorData = DataToolkit::getSubs(stringData, ',');
-
-		// Look up in the ID in the sprite map
-		auto mapPair = spriteObjects.find(tempConstructorData[0]);
-
-		if (mapPair == spriteObjects.end())
-			std::cout << "Element not found" << '\n';
-		else {
-			moveSprite(mapPair->second, stoi(tempConstructorData[1]), stoi(tempConstructorData[2]));
-		}
-
-	}
-
-	// Loop through all the objects and draw them.
-	for (auto &mapPair : this->spriteObjects) {
-		int x = mapPair.second->getXPosition();
-		int y = mapPair.second->getYPosition();
-
-		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE,
-						TILESIZE };
-		SDL_RenderCopy(renderer, sheet, &tileSet[mapPair.second->art][mapPair.second->direction],
-			&dst);
-	}
-
-	// Draw the lives.
-	drawLives();
-
-	// Update the screen.
-	SDL_RenderPresent(renderer);
-}
 
 void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
 {
@@ -170,11 +128,9 @@ void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
 	SDL_RenderClear(renderer);
 
 	// Draw the walls.
-	drawBackground(map);
+	drawBackground(levelMap);
 
 	// Update the map based on the incoming data
-	// Format is {"ID,x,y"},{"ID,x,y"},...
-
 
 	for (std::shared_ptr<DataUpdate> &dataPtr : data) {
 
@@ -186,6 +142,15 @@ void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			std::cout << "Element not found" << '\n';
 		else {
 			moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
+		
+			// Look at ObjectType specific data
+			std::vector <std::string> tempConstructorData;
+			switch (dataPtr->getObjectType()) {
+			case DataUpdate::ObjectType::PLAYER:
+				tempConstructorData = DataToolkit::getSubs(dataPtr->getData(), ',');
+				this->lives = stoi(tempConstructorData[0]);
+			}
+
 		}
 
 	}
@@ -214,7 +179,7 @@ void GraphicInterface::update(UserInputType userInput)
 	SDL_RenderClear(renderer);
 
 	// Draw the walls.
-	drawBackground(map);
+	drawBackground(levelMap);
 	
 	GraphicInterface::moveSprite(userInput, "001");
 
@@ -236,7 +201,7 @@ void GraphicInterface::update(UserInputType userInput)
 
 void GraphicInterface::showGameOverScreen() {
 	using namespace SpriteAttributes;
-	SDL_Rect dst = { 0, 0 , (mapWidth+1)*TILESIZE, (mapHeight+1)*TILESIZE };
+	SDL_Rect dst = { 0, 0 , (screenWidth+1)*TILESIZE, (screenHeight+1)*TILESIZE };
 	
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
@@ -332,8 +297,8 @@ void GraphicInterface::init()
 
 	// Create a Window in the middle of the screen
 	window = SDL_CreateWindow("The Awesome Game", SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED, mapWidth * TILESIZE,
-		mapHeight * TILESIZE + (TILESIZE + 4), SDL_WINDOW_SHOWN);
+		SDL_WINDOWPOS_CENTERED, screenWidth * TILESIZE,
+		screenHeight * TILESIZE + (TILESIZE + 4), SDL_WINDOW_SHOWN);
 
 	// Create a new renderer
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED |
@@ -503,7 +468,7 @@ void GraphicInterface::drawLives()
 {
 	using namespace SpriteAttributes;
 	for (int i = 0; i < lives; i++) {
-		SDL_Rect dst = { mapHeight * TILESIZE - i * TILESIZE, mapHeight * TILESIZE, TILESIZE,
+		SDL_Rect dst = { screenHeight * TILESIZE - i * TILESIZE, screenHeight * TILESIZE, TILESIZE,
 						TILESIZE };
 		SDL_RenderCopy(renderer, sheet, &tileSet[PACMAN][LEFT], &dst);
 	}
