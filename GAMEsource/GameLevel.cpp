@@ -113,7 +113,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		}
 		break;
 	case UserInputType::Right: //!< Move Right
-		if (tempR != 3) {
+		if (tempR != 3) {  // TO DO combine 4 checks of orientation in one
 			player1->setR(3);
 			movement = false;
 		}
@@ -145,7 +145,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			case 2:
 				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
 					if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY - 1) {
-						enemyPtr->setLives(enemyPtr->getLives() - 1);
+						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
 						
 					}
 				}
@@ -154,7 +154,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			case 3:
 				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
 					if (enemyPtr->getXPosition() == tempX + 1 && enemyPtr->getYPosition() == tempY) {
-						enemyPtr->setLives(enemyPtr->getLives() - 1);
+						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
 						
 					}
 				}
@@ -163,7 +163,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			case 4:
 				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
 					if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY + 1) {
-						enemyPtr->setLives(enemyPtr->getLives() - 1);
+						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
 						
 					}
 				}
@@ -172,7 +172,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			case 5:
 				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
 					if (enemyPtr->getXPosition() == tempX - 1 && enemyPtr->getYPosition() == tempY) {
-						enemyPtr->setLives(enemyPtr->getLives() - 1);
+						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
 						
 					}
 				}
@@ -266,53 +266,7 @@ bool GameLevel::checkPowerUpCollision(int tempX, int tempY) {
 		return true;
 	}
 }
-/*
-// Check whether a hit landed (and where?)
-bool GameLevel::checkHitCollision(int tempX, int tempY, int tempR) {
-	switch (tempR) {
-	case 2:
-		for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-			if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition == tempY - 1) {
-				enemyPtr->setLives(enemyPtr->setLives - 1);
-				return true;
-			}
-		}
-		return false;
-		break;
-	case 3:
-		for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-			if (enemyPtr->getXPosition() == tempX + 1 && enemyPtr->getYPosition == tempY ) {
-				enemyPtr->setLives(enemyPtr->setLives - 1);
-				return true;
-			}
-		}
-		return false;
-		break;
-	case 4:
-		for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-			if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition == tempY + 1) {
-				enemyPtr->setLives(enemyPtr->setLives - 1);
-				return true;
-			}
-		}
-		return false;
-		break;
-	case 5:
-		for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-			if (enemyPtr->getXPosition() == tempX - 1 && enemyPtr->getYPosition == tempY ) {
-				enemyPtr->setLives(enemyPtr->setLives - 1);
-				return true;
-			}
-		}
-		return false;
-		break;
-	}
-	// Check the square in front of the player for an enemy
-	// if there is minus one life if not continue
-	// Where is the enemy info?
-	
-}
-*/
+
 //! check game over
 bool GameLevel::checkGameOver() {
 	if (!player1->isAlive()) {
