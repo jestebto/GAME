@@ -2,21 +2,22 @@
 #define PLAYER_H
 
 #include "Character.h"
+#include "CharacterOrientation.h"
 
 class Player : public Character {
 public:
-	Player(std::string, int, int, int, int, int); //Added one more int for orientation and another for damage total 5 ints and a string
+	Player(std::string, int, int, int, CharacterOrientation, int); //Added one more int for orientation and another for damage total 5 ints and a string
 	virtual ~Player() = default;
 
-	int getR(); //More descriptive names
-	void setR(int); //.....
+	CharacterOrientation getR(); //More descriptive names
+	void setR(CharacterOrientation); //.....
 
 	int getDmg();
 
 	void setDmg(int);
 
 private:
-	int orientation;
+	CharacterOrientation orientation;
 	int damage;
 };
 #endif // !PLAYER_H

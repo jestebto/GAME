@@ -5,6 +5,7 @@
 #include <array>
 #include "GameLevel.h"
 #include "DataToolkit.h"
+#include "CharacterOrientation.h"
 
 // constructor
 GameLevel::GameLevel() {
@@ -60,8 +61,7 @@ void GameLevel::createLevel(LogicData inputString) {
 
 			//create a new player and save a shared pointer to it
 			player1 = new Player(tempConstructorData[0], stoi(tempConstructorData[1]),
-
-			stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), stoi(tempConstructorData[4]), stoi (tempConstructorData[5])); // Added tempContructorData[4] for orientation
+			stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), (CharacterOrientation)stoi(tempConstructorData[4]), stoi(tempConstructorData[5])); // Added tempContructorData[4] for orientation
 
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
 			break;
@@ -116,7 +116,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 	//! check the current position of the player
 	int tempX = player1->getXPosition();               
 	int tempY = player1->getYPosition();	
-	int tempR = player1->getR();
+	CharacterOrientation tempOrientation = player1->getR();
 	//! check which position the player will go to based on the user input
 
 	switch (userInput) {
@@ -125,8 +125,8 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		break;
 
 	case UserInputType::Up: //!< Move Up
-		if (tempR != 2) {
-			player1->setR(2);
+		if (tempOrientation != CharacterOrientation::Up) {
+			player1->setR(CharacterOrientation::Up);
 			movement = false;
 		}
 		else {
@@ -134,8 +134,8 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		}
 		break;
 	case UserInputType::Right: //!< Move Right
-		if (tempR != 3) {  // TO DO combine 4 checks of orientation in one
-			player1->setR(3);
+		if (tempOrientation != CharacterOrientation::Right) {  // TO DO combine 4 checks of orientation in one
+			player1->setR(CharacterOrientation::Right);
 			movement = false;
 		}
 		else {
@@ -143,8 +143,8 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		}
 		break;
 	case UserInputType::Down: //!< Move Down
-		if (tempR != 4) {
-			player1->setR(4);
+		if (tempOrientation != CharacterOrientation::Down) {
+			player1->setR(CharacterOrientation::Down);
 			movement = false;
 		}
 		else {
@@ -152,8 +152,8 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		}
 		break;
 	case UserInputType::Left: //!< Move Left
-		if (tempR != 5) {
-			player1->setR(5);
+		if (tempOrientation != CharacterOrientation::Left) {
+			player1->setR(CharacterOrientation::Left);
 			movement = false;
 		}
 		else {
@@ -162,8 +162,8 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		break;
 	case UserInputType::Hit: // Get 'em
 		
-			switch (tempR) {
-			case 2:
+			switch (tempOrientation) {
+			case CharacterOrientation::Up:
 				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
 					if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY - 1) {
 						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
@@ -172,7 +172,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 				}
 				
 				break;
-			case 3:
+			case CharacterOrientation::Right:
 				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
 					if (enemyPtr->getXPosition() == tempX + 1 && enemyPtr->getYPosition() == tempY) {
 						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
@@ -181,7 +181,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 				}
 				
 				break;
-			case 4:
+			case CharacterOrientation::Down:
 				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
 					if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY + 1) {
 						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
@@ -190,7 +190,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 				}
 				
 				break;
-			case 5:
+			case CharacterOrientation::Left:
 				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
 					if (enemyPtr->getXPosition() == tempX - 1 && enemyPtr->getYPosition() == tempY) {
 						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());

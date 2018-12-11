@@ -164,6 +164,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
+    <ClInclude Include="CharacterOrientation.h" />
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="DataToolkit.h" />
     <ClInclude Include="DataUpdate.h" />

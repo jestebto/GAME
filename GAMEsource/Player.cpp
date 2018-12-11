@@ -1,19 +1,19 @@
 #include "Player.h"
 
 //constructor
-Player::Player(std::string ID, int xPos, int yPos, int lives, int ori, int dmg) // Added orientation
+Player::Player(std::string ID, int xPos, int yPos, int lives, CharacterOrientation ori, int dmg) // Added orientation
 	:Character(ID, xPos, yPos, lives) {
 	setR(ori);
 	setDmg(dmg);
 };
 
 //Get the current orientation
-int Player::getR() {
+CharacterOrientation Player::getR() {
 	return orientation; 
 }
 
 //Set the desired orientation
-void Player::setR(int ori) {
+void Player::setR(CharacterOrientation ori) {
 	orientation = ori ;
 }
 

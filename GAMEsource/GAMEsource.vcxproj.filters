@@ -143,6 +143,9 @@
       <Filter>Output</Filter>
     </ClInclude>
     <ClInclude Include="DataUpdate.h" />
+    <ClInclude Include="CharacterOrientation.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
