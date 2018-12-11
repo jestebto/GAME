@@ -111,7 +111,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 	output.clear(); //! empty the output vector
 
 	bool movement = true; //! boolean that sais if the player is going to move
-	DataUpdate::Action playerAction = DataUpdate::Action::nothing;
+	DataUpdate::Action playerAction = DataUpdate::Action::NOTHING;
 
 	//! check the current position of the player
 	int tempX = player1->getXPosition();               
@@ -224,7 +224,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		isGameFinished = true;
 	} 
 	//! Update the position of the player for the output
-	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->dataToString(), DataUpdate::ObjectType::player, playerAction));
+	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->dataToString(), DataUpdate::ObjectType::PLAYER, playerAction));
 	output.push_back(update);
 
 	// check if game is over
