@@ -175,16 +175,17 @@ void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
 	// Update the map based on the incoming data
 	// Format is {"ID,x,y"},{"ID,x,y"},...
 
-	for (std::shared_ptr<DataUpdate> dataPtr : data) {
+
+	for (std::shared_ptr<DataUpdate> &dataPtr : data) {
 
 
 		// Look up in the ID in the sprite map
-		auto mapPair = spriteObjects.find(dataPtr->getID);
+		auto mapPair = spriteObjects.find(dataPtr->getID());
 
 		if (mapPair == spriteObjects.end())
 			std::cout << "Element not found" << '\n';
 		else {
-			moveSprite(mapPair->second, 1, 1);
+			moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
 		}
 
 	}
