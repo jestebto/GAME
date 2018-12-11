@@ -51,6 +51,7 @@ public:
 	/// - Draw the remaining lives
 	/// - Draw the objects (last)
 	void update(std::vector<std::string> data);
+	void update(std::vector<std::shared_ptr<DataUpdate>> data);
 
 	/// A test update that takes in user inputs directly, so that the logic component can be completely bypassed
 	/// This is useful for testing animations
