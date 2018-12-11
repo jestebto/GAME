@@ -22,6 +22,7 @@ namespace SpriteAttributes {
 		CLYDE,
 		SCARED,
 		SCAREDINV,
+		KEY,
 		CHERRY,
 		STRAWBERRY,
 		ORANGE,
