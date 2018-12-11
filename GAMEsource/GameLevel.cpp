@@ -84,7 +84,7 @@ void GameLevel::createLevel(LogicData inputString) {
 				stoi(tempConstructorData[2]), stoi(tempConstructorData[3])));
 			//! store the pointer in the vector poweUps
 			powerUps.push_back(powerUp);
-			tempConstructorData = {}; //!< make sure the vector is empty in the next case
+			tempConstructorData = {}; //! make sure the vector is empty in the next case
 			break;
 		}
 		}
@@ -93,7 +93,12 @@ void GameLevel::createLevel(LogicData inputString) {
 
 //
 void GameLevel::executeUserCommand(UserInputType userInput) {
-	bool movement = true; //!< boolean that sais if the player is going to move
+
+	output.clear(); //! empty the output vector
+
+	bool movement = true; //! boolean that sais if the player is going to move
+	DataUpdate::Action playerAction = DataUpdate::Action::nothing;
+
 	//! check the current position of the player
 	int tempX = player1->getXPosition();               
 	int tempY = player1->getYPosition();											
@@ -129,6 +134,9 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 	if (mapArray[player1->getXPosition()][player1->getYPosition()] == 2) {
 		isGameFinished = true;
 	} 
+	//! Update the position of the player for the output
+	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->dataToString(), DataUpdate::ObjectType::player, playerAction));
+	output.push_back(update);
 
 	//! check if game is over
 	checkGameOver();

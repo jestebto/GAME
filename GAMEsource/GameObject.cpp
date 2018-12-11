@@ -32,7 +32,7 @@ int GameObject::getYPosition() { return yPosition; }
 //return a string with the player data
 std::string GameObject::dataToString() {
 	std::ostringstream addData;
-	addData << objectID <<"," << xPosition
+	addData << xPosition
 		<<"," << yPosition << ",";
 	std::string totalData = addData.str();
 	return totalData;

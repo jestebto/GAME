@@ -7,6 +7,7 @@
 #include "Enemy.h"
 #include "PowerUp.h"
 #include "UserInputType.h"
+#include "DataUpdate.h"
 
 class GameLevel : public ILogicManager {
 public:
@@ -45,6 +46,7 @@ private:
 	Player* player1;
 	bool isGameOver{false};
 	bool isGameFinished{false};
+	std::vector<std::shared_ptr<DataUpdate>> output;
 };
 
 #endif // !GAMELEVEL_H
