@@ -22,7 +22,7 @@ public:
 	// evaluate and perform the user's command
 	void executeUserCommand(UserInputType);
 
-	std::vector<std::string> getLevelState();
+	std::vector<std::shared_ptr<DataUpdate>> getLevelState();
 
 	// check if game is over
 	bool checkGameOver();
@@ -47,7 +47,7 @@ private:
 	Player* player1; /// player
 	bool isGameOver{false}; /// indicate if the game is over
 	bool isGameFinished{false}; /// indicate if the level is finished
-  std::vector<std::shared_ptr<DataUpdate>> output;
+    std::vector<std::shared_ptr<DataUpdate>> output;
 
 };
 

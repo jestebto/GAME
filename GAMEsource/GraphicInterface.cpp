@@ -164,6 +164,50 @@ void GraphicInterface::update(std::vector<std::string> data)
 	SDL_RenderPresent(renderer);
 }
 
+void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
+{
+	// Clear the current renderer.
+	SDL_RenderClear(renderer);
+
+	// Draw the walls.
+	drawBackground(map);
+
+	// Update the map based on the incoming data
+	// Format is {"ID,x,y"},{"ID,x,y"},...
+
+
+	for (std::shared_ptr<DataUpdate> &dataPtr : data) {
+
+
+		// Look up in the ID in the sprite map
+		auto mapPair = spriteObjects.find(dataPtr->getID());
+
+		if (mapPair == spriteObjects.end())
+			std::cout << "Element not found" << '\n';
+		else {
+			moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
+		}
+
+	}
+
+	// Loop through all the objects and draw them.
+	for (auto &mapPair : this->spriteObjects) {
+		int x = mapPair.second->getXPosition();
+		int y = mapPair.second->getYPosition();
+
+		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE,
+						TILESIZE };
+		SDL_RenderCopy(renderer, sheet, &tileSet[mapPair.second->art][mapPair.second->direction],
+			&dst);
+	}
+
+	// Draw the lives.
+	drawLives();
+
+	// Update the screen.
+	SDL_RenderPresent(renderer);
+}
+
 void GraphicInterface::update(UserInputType userInput)
 {
 	// Clear the current renderer.
