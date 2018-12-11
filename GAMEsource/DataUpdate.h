@@ -9,7 +9,7 @@ public:
 	enum class ObjectType { PLAYER = 0 , ENEMY = 1, POWERUP = 2 };
 	enum class Action { NOTHING = 0, ATTACK = 1, ELIMINATE = 2 };
 
-	DataUpdate(std::string, std::string, ObjectType, Action);
+	DataUpdate(std::string, int, int, std::string, ObjectType, Action);
 	~DataUpdate();
 
 
@@ -17,6 +17,12 @@ public:
 	void setID(std::string);
 	/// return the object's ID
 	std::string getID();
+
+	void setXPosition(int);
+	int getXPosition();
+
+	void setYPosition(int);
+	int getYPosition();
 
 	/// set the type of object
 	void setObjectType(enum ObjectType);
@@ -35,6 +41,8 @@ public:
 
 private:
 	std::string objectID;
+	int xPosition;
+	int yPosition;
 	std::string objectData;
 	ObjectType objectType;
 	Action objectAction;

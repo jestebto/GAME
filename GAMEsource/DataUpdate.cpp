@@ -2,9 +2,11 @@
 
 
 
-DataUpdate::DataUpdate(std::string id, std::string data, DataUpdate::ObjectType type, DataUpdate::Action action)
+DataUpdate::DataUpdate(std::string id, int x, int y, std::string data, DataUpdate::ObjectType type, DataUpdate::Action action)
 {
 	objectID = id;
+	xPosition = x;
+	yPosition = y;
 	objectData = data;
 	objectType = type;
 	objectAction = action;
@@ -18,6 +20,12 @@ DataUpdate::~DataUpdate()
 void DataUpdate::setID(std::string id) { objectID = id; }
 
 std::string DataUpdate::getID() { return objectID; }
+
+void DataUpdate::setXPosition(int x) { xPosition = x; }
+int DataUpdate::getXPosition() { return xPosition; }
+
+void DataUpdate::setYPosition(int x) { yPosition = x; }
+int DataUpdate::getYPosition() { return yPosition; }
 
 void DataUpdate::setData(std::string data) { objectData = data; }
 
