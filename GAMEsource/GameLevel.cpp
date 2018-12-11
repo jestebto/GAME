@@ -60,7 +60,8 @@ void GameLevel::createLevel(LogicData inputString) {
 
 			//create a new player and save a shared pointer to it
 			player1 = new Player(tempConstructorData[0], stoi(tempConstructorData[1]),
-			stoi(tempConstructorData[2]), stoi(tempConstructorData[3]));
+
+			stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), stoi(tempConstructorData[4]), stoi (tempConstructorData[5])); // Added tempContructorData[4] for orientation
 
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
 			break;
@@ -96,7 +97,8 @@ void GameLevel::createLevel(LogicData inputString) {
 			// store the pointer in the vector poweUps
 			powerUps.push_back(powerUp);
 
-			tempConstructorData = {}; // make sure the vector is empty in the next case
+			tempConstructorData = {}; //! make sure the vector is empty in the next case
+
 			break;
 		}
 		}
@@ -105,28 +107,104 @@ void GameLevel::createLevel(LogicData inputString) {
 
 ///  execute the input of the data
 void GameLevel::executeUserCommand(UserInputType userInput) {
-	bool movement = true; // boolean that sais if the player is going to move
 
-	// check the current position of the player
+	output.clear(); //! empty the output vector
+
+	bool movement = true; //! boolean that sais if the player is going to move
+	DataUpdate::Action playerAction = DataUpdate::Action::nothing;
+
+	//! check the current position of the player
 	int tempX = player1->getXPosition();               
-	int tempY = player1->getYPosition();		
+	int tempY = player1->getYPosition();	
+	int tempR = player1->getR();
+	//! check which position the player will go to based on the user input
 
-	// check which position the player will go to based on the user input
 	switch (userInput) {
 	case UserInputType::Nothing: // No movement
 		movement = false; // if no user input, no movement
 		break;
-	case UserInputType::Up: // Move Up
-		tempY--;
+
+	case UserInputType::Up: //!< Move Up
+		if (tempR != 2) {
+			player1->setR(2);
+			movement = false;
+		}
+		else {
+			tempY--;
+		}
 		break;
-	case UserInputType::Right: // Move Right
-		tempX++;
+	case UserInputType::Right: //!< Move Right
+		if (tempR != 3) {  // TO DO combine 4 checks of orientation in one
+			player1->setR(3);
+			movement = false;
+		}
+		else {
+			tempX++;
+		}
 		break;
-	case UserInputType::Down: // Move Down
-		tempY++;
+	case UserInputType::Down: //!< Move Down
+		if (tempR != 4) {
+			player1->setR(4);
+			movement = false;
+		}
+		else {
+			tempY++;
+		}
 		break;
-	case UserInputType::Left: // Move Left
-		tempX--;
+	case UserInputType::Left: //!< Move Left
+		if (tempR != 5) {
+			player1->setR(5);
+			movement = false;
+		}
+		else {
+			tempX--;
+		}
+		break;
+	case UserInputType::Hit: // Get 'em
+		
+			switch (tempR) {
+			case 2:
+				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
+					if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY - 1) {
+						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
+						
+					}
+				}
+				
+				break;
+			case 3:
+				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
+					if (enemyPtr->getXPosition() == tempX + 1 && enemyPtr->getYPosition() == tempY) {
+						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
+						
+					}
+				}
+				
+				break;
+			case 4:
+				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
+					if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY + 1) {
+						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
+						
+					}
+				}
+				
+				break;
+			case 5:
+				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
+					if (enemyPtr->getXPosition() == tempX - 1 && enemyPtr->getYPosition() == tempY) {
+						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
+						
+					}
+				}
+				
+				break;
+			}
+			
+
+		
+		
+
 		break;
 	}
 
@@ -145,6 +223,9 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 	if (mapArray[player1->getXPosition()][player1->getYPosition()] == 2) {
 		isGameFinished = true;
 	} 
+	//! Update the position of the player for the output
+	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->dataToString(), DataUpdate::ObjectType::player, playerAction));
+	output.push_back(update);
 
 	// check if game is over
 	checkGameOver();

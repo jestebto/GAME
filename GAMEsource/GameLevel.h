@@ -7,6 +7,7 @@
 #include "Enemy.h"
 #include "PowerUp.h"
 #include "UserInputType.h"
+#include "DataUpdate.h"
 
 class GameLevel : public ILogicManager {
 public:
@@ -35,8 +36,9 @@ private:
 
 	// check if the player would collide with a power up
 	bool checkPowerUpCollision(int, int);
-	
-	
+
+	//bool checkHitCollision(int, int, int);
+
 
 	int mapArray[20][20];   /// map
 	int powerUpMap[20][20]; /// array with Power-Ups locations
@@ -45,6 +47,8 @@ private:
 	Player* player1; /// player
 	bool isGameOver{false}; /// indicate if the game is over
 	bool isGameFinished{false}; /// indicate if the level is finished
+  std::vector<std::shared_ptr<DataUpdate>> output;
+
 };
 
 #endif // !GAMELEVEL_H

@@ -70,6 +70,7 @@
     <ClCompile Include="OutputData.cpp">
       <Filter>Output</Filter>
     </ClCompile>
+    <ClCompile Include="DataUpdate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataToolkit.h">
@@ -141,6 +142,7 @@
     <ClInclude Include="IOutputManager.h">
       <Filter>Output</Filter>
     </ClInclude>
+    <ClInclude Include="DataUpdate.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
