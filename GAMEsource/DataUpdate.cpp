@@ -21,11 +21,11 @@ void DataUpdate::setID(std::string id) { objectID = id; }
 
 std::string DataUpdate::getID() { return objectID; }
 
-void DataUpdate::setXPosition(int x) { xPosition = x; }
-int DataUpdate::getXPosition() { return xPosition; }
+void DataUpdate::setObjectXPosition(int x) { xPosition = x; }
+int DataUpdate::getObjectXPosition() { return xPosition; }
 
-void DataUpdate::setYPosition(int x) { yPosition = x; }
-int DataUpdate::getYPosition() { return yPosition; }
+void DataUpdate::setObjectYPosition(int x) { yPosition = x; }
+int DataUpdate::getObjectYPosition() { return yPosition; }
 
 void DataUpdate::setData(std::string data) { objectData = data; }
 

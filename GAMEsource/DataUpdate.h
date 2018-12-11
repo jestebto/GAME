@@ -18,11 +18,11 @@ public:
 	/// return the object's ID
 	std::string getID();
 
-	void setXPosition(int);
-	int getXPosition();
+	void setObjectXPosition(int);
+	int getObjectXPosition();
 
-	void setYPosition(int);
-	int getYPosition();
+	void setObjectYPosition(int);
+	int getObjectYPosition();
 
 	/// set the type of object
 	void setObjectType(enum ObjectType);

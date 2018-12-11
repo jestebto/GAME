@@ -224,7 +224,8 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		isGameFinished = true;
 	} 
 	//! Update the position of the player for the output
-	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->dataToString(), DataUpdate::ObjectType::PLAYER, playerAction));
+	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(),player1->getYPosition(),
+		player1->dataToString(), DataUpdate::ObjectType::PLAYER, playerAction));
 	output.push_back(update);
 
 	// check if game is over
@@ -232,20 +233,9 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 }
 
 /// return a vector of strings with to update the output
-std::vector<std::string> GameLevel::getLevelState()
+std::vector<std::shared_ptr<DataUpdate>> GameLevel::getLevelState()
 {	
-	std::vector<std::string> data;
-
-	data.push_back(player1->dataToString());
-
-	for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-		data.push_back(enemyPtr->dataToString());
-	}
-
-	for (std::shared_ptr<PowerUp> powerUpPtr : powerUps) {
-		data.push_back(powerUpPtr->dataToString());
-	}
-	return data;
+	return output;
 }
 
 
