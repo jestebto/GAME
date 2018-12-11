@@ -11,8 +11,9 @@
 #include <string>
 #include "GameObject.h"
 
-/// These enum values denote the sprite sets available for items on screen.
+/// Define attributes important only for Sprite objects in the graphic user interface 
 namespace SpriteAttributes {
+	/// Artwork Type used for each sprite 
 	enum ArtType {
 		PACMAN,
 		BLINKY,
@@ -42,7 +43,7 @@ namespace SpriteAttributes {
 		NINE
 	};
 
-	/// An enum to denote the direction of an item on screen.
+	/// The direction a sprite faces
 	enum Direction { UP, DOWN, LEFT, RIGHT };
 }
 

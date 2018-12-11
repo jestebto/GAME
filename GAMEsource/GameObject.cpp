@@ -9,27 +9,27 @@ GameObject::GameObject(std::string ID, int xPos, int yPos) {
 }
 
 
-// return object ID
+/// return object ID
 std::string GameObject::getID() { return objectID; }
 
-// set X-Position
+/// set X-Position
 void GameObject::setXPosition(int& xPos) {
 	xPosition = xPos;
 }
 
-// return X-Position
+/// return X-Position
 int GameObject::getXPosition() { return xPosition; }
 
-// set Y-Position
+/// set Y-Position
 void GameObject::setYPosition(int& yPos) {
 	yPosition = yPos;
 }
 
-// return Y-Position
+/// return Y-Position
 int GameObject::getYPosition() { return yPosition; }
 
 
-//return a string with the player data
+///return a string with the object's data
 std::string GameObject::dataToString() {
 	std::ostringstream addData;
 	addData << objectID <<","<< xPosition

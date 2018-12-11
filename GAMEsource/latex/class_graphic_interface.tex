@@ -1,0 +1,109 @@
+\hypertarget{class_graphic_interface}{}\section{Graphic\+Interface Class Reference}
+\label{class_graphic_interface}\index{Graphic\+Interface@{Graphic\+Interface}}
+Inheritance diagram for Graphic\+Interface\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_graphic_interface}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_graphic_interface_accff331d036826a9c43e7bcd39165dc2}{Graphic\+Interface}} ()
+\item 
+\mbox{\Hypertarget{class_graphic_interface_ad36aed285f05abff15f0991810ea2bde}\label{class_graphic_interface_ad36aed285f05abff15f0991810ea2bde}} 
+\mbox{\hyperlink{class_graphic_interface_ad36aed285f05abff15f0991810ea2bde}{Graphic\+Interface}} (const \mbox{\hyperlink{class_graphic_interface}{Graphic\+Interface}} \&)=delete
+\begin{DoxyCompactList}\small\item\em UI objects should not be copied or moved. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graphic_interface_aa89a56ec49a83a0f6ae3de05c86d6e80}\label{class_graphic_interface_aa89a56ec49a83a0f6ae3de05c86d6e80}} 
+{\bfseries Graphic\+Interface} (const \mbox{\hyperlink{class_graphic_interface}{Graphic\+Interface}} \&\&)=delete
+\item 
+\mbox{\Hypertarget{class_graphic_interface_ac7bd13606ffcf7c14e35990c3ad4d868}\label{class_graphic_interface_ac7bd13606ffcf7c14e35990c3ad4d868}} 
+\mbox{\hyperlink{class_graphic_interface}{Graphic\+Interface}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_graphic_interface}{Graphic\+Interface}} \&)=delete
+\item 
+\mbox{\hyperlink{class_graphic_interface_a48f212964040a5baf30035420305c1f9}{$\sim$\+Graphic\+Interface}} ()
+\item 
+void \mbox{\hyperlink{class_graphic_interface_a4237627c03422b22653a3a462bd1daa2}{load\+Level}} (\mbox{\hyperlink{class_output_data}{Output\+Data}})
+\item 
+void \mbox{\hyperlink{class_graphic_interface_a250275a6b20097a3c3435a9af4d1cd75}{update}} (std\+::vector$<$ std\+::string $>$ data)
+\item 
+void \mbox{\hyperlink{class_graphic_interface_abb3581948def6522f616e9f3ce1c40ac}{update}} (User\+Input\+Type)
+\item 
+\mbox{\Hypertarget{class_graphic_interface_adc91101675b7727393c747a06db7e4e2}\label{class_graphic_interface_adc91101675b7727393c747a06db7e4e2}} 
+void \mbox{\hyperlink{class_graphic_interface_adc91101675b7727393c747a06db7e4e2}{show\+Game\+Over\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em Displays the Game Over screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_graphic_interface_a2a52c6fef543c4f130f62ee4552648f9}{move\+Sprite}} (\mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} $\ast$, int, int)
+\item 
+void \mbox{\hyperlink{class_graphic_interface_a8062b59b90fa4075903ddc122f2ba8ed}{move\+Sprite}} (User\+Input\+Type, std\+::string)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_graphic_interface_accff331d036826a9c43e7bcd39165dc2}\label{class_graphic_interface_accff331d036826a9c43e7bcd39165dc2}} 
+\index{Graphic\+Interface@{Graphic\+Interface}!Graphic\+Interface@{Graphic\+Interface}}
+\index{Graphic\+Interface@{Graphic\+Interface}!Graphic\+Interface@{Graphic\+Interface}}
+\subsubsection{\texorpdfstring{Graphic\+Interface()}{GraphicInterface()}}
+{\footnotesize\ttfamily Graphic\+Interface\+::\+Graphic\+Interface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructor Note\+: all initialisation is done in Graphic\+Interface\+::loadlevel() \mbox{\Hypertarget{class_graphic_interface_a48f212964040a5baf30035420305c1f9}\label{class_graphic_interface_a48f212964040a5baf30035420305c1f9}} 
+\index{Graphic\+Interface@{Graphic\+Interface}!````~Graphic\+Interface@{$\sim$\+Graphic\+Interface}}
+\index{````~Graphic\+Interface@{$\sim$\+Graphic\+Interface}!Graphic\+Interface@{Graphic\+Interface}}
+\subsubsection{\texorpdfstring{$\sim$\+Graphic\+Interface()}{~GraphicInterface()}}
+{\footnotesize\ttfamily Graphic\+Interface\+::$\sim$\+Graphic\+Interface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor Fully de-\/initializes the UI, including closing the main window. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_graphic_interface_a4237627c03422b22653a3a462bd1daa2}\label{class_graphic_interface_a4237627c03422b22653a3a462bd1daa2}} 
+\index{Graphic\+Interface@{Graphic\+Interface}!load\+Level@{load\+Level}}
+\index{load\+Level@{load\+Level}!Graphic\+Interface@{Graphic\+Interface}}
+\subsubsection{\texorpdfstring{load\+Level()}{loadLevel()}}
+{\footnotesize\ttfamily void Graphic\+Interface\+::load\+Level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_output_data}{Output\+Data}}}]{input\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Initialize the UI fully. Loads data Creates a main (S\+DL) window for rendering, and loads the sprites from a bitmap on disk. Public because called by Game Manager 
+
+Implements \mbox{\hyperlink{class_i_output_manager_a50a935d76cf10427b0977406a2338146}{I\+Output\+Manager}}.
+
+\mbox{\Hypertarget{class_graphic_interface_a2a52c6fef543c4f130f62ee4552648f9}\label{class_graphic_interface_a2a52c6fef543c4f130f62ee4552648f9}} 
+\index{Graphic\+Interface@{Graphic\+Interface}!move\+Sprite@{move\+Sprite}}
+\index{move\+Sprite@{move\+Sprite}!Graphic\+Interface@{Graphic\+Interface}}
+\subsubsection{\texorpdfstring{move\+Sprite()}{moveSprite()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Graphic\+Interface\+::move\+Sprite (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} $\ast$}]{element,  }\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})}
+
+Move a sprite to a position Data is given by the logic manager \mbox{\Hypertarget{class_graphic_interface_a8062b59b90fa4075903ddc122f2ba8ed}\label{class_graphic_interface_a8062b59b90fa4075903ddc122f2ba8ed}} 
+\index{Graphic\+Interface@{Graphic\+Interface}!move\+Sprite@{move\+Sprite}}
+\index{move\+Sprite@{move\+Sprite}!Graphic\+Interface@{Graphic\+Interface}}
+\subsubsection{\texorpdfstring{move\+Sprite()}{moveSprite()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Graphic\+Interface\+::move\+Sprite (\begin{DoxyParamCaption}\item[{User\+Input\+Type}]{command,  }\item[{std\+::string}]{ID }\end{DoxyParamCaption})}
+
+Move a sprite on the screen using user input. For test purposes only, as this is not connected to the logic \mbox{\Hypertarget{class_graphic_interface_a250275a6b20097a3c3435a9af4d1cd75}\label{class_graphic_interface_a250275a6b20097a3c3435a9af4d1cd75}} 
+\index{Graphic\+Interface@{Graphic\+Interface}!update@{update}}
+\index{update@{update}!Graphic\+Interface@{Graphic\+Interface}}
+\subsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Graphic\+Interface\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Update the screen
+\begin{DoxyItemize}
+\item Draw the background
+\item Draw the score
+\item Draw the remaining lives
+\item Draw the objects (last) 
+\end{DoxyItemize}
+
+Implements \mbox{\hyperlink{class_i_output_manager_aaebb6c7029ac00c7ce293272a5e854e3}{I\+Output\+Manager}}.
+
+\mbox{\Hypertarget{class_graphic_interface_abb3581948def6522f616e9f3ce1c40ac}\label{class_graphic_interface_abb3581948def6522f616e9f3ce1c40ac}} 
+\index{Graphic\+Interface@{Graphic\+Interface}!update@{update}}
+\index{update@{update}!Graphic\+Interface@{Graphic\+Interface}}
+\subsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Graphic\+Interface\+::update (\begin{DoxyParamCaption}\item[{User\+Input\+Type}]{user\+Input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+A test update that takes in user inputs directly, so that the logic component can be completely bypassed This is useful for testing animations 
+
+Implements \mbox{\hyperlink{class_i_output_manager_aef1aaf499f3eee5927cb2833af39ce43}{I\+Output\+Manager}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+User/source/repos/\+G\+A\+M\+E/\+G\+A\+M\+Esource/Graphic\+Interface.\+h\item 
+C\+:/\+Users/\+User/source/repos/\+G\+A\+M\+E/\+G\+A\+M\+Esource/Graphic\+Interface.\+cpp\end{DoxyCompactItemize}

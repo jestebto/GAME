@@ -15,7 +15,7 @@ public:
 	bool isAlive();
 
 private:
-	int lives; // number of lives
+	int lives; /// number of lives
 };
 
 #endif // CHARACTER_H

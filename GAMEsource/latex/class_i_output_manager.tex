@@ -1,0 +1,44 @@
+\hypertarget{class_i_output_manager}{}\section{I\+Output\+Manager Class Reference}
+\label{class_i_output_manager}\index{I\+Output\+Manager@{I\+Output\+Manager}}
+Inheritance diagram for I\+Output\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_i_output_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_i_output_manager_a7442c5161bf453dc13605f7aaeeea2b5}{$\sim$\+I\+Output\+Manager}} ()=0
+\begin{DoxyCompactList}\small\item\em virtual destructor to be implemented in the class implementing the interface \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_output_manager_a50a935d76cf10427b0977406a2338146}\label{class_i_output_manager_a50a935d76cf10427b0977406a2338146}} 
+virtual void \mbox{\hyperlink{class_i_output_manager_a50a935d76cf10427b0977406a2338146}{load\+Level}} (\mbox{\hyperlink{class_output_data}{Output\+Data}})=0
+\begin{DoxyCompactList}\small\item\em initialise S\+DL screen, read input data and create the maps and gamesprites in use \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_output_manager_aaebb6c7029ac00c7ce293272a5e854e3}\label{class_i_output_manager_aaebb6c7029ac00c7ce293272a5e854e3}} 
+virtual void \mbox{\hyperlink{class_i_output_manager_aaebb6c7029ac00c7ce293272a5e854e3}{update}} (std\+::vector$<$ std\+::string $>$)=0
+\begin{DoxyCompactList}\small\item\em update the screen based on the game state as determined by the logic manager \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_output_manager_aef1aaf499f3eee5927cb2833af39ce43}\label{class_i_output_manager_aef1aaf499f3eee5927cb2833af39ce43}} 
+virtual void \mbox{\hyperlink{class_i_output_manager_aef1aaf499f3eee5927cb2833af39ce43}{update}} (User\+Input\+Type)=0
+\begin{DoxyCompactList}\small\item\em for test purposes to bypass the logic component \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_output_manager_adc5ca9af7dc69324ee87233dcc7befc4}\label{class_i_output_manager_adc5ca9af7dc69324ee87233dcc7befc4}} 
+virtual void {\bfseries show\+Game\+Over\+Screen} ()=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_i_output_manager_a7442c5161bf453dc13605f7aaeeea2b5}\label{class_i_output_manager_a7442c5161bf453dc13605f7aaeeea2b5}} 
+\index{I\+Output\+Manager@{I\+Output\+Manager}!````~I\+Output\+Manager@{$\sim$\+I\+Output\+Manager}}
+\index{````~I\+Output\+Manager@{$\sim$\+I\+Output\+Manager}!I\+Output\+Manager@{I\+Output\+Manager}}
+\subsubsection{\texorpdfstring{$\sim$\+I\+Output\+Manager()}{~IOutputManager()}}
+{\footnotesize\ttfamily I\+Output\+Manager\+::$\sim$\+I\+Output\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [default]}}
+
+
+
+virtual destructor to be implemented in the class implementing the interface 
+
+Interface to be implemented by a class acting as the manager of the Output Component 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+User/source/repos/\+G\+A\+M\+E/\+G\+A\+M\+Esource/I\+Output\+Manager.\+h\item 
+C\+:/\+Users/\+User/source/repos/\+G\+A\+M\+E/\+G\+A\+M\+Esource/I\+Output\+Manager.\+cpp\end{DoxyCompactItemize}

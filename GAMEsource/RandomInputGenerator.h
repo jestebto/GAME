@@ -4,6 +4,7 @@
 class RandomInputGenerator : public IInputManager
 {
 public:
+	/// Test class
 	RandomInputGenerator();
 	~RandomInputGenerator();
 	UserInputType getInput();
