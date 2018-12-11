@@ -36,8 +36,8 @@ private:
 
 	//! check if the player would collide with a power up
 	bool checkPowerUpCollision(int, int);
-	
-	
+
+	//bool checkHitCollision(int, int, int);
 
 	int mapArray[20][20];   
 	int powerUpMap[20][20];

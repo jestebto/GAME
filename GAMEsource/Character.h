@@ -10,6 +10,8 @@ public:
 
 	void setLives(int);
 
+	int getLives();
+
 	bool isAlive();
 
 private:
