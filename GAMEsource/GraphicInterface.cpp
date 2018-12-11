@@ -470,6 +470,13 @@ void GraphicInterface::seperateTiles()
 	wall[RIGHT] = wall[UP];
 	tileSet[WALL] = wall;
 
+	std::map<Direction, SDL_Rect> key;
+	key[UP] = { o + size * 7, o + size * 5, size, size };
+	key[DOWN] = key[UP];
+	key[LEFT] = key[UP];
+	key[RIGHT] = key[UP];
+	tileSet[KEY] = key;
+
 	for (int i = 0; i < 10; i++) {
 		std::map<Direction, SDL_Rect> nr;
 		nr[UP] = { o + (size / 2) * i, o + 1 + size * 0, size / 2, size / 2 };
@@ -492,6 +499,12 @@ void GraphicInterface::drawBackground(std::vector<std::vector<int>> &map)
 								static_cast<int>(i) * TILESIZE, TILESIZE,
 								TILESIZE };
 				SDL_RenderCopy(renderer, sheet, &tileSet[WALL][DOWN], &dst);
+			}
+			else if (map[i][j] == 2) {
+				SDL_Rect dst = { static_cast<int>(j) * TILESIZE,
+								static_cast<int>(i) * TILESIZE, TILESIZE,
+								TILESIZE };
+				SDL_RenderCopy(renderer, sheet, &tileSet[KEY][DOWN], &dst);
 			}
 		}
 	}
