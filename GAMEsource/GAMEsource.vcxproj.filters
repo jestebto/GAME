@@ -71,6 +71,9 @@
       <Filter>Output</Filter>
     </ClCompile>
     <ClCompile Include="DataUpdate.cpp" />
+    <ClCompile Include="SpriteManager.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataToolkit.h">
@@ -145,6 +148,9 @@
     <ClInclude Include="DataUpdate.h" />
     <ClInclude Include="CharacterOrientation.h">
       <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteManager.h">
+      <Filter>Output</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

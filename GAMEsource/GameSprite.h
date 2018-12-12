@@ -9,7 +9,6 @@
 #ifndef GAME_SPRITE_H
 #define GAME_SPRITE_H
 #include <string>
-#include "GameObject.h"
 
 /// Define attributes important only for Sprite objects in the graphic user interface 
 namespace SpriteAttributes {
@@ -79,4 +78,4 @@ private:
 
 };
 
-#endif // GAMEOBJECT_H
+#endif // GAME_SPRITE_H

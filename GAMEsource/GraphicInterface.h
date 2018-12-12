@@ -14,8 +14,9 @@
 #define GRAPHIC_INTERFACE_H
 
 #include "IOutputManager.h"
-#include "UserInputType.h"
+#include "UserInputType.h" /// for test purposes, else this class is not supposed to know about the UserInput
 #include "GameSprite.h"
+#include "SpriteManager.h" /// all sprite related functions are in this class
 
 #include <SDL2/SDL.h>
 
@@ -59,14 +60,6 @@ public:
 	//! Displays the Game Over screen
 	void showGameOverScreen();
 
-	/// Move a sprite to a position 
-	/// Data is given by the logic manager
-	void moveSprite(GameSprite*,int, int);
-	
-	/// Move a sprite on the screen using user input.
-	/// For test purposes only, as this is not connected to the logic
-	void moveSprite(UserInputType, std::string);
-
 private:
 	///
 	/// Initialise a window for SDL
@@ -93,7 +86,7 @@ private:
 	/// \return the loaded texture, or nullptr if something went wrong.
 	SDL_Texture *loadTexture(const std::string &file);
 
-private:
+	private:
 	/// Main game UI window.
 	SDL_Window *window;
 	/// SDL Renderer to draw items onto #window.
@@ -108,6 +101,8 @@ private:
 	int screenWidth;
 	int screenHeight;
 
+	SpriteManager* spriteManager; //< keeps the 
+
 	/// Map containing all the game objects.
 	///
 	/// Stores tiles to use in GraphicInterface::sheet. Usage is:
@@ -120,9 +115,9 @@ private:
 	/// The key is the ID
 	std::map<std::string, GameSprite*> spriteObjects;
 
-	enum { TILESIZE = 24 };
+		enum { TILESIZE = 24 };
 
-	int lives=3;//<store number of lives the character has
+		int lives = 3;//<store number of lives the character has
 
 };
 

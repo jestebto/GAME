@@ -186,6 +186,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PowerUp.h" />
     <ClInclude Include="RandomInputGenerator.h" />
+    <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="StorageData.h" />
     <ClInclude Include="UserInputType.h" />
   </ItemGroup>
@@ -218,6 +219,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="RandomInputGenerator.cpp" />
+    <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="StorageData.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

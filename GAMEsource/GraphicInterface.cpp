@@ -12,6 +12,7 @@
 
 GraphicInterface::GraphicInterface()
 {
+	spriteManager = new SpriteManager(TILESIZE);
 	//All setup is done in GrahpicInterface::loadlevel once data has been received
 }
 
@@ -82,10 +83,10 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 	this->map = std::move(board);
 	*/
 
-	this->screenWidth = levelMap[0].size();
+	this->screenWidth  = levelMap[0].size();
 	this->screenHeight = levelMap.size();
-	// Initialize and load textures.
-	this->init(); //indexing starts at 0 so minus 1
+	// Initialize window and load textures.
+	this->init(); 
 	this->loadTextures();
 
 	//this->spriteObjects["099"] = new GameSprite{ "Test", 1, 1, CLYDE, UP };
@@ -134,14 +135,13 @@ void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
 
 	for (std::shared_ptr<DataUpdate> &dataPtr : data) {
 
-
 		// Look up in the ID in the sprite map
 		auto mapPair = spriteObjects.find(dataPtr->getID());
 
 		if (mapPair == spriteObjects.end())
 			std::cout << "Element not found" << '\n';
 		else {
-			moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
+			spriteManager->moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
 		
 			// Look at ObjectType specific data
 			std::vector <std::string> tempConstructorData;
@@ -160,8 +160,8 @@ void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
 		int x = mapPair.second->getXPosition();
 		int y = mapPair.second->getYPosition();
 
-		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE,
-						TILESIZE };
+		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE, 
+			TILESIZE };
 		SDL_RenderCopy(renderer, sheet, &tileSet[mapPair.second->art][mapPair.second->direction],
 			&dst);
 	}
@@ -175,13 +175,22 @@ void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
 
 void GraphicInterface::update(UserInputType userInput)
 {
+	// Purely for testing
+	
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
 
 	// Draw the walls.
 	drawBackground(levelMap);
 	
-	GraphicInterface::moveSprite(userInput, "001");
+	// Look up in the ID in the sprite map
+	auto mapPair = spriteObjects.find("001");
+
+	if (mapPair == spriteObjects.end())
+		std::cout << "Element not found" << '\n';
+	else {
+		spriteManager->moveSprite(mapPair->second, userInput);
+	}
 
 	// Loop through all the objects and draw them.
 	for (auto &mapPair : this->spriteObjects) {
@@ -212,82 +221,7 @@ void GraphicInterface::showGameOverScreen() {
 	SDL_RenderPresent(renderer);
 }
 
-void GraphicInterface::moveSprite(GameSprite* element, int x, int y)
-{
-	// move a Sprite to a position
-	using namespace SpriteAttributes;
 
-	int x_old = element->getXPosition();
-	int y_old = element->getYPosition();
-
-	element->setXPosition(x);
-	element->setYPosition(y);
-	if (y_old < y) // moving DOWN
-	{
-		element->direction = DOWN;
-	}
-	else if (y_old > y) //moving UP
-	{
-		element->direction = UP;
-	}
-	if (x_old < x) //moving right
-	{
-		element->direction = RIGHT;
-	}
-	else if (x_old > x) //moving left
-	{
-		element->direction = LEFT;
-	}
-
-}
-
-
-void GraphicInterface::moveSprite(UserInputType command, std::string ID)
-{
-	// directly move a Sprite based on user input
-	// for test purposes only, as this is not connected to the logic
-	using namespace SpriteAttributes;
-	
-
-	int moveSize= 1;
-	/*  Co-ordinates:
-	*   .---> +x
-	*   |
-	*   v
-	*   +y
-    */
-
-	auto mapPair = spriteObjects.find(ID);
-
-	if (mapPair == spriteObjects.end())
-		std::cout << "Element not found" << '\n';
-	else
-	{
-		GameSprite* &element= mapPair->second;
-			switch (command) {
-			case UserInputType::Up:
-				element->setYPosition(element->getYPosition() - moveSize);
-				element->direction = UP; //for display purposes only
-				break;
-			case UserInputType::Down:
-				element->setYPosition(element->getYPosition() + moveSize);
-				element->direction = DOWN; //for display purposes only
-				break;
-			case UserInputType::Left:
-				element->setXPosition(element->getXPosition() - moveSize);
-				element->direction = LEFT; //for display purposes only
-				break;
-			case UserInputType::Right:
-				element->setXPosition(element->getXPosition() + moveSize);
-				element->direction = RIGHT; //for display purposes only
-				break;
-			default:
-				//Do nothing
-				break;
-			}
-	}
-	
-}
 
 /// Initialises the UI::window and the UI::renderer.
 void GraphicInterface::init()
@@ -312,13 +246,14 @@ void GraphicInterface::loadTextures()
 	sheet = this->loadTexture("resources/sam_gfx.bmp");
 	seperateTiles();
 
+	// Load game over screen
 	gameOverScreen = this->loadTexture("resources/GAME_OVER.bmp");
 }
 
 /// From the Pacman Code
 void GraphicInterface::seperateTiles()
-{	
-	
+{
+
 	using namespace SpriteAttributes;
 	const int size = TILESIZE;
 	const int o = 4; // offset in bitmap (both in x and y)
