@@ -146,6 +146,9 @@
     <ClInclude Include="CharacterOrientation.h">
       <Filter>Logic</Filter>
     </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

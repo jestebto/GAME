@@ -173,6 +173,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameSprite.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="GraphicInterface.h" />
     <ClInclude Include="HardCodedStorageManager.h" />
     <ClInclude Include="IInputManager.h" />

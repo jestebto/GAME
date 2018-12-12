@@ -22,10 +22,10 @@ public:
 	// evaluate and perform the user's command
 	void executeUserCommand(UserInputType);
 
-	std::vector<std::shared_ptr<DataUpdate>> getLevelState();
+	std::vector<std::shared_ptr<DataUpdate>> getLevelUpdates();
 
 	// check if game is over
-	bool checkGameOver();
+	GameState getGameState();
 
 private:
 	// check if the player would collide with a wall
@@ -39,7 +39,7 @@ private:
 
 	//bool checkHitCollision(int, int, int);
 
-
+	GameState gameState;
 	int mapArray[20][20];   /// map
 	int powerUpMap[20][20]; /// array with Power-Ups locations
 	std::vector<std::shared_ptr<Enemy>> enemies;  /// list of enemies
