@@ -74,7 +74,7 @@ private:
 	/// Seperate tiles into a tileSet map. Usage is:
 	/// tileSet[<ArtType>][<Direction>]
 	/// and the tile set itself is in GraphicInterface::sheet
-	void seperateTiles();
+	//void seperateTiles();
 
 	/// Draws walls onto the screen according to \p map
 	/// \param map A 2-by-2 grid indicating which grid locations are walls.
@@ -86,13 +86,13 @@ private:
 	/// \return the loaded texture, or nullptr if something went wrong.
 	SDL_Texture *loadTexture(const std::string &file);
 
-	private:
+private:
 	/// Main game UI window.
 	SDL_Window *window;
 	/// SDL Renderer to draw items onto #window.
 	SDL_Renderer *renderer;
 	/// Loaded SDL texture with all sprite bitmaps.
-	SDL_Texture *sheet;
+	SDL_Texture *sheet; // Consider moving ownership of this to SpriteManager?
 	/// Loaded SDL texture with the game over screen
 	SDL_Texture *gameOverScreen;
 
@@ -103,21 +103,14 @@ private:
 
 	SpriteManager* spriteManager; //< keeps the 
 
-	/// Map containing all the game objects.
-	///
-	/// Stores tiles to use in GraphicInterface::sheet. Usage is:
-	/// tileSet[<type>][<direction>]
-	/// \see ArtType
-	/// \see Direction
-	std::map<SpriteAttributes::ArtType, std::map<SpriteAttributes::Direction, SDL_Rect>> tileSet;
-
+	
 	/// Map of GameSprites in use
 	/// The key is the ID
 	std::map<std::string, GameSprite*> spriteObjects;
 
-		enum { TILESIZE = 24 };
+	enum { TILESIZE = 24 };
 
-		int lives = 3;//<store number of lives the character has
+	int lives = 3;//<store number of lives the character has
 
 };
 

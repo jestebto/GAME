@@ -67,6 +67,7 @@ void GameManager::Update()
 		case GameState::UPANDRUNNING:
 			logicManager->executeUserCommand(userInput);
 			outputManager->update(logicManager->getLevelUpdates());
+			//outputManager->update(userInput); // For testing
 			break;
 		case GameState::LEVELFINISHED:
 			outputManager->showGameOverScreen();

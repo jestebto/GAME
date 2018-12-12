@@ -20,6 +20,7 @@ GraphicInterface::GraphicInterface()
 GraphicInterface::~GraphicInterface()
 {
 	SDL_DestroyTexture(sheet);
+	SDL_DestroyTexture(gameOverScreen);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
@@ -162,7 +163,7 @@ void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
 
 		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE, 
 			TILESIZE };
-		SDL_RenderCopy(renderer, sheet, &tileSet[mapPair.second->art][mapPair.second->direction],
+		SDL_RenderCopy(renderer, sheet, spriteManager->getTile(mapPair.second),
 			&dst);
 	}
 
@@ -199,7 +200,7 @@ void GraphicInterface::update(UserInputType userInput)
 
 		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE,
 						TILESIZE };
-		SDL_RenderCopy(renderer, sheet, &tileSet[mapPair.second->art][mapPair.second->direction],
+		SDL_RenderCopy(renderer, sheet, spriteManager->getTile(mapPair.second),
 			&dst);
 	}
 	
@@ -244,148 +245,14 @@ void GraphicInterface::loadTextures()
 {
 	// Load sprite sheet
 	sheet = this->loadTexture("resources/sam_gfx.bmp");
-	seperateTiles();
+	//spriteManager->setSheet(this->loadTexture("resources/sam_gfx.bmp"));
+	//seperateTiles(); //moved to SpriteManager
 
 	// Load game over screen
 	gameOverScreen = this->loadTexture("resources/GAME_OVER.bmp");
 }
 
-/// From the Pacman Code
-void GraphicInterface::seperateTiles()
-{
 
-	using namespace SpriteAttributes;
-	const int size = TILESIZE;
-	const int o = 4; // offset in bitmap (both in x and y)
-	std::map<Direction, SDL_Rect> pacman;
-	//                    x              y      width,height
-	pacman[UP] = { o + size * 1, o + size * 11, size, size };
-	pacman[DOWN] = { o + size * 13, o + size * 7, size, size };
-	pacman[LEFT] = { o + size * 0, o + size * 11, size, size };
-	pacman[RIGHT] = { o + size * 12, o + size * 7, size, size };
-	tileSet[PACMAN] = pacman;
-
-	std::map<Direction, SDL_Rect> pinky;
-	pinky[UP] = { o + size * 6, o + size * 9, size, size };
-	pinky[DOWN] = { o + size * 2, o + size * 9, size, size };
-	pinky[RIGHT] = { o + size * 0, o + size * 9, size, size };
-	pinky[LEFT] = { o + size * 4, o + size * 9, size, size };
-	tileSet[PINKY] = pinky;
-
-	std::map<Direction, SDL_Rect> blinky;
-	blinky[UP] = { o + size * 6, o + size * 7, size, size };
-	blinky[DOWN] = { o + size * 2, o + size * 7, size, size };
-	blinky[RIGHT] = { o + size * 0, o + size * 7, size, size };
-	blinky[LEFT] = { o + size * 4, o + size * 7, size, size };
-	tileSet[BLINKY] = blinky;
-
-	std::map<Direction, SDL_Rect> clyde;
-	clyde[UP] = { o + size * 6, o + size * 10, size, size };
-	clyde[DOWN] = { o + size * 2, o + size * 10, size, size };
-	clyde[RIGHT] = { o + size * 0, o + size * 10, size, size };
-	clyde[LEFT] = { o + size * 4, o + size * 10, size, size };
-	tileSet[CLYDE] = clyde;
-
-	std::map<Direction, SDL_Rect> inky;
-	inky[UP] = { o + size * 14, o + size * 9, size, size };
-	inky[DOWN] = { o + size * 10, o + size * 9, size, size };
-	inky[LEFT] = { o + size * 12, o + size * 9, size, size };
-	inky[RIGHT] = { o + size * 8, o + size * 9, size, size };
-	tileSet[INKY] = inky;
-
-	std::map<Direction, SDL_Rect> scared;
-	scared[UP] = { o + size * 12, o + size * 6, size, size };
-	scared[DOWN] = scared[UP];
-	scared[LEFT] = scared[UP];
-	scared[RIGHT] = scared[UP];
-	tileSet[SCARED] = scared;
-
-	std::map<Direction, SDL_Rect> scaredinv;
-	scaredinv[UP] = { o + size * 4, o + size * 11, size, size };
-	scaredinv[DOWN] = scaredinv[UP];
-	scaredinv[LEFT] = scaredinv[UP];
-	scaredinv[RIGHT] = scaredinv[UP];
-	tileSet[SCAREDINV] = scaredinv;
-
-	std::map<Direction, SDL_Rect> strawberry;
-	strawberry[UP] = { o + size * 1, o + size * 5, size, size };
-	strawberry[DOWN] = strawberry[UP];
-	strawberry[LEFT] = strawberry[UP];
-	strawberry[RIGHT] = strawberry[UP];
-	tileSet[STRAWBERRY] = strawberry;
-
-	std::map<Direction, SDL_Rect> cherry;
-	cherry[UP] = { o + size * 0, o + size * 5, size, size };
-	cherry[DOWN] = cherry[UP];
-	cherry[LEFT] = cherry[UP];
-	cherry[RIGHT] = cherry[UP];
-	tileSet[CHERRY] = cherry;
-
-	std::map<Direction, SDL_Rect> orange;
-	orange[UP] = { o + size * 2, o + size * 5, size, size };
-	orange[DOWN] = orange[UP];
-	orange[LEFT] = orange[UP];
-	orange[RIGHT] = orange[UP];
-	tileSet[ORANGE] = orange;
-
-	std::map<Direction, SDL_Rect> lemon;
-	lemon[UP] = { o + size * 3, o + size * 5, size, size };
-	lemon[DOWN] = lemon[UP];
-	lemon[LEFT] = lemon[UP];
-	lemon[RIGHT] = lemon[UP];
-	tileSet[LEMON] = lemon;
-
-	std::map<Direction, SDL_Rect> apple;
-	apple[UP] = { o + size * 4, o + size * 5, size, size };
-	apple[DOWN] = apple[UP];
-	apple[LEFT] = apple[UP];
-	apple[RIGHT] = apple[UP];
-	tileSet[APPLE] = apple;
-
-	std::map<Direction, SDL_Rect> grapes;
-	grapes[UP] = { o + size * 5, o + size * 5, size, size };
-	grapes[DOWN] = grapes[UP];
-	grapes[LEFT] = grapes[UP];
-	grapes[RIGHT] = grapes[UP];
-	tileSet[GRAPES] = grapes;
-
-	std::map<Direction, SDL_Rect> dot;
-	dot[UP] = { o + 12 * 16, o + 12 * 0, size / 2, size / 2 };
-	dot[DOWN] = dot[UP];
-	dot[LEFT] = dot[UP];
-	dot[RIGHT] = dot[UP];
-	tileSet[DOT] = dot;
-
-	std::map<Direction, SDL_Rect> energizer;
-	energizer[UP] = { o + 12 * 18, o + 12 * 0, size / 2, size / 2 };
-	energizer[DOWN] = energizer[UP];
-	energizer[LEFT] = energizer[UP];
-	energizer[RIGHT] = energizer[UP];
-	tileSet[ENERGIZER] = energizer;
-
-	std::map<Direction, SDL_Rect> wall;
-	wall[UP] = { o + size * 6, o + size * 11, size, size };
-	wall[DOWN] = wall[UP];
-	wall[LEFT] = wall[UP];
-	wall[RIGHT] = wall[UP];
-	tileSet[WALL] = wall;
-
-	std::map<Direction, SDL_Rect> key;
-	key[UP] = { o + size * 7, o + size * 5, size, size };
-	key[DOWN] = key[UP];
-	key[LEFT] = key[UP];
-	key[RIGHT] = key[UP];
-	tileSet[KEY] = key;
-
-	for (int i = 0; i < 10; i++) {
-		std::map<Direction, SDL_Rect> nr;
-		nr[UP] = { o + (size / 2) * i, o + 1 + size * 0, size / 2, size / 2 };
-		nr[DOWN] = nr[UP];
-		nr[LEFT] = nr[UP];
-		nr[RIGHT] = nr[UP];
-		tileSet[(ArtType)(ZERO + i)] = nr;
-	}
-}
 
 /// From the Pacman Code
 void GraphicInterface::drawBackground(std::vector<std::vector<int>> &map)
@@ -398,13 +265,17 @@ void GraphicInterface::drawBackground(std::vector<std::vector<int>> &map)
 				SDL_Rect dst = { static_cast<int>(j) * TILESIZE,
 								static_cast<int>(i) * TILESIZE, TILESIZE,
 								TILESIZE };
-				SDL_RenderCopy(renderer, sheet, &tileSet[WALL][DOWN], &dst);
+
+				//SDL_RenderCopy(renderer, sheet, &tileSet[WALL][DOWN], &dst);
+				SDL_RenderCopy(renderer, sheet, spriteManager->getTile(WALL, DOWN), &dst);
+				//SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL,DOWN), &dst);
 			}
 			else if (map[i][j] == 2) {
 				SDL_Rect dst = { static_cast<int>(j) * TILESIZE,
 								static_cast<int>(i) * TILESIZE, TILESIZE,
 								TILESIZE };
-				SDL_RenderCopy(renderer, sheet, &tileSet[KEY][DOWN], &dst);
+				//SDL_RenderCopy(renderer, sheet, &tileSet[KEY][DOWN], &dst);
+				SDL_RenderCopy(renderer, sheet, spriteManager->getTile(KEY, DOWN), &dst);
 			}
 		}
 	}
@@ -418,7 +289,8 @@ void GraphicInterface::drawLives()
 	for (int i = 0; i < lives; i++) {
 		SDL_Rect dst = { screenHeight * TILESIZE - i * TILESIZE, screenHeight * TILESIZE, TILESIZE,
 						TILESIZE };
-		SDL_RenderCopy(renderer, sheet, &tileSet[PACMAN][LEFT], &dst);
+		//SDL_RenderCopy(renderer, sheet, &tileSet[PACMAN][LEFT], &dst);
+		SDL_RenderCopy(renderer, sheet, spriteManager->getTile(PACMAN, LEFT), &dst);
 	}
 }
 
