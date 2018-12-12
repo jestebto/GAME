@@ -12,14 +12,15 @@
 
 GraphicInterface::GraphicInterface()
 {
-	spriteManager = new SpriteManager(TILESIZE);
+	//spriteManager = new SpriteManager(24);
+	spriteManager = std::make_unique<SpriteManager>();
 	//All setup is done in GrahpicInterface::loadlevel once data has been received
 }
 
 
 GraphicInterface::~GraphicInterface()
 {
-	SDL_DestroyTexture(sheet);
+	//SDL_DestroyTexture(sheet);
 	SDL_DestroyTexture(gameOverScreen);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
@@ -163,7 +164,7 @@ void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
 
 		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE, 
 			TILESIZE };
-		SDL_RenderCopy(renderer, sheet, spriteManager->getTile(mapPair.second),
+		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
 			&dst);
 	}
 
@@ -200,7 +201,7 @@ void GraphicInterface::update(UserInputType userInput)
 
 		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE,
 						TILESIZE };
-		SDL_RenderCopy(renderer, sheet, spriteManager->getTile(mapPair.second),
+		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
 			&dst);
 	}
 	
@@ -244,8 +245,8 @@ void GraphicInterface::init()
 void GraphicInterface::loadTextures()
 {
 	// Load sprite sheet
-	sheet = this->loadTexture("resources/sam_gfx.bmp");
-	//spriteManager->setSheet(this->loadTexture("resources/sam_gfx.bmp"));
+	//sheet = this->loadTexture("resources/sam_gfx.bmp");
+	spriteManager->setSheet(this->loadTexture("resources/sam_gfx.bmp"));
 	//seperateTiles(); //moved to SpriteManager
 
 	// Load game over screen
@@ -267,7 +268,7 @@ void GraphicInterface::drawBackground(std::vector<std::vector<int>> &map)
 								TILESIZE };
 
 				//SDL_RenderCopy(renderer, sheet, &tileSet[WALL][DOWN], &dst);
-				SDL_RenderCopy(renderer, sheet, spriteManager->getTile(WALL, DOWN), &dst);
+				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL, DOWN), &dst);
 				//SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL,DOWN), &dst);
 			}
 			else if (map[i][j] == 2) {
@@ -275,7 +276,7 @@ void GraphicInterface::drawBackground(std::vector<std::vector<int>> &map)
 								static_cast<int>(i) * TILESIZE, TILESIZE,
 								TILESIZE };
 				//SDL_RenderCopy(renderer, sheet, &tileSet[KEY][DOWN], &dst);
-				SDL_RenderCopy(renderer, sheet, spriteManager->getTile(KEY, DOWN), &dst);
+				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(KEY, DOWN), &dst);
 			}
 		}
 	}
@@ -290,7 +291,7 @@ void GraphicInterface::drawLives()
 		SDL_Rect dst = { screenHeight * TILESIZE - i * TILESIZE, screenHeight * TILESIZE, TILESIZE,
 						TILESIZE };
 		//SDL_RenderCopy(renderer, sheet, &tileSet[PACMAN][LEFT], &dst);
-		SDL_RenderCopy(renderer, sheet, spriteManager->getTile(PACMAN, LEFT), &dst);
+		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(PACMAN, LEFT), &dst);
 	}
 }
 

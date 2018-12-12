@@ -92,7 +92,7 @@ private:
 	/// SDL Renderer to draw items onto #window.
 	SDL_Renderer *renderer;
 	/// Loaded SDL texture with all sprite bitmaps.
-	SDL_Texture *sheet; // Consider moving ownership of this to SpriteManager?
+	//SDL_Texture *sheet; // moved to SpriteManager
 	/// Loaded SDL texture with the game over screen
 	SDL_Texture *gameOverScreen;
 
@@ -101,8 +101,8 @@ private:
 	int screenWidth;
 	int screenHeight;
 
-	SpriteManager* spriteManager; //< keeps the 
-
+	//*spriteManager; //< makes a SpriteManager for this OutputManager
+	std::unique_ptr<SpriteManager> spriteManager; //< makes a unique SpriteManager for this OutputManager
 	
 	/// Map of GameSprites in use
 	/// The key is the ID

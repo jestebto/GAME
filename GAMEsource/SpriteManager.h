@@ -19,16 +19,15 @@
 class SpriteManager
 {
 public: /// All public since needs to be accessed by GraphicInterface
-	SpriteManager(const int);
+	SpriteManager();
 	~SpriteManager();
 
 	/// create the texture sheet which has all the artworks for the sprites
 
-	/** Option to give SpriteManager ownership of its own sheet. 
-	*But prefer to keep this in GraphicInterface
-	*void setSheet(SDL_Texture*);
-	*SDL_Texture* getSheet();
-	*/
+	/// Option to give SpriteManager ownership of its own sheet. 
+	void setSheet(SDL_Texture*);
+	SDL_Texture* getSheet();
+	
 
 	/// get a tile on SpriteManager::sheet 
 	SDL_Rect* getTile(GameSprite*); //< getTile for a unique object in the game
@@ -45,10 +44,10 @@ public: /// All public since needs to be accessed by GraphicInterface
 
 
 private:
-	/** Loaded SDL texture with all sprite bitmaps.
-	* Ownership of this sheet is currently with GraphicInterface
-	*SDL_Texture *sheetPacman;
-	*/
+	/// Loaded SDL texture with all sprite bitmaps.
+	//Ownership of this sheet is currently with GraphicInterface
+	SDL_Texture *sheetSprites;
+
 
 	/// Seperate tiles into a tileSet map. Usage is:
 	/// tileSet[<ArtType>][<Direction>]
@@ -61,8 +60,7 @@ private:
 	/// \see Direction
 	std::map<SpriteAttributes::ArtType, std::map<SpriteAttributes::Direction, SDL_Rect>> tileSet;
 
-	int size; //< tile size for each Sprite. Should be the same as the Graphic Interface tile size
-
+	enum { PACMAN_TILESIZE = 24 }; //< tile size for each Sprite. Does not have to be the same as the graphic interface size
 };
 
 #endif // SPRITE_MANAGER_H

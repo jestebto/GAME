@@ -1,30 +1,28 @@
 #include "SpriteManager.h"
 
 
-SpriteManager::SpriteManager(const int tileSize)
+SpriteManager::SpriteManager()
 {
-	size = tileSize;
-
 	// Pre-make the map for the tiles.
 	// Note: this does not require the actual images or tiles themselves!!
-	createTileIndex();
+	//createTileIndex();
 }
 
 SpriteManager::~SpriteManager()
 {
-	//SDL_DestroyTexture(sheetPacman);
+	SDL_DestroyTexture(sheetSprites);
 }
 
-/*
+
 void SpriteManager::setSheet(SDL_Texture* texture) {
-	this->sheetPacman = texture;
+	this->sheetSprites = texture;
 	createTileIndex();
 }
 
 SDL_Texture* SpriteManager::getSheet() {
-	return this->sheetPacman;
+	return this->sheetSprites;
 }
-*/
+
 
 /// get a tile on SpriteManager::sheet 
 SDL_Rect* SpriteManager::getTile(GameSprite* element) {
@@ -117,7 +115,7 @@ void SpriteManager::createTileIndex()
 {
 
 	using namespace SpriteAttributes;
-	//const int size = TILESIZE;
+	const int size = PACMAN_TILESIZE;
 	const int o = 4; // offset in bitmap (both in x and y)
 	std::map<Direction, SDL_Rect> pacman;
 	//                    x              y      width,height
