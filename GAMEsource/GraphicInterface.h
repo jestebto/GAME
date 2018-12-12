@@ -50,7 +50,6 @@ public:
 	/// - Draw the score
 	/// - Draw the remaining lives
 	/// - Draw the objects (last)
-	void update(std::vector<std::string> data);
 	void update(std::vector<std::shared_ptr<DataUpdate>> data);
 
 	/// A test update that takes in user inputs directly, so that the logic component can be completely bypassed
@@ -105,9 +104,9 @@ private:
 	SDL_Texture *gameOverScreen;
 
 	/// 2d array containing the map, a 1 is a wall.
-	std::vector<std::vector<int>> map;
-	int mapWidth;
-	int mapHeight;
+	std::vector<std::vector<int>> levelMap;
+	int screenWidth;
+	int screenHeight;
 
 	/// Map containing all the game objects.
 	///
