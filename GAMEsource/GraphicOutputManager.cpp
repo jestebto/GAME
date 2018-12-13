@@ -4,13 +4,11 @@
  * Description: See GraphicInterface.h
  */
 
-#include "GraphicInterface.h"
-#include <iostream>
-#include "UserInputType.h"
-#include "DataToolkit.h"
+#include "GraphicOutputManager.h"
 
 
-GraphicInterface::GraphicInterface()
+
+GraphicOutputManager::GraphicOutputManager()
 {
 	//spriteManager = new SpriteManager(24);
 	spriteManager = std::make_unique<SpriteManager>();
@@ -18,7 +16,7 @@ GraphicInterface::GraphicInterface()
 }
 
 
-GraphicInterface::~GraphicInterface()
+GraphicOutputManager::~GraphicOutputManager()
 {
 	//SDL_DestroyTexture(sheet);
 	SDL_DestroyTexture(gameOverScreen);
@@ -27,7 +25,7 @@ GraphicInterface::~GraphicInterface()
 	SDL_Quit();
 }
 
-void GraphicInterface::loadLevel(OutputData inputString) {
+void GraphicOutputManager::loadLevel(OutputData inputString) {
 	using namespace SpriteAttributes;
 
 	//Parse data
@@ -112,7 +110,7 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 	SDL_RenderPresent(renderer);
 }
 
-void GraphicInterface::setBackground(const std::string& mapString) {
+void GraphicOutputManager::setBackground(const std::string& mapString) {
 	//loop through the map data
 	unsigned int row{ 0 };
 	unsigned int column{ 0 };
@@ -134,7 +132,7 @@ void GraphicInterface::setBackground(const std::string& mapString) {
 
 
 
-void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
+void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 {
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
@@ -189,7 +187,7 @@ void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
 	SDL_RenderPresent(renderer);
 }
 
-void GraphicInterface::update(UserInputType userInput)
+void GraphicOutputManager::update(UserInputType userInput)
 {
 	// Purely for testing
 	
@@ -224,7 +222,7 @@ void GraphicInterface::update(UserInputType userInput)
 	SDL_RenderPresent(renderer);
 }
 
-void GraphicInterface::showGameOverScreen() {
+void GraphicOutputManager::showGameOverScreen() {
 	using namespace SpriteAttributes;
 	SDL_Rect dst = { 0, 0 , (screenWidth+1)*TILESIZE, (screenHeight+1)*TILESIZE };
 	
@@ -240,7 +238,7 @@ void GraphicInterface::showGameOverScreen() {
 
 
 /// Initialises the UI::window and the UI::renderer.
-void GraphicInterface::init()
+void GraphicOutputManager::init()
 {
 	// Init SDL
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -256,7 +254,7 @@ void GraphicInterface::init()
 }
 
 /// From the Pacman Code
-void GraphicInterface::loadTextures()
+void GraphicOutputManager::loadTextures()
 {
 	// Load sprite sheet
 	//sheet = this->loadTexture("resources/sam_gfx.bmp");
@@ -270,7 +268,7 @@ void GraphicInterface::loadTextures()
 
 
 /// From the Pacman Code
-void GraphicInterface::drawBackground(std::vector<std::vector<int>> &map)
+void GraphicOutputManager::drawBackground(std::vector<std::vector<int>> &map)
 {
 	using namespace SpriteAttributes;
 	// Draw a wall on each position containing a one
@@ -298,7 +296,7 @@ void GraphicInterface::drawBackground(std::vector<std::vector<int>> &map)
 
 /// Draws an amount of pacmans corresponding to the amount of lives
 // From the Pacman Code
-void GraphicInterface::drawLives()
+void GraphicOutputManager::drawLives()
 {
 	using namespace SpriteAttributes;
 	for (int i = 0; i < lives; i++) {
@@ -310,7 +308,7 @@ void GraphicInterface::drawLives()
 }
 
 // From the Pacman Code
-SDL_Texture *GraphicInterface::loadTexture(const std::string &file)
+SDL_Texture *GraphicOutputManager::loadTexture(const std::string &file)
 {
 	SDL_Surface *surf = SDL_LoadBMP(file.c_str());
 	if (surf == nullptr) {

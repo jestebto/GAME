@@ -10,34 +10,35 @@
  *				Group      : TA's
  */
 
-#ifndef GRAPHIC_INTERFACE_H
-#define GRAPHIC_INTERFACE_H
+#ifndef GRAPHIC_OUTPUT_MANAGER_H
+#define GRAPHIC_OUTPUT_MANAGER_H
 
 #include "IOutputManager.h"
 #include "UserInputType.h" /// for test purposes, else this class is not supposed to know about the UserInput
 #include "GameSprite.h"
 #include "SpriteManager.h" /// all sprite related functions are in this class
+#include "DataToolkit.h"
 
 #include <SDL2/SDL.h>
-
+#include <iostream>
 #include <map>
 #include <vector>
 
-class GraphicInterface: public IOutputManager
+class GraphicOutputManager: public IOutputManager
 {
 public:
 	/// Constructor 
 	/// Note: all initialisation is done in GraphicInterface::loadlevel()
-	GraphicInterface();
+	GraphicOutputManager();
 
 	/// UI objects should not be copied or moved.
-	GraphicInterface(const GraphicInterface&) = delete;
-	GraphicInterface(const GraphicInterface&&) = delete;
-	GraphicInterface &operator=(const GraphicInterface &) = delete;
+	GraphicOutputManager(const GraphicOutputManager&) = delete;
+	GraphicOutputManager(const GraphicOutputManager&&) = delete;
+	GraphicOutputManager &operator=(const GraphicOutputManager &) = delete;
 
 	/// Destructor 
 	/// Fully de-initializes the UI, including closing the main window.
-	~GraphicInterface();
+	~GraphicOutputManager();
 
 	/// Initialize the UI fully.
 	/// Loads data
@@ -114,5 +115,5 @@ private:
 
 };
 
-#endif /* GRAPHIC_INTERFACE_H*/
+#endif /* GRAPHIC_OUTPUT_MANAGER_H*/
 
