@@ -36,6 +36,7 @@ public: /// All public since needs to be accessed by GraphicInterface
 	/// Move a sprite to a position 
 	/// Data is given by the logic manager
 	void moveSprite(GameSprite*, int, int);
+	void moveSprite(GameSprite*, int, int, SpriteAttributes::Direction);
 
 	/// Move a sprite on the screen using user input.
 	/// For test purposes only, as this is not connected to the logic
@@ -52,7 +53,7 @@ private:
 	/// Seperate tiles into a tileSet map. Usage is:
 	/// tileSet[<ArtType>][<Direction>]
 	/// and the tile set itself is in GraphicInterface::sheet
-	void createTileIndex(); //Note: this was the old separateTiles(). New name to show that it doesn't actually seperate them; it only creates an index of where each sprite is in the bigger picture
+	void createTileMap(); //Note: this was the old separateTiles(). New name to show that it doesn't actually seperate them; it only creates an index of where each sprite is in the bigger picture
 
 	/// Stores tiles to use in GraphicInterface::sheet. Usage is:
 	/// tileSet[<type>][<direction>]

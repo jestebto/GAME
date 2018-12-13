@@ -7,8 +7,9 @@
 #include <string>
 #include "GameSprite.h"
 
-GameSprite::GameSprite(std::string ID, int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Direction dir) {
-	objectID = ID;
+GameSprite::GameSprite(DataUpdate::ObjectType objectType,int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Direction dir) {
+	//objectID = ID;
+	objectType = objectType;
 	xPosition = xPos;
 	yPosition = yPos;
 	art = artType;

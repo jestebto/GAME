@@ -16,6 +16,9 @@ public:
 
 	void setDmg(int);
 
+	//save the data in a string
+	std::string dataToString();
+
 private:
 	CharacterOrientation orientation;
 	int damage;

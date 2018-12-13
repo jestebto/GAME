@@ -5,7 +5,7 @@ SpriteManager::SpriteManager()
 {
 	// Pre-make the map for the tiles.
 	// Note: this does not require the actual images or tiles themselves!!
-	//createTileIndex();
+	//createTileMap();
 }
 
 SpriteManager::~SpriteManager()
@@ -16,7 +16,7 @@ SpriteManager::~SpriteManager()
 
 void SpriteManager::setSheet(SDL_Texture* texture) {
 	this->sheetSprites = texture;
-	createTileIndex();
+	createTileMap();
 }
 
 SDL_Texture* SpriteManager::getSheet() {
@@ -70,6 +70,13 @@ void SpriteManager::moveSprite(GameSprite* element, int x, int y)
 
 }
 
+void SpriteManager::moveSprite(GameSprite* element, int x, int y, SpriteAttributes::Direction dir)
+{
+	element->setXPosition(x);
+	element->setYPosition(y);
+	element->setDirection(dir);
+}
+
 void SpriteManager::moveSprite(GameSprite* element, UserInputType command)
 {
 	// directly move a Sprite based on user input
@@ -111,7 +118,7 @@ void SpriteManager::moveSprite(GameSprite* element, UserInputType command)
 
 
 /// From the Pacman Code
-void SpriteManager::createTileIndex()
+void SpriteManager::createTileMap()
 {
 
 	using namespace SpriteAttributes;

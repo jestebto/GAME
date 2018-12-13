@@ -55,7 +55,7 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 			//separate the data to construct the new object
 			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
-			this->spriteObjects[tempConstructorData[0]] = new GameSprite{ "Player", stoi(tempConstructorData[1]),
+			this->spriteObjects[tempConstructorData[0]] = new GameSprite{ DataUpdate::ObjectType::PLAYER, stoi(tempConstructorData[1]),
 				stoi(tempConstructorData[2]), PACMAN, RIGHT };
 
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
@@ -67,12 +67,23 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 			// separate the data to construct the new object
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 			// create a new enemy storing a shared pointer to it
-			this->spriteObjects[tempConstructorData[0]] = new GameSprite{ "Enemy", stoi(tempConstructorData[1]),
+			this->spriteObjects[tempConstructorData[0]] = new GameSprite{ DataUpdate::ObjectType::ENEMY, stoi(tempConstructorData[1]),
 				stoi(tempConstructorData[2]), SCAREDINV, UP };
 
 			tempConstructorData = {}; // make sure the vector is empty in the next case
 			break;
 		}
+		case 3: { // 3 is a power up
+		// erase the part of the string that contains the object type and the ampersand symbol
+			objectVector[i].erase(0, amp + 1);
+			// separate the data to construct the new object
+			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+
+			// Format is {ID,x,y,lives}
+			this->spriteObjects[tempConstructorData[0]] = new GameSprite{ DataUpdate::ObjectType::POWERUP, stoi(tempConstructorData[1]),
+				stoi(tempConstructorData[2]), APPLE, UP };
+		}
+
 		}
 	}
 
@@ -85,13 +96,11 @@ void GraphicInterface::loadLevel(OutputData inputString) {
 	this->map = std::move(board);
 	*/
 
-	this->screenWidth  = levelMap[0].size();
-	this->screenHeight = levelMap.size();
+	this->screenWidth  = static_cast<int>(levelMap[0].size());
+	this->screenHeight = static_cast<int>(levelMap.size());
 	// Initialize window and load textures.
 	this->init(); 
 	this->loadTextures();
-
-	//this->spriteObjects["099"] = new GameSprite{ "Test", 1, 1, CLYDE, UP };
 
 	//On the first iteration, only draw the background:
 
@@ -143,14 +152,19 @@ void GraphicInterface::update(std::vector<std::shared_ptr<DataUpdate>> data)
 		if (mapPair == spriteObjects.end())
 			std::cout << "Element not found" << '\n';
 		else {
-			spriteManager->moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
-		
 			// Look at ObjectType specific data
 			std::vector <std::string> tempConstructorData;
 			switch (dataPtr->getObjectType()) {
 			case DataUpdate::ObjectType::PLAYER:
 				tempConstructorData = DataToolkit::getSubs(dataPtr->getData(), ',');
 				this->lives = stoi(tempConstructorData[0]);
+				// Dirty hack to turn integer into enum
+				spriteManager->moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition(),
+					static_cast<SpriteAttributes::Direction>(stoi(tempConstructorData[1])));
+				break;
+			default:
+				spriteManager->moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
+				break;
 			}
 
 		}
