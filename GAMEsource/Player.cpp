@@ -27,3 +27,15 @@ int Player::getDmg() {
 void Player::setDmg(int dmg) {
 	damage = dmg;
 }
+
+///return a string with the object's data
+std::string Player::dataToString() {
+	std::ostringstream addData;
+	/*
+	addData << this->getID() << "," << this->getXPosition()
+		<< "," << this->getYPosition() << ",";
+	*/
+	addData << this->getLives() << "," << static_cast<int>(this->getR()) << ",";
+	std::string totalData = addData.str();
+	return totalData;
+}

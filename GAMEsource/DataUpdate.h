@@ -6,10 +6,10 @@
 class DataUpdate
 {
 public:
-	enum class ObjectType { player = 0 , enemy = 1, powerUp = 2 };
-	enum class Action { nothing = 0, attack = 1, eliminate = 2 };
+	enum class ObjectType { PLAYER = 0 , ENEMY = 1, POWERUP = 2 };
+	enum class Action { NOTHING = 0, ATTACK = 1, ELIMINATE = 2 };
 
-	DataUpdate(std::string, std::string, ObjectType, Action);
+	DataUpdate(std::string, int, int, std::string, ObjectType, Action);
 	~DataUpdate();
 
 
@@ -17,6 +17,12 @@ public:
 	void setID(std::string);
 	/// return the object's ID
 	std::string getID();
+
+	void setObjectXPosition(int);
+	int getObjectXPosition();
+
+	void setObjectYPosition(int);
+	int getObjectYPosition();
 
 	/// set the type of object
 	void setObjectType(enum ObjectType);
@@ -35,6 +41,8 @@ public:
 
 private:
 	std::string objectID;
+	int xPosition;
+	int yPosition;
 	std::string objectData;
 	ObjectType objectType;
 	Action objectAction;

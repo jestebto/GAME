@@ -9,7 +9,7 @@
 
 // constructor
 GameLevel::GameLevel() {
-	
+	this->gameState = GameState::NOTLOADED;
 };
 
 
@@ -30,79 +30,80 @@ void GameLevel::createLevel(LogicData inputString) {
 		int objectType{stoi(initialChar)}; // Conv is the integer corresponding to the first character of a string
 
 		switch (objectType) {
-		case 0: { // 0 is map
-			// erase the part of the string that contains the object type and the ampersand symbol
-			objectVector[i].erase(0, amp + 1);
+			case 0: { // 0 is map
+				// erase the part of the string that contains the object type and the ampersand symbol
+				objectVector[i].erase(0, amp + 1);
 
-			//loop through the map data
-			unsigned int row{ 0 };
-			unsigned int column{ 0 };
-			for (unsigned int value{ 0 }; value < objectVector[i].size(); value++) {
-				int tempValue = objectVector[i].at(value);
+				//loop through the map data
+				unsigned int row{ 0 };
+				unsigned int column{ 0 };
+				for (unsigned int value{ 0 }; value < objectVector[i].size(); value++) {
+					int tempValue = objectVector[i].at(value);
 				
-				if (tempValue == 45) { // if dash, add row
-					column = 0;
-					row++;
+					if (tempValue == 45) { // if dash, add row
+						column = 0;
+						row++;
+					}
+					else {
+						mapArray[row][column] = tempValue - 48;
+						column++;
+					}
 				}
-				else {
-					mapArray[row][column] = tempValue - 48;
-					column++;
-				}
+				break;
 			}
-			break;
-		}
-		case 1: { //1 is player
+			case 1: { //1 is player
 
-			//erase the part of the string that contains the object type and the ampersand symbol
-			objectVector[i].erase(0, amp + 1);
+				//erase the part of the string that contains the object type and the ampersand symbol
+				objectVector[i].erase(0, amp + 1);
 
-			//separate the data to construct the new object
-			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+				//separate the data to construct the new object
+				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 
-			//create a new player and save a shared pointer to it
-			player1 = new Player(tempConstructorData[0], stoi(tempConstructorData[1]),
-			stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), (CharacterOrientation)stoi(tempConstructorData[4]), stoi(tempConstructorData[5])); // Added tempContructorData[4] for orientation
+				//create a new player and save a shared pointer to it
+				player1 = new Player(tempConstructorData[0], stoi(tempConstructorData[1]),
+				stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), (CharacterOrientation)stoi(tempConstructorData[4]), stoi(tempConstructorData[5])); // Added tempContructorData[4] for orientation
 
-			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
-			break;
-		}
-		case 2: { // 2 is an enemy
-			// erase the part of the string that contains the object type and the ampersand symbol
-			objectVector[i].erase(0, amp + 1);
+				tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
+				break;
+			}
+			case 2: { // 2 is an enemy
+				// erase the part of the string that contains the object type and the ampersand symbol
+				objectVector[i].erase(0, amp + 1);
 
-			// separate the data to construct the new object
-			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
+				// separate the data to construct the new object
+				tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
-			// create a new enemy storing a shared pointer to it
-			std::shared_ptr<Enemy> enemy(new Enemy(tempConstructorData[0], stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), stoi(tempConstructorData[4])));
+				// create a new enemy storing a shared pointer to it
+				std::shared_ptr<Enemy> enemy(new Enemy(tempConstructorData[0], stoi(tempConstructorData[1]),
+					stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), stoi(tempConstructorData[4])));
 
-			// store the pointer in the vector enemies
-			enemies.push_back(enemy);
+				// store the pointer in the vector enemies
+				enemies.push_back(enemy);
 
-			tempConstructorData = {}; // make sure the vector is empty in the next case
-			break;
-		}
-		case 3: { // 3 is a Power Up 
-			// erase the part of the string that contains the object type and the ampersand symbol
-			objectVector[i].erase(0, amp + 1);
+				tempConstructorData = {}; // make sure the vector is empty in the next case
+				break;
+			}
+			case 3: { // 3 is a Power Up 
+				// erase the part of the string that contains the object type and the ampersand symbol
+				objectVector[i].erase(0, amp + 1);
 
-			// separate the data to construct the new object
-			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+				// separate the data to construct the new object
+				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 
-			// create a new PowerUp and save a shared vector to it 
-			std::shared_ptr<PowerUp> powerUp(new PowerUp(tempConstructorData[0], stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), stoi(tempConstructorData[3])));
+				// create a new PowerUp and save a shared vector to it 
+				std::shared_ptr<PowerUp> powerUp(new PowerUp(tempConstructorData[0], stoi(tempConstructorData[1]),
+					stoi(tempConstructorData[2]), stoi(tempConstructorData[3])));
 
-			// store the pointer in the vector poweUps
-			powerUps.push_back(powerUp);
+				// store the pointer in the vector poweUps
+				powerUps.push_back(powerUp);
 
-			tempConstructorData = {}; //! make sure the vector is empty in the next case
+				tempConstructorData = {}; //! make sure the vector is empty in the next case
 
-			break;
-		}
+				break;
+			}
 		}
 	}
+	this->gameState = GameState::UPANDRUNNING;
 }
 
 ///  execute the input of the data
@@ -111,7 +112,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 	output.clear(); //! empty the output vector
 
 	bool movement = true; //! boolean that sais if the player is going to move
-	DataUpdate::Action playerAction = DataUpdate::Action::nothing;
+	DataUpdate::Action playerAction = DataUpdate::Action::NOTHING;
 
 	//! check the current position of the player
 	int tempX = player1->getXPosition();               
@@ -201,7 +202,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 				break;
 			}
 			
-
+		
 		
 		
 
@@ -219,33 +220,25 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		}
 	}
 
-	// check if the finish has been reached
-	if (mapArray[player1->getXPosition()][player1->getYPosition()] == 2) {
-		isGameFinished = true;
-	} 
+	
 	//! Update the position of the player for the output
-	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->dataToString(), DataUpdate::ObjectType::player, playerAction));
+	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(),player1->getYPosition(),
+		player1->dataToString(), DataUpdate::ObjectType::PLAYER, playerAction));
 	output.push_back(update);
 
+	// check if the level finish has been reached
+	if (mapArray[player1->getYPosition()][player1->getXPosition()] == 2) {
+		this->gameState = GameState::LEVELFINISHED;
+	}
+
 	// check if game is over
-	checkGameOver();
+	if (player1->getLives() <= 0) this->gameState = GameState::GAMEOVER;
 }
 
 /// return a vector of strings with to update the output
-std::vector<std::string> GameLevel::getLevelState()
+std::vector<std::shared_ptr<DataUpdate>> GameLevel::getLevelUpdates()
 {	
-	std::vector<std::string> data;
-
-	data.push_back(player1->dataToString());
-
-	for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-		data.push_back(enemyPtr->dataToString());
-	}
-
-	for (std::shared_ptr<PowerUp> powerUpPtr : powerUps) {
-		data.push_back(powerUpPtr->dataToString());
-	}
-	return data;
+	return output;
 }
 
 
@@ -294,13 +287,6 @@ bool GameLevel::checkPowerUpCollision(int tempX, int tempY) {
 	}
 }
 
-/// check if the game is over
-bool GameLevel::checkGameOver() {
-	if (!player1->isAlive()) {
-		isGameOver = true;
-		return true;
-	}
-	else {
-		return false;
-	}
+GameState GameLevel::getGameState() {
+	return this->gameState;
 }

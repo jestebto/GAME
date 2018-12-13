@@ -28,9 +28,6 @@
     <ClCompile Include="GameSprite.cpp">
       <Filter>Output</Filter>
     </ClCompile>
-    <ClCompile Include="GraphicInterface.cpp">
-      <Filter>Output</Filter>
-    </ClCompile>
     <ClCompile Include="KeyboardInputManager.cpp">
       <Filter>Input</Filter>
     </ClCompile>
@@ -71,6 +68,12 @@
       <Filter>Output</Filter>
     </ClCompile>
     <ClCompile Include="DataUpdate.cpp" />
+    <ClCompile Include="SpriteManager.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicOutputManager.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataToolkit.h">
@@ -112,9 +115,6 @@
     <ClInclude Include="GameSprite.h">
       <Filter>Output</Filter>
     </ClInclude>
-    <ClInclude Include="GraphicInterface.h">
-      <Filter>Output</Filter>
-    </ClInclude>
     <ClInclude Include="OutputData.h">
       <Filter>Output</Filter>
     </ClInclude>
@@ -145,6 +145,15 @@
     <ClInclude Include="DataUpdate.h" />
     <ClInclude Include="CharacterOrientation.h">
       <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteManager.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicOutputManager.h">
+      <Filter>Output</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

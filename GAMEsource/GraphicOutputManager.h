@@ -10,33 +10,35 @@
  *				Group      : TA's
  */
 
-#ifndef GRAPHIC_INTERFACE_H
-#define GRAPHIC_INTERFACE_H
+#ifndef GRAPHIC_OUTPUT_MANAGER_H
+#define GRAPHIC_OUTPUT_MANAGER_H
 
 #include "IOutputManager.h"
-#include "UserInputType.h"
+#include "UserInputType.h" /// for test purposes, else this class is not supposed to know about the UserInput
 #include "GameSprite.h"
+#include "SpriteManager.h" /// all sprite related functions are in this class
+#include "DataToolkit.h"
 
 #include <SDL2/SDL.h>
-
+#include <iostream>
 #include <map>
 #include <vector>
 
-class GraphicInterface: public IOutputManager
+class GraphicOutputManager: public IOutputManager
 {
 public:
 	/// Constructor 
 	/// Note: all initialisation is done in GraphicInterface::loadlevel()
-	GraphicInterface();
+	GraphicOutputManager();
 
 	/// UI objects should not be copied or moved.
-	GraphicInterface(const GraphicInterface&) = delete;
-	GraphicInterface(const GraphicInterface&&) = delete;
-	GraphicInterface &operator=(const GraphicInterface &) = delete;
+	GraphicOutputManager(const GraphicOutputManager&) = delete;
+	GraphicOutputManager(const GraphicOutputManager&&) = delete;
+	GraphicOutputManager &operator=(const GraphicOutputManager &) = delete;
 
 	/// Destructor 
 	/// Fully de-initializes the UI, including closing the main window.
-	~GraphicInterface();
+	~GraphicOutputManager();
 
 	/// Initialize the UI fully.
 	/// Loads data
@@ -50,7 +52,7 @@ public:
 	/// - Draw the score
 	/// - Draw the remaining lives
 	/// - Draw the objects (last)
-	void update(std::vector<std::string> data);
+	void update(std::vector<std::shared_ptr<DataUpdate>> data);
 
 	/// A test update that takes in user inputs directly, so that the logic component can be completely bypassed
 	/// This is useful for testing animations
@@ -58,14 +60,6 @@ public:
 
 	//! Displays the Game Over screen
 	void showGameOverScreen();
-
-	/// Move a sprite to a position 
-	/// Data is given by the logic manager
-	void moveSprite(GameSprite*,int, int);
-	
-	/// Move a sprite on the screen using user input.
-	/// For test purposes only, as this is not connected to the logic
-	void moveSprite(UserInputType, std::string);
 
 private:
 	///
@@ -81,7 +75,7 @@ private:
 	/// Seperate tiles into a tileSet map. Usage is:
 	/// tileSet[<ArtType>][<Direction>]
 	/// and the tile set itself is in GraphicInterface::sheet
-	void seperateTiles();
+	//void seperateTiles();
 
 	/// Draws walls onto the screen according to \p map
 	/// \param map A 2-by-2 grid indicating which grid locations are walls.
@@ -99,32 +93,27 @@ private:
 	/// SDL Renderer to draw items onto #window.
 	SDL_Renderer *renderer;
 	/// Loaded SDL texture with all sprite bitmaps.
-	SDL_Texture *sheet;
+	//SDL_Texture *sheet; // moved to SpriteManager
 	/// Loaded SDL texture with the game over screen
 	SDL_Texture *gameOverScreen;
 
 	/// 2d array containing the map, a 1 is a wall.
-	std::vector<std::vector<int>> map;
-	int mapWidth;
-	int mapHeight;
+	std::vector<std::vector<int>> levelMap;
+	int screenWidth;
+	int screenHeight;
 
-	/// Map containing all the game objects.
-	///
-	/// Stores tiles to use in GraphicInterface::sheet. Usage is:
-	/// tileSet[<type>][<direction>]
-	/// \see ArtType
-	/// \see Direction
-	std::map<SpriteAttributes::ArtType, std::map<SpriteAttributes::Direction, SDL_Rect>> tileSet;
-
+	//*spriteManager; //< makes a SpriteManager for this OutputManager
+	std::unique_ptr<SpriteManager> spriteManager; //< makes a unique SpriteManager for this OutputManager
+	
 	/// Map of GameSprites in use
 	/// The key is the ID
 	std::map<std::string, GameSprite*> spriteObjects;
 
 	enum { TILESIZE = 24 };
 
-	int lives=3;//<store number of lives the character has
+	int lives = 3;//<store number of lives the character has
 
 };
 
-#endif /* GRAPHIC_INTERFACE_H*/
+#endif /* GRAPHIC_OUTPUT_MANAGER_H*/
 

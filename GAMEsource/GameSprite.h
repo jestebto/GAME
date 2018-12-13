@@ -9,7 +9,8 @@
 #ifndef GAME_SPRITE_H
 #define GAME_SPRITE_H
 #include <string>
-#include "GameObject.h"
+#include "DataUpdate.h"
+#include "CharacterOrientation.h"
 
 /// Define attributes important only for Sprite objects in the graphic user interface 
 namespace SpriteAttributes {
@@ -22,6 +23,7 @@ namespace SpriteAttributes {
 		CLYDE,
 		SCARED,
 		SCAREDINV,
+		KEY,
 		CHERRY,
 		STRAWBERRY,
 		ORANGE,
@@ -44,13 +46,13 @@ namespace SpriteAttributes {
 	};
 
 	/// The direction a sprite faces
-	enum Direction { UP, DOWN, LEFT, RIGHT };
+	enum Direction { UP, RIGHT, DOWN, LEFT };
 }
 
 class GameSprite
 {
 public:
-	GameSprite(std::string, int, int, SpriteAttributes::ArtType, SpriteAttributes::Direction);
+	GameSprite(DataUpdate::ObjectType, int, int, SpriteAttributes::ArtType, SpriteAttributes::Direction);
 	virtual ~GameSprite() = default; // vitual destructor
 
 	void setType(SpriteAttributes::ArtType);
@@ -72,10 +74,11 @@ public:
 private:
 	/* Shared properties with GameObject */
 	std::string objectID;
+	DataUpdate::ObjectType objectType;
 	int xPosition;
 	int yPosition;
 	
 
 };
 
-#endif // GAMEOBJECT_H
+#endif // GAME_SPRITE_H

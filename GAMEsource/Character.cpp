@@ -24,3 +24,15 @@ bool Character::isAlive() {
 	else
 		return true;
 }
+
+///return a string with the object's data
+std::string Character::dataToString() {
+	std::ostringstream addData;
+	/*
+	addData << this->getID() << "," << this->getXPosition()
+		<< "," << this->getYPosition() << ",";
+	*/
+	addData << this->getLives() << ",";
+	std::string totalData = addData.str();
+	return totalData;
+}
