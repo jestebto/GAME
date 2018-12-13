@@ -4,6 +4,7 @@
 Character::Character(const std::string ID, int xPos, int yPos,
 	int nrLives)
 	: GameObject(ID, xPos, yPos) {
+	if (nrLives < 0) throw "Negative number of lives not possible on creation of the Character object."; //TO DO JOSE: cath in gamemanager and show screen
 	lives = nrLives;
 }
 

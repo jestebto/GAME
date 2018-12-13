@@ -6,6 +6,7 @@
 class PowerUp : public GameObject {
 public:
 	PowerUp(const std::string, int, int, int);
+	~PowerUp();
 
 	//set the number of lives to be given
 	void setNrOfLives(int);

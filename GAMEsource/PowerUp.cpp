@@ -1,9 +1,16 @@
 #include <stdexcept>
 #include "PowerUp.h"
+#include <iostream>
 
 PowerUp::PowerUp(const std::string ID, int xPos, int yPos, int lives)
 	: GameObject(ID, xPos, yPos) {
+	std::cout << "I am a powerup and I am being CONSTRUCTED!\n";
 	setNrOfLives(lives);
+}
+
+PowerUp::~PowerUp()
+{
+	std::cout << "I am a powerup and I am being destructeeeeed!\n";
 }
 
 /// set nr of lives

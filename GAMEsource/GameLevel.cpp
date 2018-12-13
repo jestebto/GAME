@@ -213,8 +213,8 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 	if (movement) {// if there is valid input
 		if (checkWallCollision(tempX, tempY)) {}     // Check for wall collision
 		else if (checkEnemyCollision(tempX, tempY)) {} // Check for enemy collision
-		else if (checkPowerUpCollision(tempX, tempY)) {} // Check for power-up collision
 		else {
+			checkPowerUpCollision(tempX, tempY); // Check for power-up collision
 			player1->setXPosition(tempX);     // if no collision, move player
 			player1->setYPosition(tempY);
 		}
@@ -272,19 +272,24 @@ bool GameLevel::checkEnemyCollision(int tempX, int tempY) {
 /// check power-up collision
 bool GameLevel::checkPowerUpCollision(int tempX, int tempY) {
 	// PowerUp array (0 = no power up, 1 = power up )
-	if (powerUpMap[tempX][tempY] == 0) {
-		return false;
-	}
-	else {
-		for (std::shared_ptr<PowerUp> powerUpPtr : powerUps) {
-			if ((tempX == powerUpPtr->getXPosition()) && (tempY == powerUpPtr->getYPosition())) {
-				int lives = powerUpPtr->getNrOfLives();
-				player1->setLives(lives);  // implement power-up effect
-				powerUpMap[tempX][tempY] = 0; // Update the array
-			}
+	bool anyPowerUpFound = false;
+	std::vector<int> pickedPowerupsIndexes;
+	for (int i = 0; i < powerUps.size(); i++)
+	{
+		if ((tempX == powerUps[i]->getXPosition()) && (tempY == powerUps[i]->getYPosition())) {
+			int lives = powerUps[i]->getNrOfLives();
+			player1->setLives(lives);  // implement power-up effect
+			powerUpMap[tempX][tempY] = 0; // Update the array+
+			anyPowerUpFound = true;
+			pickedPowerupsIndexes.push_back(i);
 		}
-		return true;
 	}
+	for (int i = 0; i < pickedPowerupsIndexes.size(); i++) {
+		std::shared_ptr<DataUpdate> collectedPowerUp(new DataUpdate(powerUps[i]->getID(), powerUps[i]->getXPosition(), powerUps[i]->getYPosition(), powerUps[i]->dataToString(), DataUpdate::ObjectType::POWERUP, DataUpdate::Action::ELIMINATE));
+		this->output.push_back(collectedPowerUp);
+		powerUps.erase(powerUps.begin() + i);
+	}
+	return anyPowerUpFound;
 }
 
 GameState GameLevel::getGameState() {

@@ -161,7 +161,12 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 					static_cast<SpriteAttributes::Direction>(stoi(tempConstructorData[1])));
 				break;
 			default:
-				spriteManager->moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
+				if (dataPtr->getAction() == DataUpdate::Action::ELIMINATE) {
+					spriteManager->moveSprite(mapPair->second, 100, 100); //TO DO LIOR: please fix this ugly thing we made, by properly removing or not drawing this sprite.
+				}
+				else {
+					spriteManager->moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
+				}
 				break;
 			}
 
