@@ -26,7 +26,6 @@ void GameManager::StartGame()
 	SetupGame();
 
 	while (ExitGame == false) {
-		
 		Update();
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
@@ -53,31 +52,42 @@ void GameManager::SetupGame()
 
 void GameManager::Update()
 {
-	//Updates sequentially the Input, Logic and Output components,
+	//Updates sequentially the Input, Logic and Output components
+
 	//Input
 	UserInputType userInput = inputManager->getInput();
+
 	if (userInput == UserInputType::Quit) {
 		//<TO DO> send request to outputManager to show "Goodbye screen" (or ask for confirmation)
 		this->ExitGame = true;
 	}
 	else if(GameOver == false){
-		//Logic
-		logicManager->executeUserCommand(userInput);
-
-
-		//Output
-		//outputManager->update(userInput); // for testing
-		outputManager->update(logicManager->getLevelState());
-
-		if (logicManager->checkGameOver()) {
+		switch (logicManager->getGameState())
+		{
+		case GameState::UPANDRUNNING:
+			logicManager->executeUserCommand(userInput);
+			outputManager->update(logicManager->getLevelUpdates());
+			//outputManager->update(userInput); // For testing
+			break;
+		case GameState::LEVELFINISHED:
+			outputManager->showGameOverScreen();
+			break;
+		case GameState::VICTORY:
+			outputManager->showGameOverScreen();
+			break;
+		case GameState::GAMEOVER:
 			this->GameOver = true;
 			std::cout << "Sadly, it's game over...";
 			outputManager->showGameOverScreen();
 			//std::this_thread::sleep_for(std::chrono::milliseconds(4000));
+			break;
+		case GameState::NOTLOADED:
+			break;
+		default:
+			throw "A not expected state ";
+			break;
 		}
-	}
-  
-	
+	}	
 }
 
 void GameManager::DistributeData() {

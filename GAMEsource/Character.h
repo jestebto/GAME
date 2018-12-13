@@ -14,6 +14,9 @@ public:
 
 	bool isAlive();
 
+	//save the data in a string
+	virtual std::string dataToString();
+
 private:
 	int lives; /// number of lives
 };

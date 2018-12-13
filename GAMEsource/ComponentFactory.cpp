@@ -12,7 +12,7 @@
 #include "GameLevel.h"
 
 //Output managers:
-#include "GraphicInterface.h"
+#include "GraphicOutputManager.h"
 
 ComponentFactory::ComponentFactory()
 {
@@ -44,5 +44,5 @@ ILogicManager* ComponentFactory::GetLogicManager()
 IOutputManager* ComponentFactory::GetOutputManager()
 {
 	//throw "Not implemented"; //Lior: here you can return an instance of your GraphicalInterface class or however you want to call it
-	return new GraphicInterface();
+	return new GraphicOutputManager();
 }

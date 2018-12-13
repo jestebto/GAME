@@ -2,6 +2,7 @@
 #define GAMEOBJECT_H
 
 #include <string>
+#include <sstream>
 
 class GameObject {
 public:
@@ -19,7 +20,7 @@ public:
 	int getYPosition();
 
 	//save the data in a string
-	std::string dataToString();
+	virtual std::string dataToString();
 
 private:
 	std::string objectID; /// objects ID
