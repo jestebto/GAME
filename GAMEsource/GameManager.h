@@ -4,7 +4,8 @@
 #include "IInputManager.h"
 #include "ILogicManager.h"
 #include "IOutputManager.h"
-#include "StorageData.h"
+#include "StorageLevelData.h"
+#include "StorageGameData.h"
 
 
 class GameManager
@@ -17,16 +18,17 @@ public:
 	static int Add(int x, int y); //<TO DO JOSE> remove this. It's a dummy function to try the GAMEtest project
 
 private:
+	StorageLevelData* currentLevel;
 	bool ExitGame;
 	bool GameOver;
-	StorageData* loadedStorageData;
+	StorageGameData* loadedStorageData;
 	ComponentFactory componentFactory;
 	IStorageManager* storageManager;
 	IInputManager* inputManager;
 	ILogicManager* logicManager;
 	IOutputManager* outputManager;
 	void SetupGame();
-	void DistributeData();
+	void DistributeData(StorageLevelData*);
 	void Update();
 };
 

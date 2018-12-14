@@ -61,9 +61,6 @@
     <ClCompile Include="RandomInputGenerator.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="StorageData.cpp">
-      <Filter>Storage</Filter>
-    </ClCompile>
     <ClCompile Include="OutputData.cpp">
       <Filter>Output</Filter>
     </ClCompile>
@@ -74,6 +71,10 @@
     <ClCompile Include="GraphicOutputManager.cpp">
       <Filter>Output</Filter>
     </ClCompile>
+    <ClCompile Include="StorageLevelData.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="StorageGameData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataToolkit.h">
@@ -124,9 +125,6 @@
     <ClInclude Include="KeyboardInputManager.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="StorageData.h">
-      <Filter>Storage</Filter>
-    </ClInclude>
     <ClInclude Include="UserInputType.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -155,6 +153,10 @@
     <ClInclude Include="GraphicOutputManager.h">
       <Filter>Output</Filter>
     </ClInclude>
+    <ClInclude Include="StorageLevelData.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="StorageGameData.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

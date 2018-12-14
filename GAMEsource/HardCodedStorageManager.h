@@ -1,14 +1,16 @@
 #pragma once
 #include "IStorageManager.h"
-#include "StorageData.h"
+#include "StorageLevelData.h"
 class HardCodedStorageManager : public IStorageManager
 {
 public:
 	HardCodedStorageManager();
 	~HardCodedStorageManager();
-	StorageData* loadDefaultLevel();
+	StorageLevelData* loadDefaultLevel();
+	StorageGameData* loadDefaultGame();
 
 private:
-	StorageData defaultLevel;
+	StorageLevelData defaultLevel;
+	StorageGameData defaultGame;
 };
 

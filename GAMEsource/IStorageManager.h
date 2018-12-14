@@ -1,5 +1,7 @@
 #pragma once
-#include "StorageData.h"
+#include "StorageLevelData.h"
+#include "StorageGameData.h"
+
 class IStorageManager
 {
 	/*
@@ -7,5 +9,6 @@ class IStorageManager
 	*/
 public:
 	virtual ~IStorageManager() = 0; //!< virtual destructor to be implemented in the class implementing the interface
-	virtual StorageData* loadDefaultLevel() = 0;
+	virtual StorageLevelData* loadDefaultLevel() = 0;
+	virtual StorageGameData* loadDefaultGame() = 0;
 };

@@ -41,10 +41,7 @@ void GameManager::SetupGame()
 	logicManager = componentFactory.GetLogicManager();
 
 	//Read the initial data (level) from the Storage component
-	loadedStorageData = storageManager->loadDefaultLevel();
-	
-	logicManager->createLevel(LogicData{ loadedStorageData->logicData });
-	outputManager->loadLevel(OutputData{ loadedStorageData->outputData });
+	loadedStorageData = storageManager->loadDefaultGame();
 
 	//state of the game is not GameOver anymore (if it was) because we just loaded a new level (will be useful for multilevel game)
 	this->GameOver = false;
@@ -70,18 +67,29 @@ void GameManager::Update()
 			//outputManager->update(userInput); // For testing
 			break;
 		case GameState::LEVELFINISHED:
-			outputManager->showVictoryScreen();
+			if (currentLevel->checkIsFinalLevel()) {
+				this->GameOver = true;
+				outputManager->showVictoryScreen();
+			}
+			else {
+				currentLevel = loadedStorageData->getNextLevel();
+				delete(this->outputManager);
+				outputManager = componentFactory.GetOutputManager(); //TO DO: remove this line when outputManager->loadLevel properly clears out all previous data.
+				DistributeData(currentLevel);
+			}
 			break;
 		case GameState::VICTORY:
 			outputManager->showVictoryScreen();
 			break;
 		case GameState::GAMEOVER:
 			this->GameOver = true;
-			std::cout << "Sadly, it's game over...";
+			std::cout << "Sadly, it's game over...\n";
 			outputManager->showGameOverScreen();
 			//std::this_thread::sleep_for(std::chrono::milliseconds(4000));
 			break;
 		case GameState::NOTLOADED:
+			currentLevel = loadedStorageData->getNextLevel();
+			DistributeData(currentLevel);
 			break;
 		default:
 			throw "A not expected state ";
@@ -90,23 +98,9 @@ void GameManager::Update()
 	}	
 }
 
-void GameManager::DistributeData() {
-	std::string logicString;
-	std::string outputString;
-
-	//<TO DO JOSE> real implementation (this is mocking)
-		/*
-		This is an example (feel free to change it):
-			001, map, content=
-								0000
-								0110
-								0100
-								0000
-			002, player p, initial x=2, initial y=2, lives=3
-		*/
-	logicString = std::string("001/m&0000-0110-0100-0000;002/p&2&2&3");
-
-	logicManager->createLevel(*(new LogicData(logicString)));
+void GameManager::DistributeData(StorageLevelData* storageLevelData) {
+	logicManager->createLevel(LogicData{ storageLevelData->logicData });
+	outputManager->loadLevel(OutputData{ storageLevelData->outputData });
 }
 
 int GameManager::Add(int x, int y) {

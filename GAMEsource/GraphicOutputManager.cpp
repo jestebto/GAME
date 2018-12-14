@@ -27,6 +27,9 @@ GraphicOutputManager::~GraphicOutputManager()
 }
 
 void GraphicOutputManager::loadLevel(OutputData inputString) {
+
+	//TO DO LIOR: clear out all pre-existing data when this is called. Then remove the reinstantiation from GameManager (inside the Update() method, we want to call to ComponentFactory->getOutputManager() )
+
 	using namespace SpriteAttributes;
 
 	//Parse data

@@ -15,6 +15,20 @@ GameLevel::GameLevel() {
 
 /// create all the objects in game level
 void GameLevel::createLevel(LogicData inputString) {
+
+	delete(this->player1);
+	enemies.clear();
+	powerUps.clear();
+	for (size_t i = 0; i < 20; i++)
+	{
+		for (size_t j = 0; j < 20; j++)
+		{
+			mapArray[i][j] = 0;
+		}
+	}
+	isGameFinished = false;
+
+
 	std::vector <std::string> objectVector;
 	std::vector <std::string> tempConstructorData;
 
