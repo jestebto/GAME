@@ -20,6 +20,7 @@ GraphicOutputManager::~GraphicOutputManager()
 {
 	//SDL_DestroyTexture(sheet);
 	SDL_DestroyTexture(gameOverScreen);
+	SDL_DestroyTexture(victoryScreen);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
@@ -227,17 +228,25 @@ void GraphicOutputManager::update(UserInputType userInput)
 	SDL_RenderPresent(renderer);
 }
 
-void GraphicOutputManager::showGameOverScreen() {
+void GraphicOutputManager::drawBitmap(SDL_Texture* texture) {
 	using namespace SpriteAttributes;
 	SDL_Rect dst = { 0, 0 , (screenWidth+1)*TILESIZE, (screenHeight+1)*TILESIZE };
 	
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
 
-	SDL_RenderCopy(renderer, gameOverScreen, NULL, &dst);//NULL to show the entire structure
+	SDL_RenderCopy(renderer, texture, NULL, &dst);//NULL to show the entire structure
 
 	// Update the screen.
 	SDL_RenderPresent(renderer);
+}
+
+void GraphicOutputManager::showGameOverScreen() {
+	drawBitmap(gameOverScreen);
+}
+
+void GraphicOutputManager::showVictoryScreen() {
+	drawBitmap(victoryScreen);
 }
 
 
@@ -268,6 +277,7 @@ void GraphicOutputManager::loadTextures()
 
 	// Load game over screen
 	gameOverScreen = this->loadTexture("resources/GAME_OVER.bmp");
+	victoryScreen = this->loadTexture("resources/set1_victory.bmp");
 }
 
 

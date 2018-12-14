@@ -60,6 +60,9 @@ public:
 
 	//! Displays the Game Over screen
 	void showGameOverScreen();
+	
+	//! Displays the Victory screen
+	void showVictoryScreen();
 
 private:
 	///
@@ -82,6 +85,9 @@ private:
 	void drawBackground(std::vector<std::vector<int>> &map);
 	void drawLives();
 
+	void drawBitmap(SDL_Texture*);
+
+
 	/// Loads an image into a texture on the rendering device
 	/// \param file The image file to load
 	/// \return the loaded texture, or nullptr if something went wrong.
@@ -96,6 +102,8 @@ private:
 	//SDL_Texture *sheet; // moved to SpriteManager
 	/// Loaded SDL texture with the game over screen
 	SDL_Texture *gameOverScreen;
+	/// Loaded SDL texture with the victory screen
+	SDL_Texture *victoryScreen;
 
 	/// 2d array containing the map, a 1 is a wall.
 	std::vector<std::vector<int>> levelMap;

@@ -70,10 +70,10 @@ void GameManager::Update()
 			//outputManager->update(userInput); // For testing
 			break;
 		case GameState::LEVELFINISHED:
-			outputManager->showGameOverScreen();
+			outputManager->showVictoryScreen();
 			break;
 		case GameState::VICTORY:
-			outputManager->showGameOverScreen();
+			outputManager->showVictoryScreen();
 			break;
 		case GameState::GAMEOVER:
 			this->GameOver = true;
