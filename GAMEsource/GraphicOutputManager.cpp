@@ -29,8 +29,9 @@ GraphicOutputManager::~GraphicOutputManager()
 void GraphicOutputManager::loadLevel(OutputData inputString) {
 
 	//TO DO LIOR: clear out all pre-existing data when this is called. Then remove the reinstantiation from GameManager (inside the Update() method, we want to call to ComponentFactory->getOutputManager() )
-
 	using namespace SpriteAttributes;
+	spriteObjects.clear();
+
 
 	//Parse data
 	std::vector <std::string> objectVector; // temporary string for storing the current object
@@ -57,8 +58,8 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			//separate the data to construct the new object
 			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
-			this->spriteObjects[tempConstructorData[0]] = new GameSprite{ DataUpdate::ObjectType::PLAYER, stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), PACMAN, RIGHT };
+			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite> (DataUpdate::ObjectType::PLAYER, stoi(tempConstructorData[1]),
+				stoi(tempConstructorData[2]), PACMAN, RIGHT );
 
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
 			break;
@@ -69,8 +70,8 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			// separate the data to construct the new object
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 			// create a new enemy storing a shared pointer to it
-			this->spriteObjects[tempConstructorData[0]] = new GameSprite{ DataUpdate::ObjectType::ENEMY, stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), SCAREDINV, UP };
+			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>( DataUpdate::ObjectType::ENEMY, stoi(tempConstructorData[1]),
+				stoi(tempConstructorData[2]), SCAREDINV, UP );
 
 			tempConstructorData = {}; // make sure the vector is empty in the next case
 			break;
@@ -82,8 +83,8 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 
 			// Format is {ID,x,y,lives}
-			this->spriteObjects[tempConstructorData[0]] = new GameSprite{ DataUpdate::ObjectType::POWERUP, stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), APPLE, UP };
+			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>( DataUpdate::ObjectType::POWERUP, stoi(tempConstructorData[1]),
+				stoi(tempConstructorData[2]), APPLE, UP );
 		}
 
 		}
@@ -160,13 +161,13 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			case DataUpdate::ObjectType::PLAYER:
 				tempConstructorData = DataToolkit::getSubs(dataPtr->getData(), ',');
 				this->lives = stoi(tempConstructorData[0]);
-				// Dirty hack to turn integer into enum
+
 				spriteManager->moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition(),
-					static_cast<SpriteAttributes::Direction>(stoi(tempConstructorData[1])));
+					static_cast<SpriteAttributes::Direction>(stoi(tempConstructorData[1]))); // Dirty hack to turn integer into enum
 				break;
 			default:
 				if (dataPtr->getAction() == DataUpdate::Action::ELIMINATE) {
-					spriteManager->moveSprite(mapPair->second, 100, 100); //TO DO LIOR: please fix this ugly thing we made, by properly removing or not drawing this sprite.
+					spriteObjects.erase(mapPair);
 				}
 				else {
 					spriteManager->moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());

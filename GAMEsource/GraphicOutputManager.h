@@ -115,7 +115,7 @@ private:
 	
 	/// Map of GameSprites in use
 	/// The key is the ID
-	std::map<std::string, GameSprite*> spriteObjects;
+	std::map<std::string, std::unique_ptr<GameSprite>> spriteObjects;
 
 	enum { TILESIZE = 24 };
 

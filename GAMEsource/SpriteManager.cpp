@@ -25,7 +25,7 @@ SDL_Texture* SpriteManager::getSheet() {
 
 
 /// get a tile on SpriteManager::sheet 
-SDL_Rect* SpriteManager::getTile(GameSprite* element) {
+SDL_Rect* SpriteManager::getTile(std::unique_ptr<GameSprite> const& element) {
 	return &tileSet[element->art][element->direction];
 }
 
@@ -34,7 +34,7 @@ SDL_Rect* SpriteManager::getTile(SpriteAttributes::ArtType art, SpriteAttributes
 }
 
 
-void SpriteManager::moveSprite(GameSprite* element, int x, int y)
+void SpriteManager::moveSprite(std::unique_ptr<GameSprite> const& element, int x, int y)
 {
 	// move a Sprite to a position
 	using namespace SpriteAttributes;
@@ -70,14 +70,14 @@ void SpriteManager::moveSprite(GameSprite* element, int x, int y)
 
 }
 
-void SpriteManager::moveSprite(GameSprite* element, int x, int y, SpriteAttributes::Direction dir)
+void SpriteManager::moveSprite(std::unique_ptr<GameSprite> const& element, int x, int y, SpriteAttributes::Direction dir)
 {
 	element->setXPosition(x);
 	element->setYPosition(y);
 	element->setDirection(dir);
 }
 
-void SpriteManager::moveSprite(GameSprite* element, UserInputType command)
+void SpriteManager::moveSprite(std::unique_ptr<GameSprite> const& element, UserInputType command)
 {
 	// directly move a Sprite based on user input
 	// for test purposes only, as this is not connected to the logic

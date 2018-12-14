@@ -4,7 +4,7 @@
  * Description: See GrameSprite.h
  */
 
-#include <string>
+
 #include "GameSprite.h"
 
 GameSprite::GameSprite(DataUpdate::ObjectType objectType,int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Direction dir) {
@@ -14,6 +14,10 @@ GameSprite::GameSprite(DataUpdate::ObjectType objectType,int xPos, int yPos, Spr
 	yPosition = yPos;
 	art = artType;
 	direction = dir;
+}
+
+GameSprite::~GameSprite() {
+	//std::cout << "Call death animation"<<'\n';
 }
 
 /// set Sprite artwork based on type

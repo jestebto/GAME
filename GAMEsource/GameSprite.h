@@ -9,6 +9,7 @@
 #ifndef GAME_SPRITE_H
 #define GAME_SPRITE_H
 #include <string>
+#include <iostream>
 #include "DataUpdate.h"
 #include "CharacterOrientation.h"
 
@@ -53,7 +54,7 @@ class GameSprite
 {
 public:
 	GameSprite(DataUpdate::ObjectType, int, int, SpriteAttributes::ArtType, SpriteAttributes::Direction);
-	virtual ~GameSprite() = default; // vitual destructor
+	~GameSprite(); // vitual destructor
 
 	void setType(SpriteAttributes::ArtType);
 	void setDirection(SpriteAttributes::Direction);

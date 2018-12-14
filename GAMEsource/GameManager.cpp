@@ -85,7 +85,6 @@ void GameManager::Update()
 			this->GameOver = true;
 			std::cout << "Sadly, it's game over...\n";
 			outputManager->showGameOverScreen();
-			//std::this_thread::sleep_for(std::chrono::milliseconds(4000));
 			break;
 		case GameState::NOTLOADED:
 			currentLevel = loadedStorageData->getNextLevel();

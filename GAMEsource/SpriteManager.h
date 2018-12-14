@@ -30,17 +30,17 @@ public: /// All public since needs to be accessed by GraphicInterface
 	
 
 	/// get a tile on SpriteManager::sheet 
-	SDL_Rect* getTile(GameSprite*); //< getTile for a unique object in the game
+	SDL_Rect* getTile(std::unique_ptr<GameSprite> const&); //< getTile for a unique object in the game
 	SDL_Rect* getTile(SpriteAttributes::ArtType, SpriteAttributes::Direction); //< getTile for generic printing e.g. for the background
 	
 	/// Move a sprite to a position 
 	/// Data is given by the logic manager
-	void moveSprite(GameSprite*, int, int);
-	void moveSprite(GameSprite*, int, int, SpriteAttributes::Direction);
+	void moveSprite(std::unique_ptr<GameSprite> const&, int, int);
+	void moveSprite(std::unique_ptr<GameSprite> const&, int, int, SpriteAttributes::Direction);
 
 	/// Move a sprite on the screen using user input.
 	/// For test purposes only, as this is not connected to the logic
-	void moveSprite(GameSprite*, UserInputType);
+	void moveSprite(std::unique_ptr<GameSprite> const&, UserInputType);
 	
 
 
