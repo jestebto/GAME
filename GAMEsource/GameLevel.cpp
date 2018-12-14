@@ -14,9 +14,9 @@ GameLevel::GameLevel() {
 
 
 /// create all the objects in game level
-void GameLevel::createLevel(LogicData inputString) {
+void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false) {
 
-	delete(this->player1);
+	//delete(this->player1); //This one is deleted later on if necessary
 	enemies.clear();
 	powerUps.clear();
 	for (size_t i = 0; i < 20; i++)
@@ -74,9 +74,16 @@ void GameLevel::createLevel(LogicData inputString) {
 				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 
 				//create a new player and save a shared pointer to it
-				player1 = new Player(tempConstructorData[0], stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), (CharacterOrientation)stoi(tempConstructorData[4]), stoi(tempConstructorData[5])); // Added tempContructorData[4] for orientation
-
+				if ((player1 != NULL) && (keepPlayerState == true)) {
+					player1->setXPosition(stoi(tempConstructorData[1]));
+					player1->setYPosition(stoi(tempConstructorData[2]));
+				}
+				else {
+					if (player1 != NULL) delete(this->player1);
+					player1 = new Player(tempConstructorData[0], stoi(tempConstructorData[1]),
+						stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), (CharacterOrientation)stoi(tempConstructorData[4]), stoi(tempConstructorData[5])); // Added tempContructorData[4] for orientation
+				}
+				
 				tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
 				break;
 			}

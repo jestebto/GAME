@@ -13,7 +13,7 @@ GameObject::GameObject(std::string ID, int xPos, int yPos) {
 std::string GameObject::getID() { return objectID; }
 
 /// set X-Position
-void GameObject::setXPosition(int& xPos) {
+void GameObject::setXPosition(int xPos) {
 	xPosition = xPos;
 }
 
@@ -21,7 +21,7 @@ void GameObject::setXPosition(int& xPos) {
 int GameObject::getXPosition() { return xPosition; }
 
 /// set Y-Position
-void GameObject::setYPosition(int& yPos) {
+void GameObject::setYPosition(int yPos) {
 	yPosition = yPos;
 }
 

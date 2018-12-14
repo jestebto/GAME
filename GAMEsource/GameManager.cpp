@@ -99,7 +99,7 @@ void GameManager::Update()
 }
 
 void GameManager::DistributeData(StorageLevelData* storageLevelData) {
-	logicManager->createLevel(LogicData{ storageLevelData->logicData });
+	logicManager->createLevel(LogicData{ storageLevelData->logicData}, true);
 	outputManager->loadLevel(OutputData{ storageLevelData->outputData });
 }
 

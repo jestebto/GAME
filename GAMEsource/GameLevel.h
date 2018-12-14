@@ -17,7 +17,7 @@ public:
 	//~GameLevel();
 
 	// create all the clases thet form GameLevel
-	void createLevel(LogicData);
+	void createLevel(LogicData, bool);
 
 	// evaluate and perform the user's command
 	void executeUserCommand(UserInputType);

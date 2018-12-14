@@ -13,10 +13,10 @@ public:
 	//void setID(const std::string&);
 	std::string getID();
 
-	void setXPosition(int&);
+	void setXPosition(int);
 	int getXPosition();
 
-	void setYPosition(int&);
+	void setYPosition(int);
 	int getYPosition();
 
 	//save the data in a string
