@@ -31,16 +31,12 @@ public: /// All public since needs to be accessed by GraphicInterface
 
 	/// get a tile on SpriteManager::sheet 
 	SDL_Rect* getTile(std::unique_ptr<GameSprite> const&); //< getTile for a unique object in the game
-	SDL_Rect* getTile(SpriteAttributes::ArtType, CharacterOrientation); //< getTile for generic printing e.g. for the background
+	SDL_Rect* getTile(SpriteAttributes::ArtType, SpriteAttributes::Description); //< getTile for generic printing e.g. for the background
 	
 	/// Move a sprite to a position 
-	/// Data is given by the logic manager
-	void moveSprite(std::unique_ptr<GameSprite> const&, int, int);
-	void moveSprite(std::unique_ptr<GameSprite> const&, int, int, CharacterOrientation);
-
-	/// Move a sprite on the screen using user input.
-	/// For test purposes only, as this is not connected to the logic
-	void moveSprite(std::unique_ptr<GameSprite> const&, UserInputType);
+	void moveSprite(std::unique_ptr<GameSprite> const&, int, int, CharacterOrientation); //< get all information from the logic manager
+	void moveSprite(std::unique_ptr<GameSprite> const&, int, int); //< Estimate direction use the new and old co-ordinates
+	void moveSprite(std::unique_ptr<GameSprite> const&, UserInputType); //< For test purposes only, as this is not connected to the logic
 	
 
 
@@ -59,7 +55,7 @@ private:
 	/// tileSet[<type>][<direction>]
 	/// \see ArtType
 	/// \see Direction
-	std::map<SpriteAttributes::ArtType, std::map<CharacterOrientation, SDL_Rect>> tileSet;
+	std::map<SpriteAttributes::ArtType, std::map<SpriteAttributes::Description, SDL_Rect>> tileSet;
 	
 	enum { PACMAN_TILESIZE = 24 }; //< tile size for each Sprite. Does not have to be the same as the graphic interface size
 };

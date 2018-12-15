@@ -30,7 +30,6 @@ GraphicOutputManager::~GraphicOutputManager()
 }
 
 void GraphicOutputManager::loadLevel(OutputData inputString) {
-	//TO DO LIOR: clear out all pre-existing data when this is called. Then remove the reinstantiation from GameManager (inside the Update() method, we want to call to ComponentFactory->getOutputManager() )
 	using namespace SpriteAttributes;
 
 	spriteObjects.clear();
@@ -48,47 +47,45 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 		std::string initialChar{ objectVector[i].at(0) }; // String containing the first character of a string 
 		int objectType{ stoi(initialChar) }; // Conv is the integer corresponding to the first character of a string
 
-		switch (objectType) {
-		case 0: { // 0 is map
+		if (objectType >= 0 && objectType <= 3) 
+		{
 			// erase the part of the string that contains the object type and the ampersand symbol
 			objectVector[i].erase(0, amp + 1);
+		}
+
+		switch (objectType) {
+		case 0: { // 0 is map
 			setBackground(objectVector[i]);
 			break;
 		}
 		case 1: { //1 is player
-		//erase the part of the string that contains the object type and the ampersand symbol
-			objectVector[i].erase(0, amp + 1);
 			//separate the data to construct the new object
 			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
+			// tempConstructorData format: {"ID, x, y, lives"} 
 			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite> (DataUpdate::ObjectType::PLAYER, stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), PACMAN, CharacterOrientation::Down );
+				stoi(tempConstructorData[2]), PACMAN, SpriteAttributes::UP);
 			this->lives= stoi(tempConstructorData[3]);
 
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
 			break;
 		}
 		case 2: { // 2 is an enemy
-			// erase the part of the string that contains the object type and the ampersand symbol
-			objectVector[i].erase(0, amp + 1);
 			// separate the data to construct the new object
+			// tempConstructorData format: "ID,x,y,lives,"
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 			// create a new enemy storing a shared pointer to it
 			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>( DataUpdate::ObjectType::ENEMY, stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), SCAREDINV, CharacterOrientation::Up );
+				stoi(tempConstructorData[2]), SCAREDINV, SpriteAttributes::DEFAULT);
 
 			tempConstructorData = {}; // make sure the vector is empty in the next case
 			break;
 		}
 		case 3: { // 3 is a power up
-		// erase the part of the string that contains the object type and the ampersand symbol
-			objectVector[i].erase(0, amp + 1);
 			// separate the data to construct the new object
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
-
-			// Format is {ID,x,y,lives}
 			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>( DataUpdate::ObjectType::POWERUP, stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), APPLE, CharacterOrientation::Up);
+				stoi(tempConstructorData[2]), APPLE, SpriteAttributes::DEFAULT);
 		}
 
 		}
@@ -236,7 +233,7 @@ void GraphicOutputManager::update(UserInputType userInput)
 
 void GraphicOutputManager::drawBitmap(SDL_Texture* texture) {
 	using namespace SpriteAttributes;
-	SDL_Rect dst = { 0, 0 , (SCREEN_WIDTH+1)*TILESIZE, (SCREEN_HEIGHT+1)*TILESIZE };
+	SDL_Rect dst = { 0, 0 , (SCREEN_WIDTH)*TILESIZE, (SCREEN_HEIGHT-1)*TILESIZE };
 	
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
@@ -305,12 +302,12 @@ void GraphicOutputManager::drawBackground(std::vector<std::vector<int>> &map)
 				TILESIZE };
 			if (map[i][j] == 1) {
 				//SDL_RenderCopy(renderer, sheet, &tileSet[WALL][DOWN], &dst);
-				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL, CharacterOrientation::Down), &dst);
+				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL, SpriteAttributes::DEFAULT), &dst);
 				//SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL,DOWN), &dst);
 			}
 			else if (map[i][j] == 2) {
 				//SDL_RenderCopy(renderer, sheet, &tileSet[KEY][DOWN], &dst);
-				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(KEY, CharacterOrientation::Down), &dst);
+				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(KEY, SpriteAttributes::DEFAULT), &dst);
 			}
 		}
 	}
@@ -325,7 +322,7 @@ void GraphicOutputManager::drawLives()
 		SDL_Rect dst = { SCREEN_HEIGHT * TILESIZE - i * TILESIZE, (SCREEN_HEIGHT -1) * TILESIZE, TILESIZE,
 						TILESIZE };
 		//SDL_RenderCopy(renderer, sheet, &tileSet[PACMAN][LEFT], &dst);
-		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(PACMAN, CharacterOrientation::Left), &dst);
+		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(PACMAN, SpriteAttributes::LEFT), &dst);
 	}
 }
 

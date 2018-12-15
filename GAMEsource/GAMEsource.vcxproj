@@ -174,7 +174,6 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameSprite.h" />
     <ClInclude Include="GameState.h" />
-    <ClInclude Include="GameTile.h" />
     <ClInclude Include="GraphicOutputManager.h" />
     <ClInclude Include="HardCodedStorageManager.h" />
     <ClInclude Include="IInputManager.h" />
@@ -205,7 +204,6 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GAMEsource.cpp" />
     <ClCompile Include="GameSprite.cpp" />
-    <ClCompile Include="GameTile.cpp" />
     <ClCompile Include="GraphicOutputManager.cpp" />
     <ClCompile Include="HardCodedStorageManager.cpp" />
     <ClCompile Include="IInputManager.cpp" />

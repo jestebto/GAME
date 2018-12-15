@@ -4,9 +4,6 @@
     <ClCompile Include="ComponentFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="DataToolkit.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -77,12 +74,9 @@
     <ClCompile Include="StorageGameData.cpp">
       <Filter>Storage</Filter>
     </ClCompile>
-    <ClCompile Include="GameTile.cpp" />
+    <ClCompile Include="DataToolkit.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataToolkit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ComponentFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -159,8 +153,9 @@
     <ClInclude Include="StorageGameData.h">
       <Filter>Storage</Filter>
     </ClInclude>
-    <ClInclude Include="GameTile.h" />
     <ClInclude Include="CharacterOrientation.h" />
+    <ClInclude Include="ProgramState.h" />
+    <ClInclude Include="DataToolkit.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

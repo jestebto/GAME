@@ -16,7 +16,7 @@
 /// Define attributes important only for Sprite objects in the graphic user interface 
 namespace SpriteAttributes {
 	/// Artwork Type used for each sprite 
-	enum ArtType {
+	 enum ArtType {
 		PACMAN,
 		BLINKY,
 		PINKY,
@@ -46,19 +46,32 @@ namespace SpriteAttributes {
 		NINE
 	};
 
-	/// The direction a sprite faces
-	//enum Direction { UP, RIGHT, DOWN, LEFT };
-	enum Action {STAND,CLOSE};
+	 /// Generic descriptions/actions for each sprite
+	 enum Description { UP, DOWN, LEFT, RIGHT, DEFAULT, ATTACK, ELIMINATE };
+
+	 /// Map enums of the smaller CharacterOrientation enum class to the bigger Description enum class
+    /// Unforunately there is no nice way to inherit enums in C++
+	 static Description mapOrientationToDescription(CharacterOrientation Ori) {
+		 switch (Ori)
+		 {
+		 case CharacterOrientation::Up:	   return UP;
+		 case CharacterOrientation::Down:  return DOWN;
+		 case CharacterOrientation::Left:  return LEFT;
+		 case CharacterOrientation::Right: return RIGHT;
+		 default: return DEFAULT;
+		 }
+	 };
+	 
 }
 
 class GameSprite
 {
 public:
-	GameSprite(DataUpdate::ObjectType, int, int, SpriteAttributes::ArtType, CharacterOrientation);
+	GameSprite(DataUpdate::ObjectType, int, int, SpriteAttributes::ArtType, SpriteAttributes::Description);
 	~GameSprite(); // vitual destructor
 
 	void setType(SpriteAttributes::ArtType);
-	void setDirection(CharacterOrientation);
+	void setDescription(SpriteAttributes::Description);
 
 	/* Shared functions with GameObject */
 	//void setID(const std::string&);
@@ -71,7 +84,7 @@ public:
 	int getYPosition();
 	
 	SpriteAttributes::ArtType art;
-	CharacterOrientation direction;
+	SpriteAttributes::Description description;
 
 private:
 	/* Shared properties with GameObject */
