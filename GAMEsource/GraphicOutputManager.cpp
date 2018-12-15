@@ -6,13 +6,15 @@
 
 #include "GraphicOutputManager.h"
 
-
-
 GraphicOutputManager::GraphicOutputManager()
 {
 	//spriteManager = new SpriteManager(24);
 	spriteManager = std::make_unique<SpriteManager>();
-	//All setup is done in GrahpicInterface::loadlevel once data has been received
+
+	// Initialize window and load textures.
+	this->init();
+	this->loadTextures();
+	//All other setup is done in GrahpicInterface::loadlevel once data has been received
 }
 
 
@@ -27,11 +29,11 @@ GraphicOutputManager::~GraphicOutputManager()
 }
 
 void GraphicOutputManager::loadLevel(OutputData inputString) {
-
 	//TO DO LIOR: clear out all pre-existing data when this is called. Then remove the reinstantiation from GameManager (inside the Update() method, we want to call to ComponentFactory->getOutputManager() )
 	using namespace SpriteAttributes;
-	spriteObjects.clear();
 
+	spriteObjects.clear();
+	levelMap.clear();
 
 	//Parse data
 	std::vector <std::string> objectVector; // temporary string for storing the current object
@@ -60,6 +62,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 
 			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite> (DataUpdate::ObjectType::PLAYER, stoi(tempConstructorData[1]),
 				stoi(tempConstructorData[2]), PACMAN, RIGHT );
+			this->lives= stoi(tempConstructorData[3]);
 
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
 			break;
@@ -99,12 +102,6 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 	this->map = std::move(board);
 	*/
 
-	this->screenWidth  = static_cast<int>(levelMap[0].size());
-	this->screenHeight = static_cast<int>(levelMap.size());
-	// Initialize window and load textures.
-	this->init(); 
-	this->loadTextures();
-
 	//On the first iteration, only draw the background:
 
 	// Clear the current renderer.
@@ -133,6 +130,10 @@ void GraphicOutputManager::setBackground(const std::string& mapString) {
 			column++;
 		}
 	}
+	// xOffset = screenWidth/2 - mapWidth/2;
+	this->xOffset = (SCREEN_WIDTH - static_cast<int>( levelMap[0].size() ))/ 2;
+	// yOffset = screenHeight/2 - mapWidth/2;
+	this->yOffset = (SCREEN_HEIGHT - static_cast<int>( levelMap.size() ))/ 2;
 }
 
 
@@ -184,7 +185,7 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 		int x = mapPair.second->getXPosition();
 		int y = mapPair.second->getYPosition();
 
-		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE, 
+		SDL_Rect dst = { (x+ xOffset) * TILESIZE , (y+yOffset) * TILESIZE, TILESIZE,
 			TILESIZE };
 		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
 			&dst);
@@ -221,7 +222,7 @@ void GraphicOutputManager::update(UserInputType userInput)
 		int x = mapPair.second->getXPosition();
 		int y = mapPair.second->getYPosition();
 
-		SDL_Rect dst = { x * TILESIZE, y * TILESIZE, TILESIZE,
+		SDL_Rect dst = { (x + xOffset) * TILESIZE + xOffset, (y+ yOffset) * TILESIZE , TILESIZE,
 						TILESIZE };
 		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
 			&dst);
@@ -234,7 +235,7 @@ void GraphicOutputManager::update(UserInputType userInput)
 
 void GraphicOutputManager::drawBitmap(SDL_Texture* texture) {
 	using namespace SpriteAttributes;
-	SDL_Rect dst = { 0, 0 , (screenWidth+1)*TILESIZE, (screenHeight+1)*TILESIZE };
+	SDL_Rect dst = { 0, 0 , (SCREEN_WIDTH+1)*TILESIZE, (SCREEN_HEIGHT+1)*TILESIZE };
 	
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
@@ -263,8 +264,8 @@ void GraphicOutputManager::init()
 
 	// Create a Window in the middle of the screen
 	window = SDL_CreateWindow("The Awesome Game", SDL_WINDOWPOS_CENTERED,
-		SDL_WINDOWPOS_CENTERED, screenWidth * TILESIZE,
-		screenHeight * TILESIZE + (TILESIZE + 4), SDL_WINDOW_SHOWN);
+		SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH * TILESIZE,
+		SCREEN_HEIGHT* TILESIZE, SDL_WINDOW_SHOWN);
 
 	// Create a new renderer
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED |
@@ -293,19 +294,15 @@ void GraphicOutputManager::drawBackground(std::vector<std::vector<int>> &map)
 	// Draw a wall on each position containing a one
 	for (size_t i = 0; i < map.size(); i++) {
 		for (size_t j = 0; j < map[i].size(); j++) {
+			SDL_Rect dst = { (static_cast<int>(j) + xOffset )* TILESIZE,
+				             (static_cast<int>(i) + yOffset) * TILESIZE , TILESIZE,
+				TILESIZE };
 			if (map[i][j] == 1) {
-				SDL_Rect dst = { static_cast<int>(j) * TILESIZE,
-								static_cast<int>(i) * TILESIZE, TILESIZE,
-								TILESIZE };
-
 				//SDL_RenderCopy(renderer, sheet, &tileSet[WALL][DOWN], &dst);
 				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL, DOWN), &dst);
 				//SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL,DOWN), &dst);
 			}
 			else if (map[i][j] == 2) {
-				SDL_Rect dst = { static_cast<int>(j) * TILESIZE,
-								static_cast<int>(i) * TILESIZE, TILESIZE,
-								TILESIZE };
 				//SDL_RenderCopy(renderer, sheet, &tileSet[KEY][DOWN], &dst);
 				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(KEY, DOWN), &dst);
 			}
@@ -319,7 +316,7 @@ void GraphicOutputManager::drawLives()
 {
 	using namespace SpriteAttributes;
 	for (int i = 0; i < lives; i++) {
-		SDL_Rect dst = { screenHeight * TILESIZE - i * TILESIZE, screenHeight * TILESIZE, TILESIZE,
+		SDL_Rect dst = { SCREEN_HEIGHT * TILESIZE - i * TILESIZE, (SCREEN_HEIGHT -1) * TILESIZE, TILESIZE,
 						TILESIZE };
 		//SDL_RenderCopy(renderer, sheet, &tileSet[PACMAN][LEFT], &dst);
 		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(PACMAN, LEFT), &dst);
