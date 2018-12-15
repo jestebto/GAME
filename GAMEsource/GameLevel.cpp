@@ -58,12 +58,12 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 						column = 0;
 						row++;
 
-						if (row > height) throw "The map exceded the maximum height";
+						if (row > height) throw std::exception("The map exceded the maximum height");
 					}
 					else {
 						mapArray[row][column] = tempValue - 48;
 						column++;
-						if (column > height) throw "The map exceded the maximum width";
+						if (column > height) throw std::exception("The map exceded the maximum width");
 					}
 				}
 				break;
@@ -78,8 +78,8 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 				int xPos = stoi(tempConstructorData[1]);
 				int yPos = stoi(tempConstructorData[2]);
 
-				if (xPos < 0 || xPos > width) throw "The player has to be inside the map";
-				if (yPos < 0 || yPos > height) throw "The player has to be inside the map";
+				if (xPos < 0 || xPos > width) throw std::exception ("The player has to be inside the map");
+				if (yPos < 0 || yPos > height) throw std::exception ("The player has to be inside the map");
 
 				//create a new player and save a  pointer to it
 				if ((player1 != NULL) && (keepPlayerState == true)) {

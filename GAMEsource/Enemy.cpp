@@ -3,7 +3,7 @@
 Enemy::Enemy(std::string ID, int xPos, int yPos,
 	int nrLives, int damage)
 	: Character(ID, xPos, yPos, nrLives) {
-	if (damage < 0) throw "The damage of the enemy must be a positive integer.";
+	if (damage < 0) throw std::exception("The damage of the enemy must be a positive integer.");
 	damageValue = damage;
 };
 

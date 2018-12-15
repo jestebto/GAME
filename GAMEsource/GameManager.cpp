@@ -26,7 +26,7 @@ void GameManager::StartGame()
 	try {
 		SetupGame();
 	}
-	catch(std::exception e){
+	catch(std::exception& e){
 		outputManager->showGameOverScreen();
 	}
 	
