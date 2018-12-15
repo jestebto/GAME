@@ -105,7 +105,7 @@ private:
 	/// Loaded SDL texture with the victory screen
 	SDL_Texture *victoryScreen;
 
-	enum { TILESIZE = 24, SCREEN_WIDTH = 12, SCREEN_HEIGHT = 11 }; //< not: title bar is an effective +1 to the screen height
+	enum { TILESIZE = 24, SCREEN_WIDTH = 22, SCREEN_HEIGHT = 21 }; //< not: title bar is an effective +1 to the screen height
 	int screenArray[SCREEN_HEIGHT][SCREEN_WIDTH];
 
 	/// 2d array containing the map, a 1 is a wall.
