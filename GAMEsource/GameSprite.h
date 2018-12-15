@@ -47,17 +47,18 @@ namespace SpriteAttributes {
 	};
 
 	/// The direction a sprite faces
-	enum Direction { UP, RIGHT, DOWN, LEFT };
+	//enum Direction { UP, RIGHT, DOWN, LEFT };
+	enum Action {STAND,CLOSE};
 }
 
 class GameSprite
 {
 public:
-	GameSprite(DataUpdate::ObjectType, int, int, SpriteAttributes::ArtType, SpriteAttributes::Direction);
+	GameSprite(DataUpdate::ObjectType, int, int, SpriteAttributes::ArtType, CharacterOrientation);
 	~GameSprite(); // vitual destructor
 
 	void setType(SpriteAttributes::ArtType);
-	void setDirection(SpriteAttributes::Direction);
+	void setDirection(CharacterOrientation);
 
 	/* Shared functions with GameObject */
 	//void setID(const std::string&);
@@ -70,7 +71,7 @@ public:
 	int getYPosition();
 	
 	SpriteAttributes::ArtType art;
-	SpriteAttributes::Direction direction;
+	CharacterOrientation direction;
 
 private:
 	/* Shared properties with GameObject */

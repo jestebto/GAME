@@ -7,7 +7,7 @@
 
 #include "GameSprite.h"
 
-GameSprite::GameSprite(DataUpdate::ObjectType objectType,int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Direction dir) {
+GameSprite::GameSprite(DataUpdate::ObjectType objectType,int xPos, int yPos, SpriteAttributes::ArtType artType, CharacterOrientation dir) {
 	//objectID = ID;
 	objectType = objectType;
 	xPosition = xPos;
@@ -26,7 +26,7 @@ void GameSprite::setType(SpriteAttributes::ArtType artType) {
 }
 
 /// set Sprite artwork based on direction the sprite is facing
-void GameSprite::setDirection(SpriteAttributes::Direction dir) {
+void GameSprite::setDirection(CharacterOrientation dir) {
 	direction = dir;
 }
 

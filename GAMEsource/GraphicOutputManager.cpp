@@ -61,7 +61,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
 			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite> (DataUpdate::ObjectType::PLAYER, stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), PACMAN, RIGHT );
+				stoi(tempConstructorData[2]), PACMAN, CharacterOrientation::Down );
 			this->lives= stoi(tempConstructorData[3]);
 
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
@@ -74,7 +74,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 			// create a new enemy storing a shared pointer to it
 			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>( DataUpdate::ObjectType::ENEMY, stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), SCAREDINV, UP );
+				stoi(tempConstructorData[2]), SCAREDINV, CharacterOrientation::Up );
 
 			tempConstructorData = {}; // make sure the vector is empty in the next case
 			break;
@@ -87,7 +87,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 
 			// Format is {ID,x,y,lives}
 			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>( DataUpdate::ObjectType::POWERUP, stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), APPLE, UP );
+				stoi(tempConstructorData[2]), APPLE, CharacterOrientation::Up);
 		}
 
 		}
@@ -164,7 +164,7 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 				this->lives = stoi(tempConstructorData[0]);
 
 				spriteManager->moveSprite(mapPair->second, dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition(),
-					static_cast<SpriteAttributes::Direction>(stoi(tempConstructorData[1]))); // Dirty hack to turn integer into enum
+					static_cast<CharacterOrientation>(stoi(tempConstructorData[1]))); // turn integer into enum
 				break;
 			default:
 				if (dataPtr->getAction() == DataUpdate::Action::ELIMINATE) {
@@ -299,12 +299,12 @@ void GraphicOutputManager::drawBackground(std::vector<std::vector<int>> &map)
 				TILESIZE };
 			if (map[i][j] == 1) {
 				//SDL_RenderCopy(renderer, sheet, &tileSet[WALL][DOWN], &dst);
-				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL, DOWN), &dst);
+				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL, CharacterOrientation::Down), &dst);
 				//SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL,DOWN), &dst);
 			}
 			else if (map[i][j] == 2) {
 				//SDL_RenderCopy(renderer, sheet, &tileSet[KEY][DOWN], &dst);
-				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(KEY, DOWN), &dst);
+				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(KEY, CharacterOrientation::Down), &dst);
 			}
 		}
 	}
@@ -319,7 +319,7 @@ void GraphicOutputManager::drawLives()
 		SDL_Rect dst = { SCREEN_HEIGHT * TILESIZE - i * TILESIZE, (SCREEN_HEIGHT -1) * TILESIZE, TILESIZE,
 						TILESIZE };
 		//SDL_RenderCopy(renderer, sheet, &tileSet[PACMAN][LEFT], &dst);
-		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(PACMAN, LEFT), &dst);
+		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(PACMAN, CharacterOrientation::Left), &dst);
 	}
 }
 
