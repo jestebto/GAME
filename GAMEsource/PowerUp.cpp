@@ -16,7 +16,7 @@ PowerUp::~PowerUp()
 /// set nr of lives
 void PowerUp::setNrOfLives(int lives) {
 	if (lives < 0) {
-		throw std::invalid_argument("The number of lives of a Power-Up must be a positive integer.");
+		throw std::exception("The number of lives of a Power-Up must be a positive integer.");
 	}
 	nrOfLives = lives; 
 }

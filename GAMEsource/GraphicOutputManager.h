@@ -64,6 +64,9 @@ public:
 	//! Displays the Victory screen
 	void showVictoryScreen();
 
+	//! Displays the generic error screen (when the error is unknown)
+	void showGenericErrorScreen();
+
 private:
 	///
 	/// Initialise a window for SDL
@@ -104,11 +107,16 @@ private:
 	SDL_Texture *gameOverScreen;
 	/// Loaded SDL texture with the victory screen
 	SDL_Texture *victoryScreen;
+	/// Loaded SDL texture with the generic error screen
+	SDL_Texture *genericErrorScreen;
+
+	enum { TILESIZE = 24, SCREEN_WIDTH = 22, SCREEN_HEIGHT = 21 }; //< not: title bar is an effective +1 to the screen height
+	int screenArray[SCREEN_HEIGHT][SCREEN_WIDTH];
 
 	/// 2d array containing the map, a 1 is a wall.
 	std::vector<std::vector<int>> levelMap;
-	int screenWidth;
-	int screenHeight;
+	int xOffset=0; //< offset to centre the map in the display
+	int yOffset=0; //< offset to centre the map in the display
 
 	//*spriteManager; //< makes a SpriteManager for this OutputManager
 	std::unique_ptr<SpriteManager> spriteManager; //< makes a unique SpriteManager for this OutputManager
@@ -117,9 +125,9 @@ private:
 	/// The key is the ID
 	std::map<std::string, std::unique_ptr<GameSprite>> spriteObjects;
 
-	enum { TILESIZE = 24 };
 
-	int lives = 3;//<store number of lives the character has
+	
+	int lives;//<store number of lives the character has
 
 };
 

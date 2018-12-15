@@ -74,7 +74,9 @@
     <ClCompile Include="StorageLevelData.cpp">
       <Filter>Storage</Filter>
     </ClCompile>
-    <ClCompile Include="StorageGameData.cpp" />
+    <ClCompile Include="StorageGameData.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataToolkit.h">
@@ -156,7 +158,12 @@
     <ClInclude Include="StorageLevelData.h">
       <Filter>Storage</Filter>
     </ClInclude>
-    <ClInclude Include="StorageGameData.h" />
+    <ClInclude Include="StorageGameData.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgramState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
