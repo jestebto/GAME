@@ -209,18 +209,18 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 
 			for (std::shared_ptr<Enemy> enemyPtr : enemies) {
 				if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY) {
-					enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
+					enemyPtr->setLives(- player1->getDmg());
 
 				}
 
 				// Try to update a dead enemy
-				/*
+				
 				if (enemyPtr->getLives() <= 0) {
 					std::shared_ptr<DataUpdate> deadEnemy(new DataUpdate(enemyPtr->getID(), enemyPtr->getXPosition(), enemyPtr->getYPosition(), enemyPtr->dataToString(), DataUpdate::ObjectType::ENEMY, DataUpdate::Action::ELIMINATE));
 					this->output.push_back(deadEnemy);
 				}
-				*/
 				
+  				
 				
 			}
 			

@@ -86,8 +86,6 @@ void GameManager::Update()
 			}
 			else {
 				currentLevel = loadedStorageData->getNextLevel();
-				delete(this->outputManager);
-				outputManager = componentFactory.GetOutputManager(); //TO DO: remove this line when outputManager->loadLevel properly clears out all previous data.
 				DistributeData(currentLevel);
 			}
 			break;
