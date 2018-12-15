@@ -186,41 +186,24 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		
 			switch (tempOrientation) {
 			case CharacterOrientation::Up:
-				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-					if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY - 1) {
-						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
-						
-					}
-				}
-				
+				tempY--;
 				break;
 			case CharacterOrientation::Right:
-				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-					if (enemyPtr->getXPosition() == tempX + 1 && enemyPtr->getYPosition() == tempY) {
-						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
-						
-					}
-				}
-				
+				tempX++;
 				break;
 			case CharacterOrientation::Down:
-				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-					if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY + 1) {
-						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
-						
-					}
-				}
-				
+				tempY++;
 				break;
 			case CharacterOrientation::Left:
-				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-					if (enemyPtr->getXPosition() == tempX - 1 && enemyPtr->getYPosition() == tempY) {
-						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
-						
-					}
-				}
-				
+				tempX--;
 				break;
+			}
+
+			for (std::shared_ptr<Enemy> enemyPtr : enemies) {
+				if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY) {
+					enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
+
+				}
 			}
 			
 		
