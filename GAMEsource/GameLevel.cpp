@@ -204,6 +204,16 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 					enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
 
 				}
+
+				// Try to update a dead enemy
+				/*
+				if (enemyPtr->getLives() <= 0) {
+					std::shared_ptr<DataUpdate> deadEnemy(new DataUpdate(enemyPtr->getID(), enemyPtr->getXPosition(), enemyPtr->getYPosition(), enemyPtr->dataToString(), DataUpdate::ObjectType::ENEMY, DataUpdate::Action::ELIMINATE));
+					this->output.push_back(deadEnemy);
+				}
+				*/
+				
+				
 			}
 			
 		
