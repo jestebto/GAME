@@ -10,8 +10,7 @@
 
 GameManager::GameManager()
 {
-	this->ExitGame = false;
-	this->GameOver = false;
+	this->programState = ProgramState::CREATED;
 	this->componentFactory = ComponentFactory{};
 }
 
@@ -21,23 +20,26 @@ GameManager::~GameManager()
 
 void GameManager::StartGame()
 {
-	ExitGame = false;
-
-	try {
-		SetupGame();
-	}
-	catch(std::exception& e){
-		outputManager->showGameOverScreen();
-	}
-	
-	while (ExitGame == false) {
+	if (this->programState == ProgramState::CREATED) {
 		try {
-			Update();
+			SetupGame();
+			this->programState = ProgramState::RUNNING;
 		}
-		catch (std::exception e) {
-			outputManager->showGameOverScreen();
+		catch (std::exception& e) {
+			outputManager->showGenericErrorScreen();
+			this->programState = ProgramState::ERROR;
 		}
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+		while (this->programState != ProgramState::CLOSING) {
+			try {
+				Update();
+			}
+			catch (std::exception e) {
+				outputManager->showGenericErrorScreen();
+				this->programState = ProgramState::ERROR;
+			}
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		}
 	}
 
 	
@@ -55,9 +57,6 @@ void GameManager::SetupGame()
 
 	//Read the initial data (level) from the Storage component
 	loadedStorageData = storageManager->loadDefaultGame();
-
-	//state of the game is not GameOver anymore (if it was) because we just loaded a new level (will be useful for multilevel game)
-	this->GameOver = false;
 }
 
 void GameManager::Update()
@@ -69,9 +68,9 @@ void GameManager::Update()
 
 	if (userInput == UserInputType::Quit) {
 		//<TO DO> send request to outputManager to show "Goodbye screen" (or ask for confirmation)
-		this->ExitGame = true;
+		this->programState = ProgramState::CLOSING;
 	}
-	else if(GameOver == false){
+	else if(this->programState == ProgramState::RUNNING){
 		switch (logicManager->getGameState())
 		{
 		case GameState::UPANDRUNNING:
@@ -81,7 +80,7 @@ void GameManager::Update()
 			break;
 		case GameState::LEVELFINISHED:
 			if (currentLevel->checkIsFinalLevel()) {
-				this->GameOver = true;
+				this->programState = ProgramState::ENDOFTHEGAME;
 				outputManager->showVictoryScreen();
 			}
 			else {
@@ -90,10 +89,11 @@ void GameManager::Update()
 			}
 			break;
 		case GameState::VICTORY:
+			this->programState = ProgramState::ENDOFTHEGAME;
 			outputManager->showVictoryScreen();
 			break;
 		case GameState::GAMEOVER:
-			this->GameOver = true;
+			this->programState = ProgramState::ENDOFTHEGAME;
 			std::cout << "Sadly, it's game over...\n";
 			outputManager->showGameOverScreen();
 			break;

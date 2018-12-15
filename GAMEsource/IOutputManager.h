@@ -19,4 +19,5 @@ public:
 	virtual void update(UserInputType) = 0;//!< for test purposes to bypass the logic component 
 	virtual void showGameOverScreen() = 0;
 	virtual void showVictoryScreen() = 0;
+	virtual void showGenericErrorScreen() = 0;
 }; 

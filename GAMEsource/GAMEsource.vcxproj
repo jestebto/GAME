@@ -186,6 +186,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="ProgramState.h" />
     <ClInclude Include="RandomInputGenerator.h" />
     <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="StorageGameData.h" />
