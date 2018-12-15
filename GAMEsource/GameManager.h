@@ -6,6 +6,7 @@
 #include "IOutputManager.h"
 #include "StorageLevelData.h"
 #include "StorageGameData.h"
+#include "ProgramState.h"
 
 
 class GameManager
@@ -19,8 +20,9 @@ public:
 
 private:
 	StorageLevelData* currentLevel;
-	bool ExitGame;
-	bool GameOver;
+	//bool ExitGame;
+	//bool GameOver;
+	ProgramState programState;
 	StorageGameData* loadedStorageData;
 	ComponentFactory componentFactory;
 	IStorageManager* storageManager;

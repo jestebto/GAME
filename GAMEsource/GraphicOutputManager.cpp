@@ -23,6 +23,7 @@ GraphicOutputManager::~GraphicOutputManager()
 	//SDL_DestroyTexture(sheet);
 	SDL_DestroyTexture(gameOverScreen);
 	SDL_DestroyTexture(victoryScreen);
+	SDL_DestroyTexture(genericErrorScreen);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
@@ -254,6 +255,10 @@ void GraphicOutputManager::showVictoryScreen() {
 	drawBitmap(victoryScreen);
 }
 
+void GraphicOutputManager::showGenericErrorScreen() {
+	drawBitmap(genericErrorScreen);
+}
+
 
 
 /// Initialises the UI::window and the UI::renderer.
@@ -283,6 +288,7 @@ void GraphicOutputManager::loadTextures()
 	// Load game over screen
 	gameOverScreen = this->loadTexture("resources/GAME_OVER.bmp");
 	victoryScreen = this->loadTexture("resources/set1_victory.bmp");
+	genericErrorScreen = this->loadTexture("resources/ERROR.bmp");
 }
 
 

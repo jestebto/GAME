@@ -64,6 +64,9 @@ public:
 	//! Displays the Victory screen
 	void showVictoryScreen();
 
+	//! Displays the generic error screen (when the error is unknown)
+	void showGenericErrorScreen();
+
 private:
 	///
 	/// Initialise a window for SDL
@@ -104,6 +107,8 @@ private:
 	SDL_Texture *gameOverScreen;
 	/// Loaded SDL texture with the victory screen
 	SDL_Texture *victoryScreen;
+	/// Loaded SDL texture with the generic error screen
+	SDL_Texture *genericErrorScreen;
 
 	enum { TILESIZE = 24, SCREEN_WIDTH = 22, SCREEN_HEIGHT = 21 }; //< not: title bar is an effective +1 to the screen height
 	int screenArray[SCREEN_HEIGHT][SCREEN_WIDTH];
