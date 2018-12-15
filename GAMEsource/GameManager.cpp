@@ -23,12 +23,25 @@ void GameManager::StartGame()
 {
 	ExitGame = false;
 
-	SetupGame();
-
+	try {
+		SetupGame();
+	}
+	catch(std::exception e){
+		outputManager->showGameOverScreen();
+	}
+	
 	while (ExitGame == false) {
-		Update();
+		try {
+			Update();
+		}
+		catch (std::exception e) {
+			outputManager->showGameOverScreen();
+		}
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
+
+	
+	
 	
 }
 

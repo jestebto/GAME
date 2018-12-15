@@ -191,44 +191,37 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		}
 		break;
 	case UserInputType::Hit: // Get 'em
-		
+		movement = false;
 			switch (tempOrientation) {
 			case CharacterOrientation::Up:
-				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-					if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY - 1) {
-						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
-						
-					}
-				}
-				
+				tempY--;
 				break;
 			case CharacterOrientation::Right:
-				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-					if (enemyPtr->getXPosition() == tempX + 1 && enemyPtr->getYPosition() == tempY) {
-						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
-						
-					}
-				}
-				
+				tempX++;
 				break;
 			case CharacterOrientation::Down:
-				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-					if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY + 1) {
-						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
-						
-					}
-				}
-				
+				tempY++;
 				break;
 			case CharacterOrientation::Left:
-				for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-					if (enemyPtr->getXPosition() == tempX - 1 && enemyPtr->getYPosition() == tempY) {
-						enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
-						
-					}
-				}
-				
+				tempX--;
 				break;
+			}
+
+			for (std::shared_ptr<Enemy> enemyPtr : enemies) {
+				if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY) {
+					enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
+
+				}
+
+				// Try to update a dead enemy
+				/*
+				if (enemyPtr->getLives() <= 0) {
+					std::shared_ptr<DataUpdate> deadEnemy(new DataUpdate(enemyPtr->getID(), enemyPtr->getXPosition(), enemyPtr->getYPosition(), enemyPtr->dataToString(), DataUpdate::ObjectType::ENEMY, DataUpdate::Action::ELIMINATE));
+					this->output.push_back(deadEnemy);
+				}
+				*/
+				
+				
 			}
 			
 		
