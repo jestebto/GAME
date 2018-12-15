@@ -19,11 +19,11 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 	//delete(this->player1); //This one is deleted later on if necessary
 	enemies.clear();
 	powerUps.clear();
-	for (size_t i = 0; i < 20; i++)
+	for (size_t i = 0; i < height; i++)
 	{
-		for (size_t j = 0; j < 20; j++)
+		for (size_t j = 0; j < width; j++)
 		{
-			mapArray[i][j] = 0;
+			mapArray[i][j] = 1;
 		}
 	}
 	isGameFinished = false;
@@ -57,10 +57,13 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 					if (tempValue == 45) { // if dash, add row
 						column = 0;
 						row++;
+
+						if (row > height) throw "The map exceded the maximum height";
 					}
 					else {
 						mapArray[row][column] = tempValue - 48;
 						column++;
+						if (column > height) throw "The map exceded the maximum width";
 					}
 				}
 				break;
@@ -72,16 +75,21 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 
 				//separate the data to construct the new object
 				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+				int xPos = stoi(tempConstructorData[1]);
+				int yPos = stoi(tempConstructorData[2]);
 
-				//create a new player and save a shared pointer to it
+				if (xPos < 0 || xPos > width) throw "The player has to be inside the map";
+				if (yPos < 0 || yPos > height) throw "The player has to be inside the map";
+
+				//create a new player and save a  pointer to it
 				if ((player1 != NULL) && (keepPlayerState == true)) {
-					player1->setXPosition(stoi(tempConstructorData[1]));
-					player1->setYPosition(stoi(tempConstructorData[2]));
+					player1->setXPosition(xPos);
+					player1->setYPosition(yPos);
 				}
 				else {
 					if (player1 != NULL) delete(this->player1);
-					player1 = new Player(tempConstructorData[0], stoi(tempConstructorData[1]),
-						stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), (CharacterOrientation)stoi(tempConstructorData[4]), stoi(tempConstructorData[5])); // Added tempContructorData[4] for orientation
+					player1 = new Player(tempConstructorData[0], xPos,
+						yPos, stoi(tempConstructorData[3]), (CharacterOrientation)stoi(tempConstructorData[4]), stoi(tempConstructorData[5])); // Added tempContructorData[4] for orientation
 				}
 				
 				tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
