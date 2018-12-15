@@ -183,7 +183,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		}
 		break;
 	case UserInputType::Hit: // Get 'em
-		
+		movement = false;
 			switch (tempOrientation) {
 			case CharacterOrientation::Up:
 				tempY--;
