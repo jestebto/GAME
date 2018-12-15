@@ -10,13 +10,13 @@ PowerUp::PowerUp(const std::string ID, int xPos, int yPos, int lives)
 
 PowerUp::~PowerUp()
 {
-	std::cout << "I am a powerup and I am being destructeeeeed!\n";
+	std::cout << "I am a powerup and I am being destructeeeeed!\n"; // TO DO for debugging purposes
 }
 
 /// set nr of lives
 void PowerUp::setNrOfLives(int lives) {
 	if (lives < 0) {
-		throw std::invalid_argument("The number of lives must be > 0");
+		throw std::invalid_argument("The number of lives of a Power-Up must be a positive integer.");
 	}
 	nrOfLives = lives; 
 }

@@ -40,7 +40,9 @@ private:
 	//bool checkHitCollision(int, int, int);
 
 	GameState gameState;
-	int mapArray[20][20];   /// map
+	static const int height{20};
+	static const int width{20};
+	int mapArray[height][width];   /// map
 	int powerUpMap[20][20]; /// array with Power-Ups locations
 	std::vector<std::shared_ptr<Enemy>> enemies;  /// list of enemies
 	std::vector<std::shared_ptr<PowerUp>> powerUps; /// list of Power-Ups
