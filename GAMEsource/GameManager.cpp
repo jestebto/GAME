@@ -8,6 +8,7 @@
 #include <string>
 #include <iostream> //printing the debug console text when game over.
 
+
 GameManager::GameManager()
 {
 	this->programState = ProgramState::CREATED;
@@ -35,6 +36,12 @@ void GameManager::StartGame()
 				Update();
 			}
 			catch (std::exception e) {
+				outputManager->showGenericErrorScreen();
+				this->programState = ProgramState::ERROR;
+			}
+			catch (const char* msg)
+			{
+				std::cout << msg << '\n';
 				outputManager->showGenericErrorScreen();
 				this->programState = ProgramState::ERROR;
 			}
