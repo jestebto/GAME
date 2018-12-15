@@ -191,7 +191,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		}
 		break;
 	case UserInputType::Hit: // Get 'em
-		movement = false;
+		movement = false;	//Making sure that hitting does not end up in movement
 			switch (tempOrientation) {
 			case CharacterOrientation::Up:
 				tempY--;
@@ -207,19 +207,24 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 				break;
 			}
 
-			for (std::shared_ptr<Enemy> enemyPtr : enemies) {
-				if (enemyPtr->getXPosition() == tempX && enemyPtr->getYPosition() == tempY) {
-					enemyPtr->setLives(enemyPtr->getLives() - player1->getDmg());
+			for (unsigned int i{ 0 }; i < enemies.size(); i++) {
+				
+				if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY) {
+					enemies[i]->setLives(- player1->getDmg());
+					std::cout << enemies[i]->getLives();
 
 				}
 
 				// Try to update a dead enemy
-				/*
-				if (enemyPtr->getLives() <= 0) {
-					std::shared_ptr<DataUpdate> deadEnemy(new DataUpdate(enemyPtr->getID(), enemyPtr->getXPosition(), enemyPtr->getYPosition(), enemyPtr->dataToString(), DataUpdate::ObjectType::ENEMY, DataUpdate::Action::ELIMINATE));
+				
+				if (enemies[i]->getLives() <= 0) {
+					std::shared_ptr<DataUpdate> deadEnemy(new DataUpdate(enemies[i]->getID(), enemies[i]->getXPosition(), enemies[i]->getYPosition(), enemies[i]->dataToString(), DataUpdate::ObjectType::ENEMY, DataUpdate::Action::ELIMINATE));
+
 					this->output.push_back(deadEnemy);
+
+					enemies.erase(enemies.begin() + i);
 				}
-				*/
+				
 				
 				
 			}

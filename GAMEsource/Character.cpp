@@ -8,7 +8,7 @@ Character::Character(const std::string ID, int xPos, int yPos,
 	lives = nrLives;
 }
 
-/// set number of lives
+/// ADD a number of lives
 void Character::setLives(int nrLives) {
 	lives += nrLives;
 }
