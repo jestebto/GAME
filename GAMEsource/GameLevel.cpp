@@ -314,12 +314,10 @@ bool GameLevel::checkPowerUpCollision(int tempX, int tempY) {
 			player1->setLives(lives);  // implement power-up effect
 			anyPowerUpFound = true;
 			pickedPowerupsIndexes.push_back(i);
+			std::shared_ptr<DataUpdate> collectedPowerUp(new DataUpdate(powerUps[i]->getID(), powerUps[i]->getXPosition(), powerUps[i]->getYPosition(), powerUps[i]->dataToString(), DataUpdate::ObjectType::POWERUP, DataUpdate::Action::ELIMINATE));
+			this->output.push_back(collectedPowerUp);
+			powerUps.erase(powerUps.begin() + i);
 		}
-	}
-	for (int i = 0; i < pickedPowerupsIndexes.size(); i++) {
-		std::shared_ptr<DataUpdate> collectedPowerUp(new DataUpdate(powerUps[i]->getID(), powerUps[i]->getXPosition(), powerUps[i]->getYPosition(), powerUps[i]->dataToString(), DataUpdate::ObjectType::POWERUP, DataUpdate::Action::ELIMINATE));
-		this->output.push_back(collectedPowerUp);
-		powerUps.erase(powerUps.begin() + i);
 	}
 	return anyPowerUpFound;
 }
