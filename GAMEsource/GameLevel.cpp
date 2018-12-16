@@ -87,8 +87,8 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 					player1->setYPosition(yPos);
 				}
 				else {
-					if (player1 != NULL) delete(this->player1);
-					player1 = new Player(tempConstructorData[0], xPos,
+					if (player1 != NULL) player1.reset();
+					player1 = std::make_unique<Player>(tempConstructorData[0], xPos,
 						yPos, stoi(tempConstructorData[3]), (CharacterOrientation)stoi(tempConstructorData[4]), stoi(tempConstructorData[5])); // Added tempContructorData[4] for orientation
 				}
 				
@@ -103,11 +103,11 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 				tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
 				// create a new enemy storing a shared pointer to it
-				std::shared_ptr<Enemy> enemy(new Enemy(tempConstructorData[0], stoi(tempConstructorData[1]),
-					stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), stoi(tempConstructorData[4])));
+				std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(tempConstructorData[0], stoi(tempConstructorData[1]),
+					stoi(tempConstructorData[2]), stoi(tempConstructorData[3]), stoi(tempConstructorData[4]));
 
 				// store the pointer in the vector enemies
-				enemies.push_back(enemy);
+				enemies.push_back(std::move(enemy));
 
 				tempConstructorData = {}; // make sure the vector is empty in the next case
 				break;
@@ -120,11 +120,11 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 
 				// create a new PowerUp and save a shared vector to it 
-				std::shared_ptr<PowerUp> powerUp(new PowerUp(tempConstructorData[0], stoi(tempConstructorData[1]),
-					stoi(tempConstructorData[2]), stoi(tempConstructorData[3])));
+				std::unique_ptr<PowerUp> powerUp = std::make_unique<PowerUp>(tempConstructorData[0], stoi(tempConstructorData[1]),
+					stoi(tempConstructorData[2]), stoi(tempConstructorData[3]));
 
 				// store the pointer in the vector poweUps
-				powerUps.push_back(powerUp);
+				powerUps.push_back(std::move(powerUp));
 
 				tempConstructorData = {}; //! make sure the vector is empty in the next case
 
@@ -292,7 +292,7 @@ bool GameLevel::checkWallCollision(int tempX, int tempY) {
 bool GameLevel::checkEnemyCollision(int tempX, int tempY) {
 	bool collision = false;
 	// Check vector of enemy objects 
-	for (std::shared_ptr<Enemy> enemyPtr : enemies) {   
+	for (std::unique_ptr<Enemy> &enemyPtr : enemies) {   
 		if ((tempX == enemyPtr->getXPosition()) && (tempY == enemyPtr->getYPosition())) {
 			int damage = enemyPtr->getDamage(); // get enemy damage
 			player1->setLives(-damage); // implement damage minus cause of deduction of life
@@ -312,7 +312,6 @@ bool GameLevel::checkPowerUpCollision(int tempX, int tempY) {
 		if ((tempX == powerUps[i]->getXPosition()) && (tempY == powerUps[i]->getYPosition())) {
 			int lives = powerUps[i]->getNrOfLives();
 			player1->setLives(lives);  // implement power-up effect
-			powerUpMap[tempX][tempY] = 0; // Update the array+
 			anyPowerUpFound = true;
 			pickedPowerupsIndexes.push_back(i);
 		}

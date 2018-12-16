@@ -43,10 +43,9 @@ private:
 	static const int height{20};
 	static const int width{20};
 	int mapArray[height][width];   /// map
-	int powerUpMap[20][20]; /// array with Power-Ups locations
-	std::vector<std::shared_ptr<Enemy>> enemies;  /// list of enemies
-	std::vector<std::shared_ptr<PowerUp>> powerUps; /// list of Power-Ups
-	Player* player1; /// player
+	std::vector<std::unique_ptr<Enemy>> enemies;  /// list of enemies
+	std::vector<std::unique_ptr<PowerUp>> powerUps; /// list of Power-Ups
+	std::unique_ptr<Player> player1; /// player
 	bool isGameOver{false}; /// indicate if the game is over
 	bool isGameFinished{false}; /// indicate if the level is finished
     std::vector<std::shared_ptr<DataUpdate>> output;
