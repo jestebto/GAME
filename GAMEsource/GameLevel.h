@@ -1,6 +1,4 @@
-	#ifndef GAMELEVEL_H
-#define GAMELEVEL_H
-
+#pragma once
 #include <vector>
 #include "ILogicManager.h"
 #include "Player.h"
@@ -52,4 +50,4 @@ private:
 
 };
 
-#endif // !GAMELEVEL_H
+
