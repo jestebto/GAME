@@ -2,9 +2,9 @@
 
 
 
-CharSprite::CharSprite(DataUpdate::ObjectType objectType, int xPos, int yPos, 
-	SpriteAttributes::ArtType artType, SpriteAttributes::Description des, CharacterOrientation ori)
-	: GameSprite(objectType, xPos, yPos, artType, des)
+CharSprite::CharSprite( int xPos, int yPos, SpriteAttributes::ArtType artType, 
+	SpriteAttributes::Description des, CharacterOrientation ori)
+	: GameSprite(xPos, yPos, artType, des)
 {
 	orientation = ori;
 }

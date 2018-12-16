@@ -75,9 +75,6 @@
       <Filter>Storage</Filter>
     </ClCompile>
     <ClCompile Include="DataToolkit.cpp" />
-    <ClCompile Include="Animation.cpp">
-      <Filter>Output</Filter>
-    </ClCompile>
     <ClCompile Include="CharSprite.cpp">
       <Filter>Output</Filter>
     </ClCompile>

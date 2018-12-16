@@ -37,9 +37,9 @@ SDL_Rect* SpriteManager::getTile(SpriteAttributes::ArtType art, SpriteAttributes
 }
 
 
-std::vector<SpriteManager::AnimationFrame>* SpriteManager::getAnimationFrames(std::unique_ptr<GameSprite> const& element, DataUpdate::ObjectType type, DataUpdate::Action action){
+std::vector<AnimationTerms::AnimationFrame>* SpriteManager::getAnimationFrames(std::unique_ptr<GameSprite> const& element, SpriteAttributes::ArtType type, AnimationTerms::AnimationTypes action){
 	switch (type) {
-	case(DataUpdate::ObjectType::PLAYER): {
+	case(SpriteAttributes::ArtType::PACMAN): {
 		// Note: if this is not a CharSprite, then getOrientation() will return type 'none'
 		return &(this->animationsPlayer.at(element->getOrientation()).at(action));
 		}
@@ -67,7 +67,7 @@ void SpriteManager::createTileMap()
 	pacman[ATTACK_UP] =   { o + size * 3, o + size * 11, size, size };
 	pacman[ATTACK_DOWN] = { o + size * 15, o + size * 7, size, size };
 	pacman[ATTACK_LEFT] = { o + size * 2, o + size * 11, size, size };
-	pacman[ATTACK_RIGHT] = { o + size * 2, o + size * 11, size, size };
+	pacman[ATTACK_RIGHT] = { o + size * 14, o + size * 7, size, size };
 	pacman[ELIMINATE] = { o + size * 14, o + size * 8, size, size };
 	pacman[DEFAULT] = pacman[RIGHT];
 	tileSet[PACMAN] = pacman;
@@ -167,24 +167,57 @@ void SpriteManager::createTileMap()
 
 void SpriteManager::createAnimations() {
 	using namespace SpriteAttributes;
+	using namespace AnimationTerms;
 	
 	/*Create local enums for the strongly typed enums in DataUpdate 
 	* This makes it easier to call them so much 
 	*/
-
-	DataUpdate::Action nothing = DataUpdate::Action::NOTHING;
-	DataUpdate::Action attack = DataUpdate::Action::ATTACK;
-	DataUpdate::Action eliminate = DataUpdate::Action::ELIMINATE;
+	/* 
+	*DataUpdate::Action nothing = DataUpdate::Action::NOTHING;
+	*DataUpdate::Action attack = DataUpdate::Action::ATTACK;
+	*DataUpdate::Action eliminate = DataUpdate::Action::ELIMINATE;
 
 	DataUpdate::ObjectType player = DataUpdate::ObjectType::PLAYER;
 	DataUpdate::ObjectType enemy = DataUpdate::ObjectType::ENEMY;
 	DataUpdate::ObjectType powerUp = DataUpdate::ObjectType::POWERUP;
+	*/
 
 	// Set the animations in animationsOther
 
-	std::map<DataUpdate::Action, std::vector<AnimationFrame>> enemyAnimations;
-	enemyAnimations[eliminate]= std::vector<AnimationFrame>{
+	std::map<AnimationTypes, std::vector<AnimationFrame>> enemyAnimations;
+	enemyAnimations[DIE]= std::vector<AnimationFrame>{
 		std::make_pair(SCARED, DEFAULT), std::make_pair(SCARED, ELIMINATE) };
-	animationsOther[enemy] = enemyAnimations;
+	animationsOther[SCARED] = enemyAnimations;
+
+
+	// Player animations
+	std::map<AnimationTypes, std::vector<AnimationFrame>> playerUpAnimations;
+	playerUpAnimations[AnimationTerms::ATTACK]= std::vector<AnimationFrame>{
+		std::make_pair(PACMAN, ATTACK_UP), std::make_pair(PACMAN, ALT),
+		std::make_pair(PACMAN, ATTACK_UP), std::make_pair(PACMAN, UP)
+	};
+	animationsPlayer[CharacterOrientation::Up] = playerUpAnimations;
+
+	std::map<AnimationTypes, std::vector<AnimationFrame>> playerDownAnimations;
+	playerDownAnimations[AnimationTerms::ATTACK] = std::vector<AnimationFrame>{
+		std::make_pair(PACMAN, ATTACK_DOWN), std::make_pair(PACMAN, ALT),
+		std::make_pair(PACMAN, ATTACK_DOWN), std::make_pair(PACMAN, DOWN)
+	};
+	animationsPlayer[CharacterOrientation::Down] = playerDownAnimations;
+
+	std::map<AnimationTypes, std::vector<AnimationFrame>> playerLeftAnimations;
+	playerLeftAnimations[AnimationTerms::ATTACK] = std::vector<AnimationFrame>{
+		std::make_pair(PACMAN, ATTACK_LEFT), std::make_pair(PACMAN, ALT),
+		std::make_pair(PACMAN, ATTACK_LEFT), std::make_pair(PACMAN, LEFT)
+	};
+	animationsPlayer[CharacterOrientation::Left] = playerLeftAnimations;
+
+	std::map<AnimationTypes, std::vector<AnimationFrame>> playerRightAnimations;
+	playerRightAnimations[AnimationTerms::ATTACK] = std::vector<AnimationFrame>{
+		std::make_pair(PACMAN, ATTACK_RIGHT), std::make_pair(PACMAN, ALT),
+		std::make_pair(PACMAN, ATTACK_RIGHT), std::make_pair(PACMAN, RIGHT)
+	};
+	animationsPlayer[CharacterOrientation::Right] = playerRightAnimations;
+
 
 }

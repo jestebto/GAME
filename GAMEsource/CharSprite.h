@@ -11,8 +11,7 @@ class CharSprite : public GameSprite
 public:
 	/// A more complex GameSprite that can handle orientations
 	/// This is important for playing animations in the right direction
-	CharSprite(DataUpdate::ObjectType objectType, int xPos, int yPos, 
-		SpriteAttributes::ArtType artType, SpriteAttributes::Description des, CharacterOrientation ori);
+	CharSprite(int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Description des, CharacterOrientation ori);
 	~CharSprite();
 
 	void setOrientation(CharacterOrientation);

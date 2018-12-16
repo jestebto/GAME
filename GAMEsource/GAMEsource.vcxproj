@@ -196,7 +196,6 @@
     <ClInclude Include="UserInputType.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="CharSprite.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />

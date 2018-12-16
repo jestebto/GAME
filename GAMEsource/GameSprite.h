@@ -10,7 +10,7 @@
 #define GAME_SPRITE_H
 #include <string>
 #include <iostream>
-#include "DataUpdate.h"
+//#include "DataUpdate.h"
 #include "UserInputType.h"
 #include "CharacterOrientation.h"
 
@@ -57,7 +57,7 @@ namespace SpriteAttributes {
 class GameSprite
 {
 public:
-	GameSprite(DataUpdate::ObjectType, int, int, SpriteAttributes::ArtType, SpriteAttributes::Description);
+	GameSprite(int, int, SpriteAttributes::ArtType, SpriteAttributes::Description);
 	~GameSprite(); // vitual destructor
 
 	void setType(SpriteAttributes::ArtType);
@@ -89,7 +89,7 @@ private:
 	SpriteAttributes::Description description;
 	/* Shared properties with GameObject */
 	std::string objectID;
-	DataUpdate::ObjectType objectType;
+	//DataUpdate::ObjectType objectType;
 	int xPosition;
 	int yPosition;
 

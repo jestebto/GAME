@@ -192,6 +192,12 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		break;
 	case UserInputType::Hit: // Get 'em
 		movement = false;	//Making sure that hitting does not end up in movement
+		//! Send an update to play the attack animation
+		std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
+			player1->dataToString(), DataUpdate::ObjectType::PLAYER, DataUpdate::Action::ATTACK));
+		output.push_back(update);
+
+
 			switch (tempOrientation) {
 			case CharacterOrientation::Up:
 				tempY--;
@@ -247,12 +253,12 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		}
 	}
 
-	
 	//! Update the position of the player for the output
-	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(),player1->getYPosition(),
+	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
 		player1->dataToString(), DataUpdate::ObjectType::PLAYER, playerAction));
 	output.push_back(update);
 
+	
 	// check if the level finish has been reached
 	if (mapArray[player1->getYPosition()][player1->getXPosition()] == 2) {
 		this->gameState = GameState::LEVELFINISHED;

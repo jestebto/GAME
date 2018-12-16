@@ -63,7 +63,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
 			// tempConstructorData format: {"ID, x, y, lives"} 
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<CharSprite> (DataUpdate::ObjectType::PLAYER, stoi(tempConstructorData[1]),
+			this->spriteObjects[tempConstructorData[0]] = std::make_unique<CharSprite> (stoi(tempConstructorData[1]),
 				stoi(tempConstructorData[2]), PACMAN, SpriteAttributes::UP, CharacterOrientation::Up);
 			this->lives= stoi(tempConstructorData[3]);
 
@@ -75,7 +75,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			// Data format: "ID,x,y,lives,"
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 			// create a new enemy storing a shared pointer to it
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>( DataUpdate::ObjectType::ENEMY, stoi(tempConstructorData[1]),
+			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>( stoi(tempConstructorData[1]),
 				stoi(tempConstructorData[2]), SCAREDINV, SpriteAttributes::DEFAULT);
 
 			tempConstructorData = {}; // make sure the vector is empty in the next case
@@ -85,7 +85,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			// separate the data to construct the new object
 			// Data format: "ID,x,y,livesBonus,"
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>( DataUpdate::ObjectType::POWERUP, stoi(tempConstructorData[1]),
+			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(stoi(tempConstructorData[1]),
 				stoi(tempConstructorData[2]), APPLE, SpriteAttributes::DEFAULT);
 		}
 
@@ -151,29 +151,51 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			std::vector <std::string> tempConstructorData;
 
 			DataUpdate::ObjectType type = dataPtr->getObjectType();
+			DataUpdate::Action action =  dataPtr->getAction();
 			switch (type) {
-			case DataUpdate::ObjectType::PLAYER:
-
+			case DataUpdate::ObjectType::PLAYER: {
 				// Data = "lives, (int)CharacterOrientation"
 				tempConstructorData = DataToolkit::getSubs(dataPtr->getData(), ',');
-				
+
 				this->lives = stoi(tempConstructorData[0]);
-				(mapPair->second)->setOrientation(static_cast<CharacterOrientation>(stoi(tempConstructorData[1])));
-				(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition()); //Calls the CharSprite code
-				break;
+
+				switch (action) {
+				case DataUpdate::Action::ATTACK: {
+					playAnimation(mapPair->second, SpriteAttributes::PACMAN, AnimationTerms::AnimationTypes::ATTACK);
+					break;
+				}
+				default: { //Assume it is a movement
+					(mapPair->second)->setOrientation(static_cast<CharacterOrientation>(stoi(tempConstructorData[1])));
+					(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition()); //Calls the CharSprite code
+					break;
+				}
+				}
+			} break;
 			case DataUpdate::ObjectType::ENEMY: {
-				playAnimation(mapPair->second, type, DataUpdate::Action::ELIMINATE);
-				spriteObjects.erase(mapPair); // since the map owns a unique_ptr, this calls the destructor as well.
-				break;
-				}
-			default:
-				if (dataPtr->getAction() == DataUpdate::Action::ELIMINATE) {
+
+				switch (action) {
+				case DataUpdate::Action::ELIMINATE: {
+					playAnimation(mapPair->second, SpriteAttributes::SCARED, AnimationTerms::AnimationTypes::DIE);
 					spriteObjects.erase(mapPair); // since the map owns a unique_ptr, this calls the destructor as well.
+					break;
 				}
-				else {
-					(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
+				default: { //Assume it is a movement
+					(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition()); 
+					break;
 				}
-				break;
+				}
+			} break;
+			default:
+				switch (action) {
+				case DataUpdate::Action::ELIMINATE: {
+						spriteObjects.erase(mapPair); // since the map owns a unique_ptr, this calls the destructor as well.
+						break;
+				}
+				default: { //Assume it is a movement
+						(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
+						break;
+				}
+				}
 			}
 
 		}
@@ -208,12 +230,6 @@ void GraphicOutputManager::update(UserInputType userInput)
 {
 	// Purely for testing
 	
-	// Clear the current renderer.
-	SDL_RenderClear(renderer);
-
-	// Draw the walls.
-	drawBackground(levelMap);
-	
 	// Look up in the ID in the sprite map
 	auto mapPair = spriteObjects.find("001");
 
@@ -221,7 +237,17 @@ void GraphicOutputManager::update(UserInputType userInput)
 		std::cout << "Element not found" << '\n';
 	else {
 		(mapPair->second)->moveSprite(userInput);
+
+		if (userInput == UserInputType::Hit) {
+			playAnimation(mapPair->second, SpriteAttributes::PACMAN, AnimationTerms::AnimationTypes::ATTACK);
+		}
 	}
+
+	// Clear the current renderer.
+	SDL_RenderClear(renderer);
+
+	// Draw the walls.
+	drawBackground(levelMap);
 
 	// Loop through all the objects and draw them.
 	for (auto &mapPair : this->spriteObjects) {
@@ -239,30 +265,31 @@ void GraphicOutputManager::update(UserInputType userInput)
 	SDL_RenderPresent(renderer);
 }
 
-void GraphicOutputManager::playAnimation(std::unique_ptr<GameSprite> const& element, DataUpdate::ObjectType type, DataUpdate::Action action)
+void GraphicOutputManager::playAnimation(std::unique_ptr<GameSprite> const& element, SpriteAttributes::ArtType type, AnimationTerms::AnimationTypes action)
 {
-	//std::vector<Animation::AnimationFrame>* animationFrames = this->animationsOther[DataUpdate::ObjectType::ENEMY][DataUpdate::Action::ELIMINATE]->getAnimationSequence();
+	try {
+		std::vector<AnimationTerms::AnimationFrame>* animationFrames = spriteManager->getAnimationFrames(element, type, action);
 
-	std::vector<SpriteManager::AnimationFrame>* animationFrames = spriteManager->getAnimationFrames(element,type,action );
+		int x = element->getXPosition();
+		int y = element->getYPosition();
 
-	int x = element->getXPosition();
-	int y = element->getYPosition();
+		SDL_Rect dst = { (x + xOffset) * TILESIZE + xOffset, (y + yOffset) * TILESIZE , TILESIZE,
+							TILESIZE };
+		for (AnimationTerms::AnimationFrame frame : *animationFrames) {
+			SDL_RenderFillRect(renderer, &dst); //fill the current spot with a blank rectangle
 
-	SDL_Rect dst = { (x + xOffset) * TILESIZE + xOffset, (y + yOffset) * TILESIZE , TILESIZE,
-						TILESIZE };
-	for (SpriteManager::AnimationFrame frame : *animationFrames) {
-		SDL_RenderFillRect(renderer, &dst); //fill the current spot with a blank rectangle
+			SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(frame.first, frame.second),
+				&dst);
 
-		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(frame.first,frame.second),
-			&dst);
+			SDL_RenderPresent(renderer);
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
-		SDL_RenderPresent(renderer);
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
+		}
 	}
-
-
-
+	catch (std::out_of_range) // Animation does not exist in any of the animation maps
+	{
+		throw "Animation does not exist";
+	}
 }
 
 void GraphicOutputManager::drawBitmap(SDL_Texture* texture) {

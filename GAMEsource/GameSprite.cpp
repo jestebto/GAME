@@ -7,9 +7,9 @@
 
 #include "GameSprite.h"
 
-GameSprite::GameSprite(DataUpdate::ObjectType objectType,int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Description des) {
+GameSprite::GameSprite(int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Description des) {
 	//objectID = ID;
-	objectType = objectType;
+	//objectType = objectType;
 	xPosition = xPos;
 	yPosition = yPos;
 	art = artType;
