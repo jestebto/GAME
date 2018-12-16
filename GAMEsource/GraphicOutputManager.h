@@ -58,6 +58,9 @@ public:
 	/// This is useful for testing animations
 	void update(UserInputType);
 
+	/// Play an animation for a given GameSprite and Action
+	void playAnimation(std::unique_ptr<GameSprite> const&, DataUpdate::ObjectType, DataUpdate::Action);
+
 	//! Displays the Game Over screen
 	void showGameOverScreen();
 	

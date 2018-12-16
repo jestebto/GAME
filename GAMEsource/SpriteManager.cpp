@@ -19,6 +19,7 @@ void SpriteManager::setSheet(SDL_Texture* texture) {
 	// Pre-make the map for the tiles.
 	// Note: this does not require the texture
 	createTileMap();
+	createAnimations();
 }
 
 SDL_Texture* SpriteManager::getSheet() {
@@ -28,106 +29,29 @@ SDL_Texture* SpriteManager::getSheet() {
 
 /// get a tile on SpriteManager::sheet 
 SDL_Rect* SpriteManager::getTile(std::unique_ptr<GameSprite> const& element) {
-	return &tileSet.at(element->art).at(element->description); //< &tileSet[art][des] does unwanted behaviour: creates a default element if it can't find the element
+	return &tileSet.at(element->getArt()).at(element->getDescription()); //< &tileSet[art][des] does unwanted behaviour: creates a default element if it can't find the element
 }
 
 SDL_Rect* SpriteManager::getTile(SpriteAttributes::ArtType art, SpriteAttributes::Description des) {
 	return &tileSet.at(art).at(des); //< &tileSet[art][des] does unwanted behaviour: creates a default element if it can't find the element
 }
 
-
-void SpriteManager::moveSprite(std::unique_ptr<GameSprite> const& element, int x, int y, CharacterOrientation dir)
-{
-	element->setXPosition(x);
-	element->setYPosition(y);
-	SpriteAttributes::Description des = SpriteAttributes::mapOrientationToDescription(dir);
-	element->setDescription(des);
-}
-
-void SpriteManager::moveSprite(std::unique_ptr<GameSprite> const& element, int x, int y)
-{
-	// move a Sprite to a position
-
-	/*  Co-ordinates:
-	*   .---> +x
-	*   |
-	*   v
-	*   +y
-	*/
-
-	int x_old = element->getXPosition();
-	int y_old = element->getYPosition();
-
-	element->setXPosition(x);
-	element->setYPosition(y);
-	if (y_old < y) // moving DOWN
-	{
-		element->description = SpriteAttributes::DOWN;
-	}
-	else if (y_old > y) //moving UP
-	{
-		element->description = SpriteAttributes::UP;
-	}
-	if (x_old < x) //moving right
-	{
-		element->description = SpriteAttributes::RIGHT;
-	}
-	else if (x_old > x) //moving left
-	{
-		element->description = SpriteAttributes::LEFT;
-	}
-
-}
-
-void SpriteManager::moveSprite(std::unique_ptr<GameSprite> const& element, UserInputType command)
-{
-	// directly move a Sprite based on user input
-	// for test purposes only, as this is not connected to the logic
-
-	int moveSize = 1;
-	/*  Co-ordinates:
-	*   .---> +x
-	*   |
-	*   v
-	*   +y
-	*/
-
-	switch (command) {
-	case UserInputType::Up:
-		element->setYPosition(element->getYPosition() - moveSize);
-		element->description = SpriteAttributes::UP; //for display purposes only
-		break;
-	case UserInputType::Down:
-		element->setYPosition(element->getYPosition() + moveSize);
-		element->description = SpriteAttributes::DOWN; //for display purposes only
-		break;
-	case UserInputType::Left:
-		element->setXPosition(element->getXPosition() - moveSize);
-		element->description = SpriteAttributes::LEFT; //for display purposes only
-		break;
-	case UserInputType::Right:
-		element->setXPosition(element->getXPosition() + moveSize);
-		element->description = SpriteAttributes::RIGHT; //for display purposes only
-		break;
-	default:
-		//Do nothing
-		break;
+/*
+std::vector<SpriteManager::AnimationFrame>* SpriteManager::getAnimationFrames(std::unique_ptr<GameSprite> const& element, DataUpdate::ObjectType type, DataUpdate::Action action){
+	switch (type) {
+	case(DataUpdate::ObjectType::PLAYER): {
+			return this->animationsPlayer[element->]
+		}
 
 	}
 }
-
+*/
 
 /// From the Pacman Code
 void SpriteManager::createTileMap()
 {
 
 	using namespace SpriteAttributes;
-	// Declare local enums since using these strong enums a lot
-	/*
-	enum CharacterOrientation UP = CharacterOrientation::Up;
-	enum CharacterOrientation DOWN = CharacterOrientation::Down;
-	enum CharacterOrientation LEFT = CharacterOrientation::Left;
-	enum CharacterOrientation RIGHT = CharacterOrientation::Right;*/
 
 	const int size = PACMAN_TILESIZE;
 	const int o = 4; // offset in bitmap (both in x and y)
@@ -137,6 +61,12 @@ void SpriteManager::createTileMap()
 	pacman[DOWN] = { o + size * 13, o + size * 7, size, size };
 	pacman[LEFT] = { o + size * 0, o + size * 11, size, size };
 	pacman[RIGHT] = { o + size * 12, o + size * 7, size, size };
+	pacman[ALT] = { o + size * 0, o + size * 8, size, size };
+	pacman[ATTACK_UP] =   { o + size * 3, o + size * 11, size, size };
+	pacman[ATTACK_DOWN] = { o + size * 15, o + size * 7, size, size };
+	pacman[ATTACK_LEFT] = { o + size * 2, o + size * 11, size, size };
+	pacman[ATTACK_RIGHT] = { o + size * 2, o + size * 11, size, size };
+	pacman[ELIMINATE] = { o + size * 14, o + size * 8, size, size };
 	pacman[DEFAULT] = pacman[RIGHT];
 	tileSet[PACMAN] = pacman;
 
@@ -174,10 +104,12 @@ void SpriteManager::createTileMap()
 
 	std::map<Description, SDL_Rect> scared;
 	scared[DEFAULT] = { o + size * 12, o + size * 6, size, size };
+	scared[ELIMINATE] = { o + size * 1, o + size * 8, size, size };
 	tileSet[SCARED] = scared;
 
 	std::map<Description, SDL_Rect> scaredinv;
 	scaredinv[DEFAULT] = { o + size * 4, o + size * 11, size, size };
+	scaredinv[ELIMINATE] = { o + size * 1, o + size * 8, size, size };
 	tileSet[SCAREDINV] = scaredinv;
 
 	std::map<Description, SDL_Rect> strawberry;
@@ -228,4 +160,29 @@ void SpriteManager::createTileMap()
 		nr[RIGHT] = nr[UP];
 		tileSet[(ArtType)(ZERO + i)] = nr;
 	}
+}
+
+
+void SpriteManager::createAnimations() {
+	using namespace SpriteAttributes;
+	
+	/*Create local enums for the strongly typed enums in DataUpdate 
+	* This makes it easier to call them so much 
+	*/
+
+	DataUpdate::Action nothing = DataUpdate::Action::NOTHING;
+	DataUpdate::Action attack = DataUpdate::Action::ATTACK;
+	DataUpdate::Action eliminate = DataUpdate::Action::ELIMINATE;
+
+	DataUpdate::ObjectType player = DataUpdate::ObjectType::PLAYER;
+	DataUpdate::ObjectType enemy = DataUpdate::ObjectType::ENEMY;
+	DataUpdate::ObjectType powerUp = DataUpdate::ObjectType::POWERUP;
+
+	// Set the animations in animationsOther
+
+	std::map<DataUpdate::Action, std::vector<AnimationFrame>> enemyAnimations;
+	enemyAnimations[attack]= std::vector<AnimationFrame>{
+		std::make_pair(SCARED, DEFAULT), std::make_pair(SCARED, ELIMINATE) };
+	animationsOther[enemy] = enemyAnimations;
+
 }

@@ -75,6 +75,12 @@
       <Filter>Storage</Filter>
     </ClCompile>
     <ClCompile Include="DataToolkit.cpp" />
+    <ClCompile Include="Animation.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
+    <ClCompile Include="CharSprite.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ComponentFactory.h">
@@ -122,9 +128,6 @@
     <ClInclude Include="KeyboardInputManager.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="UserInputType.h">
-      <Filter>Input</Filter>
-    </ClInclude>
     <ClInclude Include="HardCodedStorageManager.h">
       <Filter>Storage</Filter>
     </ClInclude>
@@ -156,6 +159,13 @@
     <ClInclude Include="CharacterOrientation.h" />
     <ClInclude Include="ProgramState.h" />
     <ClInclude Include="DataToolkit.h" />
+    <ClInclude Include="UserInputType.h" />
+    <ClInclude Include="Animation.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="CharSprite.h">
+      <Filter>Output</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
