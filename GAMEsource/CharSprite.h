@@ -9,6 +9,8 @@
 class CharSprite : public GameSprite
 {
 public:
+	/// A more complex GameSprite that can handle orientations
+	/// This is important for playing animations in the right direction
 	CharSprite(DataUpdate::ObjectType objectType, int xPos, int yPos, 
 		SpriteAttributes::ArtType artType, SpriteAttributes::Description des, CharacterOrientation ori);
 	~CharSprite();
@@ -29,7 +31,8 @@ public:
 		}
 	};
 
-	void moveSprite(int, int); //< get all information from the logic manager
+	/// Override virtual function in GameSprite
+	void moveSprite(int, int); //<  uses the current CharSprite::orientation 
 
 private:
 	CharacterOrientation orientation;

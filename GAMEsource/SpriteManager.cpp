@@ -36,16 +36,18 @@ SDL_Rect* SpriteManager::getTile(SpriteAttributes::ArtType art, SpriteAttributes
 	return &tileSet.at(art).at(des); //< &tileSet[art][des] does unwanted behaviour: creates a default element if it can't find the element
 }
 
-/*
+
 std::vector<SpriteManager::AnimationFrame>* SpriteManager::getAnimationFrames(std::unique_ptr<GameSprite> const& element, DataUpdate::ObjectType type, DataUpdate::Action action){
 	switch (type) {
 	case(DataUpdate::ObjectType::PLAYER): {
-			return this->animationsPlayer[element->]
+		// Note: if this is not a CharSprite, then getOrientation() will return type 'none'
+		return &(this->animationsPlayer.at(element->getOrientation()).at(action));
 		}
-
+	default: {
+		return &(this->animationsOther.at(type).at(action));
+	}
 	}
 }
-*/
 
 /// From the Pacman Code
 void SpriteManager::createTileMap()
@@ -181,7 +183,7 @@ void SpriteManager::createAnimations() {
 	// Set the animations in animationsOther
 
 	std::map<DataUpdate::Action, std::vector<AnimationFrame>> enemyAnimations;
-	enemyAnimations[attack]= std::vector<AnimationFrame>{
+	enemyAnimations[eliminate]= std::vector<AnimationFrame>{
 		std::make_pair(SCARED, DEFAULT), std::make_pair(SCARED, ELIMINATE) };
 	animationsOther[enemy] = enemyAnimations;
 

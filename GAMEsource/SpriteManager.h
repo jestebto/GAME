@@ -42,7 +42,7 @@ public: /// All public since needs to be accessed by GraphicInterface
 
 	/// Get a vector of animation frames
 	/// Search through the different map<>animations defined below
-	//std::vector<AnimationFrame>* getAnimationFrames(std::unique_ptr<GameSprite> const&, DataUpdate::ObjectType, DataUpdate::Action);
+	std::vector<AnimationFrame>* getAnimationFrames(std::unique_ptr<GameSprite> const&, DataUpdate::ObjectType, DataUpdate::Action);
 	
 private:
 	/// Loaded SDL texture with all sprite bitmaps.
@@ -68,9 +68,6 @@ private:
 	std::map <CharacterOrientation, std::map<DataUpdate::Action, std::vector<AnimationFrame>>> animationsPlayer;
 	std::map <DataUpdate::ObjectType, std::map<DataUpdate::Action, std::vector<AnimationFrame>>> animationsOther;
 
-	/// Use a private helper function to determine which map to use
-	///Animation getAnimation(DataUpdate::ObjectType, DataUpdate::Action, CharacterOrientation);
-	
 	enum { PACMAN_TILESIZE = 24 }; //< tile size for each Sprite. Does not have to be the same as the graphic interface size
 };
 

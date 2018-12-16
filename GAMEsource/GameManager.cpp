@@ -35,11 +35,10 @@ void GameManager::StartGame()
 			try {
 				Update();
 			}
-			/*
 			catch (std::exception &e) {
 				outputManager->showGenericErrorScreen();
 				this->programState = ProgramState::ERROR;
-			}*/
+			}
 			catch (const char* msg)
 			{
 				std::cout << msg << '\n';

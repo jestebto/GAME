@@ -135,18 +135,10 @@ void GraphicOutputManager::setBackground(const std::string& mapString) {
 	this->yOffset = (SCREEN_HEIGHT - static_cast<int>( levelMap.size() ))/ 2;
 }
 
-
-
 void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 {
-	// Clear the current renderer.
-	SDL_RenderClear(renderer);
-
-	// Draw the walls.
-	drawBackground(levelMap);
-
 	// Update the map based on the incoming data
-
+	// Note: animations will be called and will be played on the old renderer
 	for (std::shared_ptr<DataUpdate> &dataPtr : data) {
 
 		// Look up in the ID in the sprite map
@@ -158,7 +150,8 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			// Look at ObjectType specific data
 			std::vector <std::string> tempConstructorData;
 
-			switch (dataPtr->getObjectType()) {
+			DataUpdate::ObjectType type = dataPtr->getObjectType();
+			switch (type) {
 			case DataUpdate::ObjectType::PLAYER:
 
 				// Data = "lives, (int)CharacterOrientation"
@@ -166,10 +159,13 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 				
 				this->lives = stoi(tempConstructorData[0]);
 				(mapPair->second)->setOrientation(static_cast<CharacterOrientation>(stoi(tempConstructorData[1])));
-
-
-				(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition()); 
+				(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition()); //Calls the CharSprite code
 				break;
+			case DataUpdate::ObjectType::ENEMY: {
+				playAnimation(mapPair->second, type, DataUpdate::Action::ELIMINATE);
+				spriteObjects.erase(mapPair); // since the map owns a unique_ptr, this calls the destructor as well.
+				break;
+				}
 			default:
 				if (dataPtr->getAction() == DataUpdate::Action::ELIMINATE) {
 					spriteObjects.erase(mapPair); // since the map owns a unique_ptr, this calls the destructor as well.
@@ -184,12 +180,18 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 
 	}
 
+	// Clear the current renderer.
+	SDL_RenderClear(renderer);
+
+	// Draw the walls.
+	drawBackground(levelMap);
+
 	// Loop through all the objects and draw them.
 	for (auto &mapPair : this->spriteObjects) {
 		int x = mapPair.second->getXPosition();
 		int y = mapPair.second->getYPosition();
 
-		SDL_Rect dst = { (x+ xOffset) * TILESIZE , (y+yOffset) * TILESIZE, TILESIZE,
+		SDL_Rect dst = { (x + xOffset) * TILESIZE , (y + yOffset) * TILESIZE, TILESIZE,
 			TILESIZE };
 		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
 			&dst);
@@ -237,11 +239,29 @@ void GraphicOutputManager::update(UserInputType userInput)
 	SDL_RenderPresent(renderer);
 }
 
-void GraphicOutputManager::playAnimation(std::unique_ptr<GameSprite> const&, DataUpdate::ObjectType type, DataUpdate::Action action)
+void GraphicOutputManager::playAnimation(std::unique_ptr<GameSprite> const& element, DataUpdate::ObjectType type, DataUpdate::Action action)
 {
 	//std::vector<Animation::AnimationFrame>* animationFrames = this->animationsOther[DataUpdate::ObjectType::ENEMY][DataUpdate::Action::ELIMINATE]->getAnimationSequence();
 
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	std::vector<SpriteManager::AnimationFrame>* animationFrames = spriteManager->getAnimationFrames(element,type,action );
+
+	int x = element->getXPosition();
+	int y = element->getYPosition();
+
+	SDL_Rect dst = { (x + xOffset) * TILESIZE + xOffset, (y + yOffset) * TILESIZE , TILESIZE,
+						TILESIZE };
+	for (SpriteManager::AnimationFrame frame : *animationFrames) {
+		SDL_RenderFillRect(renderer, &dst); //fill the current spot with a blank rectangle
+
+		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(frame.first,frame.second),
+			&dst);
+
+		SDL_RenderPresent(renderer);
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+	}
+
+
 
 }
 

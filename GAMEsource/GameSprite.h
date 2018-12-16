@@ -66,6 +66,14 @@ public:
 	void setDescription(SpriteAttributes::Description);
 	SpriteAttributes::Description getDescription();
 
+	/// Move a sprite to a position 
+	virtual void moveSprite(int, int); //< Estimate direction using the new and old co-ordinates
+	void moveSprite(UserInputType); //< For test purposes only, as this is not connected to the logic
+
+	/// Define virtual functions for use with more complex GameSprite child classes
+	virtual void setOrientation(CharacterOrientation);
+	virtual CharacterOrientation getOrientation();
+
 	/* Shared functions with GameObject */
 	//void setID(const std::string&);
 	std::string getID();
@@ -75,14 +83,6 @@ public:
 
 	void setYPosition(int);
 	int getYPosition();
-
-	/// Move a sprite to a position 
-	virtual void moveSprite(int, int); //< Estimate direction using the new and old co-ordinates
-	void moveSprite(UserInputType); //< For test purposes only, as this is not connected to the logic
-
-	/// Define virtual functions for use with more complex GameSprite child classes
-	virtual void setOrientation(CharacterOrientation);
-	virtual CharacterOrientation getOrientation();
 	
 private:
 	SpriteAttributes::ArtType art;
