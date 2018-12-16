@@ -10,13 +10,14 @@
 #define GAME_SPRITE_H
 #include <string>
 #include <iostream>
-#include "DataUpdate.h"
+//#include "DataUpdate.h"
+#include "UserInputType.h"
 #include "CharacterOrientation.h"
 
 /// Define attributes important only for Sprite objects in the graphic user interface 
 namespace SpriteAttributes {
 	/// Artwork Type used for each sprite 
-	enum ArtType {
+	 enum ArtType {
 		PACMAN,
 		BLINKY,
 		PINKY,
@@ -46,19 +47,32 @@ namespace SpriteAttributes {
 		NINE
 	};
 
-	/// The direction a sprite faces
-	//enum Direction { UP, RIGHT, DOWN, LEFT };
-	enum Action {STAND,CLOSE};
+	 /// Generic descriptions/actions for each sprite
+	 enum Description { UP, DOWN, LEFT, RIGHT, DEFAULT, ALT, 
+		              ATTACK_UP, ATTACK_DOWN, ATTACK_LEFT, ATTACK_RIGHT,
+		              ELIMINATE };
+ 
 }
 
 class GameSprite
 {
 public:
-	GameSprite(DataUpdate::ObjectType, int, int, SpriteAttributes::ArtType, CharacterOrientation);
+	GameSprite(int, int, SpriteAttributes::ArtType, SpriteAttributes::Description);
 	~GameSprite(); // vitual destructor
 
 	void setType(SpriteAttributes::ArtType);
-	void setDirection(CharacterOrientation);
+	SpriteAttributes::ArtType getArt();
+
+	void setDescription(SpriteAttributes::Description);
+	SpriteAttributes::Description getDescription();
+
+	/// Move a sprite to a position 
+	virtual void moveSprite(int, int); //< Estimate direction using the new and old co-ordinates
+	void moveSprite(UserInputType); //< For test purposes only, as this is not connected to the logic
+
+	/// Define virtual functions for use with more complex GameSprite child classes
+	virtual void setOrientation(CharacterOrientation);
+	virtual CharacterOrientation getOrientation();
 
 	/* Shared functions with GameObject */
 	//void setID(const std::string&);
@@ -70,16 +84,15 @@ public:
 	void setYPosition(int);
 	int getYPosition();
 	
-	SpriteAttributes::ArtType art;
-	CharacterOrientation direction;
-
 private:
+	SpriteAttributes::ArtType art;
+	SpriteAttributes::Description description;
 	/* Shared properties with GameObject */
 	std::string objectID;
-	DataUpdate::ObjectType objectType;
+	//DataUpdate::ObjectType objectType;
 	int xPosition;
 	int yPosition;
-	
+
 
 };
 

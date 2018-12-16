@@ -58,6 +58,9 @@ public:
 	/// This is useful for testing animations
 	void update(UserInputType);
 
+	/// Play an animation for a given GameSprite and Action
+	void playAnimation(std::unique_ptr<GameSprite> const&, SpriteAttributes::ArtType, AnimationTerms::AnimationTypes);
+
 	//! Displays the Game Over screen
 	void showGameOverScreen();
 	
@@ -110,6 +113,7 @@ private:
 	/// Loaded SDL texture with the generic error screen
 	SDL_Texture *genericErrorScreen;
 
+	/// Declare constants used to keep the screen and tile size fixed
 	enum { TILESIZE = 24, SCREEN_WIDTH = 22, SCREEN_HEIGHT = 21 }; //< not: title bar is an effective +1 to the screen height
 	int screenArray[SCREEN_HEIGHT][SCREEN_WIDTH];
 
@@ -118,15 +122,12 @@ private:
 	int xOffset=0; //< offset to centre the map in the display
 	int yOffset=0; //< offset to centre the map in the display
 
-	//*spriteManager; //< makes a SpriteManager for this OutputManager
 	std::unique_ptr<SpriteManager> spriteManager; //< makes a unique SpriteManager for this OutputManager
 	
 	/// Map of GameSprites in use
 	/// The key is the ID
 	std::map<std::string, std::unique_ptr<GameSprite>> spriteObjects;
 
-
-	
 	int lives;//<store number of lives the character has
 
 };

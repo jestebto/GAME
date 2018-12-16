@@ -4,9 +4,6 @@
     <ClCompile Include="ComponentFactory.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="DataToolkit.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -77,12 +74,12 @@
     <ClCompile Include="StorageGameData.cpp">
       <Filter>Storage</Filter>
     </ClCompile>
-    <ClCompile Include="GameTile.cpp" />
+    <ClCompile Include="DataToolkit.cpp" />
+    <ClCompile Include="CharSprite.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DataToolkit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ComponentFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -128,9 +125,6 @@
     <ClInclude Include="KeyboardInputManager.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="UserInputType.h">
-      <Filter>Input</Filter>
-    </ClInclude>
     <ClInclude Include="HardCodedStorageManager.h">
       <Filter>Storage</Filter>
     </ClInclude>
@@ -159,8 +153,16 @@
     <ClInclude Include="StorageGameData.h">
       <Filter>Storage</Filter>
     </ClInclude>
-    <ClInclude Include="GameTile.h" />
     <ClInclude Include="CharacterOrientation.h" />
+    <ClInclude Include="ProgramState.h" />
+    <ClInclude Include="DataToolkit.h" />
+    <ClInclude Include="UserInputType.h" />
+    <ClInclude Include="Animation.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="CharSprite.h">
+      <Filter>Output</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

@@ -12,7 +12,7 @@ StorageGameData::~StorageGameData()
 
 StorageLevelData* StorageGameData::getNextLevel() {
 	this->currentLevel++;
-	if (currentLevel >= levels.size()) throw "Error: tried to access more levels than available.";
+	if (currentLevel > levels.size()) throw "Error: tried to access more levels than available.";
 	//StorageLevelData l = levels[currentLevel - 1];
 	return &(this->levels[currentLevel - 1]);
 }
