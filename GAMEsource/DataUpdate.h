@@ -9,19 +9,29 @@ public:
 	enum class ObjectType { PLAYER = 0 , ENEMY = 1, POWERUP = 2 };
 	enum class Action { NOTHING = 0, ATTACK = 1, ELIMINATE = 2 };
 
+	// Constructor
 	DataUpdate(std::string, int, int, std::string, ObjectType, Action);
+
+	//Destructor
 	~DataUpdate();
 
 
 	/// set the object's ID
 	void setID(std::string);
+
 	/// return the object's ID
 	std::string getID();
 
+	// set the object's x Position
 	void setObjectXPosition(int);
+
+	// get the object's x Position
 	int getObjectXPosition();
 
+	// set the object's y Position
 	void setObjectYPosition(int);
+
+	// set the object's y Position
 	int getObjectYPosition();
 
 	/// set the type of object
