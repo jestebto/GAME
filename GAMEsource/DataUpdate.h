@@ -1,5 +1,4 @@
-#ifndef DATAUPDATE_H
-#define DATAUPDATE_H
+#pragma once
 
 #include <string>
 
@@ -36,11 +35,13 @@ public:
 
 	/// set the type of object
 	void setObjectType(enum ObjectType);
-	/// return objet type
+
+	/// return object type
 	enum ObjectType getObjectType();
 
 	/// store the data
 	void setData(std::string);
+
 	/// return data
 	std::string getData();
 
@@ -59,4 +60,3 @@ private:
 };
 
 
-#endif // !DATAUPDATE_H
