@@ -110,7 +110,7 @@ void GameManager::Update()
 			DistributeData(currentLevel);
 			break;
 		default:
-			throw "A not expected state ";
+			throw std::exception("A not expected state "); //TO DO: create custom exception?
 			break;
 		}
 	}	

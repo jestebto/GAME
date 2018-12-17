@@ -288,7 +288,7 @@ void GraphicOutputManager::playAnimation(std::unique_ptr<GameSprite> const& elem
 	}
 	catch (std::out_of_range) // Animation does not exist in any of the animation maps
 	{
-		throw "Animation does not exist";
+		throw std::out_of_range("Animation does not exist"); //TO DO: if you catch it and throw a different thing, do we need a custom exception in this case?
 	}
 }
 
