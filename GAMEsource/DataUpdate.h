@@ -1,5 +1,4 @@
-#ifndef DATAUPDATE_H
-#define DATAUPDATE_H
+#pragma once
 
 #include <string>
 
@@ -9,28 +8,40 @@ public:
 	enum class ObjectType { PLAYER = 0 , ENEMY = 1, POWERUP = 2 };
 	enum class Action { NOTHING = 0, ATTACK = 1, ELIMINATE = 2 };
 
+	// Constructor
 	DataUpdate(std::string, int, int, std::string, ObjectType, Action);
+
+	//Destructor
 	~DataUpdate();
 
 
 	/// set the object's ID
 	void setID(std::string);
+
 	/// return the object's ID
 	std::string getID();
 
+	// set the object's x Position
 	void setObjectXPosition(int);
+
+	// get the object's x Position
 	int getObjectXPosition();
 
+	// set the object's y Position
 	void setObjectYPosition(int);
+
+	// set the object's y Position
 	int getObjectYPosition();
 
 	/// set the type of object
 	void setObjectType(enum ObjectType);
-	/// return objet type
+
+	/// return object type
 	enum ObjectType getObjectType();
 
 	/// store the data
 	void setData(std::string);
+
 	/// return data
 	std::string getData();
 
@@ -49,4 +60,3 @@ private:
 };
 
 
-#endif // !DATAUPDATE_H

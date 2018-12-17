@@ -1,5 +1,4 @@
-#ifndef GAMEOBJECT_H
-#define GAMEOBJECT_H
+#pragma once
 
 #include <string>
 #include <sstream>
@@ -29,4 +28,3 @@ private:
 
 };
 
-#endif // GAMEOBJECT_H
