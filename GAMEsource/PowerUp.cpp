@@ -13,7 +13,7 @@ PowerUp::~PowerUp()
 	std::cout << "I am a powerup and I am being destructeeeeed!\n"; // TO DO for debugging purposes
 }
 
-/// set nr of lives
+// set nr of lives
 void PowerUp::setNrOfLives(int lives) {
 	if (lives < 0) {
 		throw std::exception("The number of lives of a Power-Up must be a positive integer.");
@@ -21,5 +21,5 @@ void PowerUp::setNrOfLives(int lives) {
 	nrOfLives = lives; 
 }
 
-/// return number of lives
+// return number of lives
 int PowerUp::getNrOfLives() { return nrOfLives; }

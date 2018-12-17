@@ -4,11 +4,11 @@
 Character::Character(const std::string ID, int xPos, int yPos,
 	int nrLives)
 	: GameObject(ID, xPos, yPos) {
-	if (nrLives < 0) throw std::exception("Negative number of lives not possible on creation of the Character object."); //TO DO JOSE: cath in gamemanager and show screen
+	if (nrLives < 0) throw std::invalid_argument("Negative number of lives not possible on creation of the Character object."); //TO DO JOSE: cath in gamemanager and show screen
 	lives = nrLives;
 }
 
-/// ADD a number of lives
+// ADD a number of lives
 void Character::setLives(int nrLives) {
 	lives += nrLives;
 }
@@ -26,7 +26,7 @@ bool Character::isAlive() {
 		return true;
 }
 
-///return a string with the object's data
+//return a string with the object's data
 std::string Character::dataToString() {
 	std::ostringstream addData;
 	/*

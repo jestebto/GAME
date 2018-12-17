@@ -13,7 +13,7 @@ GameLevel::GameLevel() {
 };
 
 
-/// create all the objects in game level
+// create all the objects in game level
 void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false) {
 
 	//delete(this->player1); //This one is deleted later on if necessary
@@ -58,12 +58,12 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 						column = 0;
 						row++;
 
-						if (row > height) throw "The map exceded the maximum height";
+						if (row > height) throw std::length_error("The map exceded the maximum height");
 					}
 					else {
 						mapArray[row][column] = tempValue - 48;
 						column++;
-						if (column > height) throw "The map exceded the maximum width";
+						if (column > height) throw std::length_error("The map exceded the maximum width");
 					}
 				}
 				break;
@@ -78,8 +78,8 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 				int xPos = stoi(tempConstructorData[1]);
 				int yPos = stoi(tempConstructorData[2]);
 
-				if (xPos < 0 || xPos > width) throw "The player has to be inside the map";
-				if (yPos < 0 || yPos > height) throw "The player has to be inside the map";
+				if (xPos < 0 || xPos > width) throw std::invalid_argument("The player has to be inside the map");
+				if (yPos < 0 || yPos > height) throw std::invalid_argument("The player has to be inside the map");
 
 				//create a new player and save a  pointer to it
 				if ((player1 != NULL) && (keepPlayerState == true)) {
@@ -126,7 +126,7 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 				// store the pointer in the vector poweUps
 				powerUps.push_back(std::move(powerUp));
 
-				tempConstructorData = {}; //! make sure the vector is empty in the next case
+				tempConstructorData = {}; // make sure the vector is empty in the next case
 
 				break;
 			}
@@ -138,23 +138,23 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 ///  execute the input of the data
 void GameLevel::executeUserCommand(UserInputType userInput) {
 
-	output.clear(); //! empty the output vector
+	output.clear(); // empty the output vector
 
-	bool movement = true; //! boolean that sais if the player is going to move
+	bool movement = true; // boolean that sais if the player is going to move
 	DataUpdate::Action playerAction = DataUpdate::Action::NOTHING;
 
-	//! check the current position of the player
+	// check the current position of the player
 	int tempX = player1->getXPosition();               
 	int tempY = player1->getYPosition();	
 	CharacterOrientation tempOrientation = player1->getR();
-	//! check which position the player will go to based on the user input
+	// check which position the player will go to based on the user input
 
 	switch (userInput) {
 	case UserInputType::Nothing: // No movement
 		movement = false; // if no user input, no movement
 		break;
 
-	case UserInputType::Up: //!< Move Up
+	case UserInputType::Up: // Move Up
 		if (tempOrientation != CharacterOrientation::Up) {
 			player1->setR(CharacterOrientation::Up);
 			movement = false;
@@ -163,7 +163,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			tempY--;
 		}
 		break;
-	case UserInputType::Right: //!< Move Right
+	case UserInputType::Right: // Move Right
 		if (tempOrientation != CharacterOrientation::Right) {  // TO DO combine 4 checks of orientation in one
 			player1->setR(CharacterOrientation::Right);
 			movement = false;
@@ -172,7 +172,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			tempX++;
 		}
 		break;
-	case UserInputType::Down: //!< Move Down
+	case UserInputType::Down: // Move Down
 		if (tempOrientation != CharacterOrientation::Down) {
 			player1->setR(CharacterOrientation::Down);
 			movement = false;
@@ -181,7 +181,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			tempY++;
 		}
 		break;
-	case UserInputType::Left: //!< Move Left
+	case UserInputType::Left: // Move Left
 		if (tempOrientation != CharacterOrientation::Left) {
 			player1->setR(CharacterOrientation::Left);
 			movement = false;
@@ -190,7 +190,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			tempX--;
 		}
 		break;
-	case UserInputType::Hit: //!< Attack
+	case UserInputType::Hit: // Attack
 		movement = false;	//Making sure that hitting does not end up in movement
 		// Send an update to play the attack animation
 		std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
@@ -244,7 +244,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		}
 	}
 
-	//! Update the position of the player for the output
+	// Update the position of the player for the output
 	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
 		player1->dataToString(), DataUpdate::ObjectType::PLAYER, playerAction));
 	output.push_back(update);
@@ -259,14 +259,14 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 	if (player1->getLives() <= 0) this->gameState = GameState::GAMEOVER;
 }
 
-/// return a vector of strings with to update the output
+// return a vector of strings with to update the output
 std::vector<std::shared_ptr<DataUpdate>> GameLevel::getLevelUpdates()
 {	
 	return output;
 }
 
 
-/// Check collision with a wall
+// Check collision with a wall
 bool GameLevel::checkWallCollision(int tempX, int tempY) {
 	//map = array of zeros and ones (0 = move, 1 = wall, 2 = finish(move) )
 	if (mapArray[tempY][tempX] == 0 || mapArray[tempY][tempX] == 2) { // if not wall, move
@@ -279,7 +279,7 @@ bool GameLevel::checkWallCollision(int tempX, int tempY) {
 }
 
 
-/// Check collision with enemies
+// Check collision with enemies
 bool GameLevel::checkEnemyCollision(int tempX, int tempY) {
 	bool collision = false;
 	// Check vector of enemy objects 
@@ -293,7 +293,7 @@ bool GameLevel::checkEnemyCollision(int tempX, int tempY) {
 	return collision;
 }
 
-/// check power-up collision
+// check power-up collision
 bool GameLevel::checkPowerUpCollision(int tempX, int tempY) {
 	// PowerUp array (0 = no power up, 1 = power up )
 	bool anyPowerUpFound = false;
@@ -313,6 +313,7 @@ bool GameLevel::checkPowerUpCollision(int tempX, int tempY) {
 	return anyPowerUpFound;
 }
 
+// check the game state
 GameState GameLevel::getGameState() {
 	return this->gameState;
 }

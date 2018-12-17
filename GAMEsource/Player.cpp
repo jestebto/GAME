@@ -3,7 +3,7 @@
 //constructor
 Player::Player(std::string ID, int xPos, int yPos, int lives, CharacterOrientation ori, int dmg) // Added orientation
 	:Character(ID, xPos, yPos, lives) {
-	if (dmg < 0) throw std::exception("The damage has to be a positive integer.");
+	if (dmg < 0) throw std::invalid_argument("The damage has to be a positive integer.");
 	setR(ori);
 	setDmg(dmg);
 };

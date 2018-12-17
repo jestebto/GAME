@@ -5,20 +5,26 @@
 
 class GameObject {
 public:
-
+	/// constructor
 	GameObject(std::string, int, int);
-	virtual ~GameObject() = default; // vitual destructor
+	/// vitual destructor
+	virtual ~GameObject() = default; 
 
-	//void setID(const std::string&);
+	/// get object ID
 	std::string getID();
 
+	/// set x-position
 	void setXPosition(int);
+
+	/// get x-position
 	int getXPosition();
 
+	/// set y-position
 	void setYPosition(int);
+	/// get y-position
 	int getYPosition();
 
-	//save the data in a string
+	/// save the data in a string
 	virtual std::string dataToString();
 
 private:
