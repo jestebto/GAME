@@ -190,9 +190,9 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			tempX--;
 		}
 		break;
-	case UserInputType::Hit: // Get 'em
+	case UserInputType::Hit: //!< Attack
 		movement = false;	//Making sure that hitting does not end up in movement
-		//! Send an update to play the attack animation
+		// Send an update to play the attack animation
 		std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
 			player1->dataToString(), DataUpdate::ObjectType::PLAYER, DataUpdate::Action::ATTACK));
 		output.push_back(update);
@@ -218,7 +218,6 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 				if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY) {
 					enemies[i]->setLives(- player1->getDmg());
 					std::cout << enemies[i]->getLives();
-
 				}
 
 				// Try to update a dead enemy
@@ -229,16 +228,8 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 					this->output.push_back(deadEnemy);
 
 					enemies.erase(enemies.begin() + i);
-				}
-				
-				
-				
+				}				
 			}
-			
-		
-		
-		
-
 		break;
 	}
 
