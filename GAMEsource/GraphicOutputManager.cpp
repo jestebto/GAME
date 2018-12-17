@@ -319,7 +319,7 @@ void GraphicOutputManager::showGenericErrorScreen() {
 
 
 
-/// Initialises the UI::window and the UI::renderer.
+// Initialises the UI::window and the UI::renderer.
 void GraphicOutputManager::init()
 {
 	// Init SDL
@@ -335,7 +335,7 @@ void GraphicOutputManager::init()
 		SDL_RENDERER_PRESENTVSYNC);
 }
 
-/// From the Pacman Code
+// From the Pacman Code
 void GraphicOutputManager::loadTextures()
 {
 	// Load sprite sheet
@@ -351,7 +351,7 @@ void GraphicOutputManager::loadTextures()
 
 
 
-/// From the Pacman Code
+// From the Pacman Code
 void GraphicOutputManager::drawBackground(std::vector<std::vector<int>> &map)
 {
 	using namespace SpriteAttributes;

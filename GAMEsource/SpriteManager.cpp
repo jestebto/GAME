@@ -19,7 +19,8 @@ void SpriteManager::setSheet(SDL_Texture* texture) {
 	// Pre-make the map for the tiles.
 	// Note: this does not require the texture
 	createTileMap();
-	createAnimations();
+	// Pre-make the animation frame for the tiles.
+	createAnimationSequences();
 }
 
 SDL_Texture* SpriteManager::getSheet() {
@@ -27,13 +28,12 @@ SDL_Texture* SpriteManager::getSheet() {
 }
 
 
-/// get a tile on SpriteManager::sheet 
 SDL_Rect* SpriteManager::getTile(std::unique_ptr<GameSprite> const& element) {
-	return &tileSet.at(element->getArt()).at(element->getDescription()); //< &tileSet[art][des] does unwanted behaviour: creates a default element if it can't find the element
+	return &tileSet.at(element->getArt()).at(element->getDescription()); // &tileSet[art][des] does unwanted behaviour: creates a default element if it can't find the element
 }
 
 SDL_Rect* SpriteManager::getTile(SpriteAttributes::ArtType art, SpriteAttributes::Description des) {
-	return &tileSet.at(art).at(des); //< &tileSet[art][des] does unwanted behaviour: creates a default element if it can't find the element
+	return &tileSet.at(art).at(des); // &tileSet[art][des] does unwanted behaviour: creates a default element if it can't find the element
 }
 
 
@@ -165,7 +165,7 @@ void SpriteManager::createTileMap()
 }
 
 
-void SpriteManager::createAnimations() {
+void SpriteManager::createAnimationSequences() {
 	using namespace SpriteAttributes;
 	using namespace AnimationTerms;
 	

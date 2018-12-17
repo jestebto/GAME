@@ -14,12 +14,10 @@ CharSprite::~CharSprite()
 {
 }
 
-/// set Sprite artwork based on type
 void CharSprite::setOrientation(CharacterOrientation newOrientation) {
 	this->orientation = newOrientation;
 }
 
-/// get Sprite artwork
 CharacterOrientation CharSprite::getOrientation() {
 	return this->orientation;
 }

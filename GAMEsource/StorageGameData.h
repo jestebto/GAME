@@ -5,6 +5,7 @@
 class StorageGameData
 {
 private:
+	/// Keep track of the 
 	unsigned currentLevel;
 	std::vector<StorageLevelData> levels;
 

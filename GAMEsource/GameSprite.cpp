@@ -17,48 +17,48 @@ GameSprite::GameSprite(int xPos, int yPos, SpriteAttributes::ArtType artType, Sp
 }
 
 GameSprite::~GameSprite() {
-	//std::cout << "Call death animation"<<'\n';
 }
 
-/// set Sprite artwork based on type
+// set Sprite artwork based on type
 void GameSprite::setType(SpriteAttributes::ArtType artType) {
 	art = artType;
 }
 
-/// get Sprite artwork
+// get Sprite artwork
 SpriteAttributes::ArtType GameSprite::getArt() {
 	return this->art;
 }
 
-/// set Sprite artwork description
+// set Sprite artwork description
 void GameSprite::setDescription(SpriteAttributes::Description des) {
 	description = des;
 }
 
-/// get Sprite artwork description
+// get Sprite artwork description
 SpriteAttributes::Description GameSprite::getDescription() {
 	return this->description;
 }
 
-/// return object ID
+// return object ID
 std::string GameSprite::getID() { return objectID; }
 
-/// set X-Position
+// set X-Position
 void GameSprite::setXPosition(int xPos) {
 	xPosition = xPos;
 }
 
-/// return X-Position
+// return X-Position
 int GameSprite::getXPosition() { return xPosition; }
 
-/// set Y-Position
+// set Y-Position
 void GameSprite::setYPosition(int yPos) {
 	yPosition = yPos;
 }
 
-/// return Y-Position
+// return Y-Position
 int GameSprite::getYPosition() { return yPosition; }
 
+// Move sprite and estimate orienation
 void GameSprite::moveSprite(int x, int y)
 {
 	// move a Sprite to a position

@@ -4,10 +4,10 @@
 class HardCodedStorageManager : public IStorageManager
 {
 public:
-	HardCodedStorageManager();
-	~HardCodedStorageManager();
-	StorageLevelData* loadDefaultLevel();
-	StorageGameData* loadDefaultGame();
+	HardCodedStorageManager(); 
+	~HardCodedStorageManager();  
+	StorageLevelData* loadDefaultLevel(); //!< load a single hardcoded level
+	StorageGameData* loadDefaultGame(); //!< load a hardcorded game with multiple levels
 
 private:
 	StorageLevelData defaultLevel;
