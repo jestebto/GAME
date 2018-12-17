@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+/// Store data for a single level
 class StorageLevelData
 {
 private:

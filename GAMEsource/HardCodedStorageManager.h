@@ -1,6 +1,11 @@
 #pragma once
 #include "IStorageManager.h"
 #include "StorageLevelData.h"
+
+/**
+* Contains hardcoded level data in the form of strings.
+*
+*/
 class HardCodedStorageManager : public IStorageManager
 {
 public:

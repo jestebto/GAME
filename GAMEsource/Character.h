@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 
+/// A generic class for objects that correspond to moving characters that can interact with their enviornment
 class Character : public GameObject {
 public:
 	/// constructor 

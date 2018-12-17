@@ -40,7 +40,7 @@ SpriteAttributes::Description GameSprite::getDescription() {
 }
 
 // return object ID
-std::string GameSprite::getID() { return objectID; }
+//std::string GameSprite::getID() { return objectID; }
 
 // set X-Position
 void GameSprite::setXPosition(int xPos) {

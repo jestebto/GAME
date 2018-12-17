@@ -7,6 +7,10 @@
 #include "UserInputType.h"
 #include "DataUpdate.h"
 
+/**
+* Owns different GameOject and level data. 
+* Implements the logic part of the game.
+*/
 class GameLevel : public ILogicManager {
 public:
 	/// constructor

@@ -54,6 +54,10 @@ namespace SpriteAttributes {
  
 }
 
+/** 
+* A generic sprite/tile that can be moved around. Compare GameObject.
+*
+*/
 class GameSprite
 {
 public:
@@ -75,7 +79,7 @@ public:
 
 	/* Shared functions with GameObject */
 	//void setID(const std::string&);
-	std::string getID(); ///< a unique a ID shared with a GameObject in the logic side
+	//std::string getID(); ///< a unique a ID shared with a GameObject in the logic side
 
 	void setXPosition(int); ///< set X-Position
 	int getXPosition(); ///< get X-Position
@@ -87,7 +91,7 @@ private:
 	SpriteAttributes::ArtType art;
 	SpriteAttributes::Description description;
 	/* Shared properties with GameObject */
-	std::string objectID;
+	//std::string objectID;
 	//DataUpdate::ObjectType objectType;
 	int xPosition;
 	int yPosition;
