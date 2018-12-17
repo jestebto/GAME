@@ -36,6 +36,7 @@ void GameManager::StartGame()
 				Update();
 			}
 			catch (std::exception &e) {
+				std::cout << e.what();
 				outputManager->showGenericErrorScreen();
 				this->programState = ProgramState::ERROR;
 			}
