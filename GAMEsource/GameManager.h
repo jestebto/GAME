@@ -8,6 +8,11 @@
 #include "StorageGameData.h"
 #include "ProgramState.h"
 
+/*
+* The main class which controls runs during the programs execution. 
+* It owns an IStorageManager, an IInputManager, an ILogicManager and an IOutputManager.
+* It passes information between all 4 interfaces.
+*/
 
 class GameManager
 {

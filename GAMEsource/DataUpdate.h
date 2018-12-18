@@ -1,7 +1,10 @@
 #pragma once
 
 #include <string>
-
+/**
+* A free class which allows the ILogicManager to send updates through the GameManger to the IOutputManager  side
+*
+*/
 class DataUpdate
 {
 public:

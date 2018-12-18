@@ -2,6 +2,7 @@
 #include <vector>
 #include "StorageLevelData.h"
 
+/// Store data for multiple levels
 class StorageGameData
 {
 private:

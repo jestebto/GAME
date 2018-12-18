@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 
+/// A free class so that the different components read the hardcoded storage data in the same way
 class DataToolkit
 {
 public:

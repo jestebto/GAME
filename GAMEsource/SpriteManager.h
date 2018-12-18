@@ -23,6 +23,13 @@
 #include <thread> //sleep_for()
 #include <chrono> //milliseconds
 
+/**
+* Manages Sprites for the GraphicOutputManager. 
+* It provides an abstract interface to separate printing sprites to the SDL_renderer
+* from the complexity of creating a tile map for each tile set SDL_texture.
+* Also contains animation functions (these will be moved to a new another class)
+*/
+
 class SpriteManager
 {
 public: /// Functions to be called by GraphicOutputManager

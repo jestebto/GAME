@@ -6,12 +6,11 @@
 #include <vector>
 #include <string>
 
-
+/**
+* Interface to be implemented by a class acting as the manager of the Output Component
+*/
 class IOutputManager
 {
-	/**
-	* Interface to be implemented by a class acting as the manager of the Output Component
-	*/
 public:
 	virtual ~IOutputManager() = 0; //!<virtual destructor to be implemented in the class implementing the interface
 	virtual void loadLevel(OutputData) = 0;//!< initialise SDL screen, read input data and create the maps and gamesprites in use
