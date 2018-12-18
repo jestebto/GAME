@@ -15,7 +15,7 @@ public:
 	GameManager();
 	~GameManager();
 
-	void StartGame();
+	void StartGame(); //!< This is the one and only call that needs to be done to run the game from the main() function, and will last until the end of the program.
 	static int Add(int x, int y); //<TO DO JOSE> remove this. It's a dummy function to try the GAMEtest project
 
 private:
