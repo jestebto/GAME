@@ -11,16 +11,16 @@ public:
 	CharacterOrientation getR(); //Get current orientation 
 	void setR(CharacterOrientation); //Set the orientation 
 
-	// Get the damage
+	/// Get the damage
 	int getDmg();
 
-	//Set the damage
+	/// Set the damage
 	void setDmg(int);
 
-	//save the data in a string
+	/// save the data in a string
 	std::string dataToString();
 
 private:
-	CharacterOrientation orientation;
-	int damage;
+	CharacterOrientation orientation; ///< orientation
+	int damage; ///< damage
 };

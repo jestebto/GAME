@@ -36,6 +36,7 @@ void GameManager::StartGame()
 				Update();
 			}
 			catch (std::exception &e) {
+				std::cout << e.what();
 				outputManager->showGenericErrorScreen();
 				this->programState = ProgramState::ERROR;
 			}
@@ -109,7 +110,7 @@ void GameManager::Update()
 			DistributeData(currentLevel);
 			break;
 		default:
-			throw "A not expected state ";
+			throw std::exception("A not expected state "); //TO DO: create custom exception?
 			break;
 		}
 	}	

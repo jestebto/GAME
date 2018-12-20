@@ -14,9 +14,9 @@
 #define GRAPHIC_OUTPUT_MANAGER_H
 
 #include "IOutputManager.h"
-#include "UserInputType.h" /// for test purposes, else this class is not supposed to know about the UserInput
+#include "UserInputType.h" // for test purposes, else this class is not supposed to know about the UserInput
 #include "GameSprite.h"
-#include "SpriteManager.h" /// all sprite related functions are in this class
+#include "SpriteManager.h" // all sprite related functions are in this class
 #include "DataToolkit.h"
 
 #include <SDL2/SDL.h>
@@ -24,6 +24,9 @@
 #include <map>
 #include <vector>
 
+/// An output manager that manages a Window and a Graphic User Interface
+/// This class owns GameSprite objects, SpriteManager(s), SDL textures and a SDL window and renderer.
+/// It is dependent on SpriteManager to execute many of the tasks related to dynamic sprites.
 class GraphicOutputManager: public IOutputManager
 {
 public:
@@ -58,7 +61,7 @@ public:
 	/// This is useful for testing animations
 	void update(UserInputType);
 
-	/// Play an animation for a given GameSprite and Action
+	/// Play an animation for a given GameSprite and Animation
 	void playAnimation(std::unique_ptr<GameSprite> const&, SpriteAttributes::ArtType, AnimationTerms::AnimationTypes);
 
 	//! Displays the Game Over screen

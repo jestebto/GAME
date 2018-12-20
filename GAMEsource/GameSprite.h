@@ -47,48 +47,51 @@ namespace SpriteAttributes {
 		NINE
 	};
 
-	 /// Generic descriptions/actions for each sprite
+	 /// For descriptions/actions for each artwork
 	 enum Description { UP, DOWN, LEFT, RIGHT, DEFAULT, ALT, 
 		              ATTACK_UP, ATTACK_DOWN, ATTACK_LEFT, ATTACK_RIGHT,
 		              ELIMINATE };
  
 }
 
+/** 
+* A generic sprite/tile that can be moved around. Compare GameObject.
+*
+*/
 class GameSprite
 {
 public:
 	GameSprite(int, int, SpriteAttributes::ArtType, SpriteAttributes::Description);
 	~GameSprite(); // vitual destructor
 
-	void setType(SpriteAttributes::ArtType);
-	SpriteAttributes::ArtType getArt();
+	void setType(SpriteAttributes::ArtType); ///< set sprite artwork
+	SpriteAttributes::ArtType getArt(); ///< get sprite artwork
 
-	void setDescription(SpriteAttributes::Description);
-	SpriteAttributes::Description getDescription();
+	void setDescription(SpriteAttributes::Description); ///< set sprite artwork description
+	SpriteAttributes::Description getDescription(); ///< get sprite artwork description
 
-	/// Move a sprite to a position 
-	virtual void moveSprite(int, int); //< Estimate direction using the new and old co-ordinates
-	void moveSprite(UserInputType); //< For test purposes only, as this is not connected to the logic
+	virtual void moveSprite(int, int); ///< Estimate direction using the new and old co-ordinates
+	void moveSprite(UserInputType); ///< For test purposes only, as this is not connected to the logic
 
-	/// Define virtual functions for use with more complex GameSprite child classes
-	virtual void setOrientation(CharacterOrientation);
-	virtual CharacterOrientation getOrientation();
+	
+	virtual void setOrientation(CharacterOrientation); ///< Define virtual functions for use with more complex GameSprite child classes
+	virtual CharacterOrientation getOrientation(); ///< Return CharacterOrientation::None
 
 	/* Shared functions with GameObject */
 	//void setID(const std::string&);
-	std::string getID();
+	//std::string getID(); ///< a unique a ID shared with a GameObject in the logic side
 
-	void setXPosition(int);
-	int getXPosition();
+	void setXPosition(int); ///< set X-Position
+	int getXPosition(); ///< get X-Position
 
-	void setYPosition(int);
-	int getYPosition();
+	void setYPosition(int); ///< get Y-Position
+	int getYPosition(); ///< get Y-Position
 	
 private:
 	SpriteAttributes::ArtType art;
 	SpriteAttributes::Description description;
 	/* Shared properties with GameObject */
-	std::string objectID;
+	//std::string objectID;
 	//DataUpdate::ObjectType objectType;
 	int xPosition;
 	int yPosition;

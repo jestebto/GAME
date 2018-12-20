@@ -43,6 +43,5 @@ ILogicManager* ComponentFactory::GetLogicManager()
 
 IOutputManager* ComponentFactory::GetOutputManager()
 {
-	//throw "Not implemented"; //Lior: here you can return an instance of your GraphicalInterface class or however you want to call it
 	return new GraphicOutputManager();
 }

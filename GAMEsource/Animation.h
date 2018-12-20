@@ -6,13 +6,15 @@
 #include <vector>
 #include "GameSprite.h"
 
+/// Define terms used for animations
 namespace AnimationTerms
 {
-	/// An art type and a description uniquely defines an animation frame
+	/// An artwork type and an artwork description uniquely defines an animation frame
 	typedef std::pair<SpriteAttributes::ArtType, SpriteAttributes::Description> AnimationFrame;
 
+	/// Different kinds of animations that be can called
 	enum AnimationTypes {
-		NOTHING, IDLE, ATTACK, DIE,  LOOK_LEFT
+		NOTHING, IDLE, ATTACK, DIE,  LOOK_LEFT, LOOK_RIGHT, WALK
 	};
 };
 
