@@ -1,0 +1,55 @@
+\hypertarget{class_game_level}{}\section{Game\+Level Class Reference}
+\label{class_game_level}\index{Game\+Level@{Game\+Level}}
+
+
+{\ttfamily \#include $<$Game\+Level.\+h$>$}
+
+Inheritance diagram for Game\+Level\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_level}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_game_level_a5723a38b2b32300d4f071419afacd6f9}\label{class_game_level_a5723a38b2b32300d4f071419afacd6f9}} 
+\mbox{\hyperlink{class_game_level_a5723a38b2b32300d4f071419afacd6f9}{Game\+Level}} ()
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_game_level_acbabd989c2876a2326e6b69e33e75fa1}\label{class_game_level_acbabd989c2876a2326e6b69e33e75fa1}} 
+void \mbox{\hyperlink{class_game_level_acbabd989c2876a2326e6b69e33e75fa1}{create\+Level}} (\mbox{\hyperlink{class_logic_data}{Logic\+Data}}, bool)
+\begin{DoxyCompactList}\small\item\em create all the clases thet form \mbox{\hyperlink{class_game_level}{Game\+Level}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_level_a53cd899aa9aeaf3e9579ff32598b0043}{execute\+User\+Command}} (User\+Input\+Type)
+\begin{DoxyCompactList}\small\item\em evaluate and perform the user\textquotesingle{}s command \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_game_level_a89ddaa1423d19132e8d4c97b36f92895}\label{class_game_level_a89ddaa1423d19132e8d4c97b36f92895}} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_data_update}{Data\+Update}} $>$ $>$ \mbox{\hyperlink{class_game_level_a89ddaa1423d19132e8d4c97b36f92895}{get\+Level\+Updates}} ()
+\begin{DoxyCompactList}\small\item\em get objec\textquotesingle{}s data as a vector of strings \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_game_level_a907f82fea7462dbaf47c396cf65e2e89}\label{class_game_level_a907f82fea7462dbaf47c396cf65e2e89}} 
+Game\+State \mbox{\hyperlink{class_game_level_a907f82fea7462dbaf47c396cf65e2e89}{get\+Game\+State}} ()
+\begin{DoxyCompactList}\small\item\em check if game is over \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Owns different Game\+Oject and level data. Implements the logic part of the game. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_level_a53cd899aa9aeaf3e9579ff32598b0043}\label{class_game_level_a53cd899aa9aeaf3e9579ff32598b0043}} 
+\index{Game\+Level@{Game\+Level}!execute\+User\+Command@{execute\+User\+Command}}
+\index{execute\+User\+Command@{execute\+User\+Command}!Game\+Level@{Game\+Level}}
+\subsubsection{\texorpdfstring{execute\+User\+Command()}{executeUserCommand()}}
+{\footnotesize\ttfamily void Game\+Level\+::execute\+User\+Command (\begin{DoxyParamCaption}\item[{User\+Input\+Type}]{user\+Input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+evaluate and perform the user\textquotesingle{}s command 
+
+execute the input of the data 
+
+Implements \mbox{\hyperlink{class_i_logic_manager_a531478a93285f5cdf6f22294638b27b3}{I\+Logic\+Manager}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+G\+A\+M\+Esource/Game\+Level.\+h\item 
+G\+A\+M\+Esource/Game\+Level.\+cpp\end{DoxyCompactItemize}

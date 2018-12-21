@@ -1,0 +1,30 @@
+\hypertarget{class_component_factory}{}\section{Component\+Factory Class Reference}
+\label{class_component_factory}\index{Component\+Factory@{Component\+Factory}}
+
+
+{\ttfamily \#include $<$Component\+Factory.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_component_factory_aa6178ddfecc39747ef12f11606735e09}\label{class_component_factory_aa6178ddfecc39747ef12f11606735e09}} 
+\mbox{\hyperlink{class_i_storage_manager}{I\+Storage\+Manager}} $\ast$ \mbox{\hyperlink{class_component_factory_aa6178ddfecc39747ef12f11606735e09}{Get\+Storage\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em will return a pointer to an object implementing the \mbox{\hyperlink{class_i_storage_manager}{I\+Storage\+Manager}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_component_factory_a84613a5a5f11003abd9d10620ca72b5b}\label{class_component_factory_a84613a5a5f11003abd9d10620ca72b5b}} 
+\mbox{\hyperlink{class_i_input_manager}{I\+Input\+Manager}} $\ast$ \mbox{\hyperlink{class_component_factory_a84613a5a5f11003abd9d10620ca72b5b}{Get\+Input\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em will return a pointer to an object implementing the \mbox{\hyperlink{class_i_input_manager}{I\+Input\+Manager}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_component_factory_aa8a3b17c86c562cc69f50f283ed3cc28}\label{class_component_factory_aa8a3b17c86c562cc69f50f283ed3cc28}} 
+\mbox{\hyperlink{class_i_logic_manager}{I\+Logic\+Manager}} $\ast$ \mbox{\hyperlink{class_component_factory_aa8a3b17c86c562cc69f50f283ed3cc28}{Get\+Logic\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em will return a pointer to an object implementing the \mbox{\hyperlink{class_i_logic_manager}{I\+Logic\+Manager}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_component_factory_a19583d4fc53d5942e5c0558a52809086}\label{class_component_factory_a19583d4fc53d5942e5c0558a52809086}} 
+\mbox{\hyperlink{class_i_output_manager}{I\+Output\+Manager}} $\ast$ \mbox{\hyperlink{class_component_factory_a19583d4fc53d5942e5c0558a52809086}{Get\+Output\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em will return a pointer to an object implementing the \mbox{\hyperlink{class_i_output_manager}{I\+Output\+Manager}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The purpose of this class is to determine which specific implementations of the components to be used. Example\+: Get\+Storage\+Component might return a \mbox{\hyperlink{class_hard_coded_storage_manager}{Hard\+Coded\+Storage\+Manager}}, or a File\+System\+Storage\+Manager, which both implement the \mbox{\hyperlink{class_i_storage_manager}{I\+Storage\+Manager}} interface. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+G\+A\+M\+Esource/Component\+Factory.\+h\item 
+G\+A\+M\+Esource/Component\+Factory.\+cpp\end{DoxyCompactItemize}

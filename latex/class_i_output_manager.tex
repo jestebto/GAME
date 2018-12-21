@@ -1,0 +1,45 @@
+\hypertarget{class_i_output_manager}{}\section{I\+Output\+Manager Class Reference}
+\label{class_i_output_manager}\index{I\+Output\+Manager@{I\+Output\+Manager}}
+
+
+{\ttfamily \#include $<$I\+Output\+Manager.\+h$>$}
+
+Inheritance diagram for I\+Output\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_i_output_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_i_output_manager_a7442c5161bf453dc13605f7aaeeea2b5}\label{class_i_output_manager_a7442c5161bf453dc13605f7aaeeea2b5}} 
+virtual \mbox{\hyperlink{class_i_output_manager_a7442c5161bf453dc13605f7aaeeea2b5}{$\sim$\+I\+Output\+Manager}} ()=0
+\begin{DoxyCompactList}\small\item\em virtual destructor to be implemented in the class implementing the interface \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_output_manager_a50a935d76cf10427b0977406a2338146}\label{class_i_output_manager_a50a935d76cf10427b0977406a2338146}} 
+virtual void \mbox{\hyperlink{class_i_output_manager_a50a935d76cf10427b0977406a2338146}{load\+Level}} (\mbox{\hyperlink{class_output_data}{Output\+Data}})=0
+\begin{DoxyCompactList}\small\item\em initialise S\+DL screen, read input data and create the maps and gamesprites in use \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_output_manager_a41892abec0b57bc1244492f42f32901b}\label{class_i_output_manager_a41892abec0b57bc1244492f42f32901b}} 
+virtual void \mbox{\hyperlink{class_i_output_manager_a41892abec0b57bc1244492f42f32901b}{update}} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_data_update}{Data\+Update}} $>$$>$)=0
+\begin{DoxyCompactList}\small\item\em update the screen based on the game state as determined by the logic manager \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_output_manager_aef1aaf499f3eee5927cb2833af39ce43}\label{class_i_output_manager_aef1aaf499f3eee5927cb2833af39ce43}} 
+virtual void \mbox{\hyperlink{class_i_output_manager_aef1aaf499f3eee5927cb2833af39ce43}{update}} (User\+Input\+Type)=0
+\begin{DoxyCompactList}\small\item\em for test purposes to bypass the logic component \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_output_manager_adc5ca9af7dc69324ee87233dcc7befc4}\label{class_i_output_manager_adc5ca9af7dc69324ee87233dcc7befc4}} 
+virtual void \mbox{\hyperlink{class_i_output_manager_adc5ca9af7dc69324ee87233dcc7befc4}{show\+Game\+Over\+Screen}} ()=0
+\begin{DoxyCompactList}\small\item\em show Game Over Screen \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_output_manager_a89c5e1c35d72fb788db8b34eba956efe}\label{class_i_output_manager_a89c5e1c35d72fb788db8b34eba956efe}} 
+virtual void \mbox{\hyperlink{class_i_output_manager_a89c5e1c35d72fb788db8b34eba956efe}{show\+Victory\+Screen}} ()=0
+\begin{DoxyCompactList}\small\item\em show Victory Screen \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_output_manager_a9420b7d761af05b5ad23eadf074337f2}\label{class_i_output_manager_a9420b7d761af05b5ad23eadf074337f2}} 
+virtual void \mbox{\hyperlink{class_i_output_manager_a9420b7d761af05b5ad23eadf074337f2}{show\+Generic\+Error\+Screen}} ()=0
+\begin{DoxyCompactList}\small\item\em show Generic Error Screen \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface to be implemented by a class acting as the manager of the Output Component 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+G\+A\+M\+Esource/I\+Output\+Manager.\+h\item 
+G\+A\+M\+Esource/I\+Output\+Manager.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,39 @@
+\hypertarget{class_i_logic_manager}{}\section{I\+Logic\+Manager Class Reference}
+\label{class_i_logic_manager}\index{I\+Logic\+Manager@{I\+Logic\+Manager}}
+
+
+{\ttfamily \#include $<$I\+Logic\+Manager.\+h$>$}
+
+Inheritance diagram for I\+Logic\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_i_logic_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_i_logic_manager_af522c957cdce66d34eb8264212b413ed}\label{class_i_logic_manager_af522c957cdce66d34eb8264212b413ed}} 
+virtual \mbox{\hyperlink{class_i_logic_manager_af522c957cdce66d34eb8264212b413ed}{$\sim$\+I\+Logic\+Manager}} ()=0
+\begin{DoxyCompactList}\small\item\em virtual destructor to be implemented in the class implementing the interface \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_logic_manager_a9d09e24fdfa312e3a908c0110e305ed5}\label{class_i_logic_manager_a9d09e24fdfa312e3a908c0110e305ed5}} 
+virtual void \mbox{\hyperlink{class_i_logic_manager_a9d09e24fdfa312e3a908c0110e305ed5}{create\+Level}} (\mbox{\hyperlink{class_logic_data}{Logic\+Data}} level, bool)=0
+\begin{DoxyCompactList}\small\item\em create game level \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_logic_manager_a531478a93285f5cdf6f22294638b27b3}\label{class_i_logic_manager_a531478a93285f5cdf6f22294638b27b3}} 
+virtual void \mbox{\hyperlink{class_i_logic_manager_a531478a93285f5cdf6f22294638b27b3}{execute\+User\+Command}} (User\+Input\+Type input)=0
+\begin{DoxyCompactList}\small\item\em execute the users input \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_logic_manager_a9b783cc9ee7960b67d66549d77c601b5}\label{class_i_logic_manager_a9b783cc9ee7960b67d66549d77c601b5}} 
+virtual std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_data_update}{Data\+Update}} $>$ $>$ \mbox{\hyperlink{class_i_logic_manager_a9b783cc9ee7960b67d66549d77c601b5}{get\+Level\+Updates}} ()=0
+\begin{DoxyCompactList}\small\item\em get objec\textquotesingle{}s data as a vector of strings \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_i_logic_manager_a2e7dcfd57979507839aa885d6de2889a}\label{class_i_logic_manager_a2e7dcfd57979507839aa885d6de2889a}} 
+virtual Game\+State \mbox{\hyperlink{class_i_logic_manager_a2e7dcfd57979507839aa885d6de2889a}{get\+Game\+State}} ()=0
+\begin{DoxyCompactList}\small\item\em check if the game is over \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface to be implemented by a class acting as the manager of the Logic Component 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+G\+A\+M\+Esource/I\+Logic\+Manager.\+h\item 
+G\+A\+M\+Esource/I\+Logic\+Manager.\+cpp\end{DoxyCompactItemize}

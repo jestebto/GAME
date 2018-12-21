@@ -1,0 +1,36 @@
+\hypertarget{class_sprite_manager}{}\section{Sprite\+Manager Class Reference}
+\label{class_sprite_manager}\index{Sprite\+Manager@{Sprite\+Manager}}
+
+
+{\ttfamily \#include $<$Sprite\+Manager.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sprite_manager_a757bd0abdc5551dd0420f7f7cfc81994}\label{class_sprite_manager_a757bd0abdc5551dd0420f7f7cfc81994}} 
+\mbox{\hyperlink{class_sprite_manager_a757bd0abdc5551dd0420f7f7cfc81994}{Sprite\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Functions to be called by \mbox{\hyperlink{class_graphic_output_manager}{Graphic\+Output\+Manager}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sprite_manager_a39235ee747f04d812b550ce235660ee5}\label{class_sprite_manager_a39235ee747f04d812b550ce235660ee5}} 
+void \mbox{\hyperlink{class_sprite_manager_a39235ee747f04d812b550ce235660ee5}{set\+Sheet}} (S\+D\+L\+\_\+\+Texture $\ast$)
+\begin{DoxyCompactList}\small\item\em create the texture sheet which has all the artworks for the sprites \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sprite_manager_a402c0e54e5317aeabd4c16d669e4045e}\label{class_sprite_manager_a402c0e54e5317aeabd4c16d669e4045e}} 
+S\+D\+L\+\_\+\+Texture $\ast$ \mbox{\hyperlink{class_sprite_manager_a402c0e54e5317aeabd4c16d669e4045e}{get\+Sheet}} ()
+\begin{DoxyCompactList}\small\item\em pass the sheet so that it can be used in a renderer (in the \mbox{\hyperlink{class_graphic_output_manager}{Graphic\+Output\+Manager}}) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sprite_manager_af89d1ca81d4ae6126e7916947bee84b7}\label{class_sprite_manager_af89d1ca81d4ae6126e7916947bee84b7}} 
+S\+D\+L\+\_\+\+Rect $\ast$ \mbox{\hyperlink{class_sprite_manager_af89d1ca81d4ae6126e7916947bee84b7}{get\+Tile}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} $>$ const \&)
+\begin{DoxyCompactList}\small\item\em get\+Tile for a unique Sprite \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sprite_manager_a85d576c3402f6b0addf81a7f427916b0}\label{class_sprite_manager_a85d576c3402f6b0addf81a7f427916b0}} 
+S\+D\+L\+\_\+\+Rect $\ast$ \mbox{\hyperlink{class_sprite_manager_a85d576c3402f6b0addf81a7f427916b0}{get\+Tile}} (\mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, \mbox{\hyperlink{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}{Sprite\+Attributes\+::\+Description}})
+\begin{DoxyCompactList}\small\item\em get\+Tile for general printing e.\+g. for the background \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_sprite_manager_a697b1771c1a80333d9edc8c6fb6eb9bd}\label{class_sprite_manager_a697b1771c1a80333d9edc8c6fb6eb9bd}} 
+std\+::vector$<$ \mbox{\hyperlink{namespace_animation_terms_a9ad8fa379228f750219207c3c9f618e5}{Animation\+Terms\+::\+Animation\+Frame}} $>$ $\ast$ \mbox{\hyperlink{class_sprite_manager_a697b1771c1a80333d9edc8c6fb6eb9bd}{get\+Animation\+Frames}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} $>$ const \&, \mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, \mbox{\hyperlink{namespace_animation_terms_a171348588b2b248e71955ad7c5042e67}{Animation\+Terms\+::\+Animation\+Types}})
+\begin{DoxyCompactList}\small\item\em Get a vector of animation frames. Search through different private map$<$$>$animations defined below. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manages Sprites for the \mbox{\hyperlink{class_graphic_output_manager}{Graphic\+Output\+Manager}}. It provides an abstract interface to separate printing sprites to the S\+D\+L\+\_\+renderer from the complexity of creating a tile map for each tile set S\+D\+L\+\_\+texture. Also contains animation functions (these will be moved to a new another class) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+G\+A\+M\+Esource/Sprite\+Manager.\+h\item 
+G\+A\+M\+Esource/Sprite\+Manager.\+cpp\end{DoxyCompactItemize}

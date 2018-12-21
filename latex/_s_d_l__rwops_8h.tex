@@ -1,0 +1,237 @@
+\hypertarget{_s_d_l__rwops_8h}{}\section{G\+A\+M\+Esource/include/\+S\+D\+L2/\+S\+D\+L\+\_\+rwops.h File Reference}
+\label{_s_d_l__rwops_8h}\index{G\+A\+M\+Esource/include/\+S\+D\+L2/\+S\+D\+L\+\_\+rwops.\+h@{G\+A\+M\+Esource/include/\+S\+D\+L2/\+S\+D\+L\+\_\+rwops.\+h}}
+{\ttfamily \#include \char`\"{}S\+D\+L\+\_\+stdinc.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}S\+D\+L\+\_\+error.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}begin\+\_\+code.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}close\+\_\+code.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_s_d_l__rwops_8h_abefd1a35086e97620beffc2c069bd97d}{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+U\+N\+K\+N\+O\+WN}}~0U
+\item 
+\#define \mbox{\hyperlink{_s_d_l__rwops_8h_ad979b58d7905cfd8af0bab9ed97c1685}{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+W\+I\+N\+F\+I\+LE}}~1U
+\item 
+\#define \mbox{\hyperlink{_s_d_l__rwops_8h_a054a717fd0b1a2f175e2e822e1ecc67d}{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+S\+T\+D\+F\+I\+LE}}~2U
+\item 
+\#define \mbox{\hyperlink{_s_d_l__rwops_8h_ad1e973a8b9f9c6cae33f2870c9f76b7d}{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+J\+N\+I\+F\+I\+LE}}~3U
+\item 
+\#define \mbox{\hyperlink{_s_d_l__rwops_8h_a1120765c20af356803b2beb6709e6749}{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+RY}}~4U
+\item 
+\#define \mbox{\hyperlink{_s_d_l__rwops_8h_a145dd63b72548f37e2fdd9de8bf15bbc}{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+RO}}~5U
+\item 
+\#define \mbox{\hyperlink{_s_d_l__rwops_8h_ac028b032bb8230df64bc6284e04789f5}{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET}}~0
+\item 
+\#define \mbox{\hyperlink{_s_d_l__rwops_8h_aba5f3b60c197def370ffa2ca1ab1348d}{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR}}~1
+\item 
+\#define \mbox{\hyperlink{_s_d_l__rwops_8h_a6cf141faabd1b8f2ec3c03cf76eaf553}{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND}}~2
+\item 
+\#define \mbox{\hyperlink{_s_d_l__rwops_8h_a7219b60f2f449254ccb5af762f4c990f}{S\+D\+L\+\_\+\+Load\+File}}(file,  datasize)~\mbox{\hyperlink{_s_d_l__rwops_8h_ab80a1b522d2fbbae8ed5610d029fcfda}{S\+D\+L\+\_\+\+Load\+File\+\_\+\+RW}}(S\+D\+L\+\_\+\+R\+W\+From\+File(file, \char`\"{}rb\char`\"{}), datasize, 1)
+\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Read/write macros}\par
+{\em Macros to easily read and write from an \mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} structure. }\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_af4709cdb6df63500202f278ed179a2a1}\label{_s_d_l__rwops_8h_af4709cdb6df63500202f278ed179a2a1}} 
+\#define {\bfseries S\+D\+L\+\_\+\+R\+Wsize}(ctx)~(ctx)-\/$>$size(ctx)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a21053fbfbd96536cb7b9404a12f66822}\label{_s_d_l__rwops_8h_a21053fbfbd96536cb7b9404a12f66822}} 
+\#define {\bfseries S\+D\+L\+\_\+\+R\+Wseek}(ctx,  offset,  whence)~(ctx)-\/$>$seek(ctx, offset, whence)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_abda2d76d76788e378d4d27344eb71d43}\label{_s_d_l__rwops_8h_abda2d76d76788e378d4d27344eb71d43}} 
+\#define {\bfseries S\+D\+L\+\_\+\+R\+Wtell}(ctx)~(ctx)-\/$>$seek(ctx, 0, \mbox{\hyperlink{_s_d_l__rwops_8h_aba5f3b60c197def370ffa2ca1ab1348d}{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR}})
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a49822992c9b056f6cf6cfc52c9a13050}\label{_s_d_l__rwops_8h_a49822992c9b056f6cf6cfc52c9a13050}} 
+\#define {\bfseries S\+D\+L\+\_\+\+R\+Wread}(ctx,  ptr,  size,  n)~(ctx)-\/$>$read(ctx, ptr, size, n)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a83549e70a4a09a1d10c7a1b14b5cbdf4}\label{_s_d_l__rwops_8h_a83549e70a4a09a1d10c7a1b14b5cbdf4}} 
+\#define {\bfseries S\+D\+L\+\_\+\+R\+Wwrite}(ctx,  ptr,  size,  n)~(ctx)-\/$>$write(ctx, ptr, size, n)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a02700bab029c9438c0102457822c1231}\label{_s_d_l__rwops_8h_a02700bab029c9438c0102457822c1231}} 
+\#define {\bfseries S\+D\+L\+\_\+\+R\+Wclose}(ctx)~(ctx)-\/$>$close(ctx)
+\end{DoxyCompactItemize}
+\end{Indent}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} \mbox{\hyperlink{_s_d_l__rwops_8h_af758c42c576a0612bdf298c5823a5fe5}{S\+D\+L\+\_\+\+R\+Wops}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a02d04e13c85cd28706b8c3881c32dd46}\label{_s_d_l__rwops_8h_a02d04e13c85cd28706b8c3881c32dd46}} 
+D\+E\+C\+L\+S\+P\+EC \mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Alloc\+RW} (void)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_ac4c87c7bed186ea1a98531164ff1acfa}\label{_s_d_l__rwops_8h_ac4c87c7bed186ea1a98531164ff1acfa}} 
+D\+E\+C\+L\+S\+P\+EC void S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Free\+RW} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$area)
+\item 
+D\+E\+C\+L\+S\+P\+EC void $\ast$S\+D\+L\+C\+A\+LL \mbox{\hyperlink{_s_d_l__rwops_8h_ab80a1b522d2fbbae8ed5610d029fcfda}{S\+D\+L\+\_\+\+Load\+File\+\_\+\+RW}} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$src, size\+\_\+t $\ast$datasize, int freesrc)
+\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ R\+W\+From functions}\par
+{\em Functions to create \mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} structures from various data streams. }\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_aef7e843c3486bd1770667a594aa0b439}\label{_s_d_l__rwops_8h_aef7e843c3486bd1770667a594aa0b439}} 
+D\+E\+C\+L\+S\+P\+EC \mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+R\+W\+From\+File} (const char $\ast$file, const char $\ast$mode)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_abbd4eda76f330b5c4b813238affbe7a8}\label{_s_d_l__rwops_8h_abbd4eda76f330b5c4b813238affbe7a8}} 
+D\+E\+C\+L\+S\+P\+EC \mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+R\+W\+From\+FP} (void $\ast$fp, S\+D\+L\+\_\+bool autoclose)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_ae6f34841ce63d08597477558ffc0278e}\label{_s_d_l__rwops_8h_ae6f34841ce63d08597477558ffc0278e}} 
+D\+E\+C\+L\+S\+P\+EC \mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+R\+W\+From\+Mem} (void $\ast$mem, int size)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a51b4be80c4647e8a473b6b9fed03b1a6}\label{_s_d_l__rwops_8h_a51b4be80c4647e8a473b6b9fed03b1a6}} 
+D\+E\+C\+L\+S\+P\+EC \mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+R\+W\+From\+Const\+Mem} (const void $\ast$mem, int size)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Read endian functions}\par
+{\em Read an item of the specified endianness and return in native format. }\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_ab864094eb6b80fbf0c77d34ecdde7907}\label{_s_d_l__rwops_8h_ab864094eb6b80fbf0c77d34ecdde7907}} 
+D\+E\+C\+L\+S\+P\+EC Uint8 S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Read\+U8} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$src)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a7274f5c4b6f22a6b742ec6ef4f9d390b}\label{_s_d_l__rwops_8h_a7274f5c4b6f22a6b742ec6ef4f9d390b}} 
+D\+E\+C\+L\+S\+P\+EC Uint16 S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Read\+L\+E16} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$src)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a3cdf85a50e40dc58536930429b7b4d09}\label{_s_d_l__rwops_8h_a3cdf85a50e40dc58536930429b7b4d09}} 
+D\+E\+C\+L\+S\+P\+EC Uint16 S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Read\+B\+E16} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$src)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a8320334c299a3631fd6beb9937c30f04}\label{_s_d_l__rwops_8h_a8320334c299a3631fd6beb9937c30f04}} 
+D\+E\+C\+L\+S\+P\+EC Uint32 S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Read\+L\+E32} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$src)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_af023e134e3ae87b1595306e5faeaab76}\label{_s_d_l__rwops_8h_af023e134e3ae87b1595306e5faeaab76}} 
+D\+E\+C\+L\+S\+P\+EC Uint32 S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Read\+B\+E32} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$src)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_af7e5d9b56874b8bd3a8a6a0c5393c33d}\label{_s_d_l__rwops_8h_af7e5d9b56874b8bd3a8a6a0c5393c33d}} 
+D\+E\+C\+L\+S\+P\+EC Uint64 S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Read\+L\+E64} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$src)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a4917dc584d162bc5f28b63843557214e}\label{_s_d_l__rwops_8h_a4917dc584d162bc5f28b63843557214e}} 
+D\+E\+C\+L\+S\+P\+EC Uint64 S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Read\+B\+E64} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$src)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Write endian functions}\par
+{\em Write an item of native format to the specified endianness. }\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a07c817f8360ddc8c8983d12373306555}\label{_s_d_l__rwops_8h_a07c817f8360ddc8c8983d12373306555}} 
+D\+E\+C\+L\+S\+P\+EC size\+\_\+t S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Write\+U8} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$dst, Uint8 value)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_aa4a7df8d967c5751e3f0974743b9c2d4}\label{_s_d_l__rwops_8h_aa4a7df8d967c5751e3f0974743b9c2d4}} 
+D\+E\+C\+L\+S\+P\+EC size\+\_\+t S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Write\+L\+E16} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$dst, Uint16 value)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_ab84ea778a5f8f76cd73a52216c2c08f5}\label{_s_d_l__rwops_8h_ab84ea778a5f8f76cd73a52216c2c08f5}} 
+D\+E\+C\+L\+S\+P\+EC size\+\_\+t S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Write\+B\+E16} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$dst, Uint16 value)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a84f37961925773fe8b06ea09ed144568}\label{_s_d_l__rwops_8h_a84f37961925773fe8b06ea09ed144568}} 
+D\+E\+C\+L\+S\+P\+EC size\+\_\+t S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Write\+L\+E32} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$dst, Uint32 value)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a5debf04eeed819018ddd9a2f70d32c89}\label{_s_d_l__rwops_8h_a5debf04eeed819018ddd9a2f70d32c89}} 
+D\+E\+C\+L\+S\+P\+EC size\+\_\+t S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Write\+B\+E32} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$dst, Uint32 value)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_ae4f9b45fbb3bf4a40f3f308419307e6b}\label{_s_d_l__rwops_8h_ae4f9b45fbb3bf4a40f3f308419307e6b}} 
+D\+E\+C\+L\+S\+P\+EC size\+\_\+t S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Write\+L\+E64} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$dst, Uint64 value)
+\item 
+\mbox{\Hypertarget{_s_d_l__rwops_8h_a0422f79e1889750cf99310e968cb76fc}\label{_s_d_l__rwops_8h_a0422f79e1889750cf99310e968cb76fc}} 
+D\+E\+C\+L\+S\+P\+EC size\+\_\+t S\+D\+L\+C\+A\+LL {\bfseries S\+D\+L\+\_\+\+Write\+B\+E64} (\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$dst, Uint64 value)
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\subsection{Detailed Description}
+This file provides a general interface for S\+DL to read and write data streams. It can easily be extended to files, memory, etc. 
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_s_d_l__rwops_8h_aba5f3b60c197def370ffa2ca1ab1348d}\label{_s_d_l__rwops_8h_aba5f3b60c197def370ffa2ca1ab1348d}} 
+\index{S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}!R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR@{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR}}
+\index{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR@{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR}!S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}}
+\subsubsection{\texorpdfstring{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR}{RW\_SEEK\_CUR}}
+{\footnotesize\ttfamily \#define R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+C\+UR~1}
+
+Seek relative to current read point \mbox{\Hypertarget{_s_d_l__rwops_8h_a6cf141faabd1b8f2ec3c03cf76eaf553}\label{_s_d_l__rwops_8h_a6cf141faabd1b8f2ec3c03cf76eaf553}} 
+\index{S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}!R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND@{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND}}
+\index{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND@{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND}!S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}}
+\subsubsection{\texorpdfstring{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND}{RW\_SEEK\_END}}
+{\footnotesize\ttfamily \#define R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+E\+ND~2}
+
+Seek relative to the end of data \mbox{\Hypertarget{_s_d_l__rwops_8h_ac028b032bb8230df64bc6284e04789f5}\label{_s_d_l__rwops_8h_ac028b032bb8230df64bc6284e04789f5}} 
+\index{S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}!R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET@{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET}}
+\index{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET@{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET}!S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}}
+\subsubsection{\texorpdfstring{R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET}{RW\_SEEK\_SET}}
+{\footnotesize\ttfamily \#define R\+W\+\_\+\+S\+E\+E\+K\+\_\+\+S\+ET~0}
+
+Seek from the beginning of data \mbox{\Hypertarget{_s_d_l__rwops_8h_a7219b60f2f449254ccb5af762f4c990f}\label{_s_d_l__rwops_8h_a7219b60f2f449254ccb5af762f4c990f}} 
+\index{S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}!S\+D\+L\+\_\+\+Load\+File@{S\+D\+L\+\_\+\+Load\+File}}
+\index{S\+D\+L\+\_\+\+Load\+File@{S\+D\+L\+\_\+\+Load\+File}!S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}}
+\subsubsection{\texorpdfstring{S\+D\+L\+\_\+\+Load\+File}{SDL\_LoadFile}}
+{\footnotesize\ttfamily \#define S\+D\+L\+\_\+\+Load\+File(\begin{DoxyParamCaption}\item[{}]{file,  }\item[{}]{datasize }\end{DoxyParamCaption})~\mbox{\hyperlink{_s_d_l__rwops_8h_ab80a1b522d2fbbae8ed5610d029fcfda}{S\+D\+L\+\_\+\+Load\+File\+\_\+\+RW}}(S\+D\+L\+\_\+\+R\+W\+From\+File(file, \char`\"{}rb\char`\"{}), datasize, 1)}
+
+Load an entire file.
+
+Convenience macro. \mbox{\Hypertarget{_s_d_l__rwops_8h_ad1e973a8b9f9c6cae33f2870c9f76b7d}\label{_s_d_l__rwops_8h_ad1e973a8b9f9c6cae33f2870c9f76b7d}} 
+\index{S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}!S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+J\+N\+I\+F\+I\+LE@{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+J\+N\+I\+F\+I\+LE}}
+\index{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+J\+N\+I\+F\+I\+LE@{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+J\+N\+I\+F\+I\+LE}!S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}}
+\subsubsection{\texorpdfstring{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+J\+N\+I\+F\+I\+LE}{SDL\_RWOPS\_JNIFILE}}
+{\footnotesize\ttfamily \#define S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+J\+N\+I\+F\+I\+LE~3U}
+
+Android asset \mbox{\Hypertarget{_s_d_l__rwops_8h_a1120765c20af356803b2beb6709e6749}\label{_s_d_l__rwops_8h_a1120765c20af356803b2beb6709e6749}} 
+\index{S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}!S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+RY@{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+RY}}
+\index{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+RY@{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+RY}!S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}}
+\subsubsection{\texorpdfstring{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+RY}{SDL\_RWOPS\_MEMORY}}
+{\footnotesize\ttfamily \#define S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+RY~4U}
+
+Memory stream \mbox{\Hypertarget{_s_d_l__rwops_8h_a145dd63b72548f37e2fdd9de8bf15bbc}\label{_s_d_l__rwops_8h_a145dd63b72548f37e2fdd9de8bf15bbc}} 
+\index{S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}!S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+RO@{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+RO}}
+\index{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+RO@{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+RO}!S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}}
+\subsubsection{\texorpdfstring{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+RO}{SDL\_RWOPS\_MEMORY\_RO}}
+{\footnotesize\ttfamily \#define S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+M\+E\+M\+O\+R\+Y\+\_\+\+RO~5U}
+
+Read-\/\+Only memory stream \mbox{\Hypertarget{_s_d_l__rwops_8h_a054a717fd0b1a2f175e2e822e1ecc67d}\label{_s_d_l__rwops_8h_a054a717fd0b1a2f175e2e822e1ecc67d}} 
+\index{S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}!S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+S\+T\+D\+F\+I\+LE@{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+S\+T\+D\+F\+I\+LE}}
+\index{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+S\+T\+D\+F\+I\+LE@{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+S\+T\+D\+F\+I\+LE}!S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}}
+\subsubsection{\texorpdfstring{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+S\+T\+D\+F\+I\+LE}{SDL\_RWOPS\_STDFILE}}
+{\footnotesize\ttfamily \#define S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+S\+T\+D\+F\+I\+LE~2U}
+
+Stdio file \mbox{\Hypertarget{_s_d_l__rwops_8h_abefd1a35086e97620beffc2c069bd97d}\label{_s_d_l__rwops_8h_abefd1a35086e97620beffc2c069bd97d}} 
+\index{S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}!S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+U\+N\+K\+N\+O\+WN@{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+U\+N\+K\+N\+O\+WN}}
+\index{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+U\+N\+K\+N\+O\+WN@{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+U\+N\+K\+N\+O\+WN}!S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}}
+\subsubsection{\texorpdfstring{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+U\+N\+K\+N\+O\+WN}{SDL\_RWOPS\_UNKNOWN}}
+{\footnotesize\ttfamily \#define S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+U\+N\+K\+N\+O\+WN~0U}
+
+Unknown stream type \mbox{\Hypertarget{_s_d_l__rwops_8h_ad979b58d7905cfd8af0bab9ed97c1685}\label{_s_d_l__rwops_8h_ad979b58d7905cfd8af0bab9ed97c1685}} 
+\index{S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}!S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+W\+I\+N\+F\+I\+LE@{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+W\+I\+N\+F\+I\+LE}}
+\index{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+W\+I\+N\+F\+I\+LE@{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+W\+I\+N\+F\+I\+LE}!S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}}
+\subsubsection{\texorpdfstring{S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+W\+I\+N\+F\+I\+LE}{SDL\_RWOPS\_WINFILE}}
+{\footnotesize\ttfamily \#define S\+D\+L\+\_\+\+R\+W\+O\+P\+S\+\_\+\+W\+I\+N\+F\+I\+LE~1U}
+
+Win32 file 
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{_s_d_l__rwops_8h_af758c42c576a0612bdf298c5823a5fe5}\label{_s_d_l__rwops_8h_af758c42c576a0612bdf298c5823a5fe5}} 
+\index{S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}!S\+D\+L\+\_\+\+R\+Wops@{S\+D\+L\+\_\+\+R\+Wops}}
+\index{S\+D\+L\+\_\+\+R\+Wops@{S\+D\+L\+\_\+\+R\+Wops}!S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}}
+\subsubsection{\texorpdfstring{S\+D\+L\+\_\+\+R\+Wops}{SDL\_RWops}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}}  \mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}}}
+
+This is the read/write operation structure -- very basic. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{_s_d_l__rwops_8h_ab80a1b522d2fbbae8ed5610d029fcfda}\label{_s_d_l__rwops_8h_ab80a1b522d2fbbae8ed5610d029fcfda}} 
+\index{S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}!S\+D\+L\+\_\+\+Load\+File\+\_\+\+RW@{S\+D\+L\+\_\+\+Load\+File\+\_\+\+RW}}
+\index{S\+D\+L\+\_\+\+Load\+File\+\_\+\+RW@{S\+D\+L\+\_\+\+Load\+File\+\_\+\+RW}!S\+D\+L\+\_\+rwops.\+h@{S\+D\+L\+\_\+rwops.\+h}}
+\subsubsection{\texorpdfstring{S\+D\+L\+\_\+\+Load\+File\+\_\+\+R\+W()}{SDL\_LoadFile\_RW()}}
+{\footnotesize\ttfamily D\+E\+C\+L\+S\+P\+EC void$\ast$ S\+D\+L\+C\+A\+LL S\+D\+L\+\_\+\+Load\+File\+\_\+\+RW (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_s_d_l___r_wops}{S\+D\+L\+\_\+\+R\+Wops}} $\ast$}]{src,  }\item[{size\+\_\+t $\ast$}]{datasize,  }\item[{int}]{freesrc }\end{DoxyParamCaption})}
+
+Load all the data from an S\+DL data stream.
+
+The data is allocated with a zero byte at the end (null terminated)
+
+If {\ttfamily datasize} is not N\+U\+LL, it is filled with the size of the data read.
+
+If {\ttfamily freesrc} is non-\/zero, the stream will be closed after being read.
+
+The data should be freed with S\+D\+L\+\_\+free().
+
+\begin{DoxyReturn}{Returns}
+the data, or N\+U\+LL if there was an error. 
+\end{DoxyReturn}

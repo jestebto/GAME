@@ -1,0 +1,105 @@
+\hypertarget{class_graphic_output_manager}{}\section{Graphic\+Output\+Manager Class Reference}
+\label{class_graphic_output_manager}\index{Graphic\+Output\+Manager@{Graphic\+Output\+Manager}}
+
+
+{\ttfamily \#include $<$Graphic\+Output\+Manager.\+h$>$}
+
+Inheritance diagram for Graphic\+Output\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_graphic_output_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_graphic_output_manager_adf8a096f7b671b182b74bb130ffd6b99}{Graphic\+Output\+Manager}} ()
+\item 
+\mbox{\Hypertarget{class_graphic_output_manager_accbac7b69a0eacd891cd2196213ec21e}\label{class_graphic_output_manager_accbac7b69a0eacd891cd2196213ec21e}} 
+\mbox{\hyperlink{class_graphic_output_manager_accbac7b69a0eacd891cd2196213ec21e}{Graphic\+Output\+Manager}} (const \mbox{\hyperlink{class_graphic_output_manager}{Graphic\+Output\+Manager}} \&)=delete
+\begin{DoxyCompactList}\small\item\em UI objects should not be copied or moved. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graphic_output_manager_a0be3ed3dd2fe8d7a742376754dd1e04f}\label{class_graphic_output_manager_a0be3ed3dd2fe8d7a742376754dd1e04f}} 
+{\bfseries Graphic\+Output\+Manager} (const \mbox{\hyperlink{class_graphic_output_manager}{Graphic\+Output\+Manager}} \&\&)=delete
+\item 
+\mbox{\Hypertarget{class_graphic_output_manager_af289b7768cac2928aaae9990b0a16360}\label{class_graphic_output_manager_af289b7768cac2928aaae9990b0a16360}} 
+\mbox{\hyperlink{class_graphic_output_manager}{Graphic\+Output\+Manager}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_graphic_output_manager}{Graphic\+Output\+Manager}} \&)=delete
+\item 
+\mbox{\hyperlink{class_graphic_output_manager_a13de402f591b8bfa7a11d4c2b84dfd83}{$\sim$\+Graphic\+Output\+Manager}} ()
+\item 
+void \mbox{\hyperlink{class_graphic_output_manager_af2d827a7b2ae16889e66e67c18c731d1}{load\+Level}} (\mbox{\hyperlink{class_output_data}{Output\+Data}})
+\item 
+void \mbox{\hyperlink{class_graphic_output_manager_aed60e3ba3328c6ca2ab0b3bf60e9871f}{update}} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_data_update}{Data\+Update}} $>$$>$ data)
+\item 
+void \mbox{\hyperlink{class_graphic_output_manager_a64226361d4d827e5c16b76fcf86f4f6f}{update}} (User\+Input\+Type)
+\item 
+\mbox{\Hypertarget{class_graphic_output_manager_a2d86a80cc16bd37fc3dbe29fd1c19ab5}\label{class_graphic_output_manager_a2d86a80cc16bd37fc3dbe29fd1c19ab5}} 
+void \mbox{\hyperlink{class_graphic_output_manager_a2d86a80cc16bd37fc3dbe29fd1c19ab5}{play\+Animation}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} $>$ const \&, \mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, \mbox{\hyperlink{namespace_animation_terms_a171348588b2b248e71955ad7c5042e67}{Animation\+Terms\+::\+Animation\+Types}})
+\begin{DoxyCompactList}\small\item\em Play an animation for a given \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} and Animation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graphic_output_manager_aa8284e4b2236216fab0679337016f904}\label{class_graphic_output_manager_aa8284e4b2236216fab0679337016f904}} 
+void \mbox{\hyperlink{class_graphic_output_manager_aa8284e4b2236216fab0679337016f904}{show\+Game\+Over\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em Displays the Game Over screen. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graphic_output_manager_a896e2a0cc1b756545645add439854d1a}\label{class_graphic_output_manager_a896e2a0cc1b756545645add439854d1a}} 
+void \mbox{\hyperlink{class_graphic_output_manager_a896e2a0cc1b756545645add439854d1a}{show\+Victory\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em Displays the Victory screen. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graphic_output_manager_a085da086f62be4c985cfa1dfb5cbe015}\label{class_graphic_output_manager_a085da086f62be4c985cfa1dfb5cbe015}} 
+void \mbox{\hyperlink{class_graphic_output_manager_a085da086f62be4c985cfa1dfb5cbe015}{show\+Generic\+Error\+Screen}} ()
+\begin{DoxyCompactList}\small\item\em Displays the generic error screen (when the error is unknown) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+An output manager that manages a Window and a Graphic User Interface This class owns \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} objects, \mbox{\hyperlink{class_sprite_manager}{Sprite\+Manager(s)}}, S\+DL textures and a S\+DL window and renderer. It is dependent on \mbox{\hyperlink{class_sprite_manager}{Sprite\+Manager}} to execute many of the tasks related to dynamic sprites. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_graphic_output_manager_adf8a096f7b671b182b74bb130ffd6b99}\label{class_graphic_output_manager_adf8a096f7b671b182b74bb130ffd6b99}} 
+\index{Graphic\+Output\+Manager@{Graphic\+Output\+Manager}!Graphic\+Output\+Manager@{Graphic\+Output\+Manager}}
+\index{Graphic\+Output\+Manager@{Graphic\+Output\+Manager}!Graphic\+Output\+Manager@{Graphic\+Output\+Manager}}
+\subsubsection{\texorpdfstring{Graphic\+Output\+Manager()}{GraphicOutputManager()}}
+{\footnotesize\ttfamily Graphic\+Output\+Manager\+::\+Graphic\+Output\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructor Note\+: all initialisation is done in Graphic\+Interface\+::loadlevel() \mbox{\Hypertarget{class_graphic_output_manager_a13de402f591b8bfa7a11d4c2b84dfd83}\label{class_graphic_output_manager_a13de402f591b8bfa7a11d4c2b84dfd83}} 
+\index{Graphic\+Output\+Manager@{Graphic\+Output\+Manager}!````~Graphic\+Output\+Manager@{$\sim$\+Graphic\+Output\+Manager}}
+\index{````~Graphic\+Output\+Manager@{$\sim$\+Graphic\+Output\+Manager}!Graphic\+Output\+Manager@{Graphic\+Output\+Manager}}
+\subsubsection{\texorpdfstring{$\sim$\+Graphic\+Output\+Manager()}{~GraphicOutputManager()}}
+{\footnotesize\ttfamily Graphic\+Output\+Manager\+::$\sim$\+Graphic\+Output\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Destructor Fully de-\/initializes the UI, including closing the main window. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_graphic_output_manager_af2d827a7b2ae16889e66e67c18c731d1}\label{class_graphic_output_manager_af2d827a7b2ae16889e66e67c18c731d1}} 
+\index{Graphic\+Output\+Manager@{Graphic\+Output\+Manager}!load\+Level@{load\+Level}}
+\index{load\+Level@{load\+Level}!Graphic\+Output\+Manager@{Graphic\+Output\+Manager}}
+\subsubsection{\texorpdfstring{load\+Level()}{loadLevel()}}
+{\footnotesize\ttfamily void Graphic\+Output\+Manager\+::load\+Level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_output_data}{Output\+Data}}}]{input\+String }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Initialize the UI fully. Loads data Creates a main (S\+DL) window for rendering, and loads the sprites from a bitmap on disk. Public because called by Game Manager 
+
+Implements \mbox{\hyperlink{class_i_output_manager_a50a935d76cf10427b0977406a2338146}{I\+Output\+Manager}}.
+
+\mbox{\Hypertarget{class_graphic_output_manager_aed60e3ba3328c6ca2ab0b3bf60e9871f}\label{class_graphic_output_manager_aed60e3ba3328c6ca2ab0b3bf60e9871f}} 
+\index{Graphic\+Output\+Manager@{Graphic\+Output\+Manager}!update@{update}}
+\index{update@{update}!Graphic\+Output\+Manager@{Graphic\+Output\+Manager}}
+\subsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Graphic\+Output\+Manager\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_data_update}{Data\+Update}} $>$$>$}]{data }\end{DoxyParamCaption})}
+
+Update the screen
+\begin{DoxyItemize}
+\item Draw the background
+\item Draw the score
+\item Draw the remaining lives
+\item Draw the objects (last) 
+\end{DoxyItemize}\mbox{\Hypertarget{class_graphic_output_manager_a64226361d4d827e5c16b76fcf86f4f6f}\label{class_graphic_output_manager_a64226361d4d827e5c16b76fcf86f4f6f}} 
+\index{Graphic\+Output\+Manager@{Graphic\+Output\+Manager}!update@{update}}
+\index{update@{update}!Graphic\+Output\+Manager@{Graphic\+Output\+Manager}}
+\subsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Graphic\+Output\+Manager\+::update (\begin{DoxyParamCaption}\item[{User\+Input\+Type}]{user\+Input }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+A test update that takes in user inputs directly, so that the logic component can be completely bypassed This is useful for testing animations 
+
+Implements \mbox{\hyperlink{class_i_output_manager_aef1aaf499f3eee5927cb2833af39ce43}{I\+Output\+Manager}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+G\+A\+M\+Esource/Graphic\+Output\+Manager.\+h\item 
+G\+A\+M\+Esource/Graphic\+Output\+Manager.\+cpp\end{DoxyCompactItemize}
