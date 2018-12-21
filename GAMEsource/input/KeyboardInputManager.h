@@ -1,6 +1,8 @@
 #pragma once
+#include "pch.h"
 #include "IInputManager.h"
-#include "UserInputType.h"
+#include <SDL2/SDL.h>
+#include <iostream>
 
 /**
 * Gets input from the keyboard and mouse, and sends it through the IInputManager interface

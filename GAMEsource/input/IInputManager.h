@@ -1,5 +1,6 @@
 #pragma once
 #include "UserInputType.h"
+#include "pch.h"
 
 /**
 * Interface to be implemented by a class acting as the manager of the Input Component

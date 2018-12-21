@@ -13,70 +13,70 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Logic</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Logic</Filter>
-    </ClCompile>
-    <ClCompile Include="GameLevel.cpp">
-      <Filter>Logic</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSprite.cpp">
-      <Filter>Output</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardInputManager.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
-    <ClCompile Include="IInputManager.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
-    <ClCompile Include="IOutputManager.cpp">
-      <Filter>Output</Filter>
-    </ClCompile>
-    <ClCompile Include="IStorageManager.cpp">
-      <Filter>Storage</Filter>
-    </ClCompile>
-    <ClCompile Include="HardCodedStorageManager.cpp">
-      <Filter>Storage</Filter>
-    </ClCompile>
-    <ClCompile Include="ILogicManager.cpp">
-      <Filter>Logic</Filter>
-    </ClCompile>
-    <ClCompile Include="LogicData.cpp">
-      <Filter>Logic</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerUp.cpp">
-      <Filter>Logic</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Logic</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Logic</Filter>
-    </ClCompile>
-    <ClCompile Include="RandomInputGenerator.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
-    <ClCompile Include="OutputData.cpp">
-      <Filter>Output</Filter>
-    </ClCompile>
     <ClCompile Include="DataUpdate.cpp" />
-    <ClCompile Include="SpriteManager.cpp">
-      <Filter>Output</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicOutputManager.cpp">
-      <Filter>Output</Filter>
-    </ClCompile>
-    <ClCompile Include="StorageLevelData.cpp">
-      <Filter>Storage</Filter>
-    </ClCompile>
-    <ClCompile Include="StorageGameData.cpp">
-      <Filter>Storage</Filter>
-    </ClCompile>
     <ClCompile Include="DataToolkit.cpp" />
-    <ClCompile Include="CharSprite.cpp">
+    <ClCompile Include="input\IInputManager.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\KeyboardInputManager.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="input\RandomInputGenerator.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="storage\HardCodedStorageManager.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="storage\IStorageManager.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="storage\StorageGameData.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="storage\StorageLevelData.cpp">
+      <Filter>Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="output\CharSprite.cpp">
       <Filter>Output</Filter>
+    </ClCompile>
+    <ClCompile Include="output\GameSprite.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
+    <ClCompile Include="output\GraphicOutputManager.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
+    <ClCompile Include="output\IOutputManager.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
+    <ClCompile Include="output\OutputData.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
+    <ClCompile Include="output\SpriteManager.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\Character.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\Enemy.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\GameLevel.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\GameObject.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\ILogicManager.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\LogicData.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\Player.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\PowerUp.cpp">
+      <Filter>Logic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,82 +86,78 @@
     <ClInclude Include="GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="GameLevel.h">
-      <Filter>Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="ILogicManager.h">
-      <Filter>Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="LogicData.h">
-      <Filter>Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerUp.h">
-      <Filter>Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Logic</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSprite.h">
-      <Filter>Output</Filter>
-    </ClInclude>
-    <ClInclude Include="OutputData.h">
-      <Filter>Output</Filter>
-    </ClInclude>
-    <ClInclude Include="IInputManager.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardInputManager.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="HardCodedStorageManager.h">
-      <Filter>Storage</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomInputGenerator.h">
-      <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="IStorageManager.h">
-      <Filter>Storage</Filter>
-    </ClInclude>
-    <ClInclude Include="IOutputManager.h">
-      <Filter>Output</Filter>
-    </ClInclude>
-    <ClInclude Include="DataUpdate.h" />
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteManager.h">
-      <Filter>Output</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicOutputManager.h">
-      <Filter>Output</Filter>
-    </ClInclude>
-    <ClInclude Include="StorageLevelData.h">
-      <Filter>Storage</Filter>
-    </ClInclude>
-    <ClInclude Include="StorageGameData.h">
-      <Filter>Storage</Filter>
-    </ClInclude>
-    <ClInclude Include="CharacterOrientation.h" />
     <ClInclude Include="ProgramState.h" />
-    <ClInclude Include="DataToolkit.h" />
-    <ClInclude Include="UserInputType.h" />
-    <ClInclude Include="Animation.h">
+    <ClInclude Include="input\IInputManager.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\KeyboardInputManager.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="input\RandomInputGenerator.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\UserInputType.h" />
+    <ClInclude Include="include\pch.h" />
+    <ClInclude Include="include\CharacterOrientation.h" />
+    <ClInclude Include="include\DataToolkit.h" />
+    <ClInclude Include="include\DataUpdate.h" />
+    <ClInclude Include="include\GameState.h" />
+    <ClInclude Include="storage\HardCodedStorageManager.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\IStorageManager.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\StorageGameData.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="storage\StorageLevelData.h">
+      <Filter>Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="output\Animation.h">
       <Filter>Output</Filter>
     </ClInclude>
-    <ClInclude Include="CharSprite.h">
+    <ClInclude Include="output\CharSprite.h">
       <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="output\GameSprite.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="output\GraphicOutputManager.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="output\IOutputManager.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="output\OutputData.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="output\SpriteManager.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\Character.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\Enemy.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\GameLevel.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\GameObject.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\ILogicManager.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\LogicData.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\Player.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\PowerUp.h">
+      <Filter>Logic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

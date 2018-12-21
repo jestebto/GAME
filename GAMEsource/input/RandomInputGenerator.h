@@ -1,6 +1,8 @@
 #pragma once
 #include "IInputManager.h"
-#include "UserInputType.h"
+#include <cstdlib>
+#include "pch.h"
+
 class RandomInputGenerator : public IInputManager
 {
 public:

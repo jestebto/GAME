@@ -2,17 +2,17 @@
 #include "ComponentFactory.h"
 
 //Storage managers:
-#include "HardCodedStorageManager.h"
+#include "storage/HardCodedStorageManager.h"
 
 //Input managers:
-#include "KeyboardInputManager.h"
-#include "RandomInputGenerator.h"
+#include "input/KeyboardInputManager.h"
+#include "input/RandomInputGenerator.h"
 
 //Logic managers:
-#include "GameLevel.h"
+#include "logic/GameLevel.h"
 
 //Output managers:
-#include "GraphicOutputManager.h"
+#include "output/GraphicOutputManager.h"
 
 ComponentFactory::ComponentFactory()
 {

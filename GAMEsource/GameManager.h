@@ -1,11 +1,11 @@
 #pragma once
 #include "ComponentFactory.h"
-#include "IStorageManager.h"
-#include "IInputManager.h"
-#include "ILogicManager.h"
-#include "IOutputManager.h"
-#include "StorageLevelData.h"
-#include "StorageGameData.h"
+#include "storage/IStorageManager.h"
+#include "input/IInputManager.h"
+#include "logic/ILogicManager.h"
+#include "output/IOutputManager.h"
+#include "storage/StorageLevelData.h"
+#include "storage/StorageGameData.h"
 #include "ProgramState.h"
 
 /*

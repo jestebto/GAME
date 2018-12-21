@@ -1,6 +1,6 @@
-#include "pch.h"
+
 #include "RandomInputGenerator.h"
-#include <cstdlib>
+
 
 RandomInputGenerator::RandomInputGenerator()
 {

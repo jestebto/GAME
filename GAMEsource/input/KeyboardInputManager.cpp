@@ -1,8 +1,5 @@
-#include "pch.h"
+
 #include "KeyboardInputManager.h"
-#include <SDL2/SDL.h>
-#include "UserInputType.h"
-#include <iostream>
 
 
 

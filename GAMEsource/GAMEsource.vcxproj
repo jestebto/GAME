@@ -72,15 +72,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <SourcePath>$(VC_SourcePath)</SourcePath>
+    <IncludePath>$(IncludePath);GAMEsource</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <SourcePath>$(VC_SourcePath)</SourcePath>
+    <IncludePath>$(IncludePath);GAMEsource</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <SourcePath>$(VC_SourcePath)</SourcePath>
+    <IncludePath>$(IncludePath);GAMEsource</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <SourcePath>$(VC_SourcePath)</SourcePath>
+    <IncludePath>$(IncludePath);GAMEsource</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -91,7 +99,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,7 +117,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,7 +137,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,7 +159,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -163,71 +171,71 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="Character.h" />
-    <ClInclude Include="CharacterOrientation.h" />
-    <ClInclude Include="CharSprite.h" />
     <ClInclude Include="ComponentFactory.h" />
-    <ClInclude Include="DataToolkit.h" />
-    <ClInclude Include="DataUpdate.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="GameLevel.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameSprite.h" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="GraphicOutputManager.h" />
-    <ClInclude Include="HardCodedStorageManager.h" />
-    <ClInclude Include="IInputManager.h" />
-    <ClInclude Include="ILogicManager.h" />
-    <ClInclude Include="IOutputManager.h" />
-    <ClInclude Include="IStorageManager.h" />
-    <ClInclude Include="KeyboardInputManager.h" />
-    <ClInclude Include="LogicData.h" />
-    <ClInclude Include="OutputData.h" />
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="include\CharacterOrientation.h" />
+    <ClInclude Include="include\DataToolkit.h" />
+    <ClInclude Include="include\DataUpdate.h" />
+    <ClInclude Include="include\GameState.h" />
+    <ClInclude Include="include\pch.h" />
+    <ClInclude Include="include\UserInputType.h" />
+    <ClInclude Include="input\IInputManager.h" />
+    <ClInclude Include="input\KeyboardInputManager.h" />
+    <ClInclude Include="input\RandomInputGenerator.h" />
+    <ClInclude Include="logic\Character.h" />
+    <ClInclude Include="logic\Enemy.h" />
+    <ClInclude Include="logic\GameLevel.h" />
+    <ClInclude Include="logic\GameObject.h" />
+    <ClInclude Include="logic\ILogicManager.h" />
+    <ClInclude Include="logic\LogicData.h" />
+    <ClInclude Include="logic\Player.h" />
+    <ClInclude Include="logic\PowerUp.h" />
+    <ClInclude Include="output\Animation.h" />
+    <ClInclude Include="output\CharSprite.h" />
+    <ClInclude Include="output\GameSprite.h" />
+    <ClInclude Include="output\GraphicOutputManager.h" />
+    <ClInclude Include="output\IOutputManager.h" />
+    <ClInclude Include="output\OutputData.h" />
+    <ClInclude Include="output\SpriteManager.h" />
     <ClInclude Include="ProgramState.h" />
-    <ClInclude Include="RandomInputGenerator.h" />
-    <ClInclude Include="SpriteManager.h" />
-    <ClInclude Include="StorageGameData.h" />
-    <ClInclude Include="StorageLevelData.h" />
-    <ClInclude Include="UserInputType.h" />
+    <ClInclude Include="storage\HardCodedStorageManager.h" />
+    <ClInclude Include="storage\IStorageManager.h" />
+    <ClInclude Include="storage\StorageGameData.h" />
+    <ClInclude Include="storage\StorageLevelData.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Character.cpp" />
-    <ClCompile Include="CharSprite.cpp" />
     <ClCompile Include="ComponentFactory.cpp" />
     <ClCompile Include="DataToolkit.cpp" />
     <ClCompile Include="DataUpdate.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="GameLevel.cpp" />
     <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GAMEsource.cpp" />
-    <ClCompile Include="GameSprite.cpp" />
-    <ClCompile Include="GraphicOutputManager.cpp" />
-    <ClCompile Include="HardCodedStorageManager.cpp" />
-    <ClCompile Include="IInputManager.cpp" />
-    <ClCompile Include="ILogicManager.cpp" />
-    <ClCompile Include="IOutputManager.cpp" />
-    <ClCompile Include="IStorageManager.cpp" />
-    <ClCompile Include="KeyboardInputManager.cpp" />
-    <ClCompile Include="LogicData.cpp" />
-    <ClCompile Include="OutputData.cpp" />
+    <ClCompile Include="input\IInputManager.cpp" />
+    <ClCompile Include="input\KeyboardInputManager.cpp" />
+    <ClCompile Include="input\RandomInputGenerator.cpp" />
+    <ClCompile Include="logic\Character.cpp" />
+    <ClCompile Include="logic\Enemy.cpp" />
+    <ClCompile Include="logic\GameLevel.cpp" />
+    <ClCompile Include="logic\GameObject.cpp" />
+    <ClCompile Include="logic\ILogicManager.cpp" />
+    <ClCompile Include="logic\LogicData.cpp" />
+    <ClCompile Include="logic\Player.cpp" />
+    <ClCompile Include="logic\PowerUp.cpp" />
+    <ClCompile Include="output\CharSprite.cpp" />
+    <ClCompile Include="output\GameSprite.cpp" />
+    <ClCompile Include="output\GraphicOutputManager.cpp" />
+    <ClCompile Include="output\IOutputManager.cpp" />
+    <ClCompile Include="output\OutputData.cpp" />
+    <ClCompile Include="output\SpriteManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PowerUp.cpp" />
-    <ClCompile Include="RandomInputGenerator.cpp" />
-    <ClCompile Include="SpriteManager.cpp" />
-    <ClCompile Include="StorageGameData.cpp" />
-    <ClCompile Include="StorageLevelData.cpp" />
+    <ClCompile Include="storage\HardCodedStorageManager.cpp" />
+    <ClCompile Include="storage\IStorageManager.cpp" />
+    <ClCompile Include="storage\StorageGameData.cpp" />
+    <ClCompile Include="storage\StorageLevelData.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
