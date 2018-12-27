@@ -13,7 +13,7 @@
 #include "GameSprite.h"
 #include "CharSprite.h"
 #include "UserInputType.h" // for test purposes, else this class is not supposed to know about the UserInput
-#include "Animation.h"
+#include "AnimationFrame.h"
 
 #include <SDL2/SDL.h>
 #include <map>
@@ -45,7 +45,7 @@ public: /// Functions to be called by GraphicOutputManager
 	SDL_Rect* getTile(SpriteAttributes::ArtType, SpriteAttributes::Description); 
 
 	/// Get a vector of animation frames. Search through different private map<>animations defined below
-	std::vector<AnimationTerms::AnimationFrame>* getAnimationFrames(std::unique_ptr<GameSprite> const&, SpriteAttributes::ArtType, AnimationTerms::AnimationTypes);
+	std::vector<AnimationFrame>* getAnimationFrames(std::unique_ptr<GameSprite> const&, SpriteAttributes::ArtType, AnimationTerms::AnimationTypes);
 	
 private:
 	/// Loaded SDL texture with all sprite bitmaps.
@@ -67,8 +67,8 @@ private:
 	/// For the player, use a map with the key as the orientation and the action
 	/// For the other objects, the orientation is not important, so use the key as object type and the action
 	/// An art type and a description uniquely defines an animation frame
-	std::map <CharacterOrientation, std::map<AnimationTerms::AnimationTypes, std::vector<AnimationTerms::AnimationFrame>>> animationsPlayer;
-	std::map <SpriteAttributes::ArtType, std::map<AnimationTerms::AnimationTypes, std::vector<AnimationTerms::AnimationFrame>>> animationsOther;
+	std::map <CharacterOrientation, std::map<AnimationTerms::AnimationTypes, std::vector<AnimationFrame>>> animationsPlayer;
+	std::map <SpriteAttributes::ArtType, std::map<AnimationTerms::AnimationTypes, std::vector<AnimationFrame>>> animationsOther;
 
 	enum { PACMAN_TILESIZE = 24 }; //< tile size for each Sprite. Does not have to be the same as the graphic interface size
 };

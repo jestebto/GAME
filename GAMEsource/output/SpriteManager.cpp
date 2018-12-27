@@ -30,7 +30,7 @@ SDL_Rect* SpriteManager::getTile(SpriteAttributes::ArtType art, SpriteAttributes
 }
 
 
-std::vector<AnimationTerms::AnimationFrame>* SpriteManager::getAnimationFrames(std::unique_ptr<GameSprite> const& element, SpriteAttributes::ArtType type, AnimationTerms::AnimationTypes action){
+std::vector<AnimationFrame>* SpriteManager::getAnimationFrames(std::unique_ptr<GameSprite> const& element, SpriteAttributes::ArtType type, AnimationTerms::AnimationTypes action){
 	switch (type) {
 	case(SpriteAttributes::ArtType::PACMAN): {
 		// Note: if this is not a CharSprite, then getOrientation() will return type 'none'
@@ -179,36 +179,36 @@ void SpriteManager::createAnimationSequences() {
 
 	std::map<AnimationTypes, std::vector<AnimationFrame>> enemyAnimations;
 	enemyAnimations[DIE]= std::vector<AnimationFrame>{
-		std::make_pair(SCARED, DEFAULT), std::make_pair(SCARED, ELIMINATE) };
+		AnimationFrame(SCARED, DEFAULT), AnimationFrame(SCARED, ELIMINATE) };
 	animationsOther[SCARED] = enemyAnimations;
 
 
 	// Player animations
 	std::map<AnimationTypes, std::vector<AnimationFrame>> playerUpAnimations;
 	playerUpAnimations[AnimationTerms::ATTACK]= std::vector<AnimationFrame>{
-		std::make_pair(PACMAN, ATTACK_UP), std::make_pair(PACMAN, ALT),
-		std::make_pair(PACMAN, ATTACK_UP), std::make_pair(PACMAN, UP)
+		AnimationFrame(PACMAN, ATTACK_UP), AnimationFrame(PACMAN, ALT),
+		AnimationFrame(PACMAN, ATTACK_UP), AnimationFrame(PACMAN, UP)
 	};
 	animationsPlayer[CharacterOrientation::Up] = playerUpAnimations;
 
 	std::map<AnimationTypes, std::vector<AnimationFrame>> playerDownAnimations;
 	playerDownAnimations[AnimationTerms::ATTACK] = std::vector<AnimationFrame>{
-		std::make_pair(PACMAN, ATTACK_DOWN), std::make_pair(PACMAN, ALT),
-		std::make_pair(PACMAN, ATTACK_DOWN), std::make_pair(PACMAN, DOWN)
+		AnimationFrame(PACMAN, ATTACK_DOWN), AnimationFrame(PACMAN, ALT),
+		AnimationFrame(PACMAN, ATTACK_DOWN), AnimationFrame(PACMAN, DOWN)
 	};
 	animationsPlayer[CharacterOrientation::Down] = playerDownAnimations;
 
 	std::map<AnimationTypes, std::vector<AnimationFrame>> playerLeftAnimations;
 	playerLeftAnimations[AnimationTerms::ATTACK] = std::vector<AnimationFrame>{
-		std::make_pair(PACMAN, ATTACK_LEFT), std::make_pair(PACMAN, ALT),
-		std::make_pair(PACMAN, ATTACK_LEFT), std::make_pair(PACMAN, LEFT)
+		AnimationFrame(PACMAN, ATTACK_LEFT), AnimationFrame(PACMAN, ALT),
+		AnimationFrame(PACMAN, ATTACK_LEFT), AnimationFrame(PACMAN, LEFT)
 	};
 	animationsPlayer[CharacterOrientation::Left] = playerLeftAnimations;
 
 	std::map<AnimationTypes, std::vector<AnimationFrame>> playerRightAnimations;
 	playerRightAnimations[AnimationTerms::ATTACK] = std::vector<AnimationFrame>{
-		std::make_pair(PACMAN, ATTACK_RIGHT), std::make_pair(PACMAN, ALT),
-		std::make_pair(PACMAN, ATTACK_RIGHT), std::make_pair(PACMAN, RIGHT)
+		AnimationFrame(PACMAN, ATTACK_RIGHT), AnimationFrame(PACMAN, ALT),
+		AnimationFrame(PACMAN, ATTACK_RIGHT), AnimationFrame(PACMAN, RIGHT)
 	};
 	animationsPlayer[CharacterOrientation::Right] = playerRightAnimations;
 
