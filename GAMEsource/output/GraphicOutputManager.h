@@ -16,7 +16,7 @@
 #include "IOutputManager.h"
 #include "UserInputType.h" // for test purposes, else this class is not supposed to know about the UserInput
 #include "GameSprite.h"
-#include "SpriteManager.h" // all sprite related functions are in this class
+#include "TileManager.h" // all sprite related functions are in this class
 #include "DataToolkit.h"
 
 #include <SDL2/SDL.h>
@@ -122,7 +122,7 @@ private:
 	int xOffset=0; //< offset to centre the map in the display
 	int yOffset=0; //< offset to centre the map in the display
 
-	std::unique_ptr<SpriteManager> spriteManager; //< makes a unique SpriteManager for this OutputManager
+	std::unique_ptr<TileManager> spriteManager; //< makes a unique SpriteManager for this OutputManager
 	
 	/// Map of GameSprites in use
 	/// The key is the ID

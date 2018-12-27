@@ -13,7 +13,7 @@ GraphicOutputManager::GraphicOutputManager()
 	//All other setup is done in GrahpicInterface::loadlevel once data has been received
 
 	// Load game over screen
-	spriteManager = std::make_unique<SpriteManager>(this->loadTexture("resources/sam_gfx.bmp"));
+	spriteManager = std::make_unique<TileManager>(this->loadTexture("resources/sam_gfx.bmp"));
 	gameOverScreen = this->loadTexture("resources/GAME_OVER.bmp");
 	victoryScreen = this->loadTexture("resources/set1_victory.bmp");
 	genericErrorScreen = this->loadTexture("resources/ERROR.bmp");

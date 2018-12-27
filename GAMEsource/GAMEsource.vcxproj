@@ -196,7 +196,7 @@
     <ClInclude Include="output\GraphicOutputManager.h" />
     <ClInclude Include="output\IOutputManager.h" />
     <ClInclude Include="output\OutputData.h" />
-    <ClInclude Include="output\SpriteManager.h" />
+    <ClInclude Include="output\TileManager.h" />
     <ClInclude Include="ProgramState.h" />
     <ClInclude Include="storage\HardCodedStorageManager.h" />
     <ClInclude Include="storage\IStorageManager.h" />
@@ -225,7 +225,7 @@
     <ClCompile Include="output\GraphicOutputManager.cpp" />
     <ClCompile Include="output\IOutputManager.cpp" />
     <ClCompile Include="output\OutputData.cpp" />
-    <ClCompile Include="output\SpriteManager.cpp" />
+    <ClCompile Include="output\TileManager.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

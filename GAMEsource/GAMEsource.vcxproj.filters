@@ -51,9 +51,6 @@
     <ClCompile Include="output\OutputData.cpp">
       <Filter>Output</Filter>
     </ClCompile>
-    <ClCompile Include="output\SpriteManager.cpp">
-      <Filter>Output</Filter>
-    </ClCompile>
     <ClCompile Include="logic\Character.cpp">
       <Filter>Logic</Filter>
     </ClCompile>
@@ -77,6 +74,9 @@
     </ClCompile>
     <ClCompile Include="logic\PowerUp.cpp">
       <Filter>Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="output\TileManager.cpp">
+      <Filter>Output</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +129,6 @@
     <ClInclude Include="output\OutputData.h">
       <Filter>Output</Filter>
     </ClInclude>
-    <ClInclude Include="output\SpriteManager.h">
-      <Filter>Output</Filter>
-    </ClInclude>
     <ClInclude Include="logic\Character.h">
       <Filter>Logic</Filter>
     </ClInclude>
@@ -157,6 +154,9 @@
       <Filter>Logic</Filter>
     </ClInclude>
     <ClInclude Include="output\AnimationFrame.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="output\TileManager.h">
       <Filter>Output</Filter>
     </ClInclude>
   </ItemGroup>

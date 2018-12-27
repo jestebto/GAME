@@ -7,8 +7,8 @@
  */
 
 
-#ifndef SPRITE_MANAGER_H
-#define SPRITE_MANAGER_H
+#ifndef TILE_MANAGER_H
+#define TILE_MANAGER_H
 
 #include "GameSprite.h"
 #include "CharSprite.h"
@@ -30,11 +30,11 @@
 * Also contains animation functions (these will be moved to a new another class)
 */
 
-class SpriteManager
+class TileManager
 {
 public: /// Functions to be called by GraphicOutputManager
-	SpriteManager(SDL_Texture*);
-	~SpriteManager();
+	TileManager(SDL_Texture*);
+	~TileManager();
 
 	/// pass the sheet so that it can be used in a renderer (in the GraphicOutputManager)
 	SDL_Texture* getSheet();
@@ -73,4 +73,4 @@ private:
 	enum { PACMAN_TILESIZE = 24 }; //< tile size for each Sprite. Does not have to be the same as the graphic interface size
 };
 
-#endif // SPRITE_MANAGER_H
+#endif // TILE_MANAGER_H

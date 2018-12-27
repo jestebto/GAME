@@ -1,7 +1,7 @@
 #include "SpriteManager.h"
 
 
-SpriteManager::SpriteManager(SDL_Texture* texture)
+TileManager::TileManager(SDL_Texture* texture)
 {
 	this->sheetSprites = texture;
 	// Pre-make the map for the tiles.
@@ -11,26 +11,26 @@ SpriteManager::SpriteManager(SDL_Texture* texture)
 	createAnimationSequences();
 }
 
-SpriteManager::~SpriteManager()
+TileManager::~TileManager()
 {
 	SDL_DestroyTexture(sheetSprites);
 }
 
-SDL_Texture* SpriteManager::getSheet() {
+SDL_Texture* TileManager::getSheet() {
 	return this->sheetSprites;
 }
 
 
-SDL_Rect* SpriteManager::getTile(std::unique_ptr<GameSprite> const& element) {
+SDL_Rect* TileManager::getTile(std::unique_ptr<GameSprite> const& element) {
 	return &tileSet.at(element->getArt()).at(element->getDescription()); // &tileSet[art][des] does unwanted behaviour: creates a default element if it can't find the element
 }
 
-SDL_Rect* SpriteManager::getTile(SpriteAttributes::ArtType art, SpriteAttributes::Description des) {
+SDL_Rect* TileManager::getTile(SpriteAttributes::ArtType art, SpriteAttributes::Description des) {
 	return &tileSet.at(art).at(des); // &tileSet[art][des] does unwanted behaviour: creates a default element if it can't find the element
 }
 
 
-std::vector<AnimationFrame>* SpriteManager::getAnimationFrames(std::unique_ptr<GameSprite> const& element, SpriteAttributes::ArtType type, AnimationTerms::AnimationTypes action){
+std::vector<AnimationFrame>* TileManager::getAnimationFrames(std::unique_ptr<GameSprite> const& element, SpriteAttributes::ArtType type, AnimationTerms::AnimationTypes action){
 	switch (type) {
 	case(SpriteAttributes::ArtType::PACMAN): {
 		// Note: if this is not a CharSprite, then getOrientation() will return type 'none'
@@ -43,7 +43,7 @@ std::vector<AnimationFrame>* SpriteManager::getAnimationFrames(std::unique_ptr<G
 }
 
 /// From the Pacman Code
-void SpriteManager::createTileMap()
+void TileManager::createTileMap()
 {
 
 	using namespace SpriteAttributes;
@@ -158,7 +158,7 @@ void SpriteManager::createTileMap()
 }
 
 
-void SpriteManager::createAnimationSequences() {
+void TileManager::createAnimationSequences() {
 	using namespace SpriteAttributes;
 	using namespace AnimationTerms;
 	
