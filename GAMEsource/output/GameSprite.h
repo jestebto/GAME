@@ -72,7 +72,7 @@ public:
 
 	virtual void moveSprite(int, int); ///< Estimate direction using the new and old co-ordinates
 	virtual void moveSprite(int); ///< Define virtual functions for use with more complex GameSprite child classes
-	void moveSprite(UserInputType); ///< For test purposes only, as this is not connected to the logic
+	void moveSprite(UserInputType,int); ///< For test purposes only, as this is not connected to the logic
 
 	
 	virtual void setOrientation(CharacterOrientation); ///< Define virtual functions for use with more complex GameSprite child classes

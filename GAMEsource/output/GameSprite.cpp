@@ -99,12 +99,11 @@ void GameSprite::moveSprite(int value)
 	// don't move it all all
 }
 
-void GameSprite::moveSprite(UserInputType command)
+void GameSprite::moveSprite(UserInputType command, int moveSize)
 {
 	// directly move a Sprite based on user input
 	// for test purposes only, as this is not connected to the logic
 
-	int moveSize = 1;
 	/*  Co-ordinates:
 	*   .---> +x
 	*   |

@@ -1,4 +1,4 @@
-#include "SpriteManager.h"
+#include "TileManager.h"
 
 
 TileManager::TileManager(SDL_Texture* texture)

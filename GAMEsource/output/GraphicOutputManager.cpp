@@ -64,8 +64,10 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
 			// tempConstructorData format: {"ID, x, y, lives"} 
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<CharSprite> (stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), PACMAN, SpriteAttributes::UP, CharacterOrientation::Up);
+			int x = TILESIZE * stoi(tempConstructorData[1]);
+			int y = TILESIZE * stoi(tempConstructorData[2]);
+			this->spriteObjects[tempConstructorData[0]] = std::make_unique<CharSprite> (x,y,PACMAN, 
+				SpriteAttributes::UP, CharacterOrientation::Up);
 			this->lives= stoi(tempConstructorData[3]);
 
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
@@ -76,8 +78,10 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			// Data format: "ID,x,y,lives,"
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 			// create a new enemy storing a shared pointer to it
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>( stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), SCAREDINV, SpriteAttributes::DEFAULT);
+			int x = TILESIZE * stoi(tempConstructorData[1]);
+			int y = TILESIZE * stoi(tempConstructorData[2]);
+			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, SCAREDINV, 
+				SpriteAttributes::DEFAULT);
 
 			tempConstructorData = {}; // make sure the vector is empty in the next case
 			break;
@@ -86,8 +90,10 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			// separate the data to construct the new object
 			// Data format: "ID,x,y,livesBonus,"
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), APPLE, SpriteAttributes::DEFAULT);
+			int x = TILESIZE * stoi(tempConstructorData[1]);
+			int y = TILESIZE * stoi(tempConstructorData[2]);
+			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, APPLE,
+				SpriteAttributes::DEFAULT);
 		}
 
 		}
@@ -131,9 +137,9 @@ void GraphicOutputManager::setBackground(const std::string& mapString) {
 		}
 	}
 	// xOffset = screenWidth/2 - mapWidth/2;
-	this->xOffset = (SCREEN_WIDTH - static_cast<int>( levelMap[0].size() ))/ 2;
+	this->xOffset = (TILESIZE*(SCREEN_WIDTH - static_cast<int>( levelMap[0].size() )))/ 2;
 	// yOffset = screenHeight/2 - mapWidth/2;
-	this->yOffset = (SCREEN_HEIGHT - static_cast<int>( levelMap.size() ))/ 2;
+	this->yOffset = (TILESIZE*(SCREEN_HEIGHT - static_cast<int>( levelMap.size() )))/ 2;
 }
 
 void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
@@ -167,7 +173,9 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 				}
 				default: { //Assume it is a movement
 					(mapPair->second)->setOrientation(static_cast<CharacterOrientation>(stoi(tempConstructorData[1])));
-					(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition()); //Calls the CharSprite code
+					int x = TILESIZE * (dataPtr->getObjectXPosition());
+					int y = TILESIZE * (dataPtr->getObjectYPosition());
+					(mapPair->second)->moveSprite(x, y); //Calls the CharSprite move code
 					break;
 				}
 				}
@@ -181,7 +189,9 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 					break;
 				}
 				default: { //Assume it is a movement
-					(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition()); 
+					int x = TILESIZE *(dataPtr->getObjectXPosition());
+					int y = TILESIZE *(dataPtr->getObjectYPosition());
+					(mapPair->second)->moveSprite(x, y); 
 					break;
 				}
 				}
@@ -214,7 +224,7 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 		int x = mapPair.second->getXPosition();
 		int y = mapPair.second->getYPosition();
 
-		SDL_Rect dst = { (x + xOffset) * TILESIZE , (y + yOffset) * TILESIZE, TILESIZE,
+		SDL_Rect dst = { x  + xOffset, y  + yOffset, TILESIZE,
 			TILESIZE };
 		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
 			&dst);
@@ -237,7 +247,7 @@ void GraphicOutputManager::update(UserInputType userInput)
 	if (mapPair == spriteObjects.end())
 		std::cout << "Element not found" << '\n';
 	else {
-		(mapPair->second)->moveSprite(userInput);
+		(mapPair->second)->moveSprite(userInput,TILESIZE);
 
 		if (userInput == UserInputType::Hit) {
 			playAnimation(mapPair->second, SpriteAttributes::PACMAN, AnimationTerms::AnimationTypes::ATTACK);
@@ -255,7 +265,7 @@ void GraphicOutputManager::update(UserInputType userInput)
 		int x = mapPair.second->getXPosition();
 		int y = mapPair.second->getYPosition();
 
-		SDL_Rect dst = { (x + xOffset) * TILESIZE + xOffset, (y+ yOffset) * TILESIZE , TILESIZE,
+		SDL_Rect dst = { x + xOffset, y + yOffset , TILESIZE,
 						TILESIZE };
 		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
 			&dst);
@@ -274,7 +284,7 @@ void GraphicOutputManager::playAnimation(std::unique_ptr<GameSprite> const& elem
 
 		int x = element->getXPosition();
 		int y = element->getYPosition();
-		SDL_Rect dst = { (x + xOffset) * TILESIZE + xOffset, (y + yOffset) * TILESIZE , TILESIZE,
+		SDL_Rect dst = { x + xOffset, y + yOffset, TILESIZE,
 				TILESIZE };
 		SDL_RenderFillRect(renderer, &dst); //fill the current spot with a blank rectangle
 
@@ -284,8 +294,8 @@ void GraphicOutputManager::playAnimation(std::unique_ptr<GameSprite> const& elem
 				element->moveSprite(frame.movement);
 				int x = element->getXPosition();
 				int y = element->getYPosition(); 
-				dst = { (x + xOffset) * TILESIZE + xOffset, (y + yOffset) * TILESIZE , TILESIZE,
-		TILESIZE };
+				dst = { x + xOffset, y + yOffset , TILESIZE,
+				TILESIZE };
 			}
 			
 
@@ -355,8 +365,8 @@ void GraphicOutputManager::drawBackground(std::vector<std::vector<int>> &map)
 	// Draw a wall on each position containing a one
 	for (size_t i = 0; i < map.size(); i++) {
 		for (size_t j = 0; j < map[i].size(); j++) {
-			SDL_Rect dst = { (static_cast<int>(j) + xOffset )* TILESIZE,
-				             (static_cast<int>(i) + yOffset) * TILESIZE , TILESIZE,
+			SDL_Rect dst = { (static_cast<int>(j)*TILESIZE)+ xOffset,
+				             (static_cast<int>(i)* TILESIZE)+ yOffset , TILESIZE,
 				TILESIZE };
 			if (map[i][j] == 1) {
 				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL, SpriteAttributes::DEFAULT), &dst);
