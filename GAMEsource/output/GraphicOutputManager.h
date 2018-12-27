@@ -81,9 +81,6 @@ private:
 	/// Read the map layout and add into the map array
 	void setBackground(const std::string&);
 
-    /// Loads the sprite sheet.
-    void loadTextures();
-
 	/// Seperate tiles into a tileSet map. Usage is:
 	/// tileSet[<ArtType>][<Direction>]
 	/// and the tile set itself is in GraphicInterface::sheet

@@ -30,6 +30,12 @@ void GameManager::StartGame()
 			outputManager->showGenericErrorScreen();
 			this->programState = ProgramState::ERROR;
 		}
+		catch (std::string msg)
+		{
+			std::cout << msg << '\n';
+			// If the output manager fails, then can't show the ErrorScreen;
+			this->programState = ProgramState::ERROR;
+		}
 
 		while (this->programState != ProgramState::CLOSING) {
 			try {

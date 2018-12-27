@@ -1,26 +1,19 @@
 #include "SpriteManager.h"
 
 
-SpriteManager::SpriteManager()
+SpriteManager::SpriteManager(SDL_Texture* texture)
 {
-	// Pre-make the map for the tiles.
-	// Note: this does not require the actual images or tiles themselves
-	//createTileMap(); -> moved to SpriteManager::setSheet
-}
-
-SpriteManager::~SpriteManager()
-{
-	SDL_DestroyTexture(sheetSprites);
-}
-
-
-void SpriteManager::setSheet(SDL_Texture* texture) {
 	this->sheetSprites = texture;
 	// Pre-make the map for the tiles.
 	// Note: this does not require the texture
 	createTileMap();
 	// Pre-make the animation frame for the tiles.
 	createAnimationSequences();
+}
+
+SpriteManager::~SpriteManager()
+{
+	SDL_DestroyTexture(sheetSprites);
 }
 
 SDL_Texture* SpriteManager::getSheet() {

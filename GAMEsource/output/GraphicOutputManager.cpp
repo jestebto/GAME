@@ -8,19 +8,20 @@
 
 GraphicOutputManager::GraphicOutputManager()
 {
-	//spriteManager = new SpriteManager(24);
-	spriteManager = std::make_unique<SpriteManager>();
-
 	// Initialize window and load textures.
 	this->init();
-	this->loadTextures();
 	//All other setup is done in GrahpicInterface::loadlevel once data has been received
+
+	// Load game over screen
+	spriteManager = std::make_unique<SpriteManager>(this->loadTexture("resources/sam_gfx.bmp"));
+	gameOverScreen = this->loadTexture("resources/GAME_OVER.bmp");
+	victoryScreen = this->loadTexture("resources/set1_victory.bmp");
+	genericErrorScreen = this->loadTexture("resources/ERROR.bmp");
 }
 
 
 GraphicOutputManager::~GraphicOutputManager()
 {
-	//SDL_DestroyTexture(sheet);
 	SDL_DestroyTexture(gameOverScreen);
 	SDL_DestroyTexture(victoryScreen);
 	SDL_DestroyTexture(genericErrorScreen);
@@ -335,21 +336,6 @@ void GraphicOutputManager::init()
 		SDL_RENDERER_PRESENTVSYNC);
 }
 
-// From the Pacman Code
-void GraphicOutputManager::loadTextures()
-{
-	// Load sprite sheet
-	//sheet = this->loadTexture("resources/sam_gfx.bmp");
-	spriteManager->setSheet(this->loadTexture("resources/sam_gfx.bmp"));
-	//seperateTiles(); //moved to SpriteManager
-
-	// Load game over screen
-	gameOverScreen = this->loadTexture("resources/GAME_OVER.bmp");
-	victoryScreen = this->loadTexture("resources/set1_victory.bmp");
-	genericErrorScreen = this->loadTexture("resources/ERROR.bmp");
-}
-
-
 
 // From the Pacman Code
 void GraphicOutputManager::drawBackground(std::vector<std::vector<int>> &map)
@@ -388,11 +374,17 @@ SDL_Texture *GraphicOutputManager::loadTexture(const std::string &file)
 {
 	SDL_Surface *surf = SDL_LoadBMP(file.c_str());
 	if (surf == nullptr) {
-		std::cerr << "Error while loading texture bitmap: " << SDL_GetError() << std::endl;
+		std::string errorMsg= "Error while loading texture bitmap: ";
+		errorMsg = errorMsg + SDL_GetError();
+		throw errorMsg;
+		//std::cerr << "Error while loading texture bitmap: " << SDL_GetError() << std::endl;
 	}
 	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surf);
 	if (texture == nullptr) {
-		std::cerr << "Error while creating texture: " << SDL_GetError() << std::endl;
+		std::string errorMsg = "Error while loading texture bitmap: ";
+		errorMsg = errorMsg + SDL_GetError();
+		throw errorMsg;
+		//std::cerr << "Error while creating texture: " << SDL_GetError() << std::endl;
 	}
 	SDL_FreeSurface(surf);
 	return texture;

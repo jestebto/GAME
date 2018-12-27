@@ -33,13 +33,9 @@
 class SpriteManager
 {
 public: /// Functions to be called by GraphicOutputManager
-	SpriteManager();
+	SpriteManager(SDL_Texture*);
 	~SpriteManager();
 
-	// TOD Lior: the SpriteManager should own this function
-	/// create the texture sheet which has all the artworks for the sprites
-	void setSheet(SDL_Texture*);
-	
 	/// pass the sheet so that it can be used in a renderer (in the GraphicOutputManager)
 	SDL_Texture* getSheet();
 	
