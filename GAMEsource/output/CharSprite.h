@@ -32,6 +32,7 @@ public:
 
 	/// Override virtual function in GameSprite, so that the artwork is change to match the orientation
 	void moveSprite(int, int); 
+	void moveSprite(int); ///< move Sprite based on the current orientation
 
 private:
 	CharacterOrientation orientation;

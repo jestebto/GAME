@@ -29,3 +29,30 @@ void CharSprite::moveSprite(int x, int y)
 	SpriteAttributes::Description des = CharSprite::mapOrientationToDescription(this->orientation);
 	setDescription(des);
 }
+
+void CharSprite::moveSprite(int value)
+{
+	CharacterOrientation ori = this->getOrientation();
+
+	int x = this->getXPosition();
+	int y = this->getYPosition();
+
+	switch (ori) {
+	case CharacterOrientation::Up: 
+		setYPosition(y-value);
+		break;
+	case CharacterOrientation::Down:
+		setYPosition(y+value);
+		break;
+	case CharacterOrientation::Left:
+		setXPosition(x - value);
+		break;
+	case CharacterOrientation::Right:
+		setXPosition(x + value);
+		break;
+	default:
+		break;
+	}
+	SpriteAttributes::Description des = CharSprite::mapOrientationToDescription(this->orientation);
+	setDescription(des);
+}

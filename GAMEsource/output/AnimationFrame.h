@@ -18,9 +18,10 @@ namespace AnimationTerms {
 class AnimationFrame
 {
 public:
-	AnimationFrame(SpriteAttributes::ArtType artType, SpriteAttributes::Description des) {
+	AnimationFrame(SpriteAttributes::ArtType artType, SpriteAttributes::Description des,int value) {
 		this->art = artType;
 		this->description = des;
+		this->movement = value;
 	}
 	;
 	~AnimationFrame() {};
@@ -30,6 +31,7 @@ public:
 
 	SpriteAttributes::ArtType art;
 	SpriteAttributes::Description description;
+	int movement;
 
 };
 

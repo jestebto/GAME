@@ -114,9 +114,6 @@
     <ClInclude Include="storage\StorageLevelData.h">
       <Filter>Storage</Filter>
     </ClInclude>
-    <ClInclude Include="output\Animation.h">
-      <Filter>Output</Filter>
-    </ClInclude>
     <ClInclude Include="output\CharSprite.h">
       <Filter>Output</Filter>
     </ClInclude>
@@ -158,6 +155,9 @@
     </ClInclude>
     <ClInclude Include="logic\PowerUp.h">
       <Filter>Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="output\AnimationFrame.h">
+      <Filter>Output</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

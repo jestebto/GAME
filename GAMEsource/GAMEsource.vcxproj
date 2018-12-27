@@ -190,7 +190,7 @@
     <ClInclude Include="logic\LogicData.h" />
     <ClInclude Include="logic\Player.h" />
     <ClInclude Include="logic\PowerUp.h" />
-    <ClInclude Include="output\Animation.h" />
+    <ClInclude Include="output\AnimationFrame.h" />
     <ClInclude Include="output\CharSprite.h" />
     <ClInclude Include="output\GameSprite.h" />
     <ClInclude Include="output\GraphicOutputManager.h" />

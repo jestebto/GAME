@@ -271,14 +271,25 @@ void GraphicOutputManager::playAnimation(std::unique_ptr<GameSprite> const& elem
 	try {
 		std::vector<AnimationFrame>* animationFrames = spriteManager->getAnimationFrames(element, type, action);
 
+
 		int x = element->getXPosition();
 		int y = element->getYPosition();
-
 		SDL_Rect dst = { (x + xOffset) * TILESIZE + xOffset, (y + yOffset) * TILESIZE , TILESIZE,
-							TILESIZE };
-		for (AnimationFrame frame : *animationFrames) {
-			SDL_RenderFillRect(renderer, &dst); //fill the current spot with a blank rectangle
+				TILESIZE };
+		SDL_RenderFillRect(renderer, &dst); //fill the current spot with a blank rectangle
 
+		for (AnimationFrame frame : *animationFrames) {
+			if (frame.movement != 0) {
+				SDL_RenderFillRect(renderer, &dst); //fill the current spot with a blank rectangle
+				element->moveSprite(frame.movement);
+				int x = element->getXPosition();
+				int y = element->getYPosition(); 
+				dst = { (x + xOffset) * TILESIZE + xOffset, (y + yOffset) * TILESIZE , TILESIZE,
+		TILESIZE };
+			}
+			
+
+			SDL_RenderFillRect(renderer, &dst); //fill the current spot with a blank rectangle
 			SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(frame.art, frame.description),
 				&dst);
 

@@ -94,6 +94,11 @@ void GameSprite::moveSprite(int x, int y)
 
 }
 
+void GameSprite::moveSprite(int value)
+{
+	// don't move it all all
+}
+
 void GameSprite::moveSprite(UserInputType command)
 {
 	// directly move a Sprite based on user input

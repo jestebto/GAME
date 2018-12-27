@@ -71,6 +71,7 @@ public:
 	SpriteAttributes::Description getDescription(); ///< get sprite artwork description
 
 	virtual void moveSprite(int, int); ///< Estimate direction using the new and old co-ordinates
+	virtual void moveSprite(int); ///< Define virtual functions for use with more complex GameSprite child classes
 	void moveSprite(UserInputType); ///< For test purposes only, as this is not connected to the logic
 
 	
@@ -78,9 +79,6 @@ public:
 	virtual CharacterOrientation getOrientation(); ///< Return CharacterOrientation::None
 
 	/* Shared functions with GameObject */
-	//void setID(const std::string&);
-	//std::string getID(); ///< a unique a ID shared with a GameObject in the logic side
-
 	void setXPosition(int); ///< set X-Position
 	int getXPosition(); ///< get X-Position
 
