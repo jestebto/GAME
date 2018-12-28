@@ -6,8 +6,6 @@
 #include <vector>
 #include "GameSprite.h"
 
-/// Define terms used for animations
-
 /**
 * Each animation frame consists of a single sprite artwork, which can be uniquely identified 
 * by an artType and a description e.g. PACMAN UP.
@@ -28,9 +26,9 @@ public:
 	/// An artwork type and an artwork description uniquely defines an animation frame
 	//typedef std::pair<SpriteAttributes::ArtType, SpriteAttributes::Description> AnimationFrame;
 
-	SpriteAttributes::ArtType art;
-	SpriteAttributes::Description description;
-	int movement;
+	SpriteAttributes::ArtType art; ///< An artwork type to identify the sprite
+	SpriteAttributes::Description description; ///< further description to identify the sprite
+	int movement; ///< Can encode a movement if desired. Set to 0 for no movement.
 
 };
 

@@ -39,14 +39,19 @@ SDL_Rect* TileManagerPacman::getTile(SpriteAttributes::ArtType art, SpriteAttrib
 
 
 std::vector<AnimationFrame>* TileManagerPacman::getAnimationFrames(GameSprite* element, SpriteAttributes::ArtType type, SpriteAttributes::AnimationTypes action) {
-	switch (type) {
-	case(SpriteAttributes::ArtType::PACMAN): {
-		// Note: if this is not a CharSprite, then getOrientation() will return type 'none'
-		return &(this->animationsPacman.at(element->getOrientation()).at(action));
+	try {
+		switch (type) {
+		case(SpriteAttributes::ArtType::PACMAN): {
+			// Note: if this is not a CharSprite, then getOrientation() will return type 'none'
+			return &(this->animationsPacman.at(element->getOrientation()).at(action));
+		}
+		default: {
+			return &(this->animationsOther.at(type).at(action));
+		}
+		}
 	}
-	default: {
-		return &(this->animationsOther.at(type).at(action));
-	}
+	catch (std::out_of_range) {
+		return &(this->animationsOther.at(SpriteAttributes::ERROR).at(SpriteAttributes::AnimationTypes::NOTHING));
 	}
 }
 
@@ -186,12 +191,21 @@ void TileManagerPacman::createAnimationSequences() {
 	animationsOther[SCARED] = enemyAnimations;
 
 
+	std::map<AnimationTypes, std::vector<AnimationFrame>> error;
+	error[NOTHING] = std::vector<AnimationFrame>{
+		// flicker the error sprite
+		// useful for showing an animation isn't defined without causing the whole program to crash
+		AnimationFrame(ERROR, DEFAULT,0), AnimationFrame(BLANK, DEFAULT,0), 
+		AnimationFrame(ERROR, DEFAULT,0), AnimationFrame(BLANK, ELIMINATE,0),
+		AnimationFrame(ERROR, DEFAULT,0), AnimationFrame(BLANK, ELIMINATE,0) };
+	animationsOther[ERROR] = error;
+
 	// Pacman animations
 	std::map<AnimationTypes, std::vector<AnimationFrame>> playerUpAnimations;
 	playerUpAnimations[SpriteAttributes::ATTACK] = std::vector<AnimationFrame>{
 		AnimationFrame(PACMAN, UP,tileSize / 6), //move up
-		AnimationFrame(PACMAN, ATTACK_UP,0),
-		AnimationFrame(PACMAN, ALT,0), AnimationFrame(PACMAN, ATTACK_UP,0),
+		AnimationFrame(PACMAN, ATTACK_UP,0), AnimationFrame(PACMAN, ALT,0),
+		AnimationFrame(PACMAN, ATTACK_UP,0), AnimationFrame(PACMAN, UP,0),
 		AnimationFrame(PACMAN, UP,-tileSize / 6) //move down
 	};
 	playerUpAnimations[SpriteAttributes::GET_HIT] = std::vector<AnimationFrame>{
@@ -262,6 +276,8 @@ void TileManagerPacman::createAnimationSequences() {
 	playerRightAnimations[SpriteAttributes::DEATH] = playerUpAnimations[SpriteAttributes::DEATH];
 	animationsPacman[CharacterOrientation::Right] = playerRightAnimations;
 
-
+	std::map<AnimationTypes, std::vector<AnimationFrame>> playerNoneAnimations;
+	playerNoneAnimations[SpriteAttributes::DEATH] = playerUpAnimations[SpriteAttributes::DEATH];
+	animationsPacman[CharacterOrientation::None] = playerNoneAnimations;
 
 }

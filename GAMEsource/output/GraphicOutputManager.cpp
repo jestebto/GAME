@@ -198,7 +198,8 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			default:
 				switch (action) {
 				case DataUpdate::Action::ELIMINATE: {
-						deleteList.push_back(thisID); //add to the delete list
+					//animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::APPLE, SpriteAttributes::AnimationTypes::DEATH));
+					deleteList.push_back(thisID); //add to the delete list
 						break;
 				}
 				default: {
