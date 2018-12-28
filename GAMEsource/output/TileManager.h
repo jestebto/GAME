@@ -24,10 +24,10 @@
 #include <chrono> //milliseconds
 
 /**
-* Manages Sprites for the GraphicOutputManager. 
-* It provides an abstract interface to separate printing sprites to the SDL_renderer
-* from the complexity of creating a tile map for each tile set SDL_texture.
-* Also contains animation functions (these will be moved to a new another class)
+* Pure virtual class that manages Sprites for the GraphicOutputManager. It provides an abstract interface for the GraphicOutputManager.
+* Different TileManagers can be instantiated for different tile set images/SDL_Textures.
+* This seperates the complex task of creating and managing a tile set from the relatively simple task of printing sprites.
+* Also contains animation functions (these will be moved to a new another class).
 */
 
 class TileManager
@@ -40,37 +40,22 @@ public: /// Functions to be called by GraphicOutputManager
 	SDL_Texture* getSheet();
 	
 	/// getTile for a unique Sprite
-	SDL_Rect* getTile(std::unique_ptr<GameSprite> const&); 
+	virtual SDL_Rect* getTile(std::unique_ptr<GameSprite> const&) =0; 
 	/// getTile for general printing e.g. for the background
-	SDL_Rect* getTile(SpriteAttributes::ArtType, SpriteAttributes::Description); 
+	virtual SDL_Rect* getTile(SpriteAttributes::ArtType, SpriteAttributes::Description)=0;
 
-	/// Get a vector of animation frames. Search through different private map<>animations defined below
-	std::vector<AnimationFrame>* getAnimationFrames(GameSprite*, SpriteAttributes::ArtType, SpriteAttributes::AnimationTypes);
+	/// Get a vector of animation frames.
+	virtual std::vector<AnimationFrame>* getAnimationFrames(GameSprite*, SpriteAttributes::ArtType,
+		SpriteAttributes::AnimationTypes)=0;
 	
 private:
 	/// Loaded SDL texture with all sprite bitmaps.
 	SDL_Texture *sheetSprites;
 
-	/// Seperate tiles into a tileSet map. Usage is:
-	/// tileSet[<ArtType>][<Direction>]
-	/// and the tile set itself is in GraphicInterface::sheet
-	void createTileMap(); //Note: this was the old separateTiles(). New name to show that it doesn't actually seperate them; it only creates an index of where each sprite is in the bigger picture
-	void createAnimationSequences();
+	/// Seperate tiles into a tileSet map
+	virtual void createTileMap() = 0; //Note: this was the old separateTiles(). New name to show that it doesn't actually seperate them; it only creates an index of where each sprite is in the bigger picture
+	virtual void createAnimationSequences()=0; ///< create a list of connected sprites and descriptions to use in an animation sequence
 
-	/// Stores tiles to use in GraphicInterface::sheet. Usage is:
-	/// tileSet[<type>][<direction>]
-	/// \see ArtType
-	/// \see Direction
-	std::map<SpriteAttributes::ArtType, std::map<SpriteAttributes::Description, SDL_Rect>> tileSet;
-
-	/// Hard code the animation sequences
-	/// For the player, use a map with the key as the orientation and the action
-	/// For the other objects, the orientation is not important, so use the key as object type and the action
-	/// An art type and a description uniquely defines an animation frame
-	std::map <CharacterOrientation, std::map<SpriteAttributes::AnimationTypes, std::vector<AnimationFrame>>> animationsPacman;
-	std::map <SpriteAttributes::ArtType, std::map<SpriteAttributes::AnimationTypes, std::vector<AnimationFrame>>> animationsOther;
-
-	enum { PACMAN_TILESIZE = 24 }; //< tile size for each Sprite. Does not have to be the same as the graphic interface size
 };
 
 #endif // TILE_MANAGER_H

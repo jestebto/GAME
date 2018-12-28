@@ -78,6 +78,12 @@
     <ClCompile Include="output\TileManager.cpp">
       <Filter>Output</Filter>
     </ClCompile>
+    <ClCompile Include="output\TileManagerPacman.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
+    <ClCompile Include="output\TileManagerWeapons.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ComponentFactory.h">
@@ -160,6 +166,12 @@
       <Filter>Output</Filter>
     </ClInclude>
     <ClInclude Include="output\AnimationRequest.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="output\TileManagerPacman.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="output\TileManagerWeapons.h">
       <Filter>Output</Filter>
     </ClInclude>
   </ItemGroup>

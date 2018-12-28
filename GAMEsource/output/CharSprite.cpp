@@ -3,8 +3,8 @@
 
 
 CharSprite::CharSprite( int xPos, int yPos, SpriteAttributes::ArtType artType, 
-	SpriteAttributes::Description des, CharacterOrientation ori)
-	: GameSprite(xPos, yPos, artType, des)
+	SpriteAttributes::Description des, int select, CharacterOrientation ori)
+	: GameSprite(xPos, yPos, artType, des, select)
 {
 	orientation = ori;
 }

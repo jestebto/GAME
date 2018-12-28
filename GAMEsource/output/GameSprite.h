@@ -18,6 +18,7 @@
 namespace SpriteAttributes {
 	/// Artwork Type used for each sprite 
 	 enum ArtType {
+		 //Pacman
 		PACMAN,
 		BLINKY,
 		PINKY,
@@ -45,7 +46,11 @@ namespace SpriteAttributes {
 		SIX,
 		SEVEN,
 		EIGHT,
-		NINE
+		NINE,
+		// 7Soul1 tiles only
+		FIRE_SWORD,
+		// Error
+		ERROR
 	};
 
 	 /// For descriptions/actions for each artwork
@@ -67,7 +72,7 @@ namespace SpriteAttributes {
 class GameSprite
 {
 public:
-	GameSprite(int, int, SpriteAttributes::ArtType, SpriteAttributes::Description);
+	GameSprite(int, int, SpriteAttributes::ArtType, SpriteAttributes::Description,int);
 	~GameSprite(); // vitual destructor
 
 	void setType(SpriteAttributes::ArtType); ///< set sprite artwork
@@ -90,6 +95,8 @@ public:
 
 	void setYPosition(int); ///< get Y-Position
 	int getYPosition(); ///< get Y-Position
+
+	int tileManager;///< define which tileManager to use with this sprite
 	
 private:
 	SpriteAttributes::ArtType art;

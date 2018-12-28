@@ -12,8 +12,14 @@ GraphicOutputManager::GraphicOutputManager()
 	this->init();
 	//All other setup is done in GrahpicInterface::loadlevel once data has been received
 
-	// Load game over screen
-	spriteManager = std::make_unique<TileManager>(this->loadTexture("resources/sam_gfx.bmp"));
+	//Load TileManagers
+	spriteManager = std::make_unique<TileManagerPacman>(this->loadTexture("resources/sam_gfx.bmp"));// TM0
+	weaponManager = std::make_unique<TileManagerWeapons>(this->loadTexture("resources/7Soul1.bmp"));// TM1
+	//NB No animations defined for weaponManager. Do not use TM1 for the animations!!
+	//So basicalyl powerups/weapons can't have any animations
+	//TODO: a better solution
+
+	// Load other textures
 	gameOverScreen = this->loadTexture("resources/GAME_OVER.bmp");
 	victoryScreen = this->loadTexture("resources/set1_victory.bmp");
 	genericErrorScreen = this->loadTexture("resources/ERROR.bmp");
@@ -67,7 +73,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			int x = TILESIZE * stoi(tempConstructorData[1]);
 			int y = TILESIZE * stoi(tempConstructorData[2]);
 			this->spriteObjects[tempConstructorData[0]] = std::make_unique<CharSprite> (x,y,PACMAN, 
-				SpriteAttributes::UP, CharacterOrientation::Up);
+				SpriteAttributes::UP,TM0,CharacterOrientation::Up);
 			this->lives= stoi(tempConstructorData[3]);
 
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
@@ -81,7 +87,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			int x = TILESIZE * stoi(tempConstructorData[1]);
 			int y = TILESIZE * stoi(tempConstructorData[2]);
 			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, SCAREDINV, 
-				SpriteAttributes::DEFAULT);
+				SpriteAttributes::DEFAULT, TM0);
 
 			tempConstructorData = {}; // make sure the vector is empty in the next case
 			break;
@@ -93,20 +99,12 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			int x = TILESIZE * stoi(tempConstructorData[1]);
 			int y = TILESIZE * stoi(tempConstructorData[2]);
 			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, APPLE,
-				SpriteAttributes::DEFAULT);
+				SpriteAttributes::DEFAULT, TM1);
 		}
 
 		}
 	}
 
-
-	//Hard coded board for test purposes
-	/*
-	std::vector<std::vector<int>> board = { {
-		#include "board.def"
-	} };
-	this->map = std::move(board);
-	*/
 
 	//On the first iteration, only draw the background:
 
@@ -151,7 +149,7 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 
 	for (std::shared_ptr<DataUpdate> &dataPtr : data) {
 
-		// Look up in the ID in the sprite map
+		// Look up the ID in the sprite map
 		std::string thisID = dataPtr->getID();
 		auto mapPair = spriteObjects.find(thisID);
 
@@ -220,8 +218,8 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 	if (!animationList.empty()) { playAnimationMany(animationList); }
 
 	//delete all objects in the deleteList
-	for (std::string &deleteID : deleteList) {
-		auto mapPair = spriteObjects.find(deleteID);
+	for (std::string &thisID : deleteList) {
+		auto mapPair = spriteObjects.find(thisID);
 		spriteObjects.erase(mapPair);
 	}
 
@@ -236,10 +234,18 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 		int x = mapPair.second->getXPosition();
 		int y = mapPair.second->getYPosition();
 
-		SDL_Rect dst = { x  + xOffset, y  + yOffset, TILESIZE,
-			TILESIZE };
-		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
-			&dst);
+		SDL_Rect dst = { x  + xOffset, y  + yOffset, TILESIZE,TILESIZE }; //note: will stretch weaponManager tiles
+
+		// select which tile manager to to use to print the sprites
+		if (mapPair.second->tileManager == TM0) {
+			SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
+				&dst);
+		}
+		else
+		{
+			SDL_RenderCopy(renderer, weaponManager->getSheet(), weaponManager->getTile(mapPair.second),
+				&dst);
+		}
 	}
 
 	// Draw the lives.
@@ -277,8 +283,7 @@ void GraphicOutputManager::update(UserInputType userInput)
 		int x = mapPair.second->getXPosition();
 		int y = mapPair.second->getYPosition();
 
-		SDL_Rect dst = { x + xOffset, y + yOffset , TILESIZE,
-						TILESIZE };
+		SDL_Rect dst = { x + xOffset, y + yOffset , TILESIZE,TILESIZE };
 		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
 			&dst);
 	}
@@ -302,7 +307,7 @@ void GraphicOutputManager::playAnimation(AnimationRequest animationRequest)
 	}
 	catch (std::out_of_range) // Animation does not exist in any of the animation maps
 	{
-		throw std::out_of_range("Animation does not exist"); //TO DO: if you catch it and throw a different thing, do we need a custom exception in this case?
+		throw std::out_of_range("Animation does not exist in this tile manager"); //TO DO: if you catch it and throw a different thing, do we need a custom exception in this case?
 	}
 }
 
@@ -311,7 +316,6 @@ void GraphicOutputManager::playAnimationMany(std::vector<AnimationRequest> anima
 	std::vector< std::vector<AnimationFrame>* > animationSequences; //all the animation sequences to be displayed
 	size_t longest = 1; // length of the longest animation sequence
 	try {
-
 		// first get all the animation frames
 		for (AnimationRequest animationRequest : animationList) {
 			animationSequences.push_back(spriteManager->getAnimationFrames(animationRequest.elementRef, animationRequest.art, animationRequest.action));
@@ -319,18 +323,19 @@ void GraphicOutputManager::playAnimationMany(std::vector<AnimationRequest> anima
 				longest = animationSequences.back()->size();
 		}
 	}
-	catch (std::out_of_range) // One animation does not exist in any of the animation maps
+	catch (std::out_of_range) // One animation does not exist in the animation maps
 	{
-		throw std::out_of_range("An animation does not exist"); 
+		throw std::out_of_range("An animation does not exist in this tile manager"); 
 	}
 
 	size_t numAnimations = size(animationSequences);
 
-	// for each frame
+	// play animations concurrently
 	for (size_t j = 0; j < longest; j++) { // j = index of frame
 		for (size_t i = 0; i < numAnimations; ++i) { // i = index of animation
 			//update the renderers with each frame
 			if (animationSequences.at(i)->size() > j )
+				// draw frame j of animation i
 				drawAnimationFrame(animationSequences.at(i)->at(j), animationList.at(i).elementRef);
 		}
 		SDL_RenderPresent(renderer);
@@ -342,8 +347,7 @@ void GraphicOutputManager::drawAnimationFrame(AnimationFrame frame,GameSprite* e
 	//fill the old tile with a blank rectangle
 	int x = element->getXPosition();
 	int y = element->getYPosition();
-	SDL_Rect dst = { x + xOffset, y + yOffset, TILESIZE,
-		TILESIZE };
+	SDL_Rect dst = { x + xOffset, y + yOffset, TILESIZE,TILESIZE };
 	SDL_RenderFillRect(renderer, &dst); 
 
 	// if required, move the sprite
