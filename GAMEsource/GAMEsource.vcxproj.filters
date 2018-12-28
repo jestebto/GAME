@@ -159,6 +159,9 @@
     <ClInclude Include="output\TileManager.h">
       <Filter>Output</Filter>
     </ClInclude>
+    <ClInclude Include="output\AnimationRequest.h">
+      <Filter>Output</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

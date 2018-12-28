@@ -145,11 +145,15 @@ void GraphicOutputManager::setBackground(const std::string& mapString) {
 void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 {
 	// Update the map based on the incoming data
-	// Note: animations will be called and will be played on the old renderer
+	
+	std::vector<AnimationRequest> animationList; // keep track of animations to show
+	std::vector<std::string> deleteList;  // keep track of objects to delete after the animations
+
 	for (std::shared_ptr<DataUpdate> &dataPtr : data) {
 
 		// Look up in the ID in the sprite map
-		auto mapPair = spriteObjects.find(dataPtr->getID());
+		std::string thisID = dataPtr->getID();
+		auto mapPair = spriteObjects.find(thisID);
 
 		if (mapPair == spriteObjects.end())
 			std::cout << "Element not found" << '\n';
@@ -161,37 +165,30 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			DataUpdate::Action action =  dataPtr->getAction();
 			switch (type) {
 			case DataUpdate::ObjectType::PLAYER: {
-				// Data = "lives, (int)CharacterOrientation"
+				// DataFormat = "lives, (int)CharacterOrientation"
 				tempConstructorData = DataToolkit::getSubs(dataPtr->getData(), ',');
 
 				this->lives = stoi(tempConstructorData[0]);
 
 				switch (action) {
 				case DataUpdate::Action::ATTACK: {
-					playAnimation(mapPair->second, SpriteAttributes::PACMAN, AnimationTerms::AnimationTypes::ATTACK);
+					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::ATTACK));
 					break;
 				}
-				default: { //Assume it is a movement
+				default: { // update the orientation for the moveSprite call below
 					(mapPair->second)->setOrientation(static_cast<CharacterOrientation>(stoi(tempConstructorData[1])));
-					int x = TILESIZE * (dataPtr->getObjectXPosition());
-					int y = TILESIZE * (dataPtr->getObjectYPosition());
-					(mapPair->second)->moveSprite(x, y); //Calls the CharSprite move code
 					break;
 				}
 				}
 			} break;
 			case DataUpdate::ObjectType::ENEMY: {
-
 				switch (action) {
 				case DataUpdate::Action::ELIMINATE: {
-					playAnimation(mapPair->second, SpriteAttributes::SCARED, AnimationTerms::AnimationTypes::DIE);
-					spriteObjects.erase(mapPair); // since the map owns a unique_ptr, this calls the destructor as well.
+					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::SCARED, SpriteAttributes::AnimationTypes::DEATH));
+					deleteList.push_back(thisID);
 					break;
 				}
-				default: { //Assume it is a movement
-					int x = TILESIZE *(dataPtr->getObjectXPosition());
-					int y = TILESIZE *(dataPtr->getObjectYPosition());
-					(mapPair->second)->moveSprite(x, y); 
+				default: {
 					break;
 				}
 				}
@@ -199,18 +196,29 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			default:
 				switch (action) {
 				case DataUpdate::Action::ELIMINATE: {
-						spriteObjects.erase(mapPair); // since the map owns a unique_ptr, this calls the destructor as well.
+						deleteList.push_back(thisID); //add to the delete list
 						break;
 				}
-				default: { //Assume it is a movement
-						(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
-						break;
+				default: {
+					break;
 				}
 				}
 			}
 
+			// update object position, regardless of the incoming action
+			int x = TILESIZE * (dataPtr->getObjectXPosition());
+			int y = TILESIZE * (dataPtr->getObjectYPosition());
+			(mapPair->second)->moveSprite(x, y);
 		}
 
+	}
+	//Play all animations
+	if (!animationList.empty()) { playAnimationMany(animationList); }
+
+	//delete all objects in the deleteList
+	for (std::string &deleteID : deleteList) {
+		auto mapPair = spriteObjects.find(deleteID);
+		spriteObjects.erase(mapPair);
 	}
 
 	// Clear the current renderer.
@@ -250,7 +258,7 @@ void GraphicOutputManager::update(UserInputType userInput)
 		(mapPair->second)->moveSprite(userInput,TILESIZE);
 
 		if (userInput == UserInputType::Hit) {
-			playAnimation(mapPair->second, SpriteAttributes::PACMAN, AnimationTerms::AnimationTypes::ATTACK);
+			//playAnimation(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::ATTACK);
 		}
 	}
 
@@ -276,42 +284,76 @@ void GraphicOutputManager::update(UserInputType userInput)
 	SDL_RenderPresent(renderer);
 }
 
-void GraphicOutputManager::playAnimation(std::unique_ptr<GameSprite> const& element, SpriteAttributes::ArtType type, AnimationTerms::AnimationTypes action)
+void GraphicOutputManager::playAnimation(AnimationRequest animationRequest)
 {
 	try {
-		std::vector<AnimationFrame>* animationFrames = spriteManager->getAnimationFrames(element, type, action);
-
-
-		int x = element->getXPosition();
-		int y = element->getYPosition();
-		SDL_Rect dst = { x + xOffset, y + yOffset, TILESIZE,
-				TILESIZE };
-		SDL_RenderFillRect(renderer, &dst); //fill the current spot with a blank rectangle
-
+		std::vector<AnimationFrame>* animationFrames = spriteManager->getAnimationFrames(animationRequest.elementRef, animationRequest.art, animationRequest.action);
+		// display each frame in the vector of animationFrames 
 		for (AnimationFrame frame : *animationFrames) {
-			if (frame.movement != 0) {
-				SDL_RenderFillRect(renderer, &dst); //fill the current spot with a blank rectangle
-				element->moveSprite(frame.movement);
-				int x = element->getXPosition();
-				int y = element->getYPosition(); 
-				dst = { x + xOffset, y + yOffset , TILESIZE,
-				TILESIZE };
-			}
-			
-
-			SDL_RenderFillRect(renderer, &dst); //fill the current spot with a blank rectangle
-			SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(frame.art, frame.description),
-				&dst);
-
+			//update the renderer
+			drawAnimationFrame(frame, animationRequest.elementRef);
 			SDL_RenderPresent(renderer);
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
 		}
 	}
 	catch (std::out_of_range) // Animation does not exist in any of the animation maps
 	{
 		throw std::out_of_range("Animation does not exist"); //TO DO: if you catch it and throw a different thing, do we need a custom exception in this case?
 	}
+}
+
+void GraphicOutputManager::playAnimationMany(std::vector<AnimationRequest> animationList)
+{
+	std::vector< std::vector<AnimationFrame>* > animationSequences; //all the animation sequences to be displayed
+	size_t longest = 1; // length of the longest animation sequence
+	try {
+
+		// first get all the animation frames
+		for (AnimationRequest animationRequest : animationList) {
+			animationSequences.push_back(spriteManager->getAnimationFrames(animationRequest.elementRef, animationRequest.art, animationRequest.action));
+			if (animationSequences.back()->size()> longest)
+				longest = animationSequences.back()->size();
+		}
+	}
+	catch (std::out_of_range) // One animation does not exist in any of the animation maps
+	{
+		throw std::out_of_range("An animation does not exist"); 
+	}
+
+	size_t numAnimations = size(animationSequences);
+
+	// for each frame
+	for (size_t j = 0; j < longest; j++) { // j = index of frame
+		for (size_t i = 0; i < numAnimations; ++i) { // i = index of animation
+			//update the renderers with each frame
+			if (animationSequences.at(i)->size() > j )
+				drawAnimationFrame(animationSequences.at(i)->at(j), animationList.at(i).elementRef);
+		}
+		SDL_RenderPresent(renderer);
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
+}
+
+void GraphicOutputManager::drawAnimationFrame(AnimationFrame frame,GameSprite* element){
+	//fill the old tile with a blank rectangle
+	int x = element->getXPosition();
+	int y = element->getYPosition();
+	SDL_Rect dst = { x + xOffset, y + yOffset, TILESIZE,
+		TILESIZE };
+	SDL_RenderFillRect(renderer, &dst); 
+
+	// if required, move the sprite
+	if (frame.movement != 0) {
+		element->moveSprite(frame.movement);
+		x = element->getXPosition();
+		y = element->getYPosition();
+		dst = { x + xOffset, y + yOffset, TILESIZE,
+		TILESIZE };
+	}
+
+	// put the sprite in the new position
+	SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(frame.art, frame.description),
+		&dst);
 }
 
 void GraphicOutputManager::drawBitmap(SDL_Texture* texture) {

@@ -1,20 +1,19 @@
 #pragma once
-//Lior: TODO: remove, currently not use
-#ifndef ANIMATION_H
-#define ANIMATION_H
+
+#ifndef ANIMATION_FRAME_H
+#define ANIMATION_FRAME_H
 
 #include <vector>
 #include "GameSprite.h"
 
 /// Define terms used for animations
 
-namespace AnimationTerms {
-	enum AnimationTypes {
-		NOTHING, IDLE, ATTACK, DIE, LOOK_LEFT, LOOK_RIGHT, WALK
-	};
-
-}
-
+/**
+* Each animation frame consists of a single sprite artwork, which can be uniquely identified 
+* by an artType and a description e.g. PACMAN UP.
+* Can also encode extra information in the frame, such as how to move the sprite during the 
+* animation
+*/
 class AnimationFrame
 {
 public:
@@ -35,4 +34,4 @@ public:
 
 };
 
-#endif // ANIMATION_H
+#endif // ANIMATION_FRAME_H

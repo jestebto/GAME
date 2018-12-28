@@ -18,6 +18,8 @@
 #include "GameSprite.h"
 #include "TileManager.h" // all sprite related functions are in this class
 #include "DataToolkit.h"
+#include "AnimationFrame.h"
+#include "AnimationRequest.h"
 
 #include <SDL2/SDL.h>
 #include <iostream>
@@ -62,7 +64,9 @@ public:
 	void update(UserInputType);
 
 	/// Play an animation for a given GameSprite and Animation
-	void playAnimation(std::unique_ptr<GameSprite> const&, SpriteAttributes::ArtType, AnimationTerms::AnimationTypes);
+	void playAnimation(AnimationRequest);
+	/// Play multiple animations at once
+	void playAnimationMany(std::vector<AnimationRequest>);
 
 	//! Displays the Game Over screen
 	void showGameOverScreen();
@@ -86,12 +90,11 @@ private:
 	/// and the tile set itself is in GraphicInterface::sheet
 	//void seperateTiles();
 
-	/// Draws walls onto the screen according to \p map
-	/// \param map A 2-by-2 grid indicating which grid locations are walls.
-	void drawBackground(std::vector<std::vector<int>> &map);
-	void drawLives();
-
-	void drawBitmap(SDL_Texture*);
+	// drawing functions
+	void drawBackground(std::vector<std::vector<int>> &map); ///< Draws walls onto the screen according to \p map
+	void drawLives(); ///< draw Pacman sprites at the bottom to indicate the number of lives
+	void drawAnimationFrame(AnimationFrame, GameSprite*); ///< draw a single animation frame for a spirte
+	void drawBitmap(SDL_Texture*); ///< draw an image over the entire screen
 
 
 	/// Loads an image into a texture on the rendering device

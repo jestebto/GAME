@@ -17,6 +17,7 @@ GameSprite::GameSprite(int xPos, int yPos, SpriteAttributes::ArtType artType, Sp
 }
 
 GameSprite::~GameSprite() {
+	//std::cout << "destroy" << '\n';
 }
 
 // set Sprite artwork based on type

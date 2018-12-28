@@ -51,6 +51,11 @@ namespace SpriteAttributes {
 	 enum Description { UP, DOWN, LEFT, RIGHT, DEFAULT, ALT, 
 		              ATTACK_UP, ATTACK_DOWN, ATTACK_LEFT, ATTACK_RIGHT,
 		              ELIMINATE };
+
+	 ///For different types of animations
+	 enum AnimationTypes {
+		 NOTHING, IDLE, ATTACK, DEATH, GET_HIT, LOOK_LEFT, LOOK_RIGHT, WALK
+	 };
  
 }
 
@@ -91,8 +96,8 @@ private:
 	/* Shared properties with GameObject */
 	//std::string objectID;
 	//DataUpdate::ObjectType objectType;
-	int xPosition;
-	int yPosition;
+	int xPosition; // measured in pixels. therefore xPosition=TILESIZE*(GameObject.getXposition())
+	int yPosition; // measured in pixels. therefore yPosition=TILESIZE*(GameObject.getYposition())
 
 
 };

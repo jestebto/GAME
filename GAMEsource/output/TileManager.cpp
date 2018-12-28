@@ -30,7 +30,7 @@ SDL_Rect* TileManager::getTile(SpriteAttributes::ArtType art, SpriteAttributes::
 }
 
 
-std::vector<AnimationFrame>* TileManager::getAnimationFrames(std::unique_ptr<GameSprite> const& element, SpriteAttributes::ArtType type, AnimationTerms::AnimationTypes action){
+std::vector<AnimationFrame>* TileManager::getAnimationFrames(GameSprite* element, SpriteAttributes::ArtType type, SpriteAttributes::AnimationTypes action){
 	switch (type) {
 	case(SpriteAttributes::ArtType::PACMAN): {
 		// Note: if this is not a CharSprite, then getOrientation() will return type 'none'
@@ -160,58 +160,50 @@ void TileManager::createTileMap()
 
 void TileManager::createAnimationSequences() {
 	using namespace SpriteAttributes;
-	using namespace AnimationTerms;
 	
-	/*Create local enums for the strongly typed enums in DataUpdate 
-	* This makes it easier to call them so much 
-	*/
-	/* 
-	*DataUpdate::Action nothing = DataUpdate::Action::NOTHING;
-	*DataUpdate::Action attack = DataUpdate::Action::ATTACK;
-	*DataUpdate::Action eliminate = DataUpdate::Action::ELIMINATE;
-
-	DataUpdate::ObjectType player = DataUpdate::ObjectType::PLAYER;
-	DataUpdate::ObjectType enemy = DataUpdate::ObjectType::ENEMY;
-	DataUpdate::ObjectType powerUp = DataUpdate::ObjectType::POWERUP;
-	*/
-
 	// Set the animations in animationsOther
 
 	std::map<AnimationTypes, std::vector<AnimationFrame>> enemyAnimations;
-	enemyAnimations[DIE]= std::vector<AnimationFrame>{
+	enemyAnimations[DEATH]= std::vector<AnimationFrame>{
+		AnimationFrame(SCAREDINV, DEFAULT,0), AnimationFrame(SCARED, DEFAULT,0), // dummy frames since death animation is short
 		AnimationFrame(SCARED, DEFAULT,0), AnimationFrame(SCARED, ELIMINATE,0) };
 	animationsOther[SCARED] = enemyAnimations;
 
 
 	// Player animations
 	std::map<AnimationTypes, std::vector<AnimationFrame>> playerUpAnimations;
-	playerUpAnimations[AnimationTerms::ATTACK]= std::vector<AnimationFrame>{
-		//AnimationFrame(PACMAN, UP,1), //move up
+	playerUpAnimations[SpriteAttributes::ATTACK]= std::vector<AnimationFrame>{
+		AnimationFrame(PACMAN, UP,PACMAN_TILESIZE/6), //move up
 		AnimationFrame(PACMAN, ATTACK_UP,0),
 		AnimationFrame(PACMAN, ALT,0), AnimationFrame(PACMAN, ATTACK_UP,0),
-		AnimationFrame(PACMAN, UP,-0), 
-		//AnimationFrame(PACMAN, UP,1) //move down
+		AnimationFrame(PACMAN, UP,-PACMAN_TILESIZE/6) //move down
 	};
 	animationsPlayer[CharacterOrientation::Up] = playerUpAnimations;
 
 	std::map<AnimationTypes, std::vector<AnimationFrame>> playerDownAnimations;
-	playerDownAnimations[AnimationTerms::ATTACK] = std::vector<AnimationFrame>{
+	playerDownAnimations[SpriteAttributes::ATTACK] = std::vector<AnimationFrame>{
+		AnimationFrame(PACMAN, DOWN,PACMAN_TILESIZE / 6), //move down
 		AnimationFrame(PACMAN, ATTACK_DOWN,0), AnimationFrame(PACMAN, ALT,0),
-		AnimationFrame(PACMAN, ATTACK_DOWN,0), AnimationFrame(PACMAN, DOWN,0)
+		AnimationFrame(PACMAN, ATTACK_DOWN,0), AnimationFrame(PACMAN, DOWN,0),
+		AnimationFrame(PACMAN, DOWN,-PACMAN_TILESIZE / 6) //move up
 	};
 	animationsPlayer[CharacterOrientation::Down] = playerDownAnimations;
 
 	std::map<AnimationTypes, std::vector<AnimationFrame>> playerLeftAnimations;
-	playerLeftAnimations[AnimationTerms::ATTACK] = std::vector<AnimationFrame>{
+	playerLeftAnimations[SpriteAttributes::ATTACK] = std::vector<AnimationFrame>{
+		AnimationFrame(PACMAN, LEFT,PACMAN_TILESIZE / 6), //move left
 		AnimationFrame(PACMAN, ATTACK_LEFT,0), AnimationFrame(PACMAN, ALT,0),
-		AnimationFrame(PACMAN, ATTACK_LEFT,0), AnimationFrame(PACMAN, LEFT,0)
+		AnimationFrame(PACMAN, ATTACK_LEFT,0), AnimationFrame(PACMAN, LEFT,0),
+		AnimationFrame(PACMAN, LEFT,-PACMAN_TILESIZE / 6) //move right
 	};
 	animationsPlayer[CharacterOrientation::Left] = playerLeftAnimations;
 
 	std::map<AnimationTypes, std::vector<AnimationFrame>> playerRightAnimations;
-	playerRightAnimations[AnimationTerms::ATTACK] = std::vector<AnimationFrame>{
+	playerRightAnimations[SpriteAttributes::ATTACK] = std::vector<AnimationFrame>{
+		AnimationFrame(PACMAN, RIGHT, PACMAN_TILESIZE / 6), //move right
 		AnimationFrame(PACMAN, ATTACK_RIGHT,0), AnimationFrame(PACMAN, ALT,0),
-		AnimationFrame(PACMAN, ATTACK_RIGHT,0), AnimationFrame(PACMAN, RIGHT,0)
+		AnimationFrame(PACMAN, ATTACK_RIGHT,0), AnimationFrame(PACMAN, RIGHT,0),
+		AnimationFrame(PACMAN, RIGHT,-PACMAN_TILESIZE / 6) //move left
 	};
 	animationsPlayer[CharacterOrientation::Right] = playerRightAnimations;
 
