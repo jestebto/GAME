@@ -175,6 +175,10 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::ATTACK));
 					break;
 				}
+				case DataUpdate::Action::GET_HIT: {
+					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::GET_HIT));
+					break;
+				}
 				default: { // update the orientation for the moveSprite call below
 					(mapPair->second)->setOrientation(static_cast<CharacterOrientation>(stoi(tempConstructorData[1])));
 					break;
@@ -258,7 +262,7 @@ void GraphicOutputManager::update(UserInputType userInput)
 		(mapPair->second)->moveSprite(userInput,TILESIZE);
 
 		if (userInput == UserInputType::Hit) {
-			//playAnimation(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::ATTACK);
+			playAnimation(AnimationRequest(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::DEATH));
 		}
 	}
 
@@ -358,7 +362,7 @@ void GraphicOutputManager::drawAnimationFrame(AnimationFrame frame,GameSprite* e
 
 void GraphicOutputManager::drawBitmap(SDL_Texture* texture) {
 	using namespace SpriteAttributes;
-	SDL_Rect dst = { 0, 0 , (SCREEN_WIDTH)*TILESIZE, (SCREEN_HEIGHT-1)*TILESIZE };
+	SDL_Rect dst = { 0, 0 , (SCREEN_WIDTH)*TILESIZE, (SCREEN_HEIGHT-3)*TILESIZE };
 	
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);

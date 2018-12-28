@@ -9,7 +9,7 @@ class DataUpdate
 {
 public:
 	enum class ObjectType { PLAYER = 0 , ENEMY = 1, POWERUP = 2 };
-	enum class Action { NOTHING = 0, ATTACK = 1, ELIMINATE = 2 };
+	enum class Action { NOTHING = 0, ATTACK = 1, ELIMINATE = 2, GET_HIT };
 
 	// Constructor
 	DataUpdate(std::string, int, int, std::string, ObjectType, Action);

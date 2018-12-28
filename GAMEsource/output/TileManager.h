@@ -67,7 +67,7 @@ private:
 	/// For the player, use a map with the key as the orientation and the action
 	/// For the other objects, the orientation is not important, so use the key as object type and the action
 	/// An art type and a description uniquely defines an animation frame
-	std::map <CharacterOrientation, std::map<SpriteAttributes::AnimationTypes, std::vector<AnimationFrame>>> animationsPlayer;
+	std::map <CharacterOrientation, std::map<SpriteAttributes::AnimationTypes, std::vector<AnimationFrame>>> animationsPacman;
 	std::map <SpriteAttributes::ArtType, std::map<SpriteAttributes::AnimationTypes, std::vector<AnimationFrame>>> animationsOther;
 
 	enum { PACMAN_TILESIZE = 24 }; //< tile size for each Sprite. Does not have to be the same as the graphic interface size

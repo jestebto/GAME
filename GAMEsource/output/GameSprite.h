@@ -34,6 +34,7 @@ namespace SpriteAttributes {
 		GRAPES,
 		DOT,
 		ENERGIZER,
+		BLANK,
 		WALL,
 		ZERO,
 		ONE,

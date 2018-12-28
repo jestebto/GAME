@@ -2,7 +2,6 @@
 #include "GameManager.h"
 #include "UserInputType.h"
 
-#include <SDL2/SDL.h> // Lior: this is for the timer functionality to limit frame rate and input rates
 #include <thread> //sleep_for()
 #include <chrono> //milliseconds
 #include <string>
@@ -33,7 +32,7 @@ void GameManager::StartGame()
 		catch (std::string msg)
 		{
 			std::cout << msg << '\n';
-			// If the output manager fails, then can't show the ErrorScreen;
+			// Don't show the error screen, because the output manager itself might have failed
 			this->programState = ProgramState::ERROR;
 		}
 
