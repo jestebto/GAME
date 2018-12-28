@@ -236,7 +236,12 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 	// check whether the movement is valid and if it is perform it 
 	if (movement) {// if there is valid input
 		if (checkWallCollision(tempX, tempY)) {}     // Check for wall collision
-		else if (checkEnemyCollision(tempX, tempY)) {} // Check for enemy collision
+		else if (checkEnemyCollision(tempX, tempY)) {
+			//send update to play a GET_HIT animation
+			std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
+				player1->dataToString(), DataUpdate::ObjectType::PLAYER, DataUpdate::Action::GET_HIT));
+			output.push_back(update);
+		} // Check for enemy collision
 		else {
 			checkPowerUpCollision(tempX, tempY); // Check for power-up collision
 			player1->setXPosition(tempX);     // if no collision, move player

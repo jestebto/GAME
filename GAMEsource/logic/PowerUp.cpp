@@ -4,13 +4,13 @@
 
 PowerUp::PowerUp(const std::string ID, int xPos, int yPos, int lives)
 	: GameObject(ID, xPos, yPos) {
-	std::cout << "I am a powerup and I am being CONSTRUCTED!\n";
+	//std::cout << "I am a powerup and I am being CONSTRUCTED!\n";
 	setNrOfLives(lives);
 }
 
 PowerUp::~PowerUp()
 {
-	std::cout << "I am a powerup and I am being destructeeeeed!\n"; // TO DO for debugging purposes
+	//std::cout << "I am a powerup and I am being destructeeeeed!\n"; // TO DO for debugging purposes
 }
 
 // set nr of lives

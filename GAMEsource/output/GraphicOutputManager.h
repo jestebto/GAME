@@ -16,8 +16,11 @@
 #include "IOutputManager.h"
 #include "UserInputType.h" // for test purposes, else this class is not supposed to know about the UserInput
 #include "GameSprite.h"
-#include "SpriteManager.h" // all sprite related functions are in this class
+#include "TileManagerPacman.h" // all sprite related functions are in this class
+#include "TileManagerWeapons.h"
 #include "DataToolkit.h"
+#include "AnimationFrame.h"
+#include "AnimationRequest.h"
 
 #include <SDL2/SDL.h>
 #include <iostream>
@@ -62,7 +65,9 @@ public:
 	void update(UserInputType);
 
 	/// Play an animation for a given GameSprite and Animation
-	void playAnimation(std::unique_ptr<GameSprite> const&, SpriteAttributes::ArtType, AnimationTerms::AnimationTypes);
+	void playAnimation(AnimationRequest);
+	/// Play multiple animations at once
+	void playAnimationMany(std::vector<AnimationRequest>);
 
 	//! Displays the Game Over screen
 	void showGameOverScreen();
@@ -81,20 +86,16 @@ private:
 	/// Read the map layout and add into the map array
 	void setBackground(const std::string&);
 
-    /// Loads the sprite sheet.
-    void loadTextures();
-
 	/// Seperate tiles into a tileSet map. Usage is:
 	/// tileSet[<ArtType>][<Direction>]
 	/// and the tile set itself is in GraphicInterface::sheet
 	//void seperateTiles();
 
-	/// Draws walls onto the screen according to \p map
-	/// \param map A 2-by-2 grid indicating which grid locations are walls.
-	void drawBackground(std::vector<std::vector<int>> &map);
-	void drawLives();
-
-	void drawBitmap(SDL_Texture*);
+	// drawing functions
+	void drawBackground(std::vector<std::vector<int>> &map); ///< Draws walls onto the screen according to \p map
+	void drawLives(); ///< draw Pacman sprites at the bottom to indicate the number of lives
+	void drawAnimationFrame(AnimationFrame, GameSprite*); ///< draw a single animation frame for a spirte
+	void drawBitmap(SDL_Texture*); ///< draw an image over the entire screen
 
 
 	/// Loads an image into a texture on the rendering device
@@ -116,17 +117,22 @@ private:
 	/// Loaded SDL texture with the generic error screen
 	SDL_Texture *genericErrorScreen;
 
-	/// Declare constants used to keep the screen and tile size fixed
-	enum { TILESIZE = 24, SCREEN_WIDTH = 22, SCREEN_HEIGHT = 21 }; //< not: title bar is an effective +1 to the screen height
-	int screenArray[SCREEN_HEIGHT][SCREEN_WIDTH];
+	/**
+	* Declare constants used to keep the screen and tile size fixed
+	* Also declare enums to specify the tile manager to use for each game sprites
+	* TM0 -> use spriteManager
+	* TM1 -> use weaponManager (but not for animations!!)
+	*/
+	enum { TILESIZE = 24, SCREEN_WIDTH = 22, SCREEN_HEIGHT = 21, TM0,TM1 }; // note: title bar is an effective +1 to the screen height
 
 	/// 2d array containing the map, a 1 is a wall.
 	std::vector<std::vector<int>> levelMap;
 	int xOffset=0; //< offset to centre the map in the display
 	int yOffset=0; //< offset to centre the map in the display
 
-	std::unique_ptr<SpriteManager> spriteManager; //< makes a unique SpriteManager for this OutputManager
-	
+	std::unique_ptr<TileManager> spriteManager; ///< makes a unique TileManager for the sprites for this OutputManager
+	std::unique_ptr<TileManager> weaponManager; ///< makes a unique TileManager for the weapons for this OutputManager
+
 	/// Map of GameSprites in use
 	/// The key is the ID
 	std::map<std::string, std::unique_ptr<GameSprite>> spriteObjects;

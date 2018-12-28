@@ -18,6 +18,7 @@
 namespace SpriteAttributes {
 	/// Artwork Type used for each sprite 
 	 enum ArtType {
+		 //Pacman
 		PACMAN,
 		BLINKY,
 		PINKY,
@@ -34,6 +35,7 @@ namespace SpriteAttributes {
 		GRAPES,
 		DOT,
 		ENERGIZER,
+		BLANK,
 		WALL,
 		ZERO,
 		ONE,
@@ -44,13 +46,22 @@ namespace SpriteAttributes {
 		SIX,
 		SEVEN,
 		EIGHT,
-		NINE
+		NINE,
+		// 7Soul1 tiles only
+		FIRE_SWORD,
+		// Error
+		ERROR
 	};
 
 	 /// For descriptions/actions for each artwork
 	 enum Description { UP, DOWN, LEFT, RIGHT, DEFAULT, ALT, 
 		              ATTACK_UP, ATTACK_DOWN, ATTACK_LEFT, ATTACK_RIGHT,
 		              ELIMINATE };
+
+	 ///For different types of animations
+	 enum AnimationTypes {
+		 NOTHING, IDLE, ATTACK, DEATH, GET_HIT, LOOK_LEFT, LOOK_RIGHT, WALK
+	 };
  
 }
 
@@ -61,7 +72,7 @@ namespace SpriteAttributes {
 class GameSprite
 {
 public:
-	GameSprite(int, int, SpriteAttributes::ArtType, SpriteAttributes::Description);
+	GameSprite(int, int, SpriteAttributes::ArtType, SpriteAttributes::Description,int);
 	~GameSprite(); // vitual destructor
 
 	void setType(SpriteAttributes::ArtType); ///< set sprite artwork
@@ -71,21 +82,21 @@ public:
 	SpriteAttributes::Description getDescription(); ///< get sprite artwork description
 
 	virtual void moveSprite(int, int); ///< Estimate direction using the new and old co-ordinates
-	void moveSprite(UserInputType); ///< For test purposes only, as this is not connected to the logic
+	virtual void moveSprite(int); ///< Define virtual functions for use with more complex GameSprite child classes
+	void moveSprite(UserInputType,int); ///< For test purposes only, as this is not connected to the logic
 
 	
 	virtual void setOrientation(CharacterOrientation); ///< Define virtual functions for use with more complex GameSprite child classes
 	virtual CharacterOrientation getOrientation(); ///< Return CharacterOrientation::None
 
 	/* Shared functions with GameObject */
-	//void setID(const std::string&);
-	//std::string getID(); ///< a unique a ID shared with a GameObject in the logic side
-
 	void setXPosition(int); ///< set X-Position
 	int getXPosition(); ///< get X-Position
 
 	void setYPosition(int); ///< get Y-Position
 	int getYPosition(); ///< get Y-Position
+
+	int tileManager;///< define which tileManager to use with this sprite
 	
 private:
 	SpriteAttributes::ArtType art;
@@ -93,8 +104,8 @@ private:
 	/* Shared properties with GameObject */
 	//std::string objectID;
 	//DataUpdate::ObjectType objectType;
-	int xPosition;
-	int yPosition;
+	int xPosition; // measured in pixels. therefore xPosition=TILESIZE*(GameObject.getXposition())
+	int yPosition; // measured in pixels. therefore yPosition=TILESIZE*(GameObject.getYposition())
 
 
 };

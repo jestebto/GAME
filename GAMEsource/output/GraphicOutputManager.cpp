@@ -8,19 +8,26 @@
 
 GraphicOutputManager::GraphicOutputManager()
 {
-	//spriteManager = new SpriteManager(24);
-	spriteManager = std::make_unique<SpriteManager>();
-
 	// Initialize window and load textures.
 	this->init();
-	this->loadTextures();
 	//All other setup is done in GrahpicInterface::loadlevel once data has been received
+
+	//Load TileManagers
+	spriteManager = std::make_unique<TileManagerPacman>(this->loadTexture("resources/sam_gfx.bmp"));// TM0
+	weaponManager = std::make_unique<TileManagerWeapons>(this->loadTexture("resources/7Soul1.bmp"));// TM1
+	//NB No animations defined for weaponManager. Do not use TM1 for the animations!!
+	//So basicalyl powerups/weapons can't have any animations
+	//TODO: a better solution
+
+	// Load other textures
+	gameOverScreen = this->loadTexture("resources/GAME_OVER.bmp");
+	victoryScreen = this->loadTexture("resources/set1_victory.bmp");
+	genericErrorScreen = this->loadTexture("resources/ERROR.bmp");
 }
 
 
 GraphicOutputManager::~GraphicOutputManager()
 {
-	//SDL_DestroyTexture(sheet);
 	SDL_DestroyTexture(gameOverScreen);
 	SDL_DestroyTexture(victoryScreen);
 	SDL_DestroyTexture(genericErrorScreen);
@@ -63,8 +70,10 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
 			// tempConstructorData format: {"ID, x, y, lives"} 
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<CharSprite> (stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), PACMAN, SpriteAttributes::UP, CharacterOrientation::Up);
+			int x = TILESIZE * stoi(tempConstructorData[1]);
+			int y = TILESIZE * stoi(tempConstructorData[2]);
+			this->spriteObjects[tempConstructorData[0]] = std::make_unique<CharSprite> (x,y,PACMAN, 
+				SpriteAttributes::UP,TM0,CharacterOrientation::Up);
 			this->lives= stoi(tempConstructorData[3]);
 
 			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
@@ -75,8 +84,10 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			// Data format: "ID,x,y,lives,"
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 			// create a new enemy storing a shared pointer to it
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>( stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), SCAREDINV, SpriteAttributes::DEFAULT);
+			int x = TILESIZE * stoi(tempConstructorData[1]);
+			int y = TILESIZE * stoi(tempConstructorData[2]);
+			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, SCAREDINV, 
+				SpriteAttributes::DEFAULT, TM0);
 
 			tempConstructorData = {}; // make sure the vector is empty in the next case
 			break;
@@ -85,21 +96,15 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 			// separate the data to construct the new object
 			// Data format: "ID,x,y,livesBonus,"
 			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(stoi(tempConstructorData[1]),
-				stoi(tempConstructorData[2]), APPLE, SpriteAttributes::DEFAULT);
+			int x = TILESIZE * stoi(tempConstructorData[1]);
+			int y = TILESIZE * stoi(tempConstructorData[2]);
+			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, APPLE,
+				SpriteAttributes::DEFAULT, TM1);
 		}
 
 		}
 	}
 
-
-	//Hard coded board for test purposes
-	/*
-	std::vector<std::vector<int>> board = { {
-		#include "board.def"
-	} };
-	this->map = std::move(board);
-	*/
 
 	//On the first iteration, only draw the background:
 
@@ -130,19 +135,23 @@ void GraphicOutputManager::setBackground(const std::string& mapString) {
 		}
 	}
 	// xOffset = screenWidth/2 - mapWidth/2;
-	this->xOffset = (SCREEN_WIDTH - static_cast<int>( levelMap[0].size() ))/ 2;
+	this->xOffset = (TILESIZE*(SCREEN_WIDTH - static_cast<int>( levelMap[0].size() )))/ 2;
 	// yOffset = screenHeight/2 - mapWidth/2;
-	this->yOffset = (SCREEN_HEIGHT - static_cast<int>( levelMap.size() ))/ 2;
+	this->yOffset = (TILESIZE*(SCREEN_HEIGHT - static_cast<int>( levelMap.size() )))/ 2;
 }
 
 void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 {
 	// Update the map based on the incoming data
-	// Note: animations will be called and will be played on the old renderer
+	
+	std::vector<AnimationRequest> animationList; // keep track of animations to show
+	std::vector<std::string> deleteList;  // keep track of objects to delete after the animations
+
 	for (std::shared_ptr<DataUpdate> &dataPtr : data) {
 
-		// Look up in the ID in the sprite map
-		auto mapPair = spriteObjects.find(dataPtr->getID());
+		// Look up the ID in the sprite map
+		std::string thisID = dataPtr->getID();
+		auto mapPair = spriteObjects.find(thisID);
 
 		if (mapPair == spriteObjects.end())
 			std::cout << "Element not found" << '\n';
@@ -154,33 +163,34 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			DataUpdate::Action action =  dataPtr->getAction();
 			switch (type) {
 			case DataUpdate::ObjectType::PLAYER: {
-				// Data = "lives, (int)CharacterOrientation"
+				// DataFormat = "lives, (int)CharacterOrientation"
 				tempConstructorData = DataToolkit::getSubs(dataPtr->getData(), ',');
 
 				this->lives = stoi(tempConstructorData[0]);
 
 				switch (action) {
 				case DataUpdate::Action::ATTACK: {
-					playAnimation(mapPair->second, SpriteAttributes::PACMAN, AnimationTerms::AnimationTypes::ATTACK);
+					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::ATTACK));
 					break;
 				}
-				default: { //Assume it is a movement
+				case DataUpdate::Action::GET_HIT: {
+					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::GET_HIT));
+					break;
+				}
+				default: { // update the orientation for the moveSprite call below
 					(mapPair->second)->setOrientation(static_cast<CharacterOrientation>(stoi(tempConstructorData[1])));
-					(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition()); //Calls the CharSprite code
 					break;
 				}
 				}
 			} break;
 			case DataUpdate::ObjectType::ENEMY: {
-
 				switch (action) {
 				case DataUpdate::Action::ELIMINATE: {
-					playAnimation(mapPair->second, SpriteAttributes::SCARED, AnimationTerms::AnimationTypes::DIE);
-					spriteObjects.erase(mapPair); // since the map owns a unique_ptr, this calls the destructor as well.
+					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::SCARED, SpriteAttributes::AnimationTypes::DEATH));
+					deleteList.push_back(thisID);
 					break;
 				}
-				default: { //Assume it is a movement
-					(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition()); 
+				default: {
 					break;
 				}
 				}
@@ -188,18 +198,29 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			default:
 				switch (action) {
 				case DataUpdate::Action::ELIMINATE: {
-						spriteObjects.erase(mapPair); // since the map owns a unique_ptr, this calls the destructor as well.
+						deleteList.push_back(thisID); //add to the delete list
 						break;
 				}
-				default: { //Assume it is a movement
-						(mapPair->second)->moveSprite(dataPtr->getObjectXPosition(), dataPtr->getObjectYPosition());
-						break;
+				default: {
+					break;
 				}
 				}
 			}
 
+			// update object position, regardless of the incoming action
+			int x = TILESIZE * (dataPtr->getObjectXPosition());
+			int y = TILESIZE * (dataPtr->getObjectYPosition());
+			(mapPair->second)->moveSprite(x, y);
 		}
 
+	}
+	//Play all animations
+	if (!animationList.empty()) { playAnimationMany(animationList); }
+
+	//delete all objects in the deleteList
+	for (std::string &thisID : deleteList) {
+		auto mapPair = spriteObjects.find(thisID);
+		spriteObjects.erase(mapPair);
 	}
 
 	// Clear the current renderer.
@@ -213,10 +234,18 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 		int x = mapPair.second->getXPosition();
 		int y = mapPair.second->getYPosition();
 
-		SDL_Rect dst = { (x + xOffset) * TILESIZE , (y + yOffset) * TILESIZE, TILESIZE,
-			TILESIZE };
-		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
-			&dst);
+		SDL_Rect dst = { x  + xOffset, y  + yOffset, TILESIZE,TILESIZE }; //note: will stretch weaponManager tiles
+
+		// select which tile manager to to use to print the sprites
+		if (mapPair.second->tileManager == TM0) {
+			SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
+				&dst);
+		}
+		else
+		{
+			SDL_RenderCopy(renderer, weaponManager->getSheet(), weaponManager->getTile(mapPair.second),
+				&dst);
+		}
 	}
 
 	// Draw the lives.
@@ -236,10 +265,10 @@ void GraphicOutputManager::update(UserInputType userInput)
 	if (mapPair == spriteObjects.end())
 		std::cout << "Element not found" << '\n';
 	else {
-		(mapPair->second)->moveSprite(userInput);
+		(mapPair->second)->moveSprite(userInput,TILESIZE);
 
 		if (userInput == UserInputType::Hit) {
-			playAnimation(mapPair->second, SpriteAttributes::PACMAN, AnimationTerms::AnimationTypes::ATTACK);
+			playAnimation(AnimationRequest(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::DEATH));
 		}
 	}
 
@@ -254,8 +283,7 @@ void GraphicOutputManager::update(UserInputType userInput)
 		int x = mapPair.second->getXPosition();
 		int y = mapPair.second->getYPosition();
 
-		SDL_Rect dst = { (x + xOffset) * TILESIZE + xOffset, (y+ yOffset) * TILESIZE , TILESIZE,
-						TILESIZE };
+		SDL_Rect dst = { x + xOffset, y + yOffset , TILESIZE,TILESIZE };
 		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
 			&dst);
 	}
@@ -265,36 +293,80 @@ void GraphicOutputManager::update(UserInputType userInput)
 	SDL_RenderPresent(renderer);
 }
 
-void GraphicOutputManager::playAnimation(std::unique_ptr<GameSprite> const& element, SpriteAttributes::ArtType type, AnimationTerms::AnimationTypes action)
+void GraphicOutputManager::playAnimation(AnimationRequest animationRequest)
 {
 	try {
-		std::vector<AnimationTerms::AnimationFrame>* animationFrames = spriteManager->getAnimationFrames(element, type, action);
-
-		int x = element->getXPosition();
-		int y = element->getYPosition();
-
-		SDL_Rect dst = { (x + xOffset) * TILESIZE + xOffset, (y + yOffset) * TILESIZE , TILESIZE,
-							TILESIZE };
-		for (AnimationTerms::AnimationFrame frame : *animationFrames) {
-			SDL_RenderFillRect(renderer, &dst); //fill the current spot with a blank rectangle
-
-			SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(frame.first, frame.second),
-				&dst);
-
+		std::vector<AnimationFrame>* animationFrames = spriteManager->getAnimationFrames(animationRequest.elementRef, animationRequest.art, animationRequest.action);
+		// display each frame in the vector of animationFrames 
+		for (AnimationFrame frame : *animationFrames) {
+			//update the renderer
+			drawAnimationFrame(frame, animationRequest.elementRef);
 			SDL_RenderPresent(renderer);
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
 		}
 	}
 	catch (std::out_of_range) // Animation does not exist in any of the animation maps
 	{
-		throw std::out_of_range("Animation does not exist"); //TO DO: if you catch it and throw a different thing, do we need a custom exception in this case?
+		throw std::out_of_range("Animation does not exist in this tile manager"); //TO DO: if you catch it and throw a different thing, do we need a custom exception in this case?
 	}
+}
+
+void GraphicOutputManager::playAnimationMany(std::vector<AnimationRequest> animationList)
+{
+	std::vector< std::vector<AnimationFrame>* > animationSequences; //all the animation sequences to be displayed
+	size_t longest = 1; // length of the longest animation sequence
+	try {
+		// first get all the animation frames
+		for (AnimationRequest animationRequest : animationList) {
+			animationSequences.push_back(spriteManager->getAnimationFrames(animationRequest.elementRef, animationRequest.art, animationRequest.action));
+			if (animationSequences.back()->size()> longest)
+				longest = animationSequences.back()->size();
+		}
+	}
+	catch (std::out_of_range) // One animation does not exist in the animation maps
+	{
+		throw std::out_of_range("An animation does not exist in this tile manager"); 
+	}
+
+	size_t numAnimations = size(animationSequences);
+
+	// play animations concurrently
+	for (size_t j = 0; j < longest; j++) { // j = index of frame
+		for (size_t i = 0; i < numAnimations; ++i) { // i = index of animation
+			//update the renderers with each frame
+			if (animationSequences.at(i)->size() > j )
+				// draw frame j of animation i
+				drawAnimationFrame(animationSequences.at(i)->at(j), animationList.at(i).elementRef);
+		}
+		SDL_RenderPresent(renderer);
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
+}
+
+void GraphicOutputManager::drawAnimationFrame(AnimationFrame frame,GameSprite* element){
+	//fill the old tile with a blank rectangle
+	int x = element->getXPosition();
+	int y = element->getYPosition();
+	SDL_Rect dst = { x + xOffset, y + yOffset, TILESIZE,TILESIZE };
+	SDL_RenderFillRect(renderer, &dst); 
+
+	// if required, move the sprite
+	if (frame.movement != 0) {
+		element->moveSprite(frame.movement);
+		x = element->getXPosition();
+		y = element->getYPosition();
+		dst = { x + xOffset, y + yOffset, TILESIZE,
+		TILESIZE };
+	}
+
+	// put the sprite in the new position
+	SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(frame.art, frame.description),
+		&dst);
 }
 
 void GraphicOutputManager::drawBitmap(SDL_Texture* texture) {
 	using namespace SpriteAttributes;
-	SDL_Rect dst = { 0, 0 , (SCREEN_WIDTH)*TILESIZE, (SCREEN_HEIGHT-1)*TILESIZE };
+	SDL_Rect dst = { 0, 0 , (SCREEN_WIDTH)*TILESIZE, (SCREEN_HEIGHT-3)*TILESIZE };
 	
 	// Clear the current renderer.
 	SDL_RenderClear(renderer);
@@ -335,21 +407,6 @@ void GraphicOutputManager::init()
 		SDL_RENDERER_PRESENTVSYNC);
 }
 
-// From the Pacman Code
-void GraphicOutputManager::loadTextures()
-{
-	// Load sprite sheet
-	//sheet = this->loadTexture("resources/sam_gfx.bmp");
-	spriteManager->setSheet(this->loadTexture("resources/sam_gfx.bmp"));
-	//seperateTiles(); //moved to SpriteManager
-
-	// Load game over screen
-	gameOverScreen = this->loadTexture("resources/GAME_OVER.bmp");
-	victoryScreen = this->loadTexture("resources/set1_victory.bmp");
-	genericErrorScreen = this->loadTexture("resources/ERROR.bmp");
-}
-
-
 
 // From the Pacman Code
 void GraphicOutputManager::drawBackground(std::vector<std::vector<int>> &map)
@@ -358,8 +415,8 @@ void GraphicOutputManager::drawBackground(std::vector<std::vector<int>> &map)
 	// Draw a wall on each position containing a one
 	for (size_t i = 0; i < map.size(); i++) {
 		for (size_t j = 0; j < map[i].size(); j++) {
-			SDL_Rect dst = { (static_cast<int>(j) + xOffset )* TILESIZE,
-				             (static_cast<int>(i) + yOffset) * TILESIZE , TILESIZE,
+			SDL_Rect dst = { (static_cast<int>(j)*TILESIZE)+ xOffset,
+				             (static_cast<int>(i)* TILESIZE)+ yOffset , TILESIZE,
 				TILESIZE };
 			if (map[i][j] == 1) {
 				SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(WALL, SpriteAttributes::DEFAULT), &dst);
@@ -388,11 +445,17 @@ SDL_Texture *GraphicOutputManager::loadTexture(const std::string &file)
 {
 	SDL_Surface *surf = SDL_LoadBMP(file.c_str());
 	if (surf == nullptr) {
-		std::cerr << "Error while loading texture bitmap: " << SDL_GetError() << std::endl;
+		std::string errorMsg= "Error while loading texture bitmap: ";
+		errorMsg = errorMsg + SDL_GetError();
+		throw errorMsg;
+		//std::cerr << "Error while loading texture bitmap: " << SDL_GetError() << std::endl;
 	}
 	SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, surf);
 	if (texture == nullptr) {
-		std::cerr << "Error while creating texture: " << SDL_GetError() << std::endl;
+		std::string errorMsg = "Error while loading texture bitmap: ";
+		errorMsg = errorMsg + SDL_GetError();
+		throw errorMsg;
+		//std::cerr << "Error while creating texture: " << SDL_GetError() << std::endl;
 	}
 	SDL_FreeSurface(surf);
 	return texture;

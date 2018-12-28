@@ -7,16 +7,18 @@
 
 #include "GameSprite.h"
 
-GameSprite::GameSprite(int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Description des) {
+GameSprite::GameSprite(int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Description des,int select) {
 	//objectID = ID;
 	//objectType = objectType;
 	xPosition = xPos;
 	yPosition = yPos;
 	art = artType;
 	description = des;
+	tileManager = select;
 }
 
 GameSprite::~GameSprite() {
+	//std::cout << "destroy" << '\n';
 }
 
 // set Sprite artwork based on type
@@ -94,12 +96,16 @@ void GameSprite::moveSprite(int x, int y)
 
 }
 
-void GameSprite::moveSprite(UserInputType command)
+void GameSprite::moveSprite(int value)
+{
+	// don't move it all all
+}
+
+void GameSprite::moveSprite(UserInputType command, int moveSize)
 {
 	// directly move a Sprite based on user input
 	// for test purposes only, as this is not connected to the logic
 
-	int moveSize = 1;
 	/*  Co-ordinates:
 	*   .---> +x
 	*   |
