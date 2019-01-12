@@ -107,7 +107,7 @@ void GameManager::Update()
 			break;
 		case GameState::GAMEOVER:
 			this->programState = ProgramState::ENDOFTHEGAME;
-			std::cout << "Sadly, it's game over...\n";
+			//std::cout << "Sadly, it's game over...\n";
 			outputManager->showGameOverScreen();
 			break;
 		case GameState::NOTLOADED:

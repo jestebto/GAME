@@ -251,6 +251,8 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 
 	// Draw the lives.
 	drawLives();
+	if (this->lives == 0)
+		playAnimation(AnimationRequest(spriteObjects.find("001")->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::DEATH));
 
 	// Update the screen.
 	SDL_RenderPresent(renderer);

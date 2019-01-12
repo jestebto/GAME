@@ -217,7 +217,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 				
 				if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY) {
 					enemies[i]->setLives(- player1->getDmg());
-					std::cout << enemies[i]->getLives();
+					//std::cout << enemies[i]->getLives();
 				}
 
 				// Try to update a dead enemy
