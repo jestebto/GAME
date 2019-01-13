@@ -29,12 +29,6 @@ private:
 	void createTileMap(); //Note: this was the old separateTiles(). New name to show that it doesn't actually seperate them; it only creates an index of where each sprite is in the bigger picture
 	void createAnimationSequences(); ///< create a list of connected sprites and descriptions to use in an animation sequence
 	
-	/// Stores tiles to use wtih getTile
-	/// tileSet[<ArtType>][<Description>]
-	/// \see ArtType
-	/// \see Description
-	std::map<SpriteAttributes::ArtType, std::map<SpriteAttributes::Description, SDL_Rect>> tileSet;
-
 	/// Hard code the animation sequences
 	/// For the player, use a map with the key as the orientation and the action
 	/// For the other objects, the orientation is not important, so use the key as object type and the action

@@ -45,7 +45,14 @@ public: /// Functions to be called by GraphicOutputManager
 	/// Get a vector of animation frames.
 	virtual std::vector<AnimationFrame>* getAnimationFrames(GameSprite*, SpriteAttributes::ArtType,
 		SpriteAttributes::AnimationTypes)=0;
-	
+
+protected:	
+	/// Stores tiles to use wtih getTile
+	/// tileSet[<ArtType>][<Description>]
+	/// \see ArtType
+	/// \see Description
+	std::map<SpriteAttributes::ArtType, std::map<SpriteAttributes::Description, SDL_Rect>> tileSet;
+
 private:
 	/// Loaded SDL texture with all sprite bitmaps.
 	SDL_Texture *sheetSprites;

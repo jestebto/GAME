@@ -25,12 +25,6 @@ public:
 	const int tileSize = 16; 
 
 private:
-	/// Stores tiles to use with getTile
-	/// tileSet[<ArtType>][<Description>]
-	/// \see ArtType
-	/// \see Description
-	std::map<SpriteAttributes::ArtType, std::map<SpriteAttributes::Description, SDL_Rect>> tileSet;
-
 	void createTileMap();
 	void createAnimationSequences();
 };
