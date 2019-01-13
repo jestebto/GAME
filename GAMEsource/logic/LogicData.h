@@ -1,4 +1,6 @@
-#pragma once
+#ifndef LOGICDATA_H
+#define LOGICDATA_H
+
 #include <string>
 class LogicData
 {
@@ -9,4 +11,6 @@ public:
 
 	std::string data;   /// string with the data to create the level
 };
+
+#endif /* LOGICDATA_H */
 

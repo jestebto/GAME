@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ISTORAGEMANAGER_H
+#define ISTORAGEMANAGER_H
+
 #include "StorageLevelData.h"
 #include "StorageGameData.h"
 
@@ -12,3 +14,5 @@ public:
 	virtual StorageLevelData* loadDefaultLevel() = 0; //!< load a single level
 	virtual StorageGameData* loadDefaultGame() = 0; //!< load multiple levels to form a single game
 };
+
+#endif /* ISTORAGEMANAGER_H */

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TILEMANAGERWEAPONS_H
+#define TILEMANAGERWEAPONS_H
+
 #include "TileManager.h"
 class TileManagerWeapons :
 	public TileManager
@@ -33,3 +35,4 @@ private:
 	void createAnimationSequences();
 };
 
+#endif /* TILEMANAGERWEAPONS_H */

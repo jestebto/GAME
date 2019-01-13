@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include "Character.h"
 #include "CharacterOrientation.h"
@@ -24,3 +25,5 @@ private:
 	CharacterOrientation orientation; ///< orientation
 	int damage; ///< damage
 };
+
+#endif /* PLAYER_H */

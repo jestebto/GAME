@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CHARACTER_H
+#define CHARACTER_H
 
 #include "GameObject.h"
 
@@ -25,3 +26,4 @@ private:
 	int lives; /// number of lives
 };
 
+#endif /* CHARACTER_H */

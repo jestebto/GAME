@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  *  Created on: 12 December, 2018
  *      Author: Lior Sinai

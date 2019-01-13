@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ENEMY_H
+#define ENEMY_H
 
 #include "Character.h"
 
@@ -17,4 +18,6 @@ public:
 private:
 	int damageValue;  /// damage to player 
 };
+
+#endif /* ENEMY_H */
 

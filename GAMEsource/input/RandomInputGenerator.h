@@ -1,4 +1,6 @@
-#pragma once
+#ifndef RANDOMINPUTMANAGER_H
+#define RANDOMINPUTMANAGER_H
+
 #include "IInputManager.h"
 #include <cstdlib>
 #include "pch.h"
@@ -12,3 +14,4 @@ public:
 	UserInputType getInput();
 };
 
+#endif /* RANDOMINPUTMANAGER_H */

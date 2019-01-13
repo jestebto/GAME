@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef ANIMATION_REQUEST_H
 #define ANIMATION_REQUEST_H
 

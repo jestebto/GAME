@@ -1,4 +1,6 @@
-#pragma once
+#ifndef IINPUTMANAGER_H
+#define IINPUTMANAGER_H
+
 #include "UserInputType.h"
 #include "pch.h"
 
@@ -12,3 +14,5 @@ public:
 	virtual ~IInputManager() = 0; //!< virtual destructor to be implemented in the class implementing the interface
 	virtual UserInputType getInput() = 0; //!< Provides a single input from whichever source mapped as UserInputType
 };
+
+#endif /* IINPUTMANAGER_H */

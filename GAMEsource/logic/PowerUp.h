@@ -1,4 +1,5 @@
-#pragma once
+#ifndef POWERUP_H
+#define POWERUP_H
 
 #include "GameObject.h"
 
@@ -17,3 +18,4 @@ private:
 	int nrOfLives; ///< number of lives it gives to the player
 };
 
+#endif /* POWERUP_H */

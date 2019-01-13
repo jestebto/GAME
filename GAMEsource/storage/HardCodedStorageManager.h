@@ -1,4 +1,6 @@
-#pragma once
+#ifndef HARDCODEDSTORAGEMANAGER_H
+#define HARDCODEDSTORAGEMANAGER_H
+
 #include "IStorageManager.h"
 #include "StorageLevelData.h"
 #include "pch.h"
@@ -21,3 +23,4 @@ private:
 	StorageGameData defaultGame;
 };
 
+#endif /* HARDCODEDSTORAGEMANAGER_H */

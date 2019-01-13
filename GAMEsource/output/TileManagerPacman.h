@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TILEMANAGERPACMAN_H
+#define TILEMANAGERPACMAN_H
+
 #include "TileManager.h"
 /**
 * A tile manager specifically for the Pacman tiles
@@ -42,3 +44,4 @@ private:
 
 };
 
+#endif /* TILEMANAGERPACMAN_H */

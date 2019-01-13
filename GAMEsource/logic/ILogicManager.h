@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ILOGICMANAGER_H
+#define ILOGICMANAGER_H
+
 #include "UserInputType.h"
 #include "LogicData.h"
 #include "DataUpdate.h"
@@ -18,3 +20,5 @@ public:
 	virtual std::vector<std::shared_ptr<DataUpdate>> getLevelUpdates() = 0; ///< get objec's data as a vector of strings
 	virtual GameState getGameState() = 0 ; ///< check if the game is over
 };
+
+#endif /* ILOGICMANAGER_H */
