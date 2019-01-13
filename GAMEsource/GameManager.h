@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAMEMANAGER_H
+#define GAMEMANAGER_H
+
 #include "ComponentFactory.h"
 #include "storage/IStorageManager.h"
 #include "input/IInputManager.h"
@@ -39,4 +41,4 @@ private:
 	void Update();
 };
 
-
+#endif /* GAMEMANAGER_H */

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DATAUPDATE_H
+#define DATAUPDATE_H
 
 #include <string>
 /**
@@ -62,4 +63,4 @@ private:
 	Action objectAction;
 };
 
-
+#endif /* DATAUPDATE_H */

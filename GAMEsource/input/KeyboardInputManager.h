@@ -1,4 +1,6 @@
-#pragma once
+#ifndef KEYBOARDINPUTMANAGER_H
+#define KEYBOARDINPUTMANAGER_H
+
 #include "pch.h"
 #include "IInputManager.h"
 #include <SDL2/SDL.h>
@@ -15,3 +17,4 @@ public:
 	UserInputType getInput();
 };
 
+#endif /* KEYBOARDINPUTMANAGER_H */

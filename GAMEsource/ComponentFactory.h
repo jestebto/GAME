@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COMPONENTFACTORY_H
+#define COMPONENTFACTORY_H
 #include "storage/IStorageManager.h"
 #include "input/IInputManager.h"
 #include "logic/ILogicManager.h"
@@ -20,4 +21,6 @@ public:
 	ILogicManager* GetLogicManager();	//!< will return a pointer to an object implementing the ILogicManager
 	IOutputManager* GetOutputManager(); //!< will return a pointer to an object implementing the IOutputManager
 };
+
+#endif /* COMPONENTFACTORY_H */
 

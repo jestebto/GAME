@@ -1,2 +1,6 @@
-#pragma once
+#ifndef GAMESTATE_H
+#define GAMESTATE_H
+
 enum class GameState { NOTLOADED, UPANDRUNNING, LEVELFINISHED, VICTORY, GAMEOVER};
+
+#endif /* GAMESTATE_H */

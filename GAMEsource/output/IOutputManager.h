@@ -1,4 +1,6 @@
-#pragma once
+#ifndef IOUTPUTMANAGER_H
+#define IOUTPUTMANAGER_H
+
 #include "UserInputType.h"
 #include "OutputData.h"
 #include "DataUpdate.h"
@@ -20,3 +22,5 @@ public:
 	virtual void showVictoryScreen() = 0;   //!< show Victory Screen
 	virtual void showGenericErrorScreen() = 0; //!< show Generic Error Screen
 }; 
+
+#endif /* IOUTPUTMANAGER_H */

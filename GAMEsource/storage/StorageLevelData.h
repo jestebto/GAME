@@ -1,4 +1,6 @@
-#pragma once
+#ifndef STORAGELEVELDATA_H
+#define STORAGELEVELDATA_H
+
 #include <string>
 
 /// Store data for a single level
@@ -15,3 +17,4 @@ public:
 	std::string outputData; //!< mostly similar to logic data, but can be different e.g. different textures that you can walk on
 };
 
+#endif /* STORAGELEVELDATA_H */

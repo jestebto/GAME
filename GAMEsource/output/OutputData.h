@@ -1,4 +1,6 @@
-#pragma once
+#ifndef OUTPUTDATA_H
+#define OUTPUTDATA_H
+
 #include <string>
 class OutputData
 {
@@ -10,3 +12,4 @@ public:
 	std::string data; ///< string data given in a special format for loading each level
 };
 
+#endif /* OUTPUTDATA_H */

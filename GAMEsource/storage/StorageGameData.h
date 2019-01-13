@@ -1,4 +1,6 @@
-#pragma once
+#ifndef STORAGEGAMEDATA_H
+#define STORAGEGAMEDATA_H
+
 #include <vector>
 #include "StorageLevelData.h"
 
@@ -18,3 +20,4 @@ public:
 	//void add(StorageLevelData, unsigned);
 };
 
+#endif /* STORAGEGAMEDATA_H */

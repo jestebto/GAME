@@ -1,6 +1,3 @@
-#pragma once
-
-
 #ifndef CHAR_SPRITE_H
 #define CHAR_SPRITE_H
 

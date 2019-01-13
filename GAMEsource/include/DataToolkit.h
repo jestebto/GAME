@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DATATOOLKIT_H
+#define DATATOOLKIT_H
+
 #include <vector>
 #include <string>
 
@@ -13,4 +15,6 @@ public:
 	/// devide a string into substrings
 	static std::vector<std::string> getSubs(std::string s, char delimiter);
 };
+
+#endif /* DATATOOLKIT_H */
 

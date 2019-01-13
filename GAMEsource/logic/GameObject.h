@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
 
 #include <string>
 #include <sstream>
@@ -34,4 +35,6 @@ private:
 	int yPosition; /// y-position
 
 };
+
+#endif /* GAMEOBJECT_H */
 
