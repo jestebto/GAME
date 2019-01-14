@@ -100,15 +100,17 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 				int y = TILESIZE * stoi(tempConstructorData[2]);
 				this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, APPLE,
 					SpriteAttributes::DEFAULT, TM1);
+				break;
 			}
 			case 4: { // 4 is a weapon
 				// separate the data to construct the new object
 				// Data format: "ID,x,y,"
-						tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
-						int x = TILESIZE * stoi(tempConstructorData[1]);
-						int y = TILESIZE * stoi(tempConstructorData[2]);
-						this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x, y, FIRE_SWORD,
-							SpriteAttributes::DEFAULT, TM1);
+				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+				int x = TILESIZE * stoi(tempConstructorData[1]);
+				int y = TILESIZE * stoi(tempConstructorData[2]);
+				this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x, y, FIRE_SWORD,
+					SpriteAttributes::DEFAULT, TM1);
+				break;
 			}
 		}
 	}
