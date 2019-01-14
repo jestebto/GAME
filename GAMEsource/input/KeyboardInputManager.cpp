@@ -49,6 +49,11 @@ UserInputType KeyboardInputManager::getInput()
 					//std::cout << ">>>Pressed HIT!\n";
 					inputType = UserInputType::Hit;
 					break;
+				case SDLK_j:
+				case SDLK_l: //space bar //<TO DO JOSE> change with the right enum value
+					//std::cout << ">>>Pressed THROW!\n";
+					inputType = UserInputType::Throw;
+					break;
 				case SDLK_ESCAPE:
 					//std::cout << ">>>Pressed QUIT!\n"; //<TO DO> comment out or remove (DEBUG)
 					inputType =  UserInputType::Quit;
