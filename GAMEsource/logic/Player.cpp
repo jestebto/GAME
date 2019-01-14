@@ -36,7 +36,7 @@ std::string Player::dataToString() {
 	addData << this->getID() << "," << this->getXPosition()
 		<< "," << this->getYPosition() << ",";
 	*/
-	addData << this->getLives() << "," << static_cast<int>(this->getR()) << ",";
+	addData << this->getLives() << "," << static_cast<int>(this->getR()) << "," << this->getWeapon()<<',';
 	std::string totalData = addData.str();
 	return totalData;
 }

@@ -175,10 +175,13 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			DataUpdate::Action action =  dataPtr->getAction();
 			switch (type) {
 			case DataUpdate::ObjectType::PLAYER: {
-				// DataFormat = "lives, (int)CharacterOrientation"
+				// DataFormat = "lives, (int)CharacterOrientation, damage"
 				tempConstructorData = DataToolkit::getSubs(dataPtr->getData(), ',');
 
 				this->lives = stoi(tempConstructorData[0]);
+
+				//Check if the player has a weapon
+				if (stoi(tempConstructorData[2])==true) this->hasWeapon= true;
 
 				switch (action) {
 				case DataUpdate::Action::ATTACK: {
@@ -189,8 +192,12 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::GET_HIT));
 					break;
 				}
-				default: { // update the orientation for the moveSprite call below
+				default: {  //assume movement
 					(mapPair->second)->setOrientation(static_cast<CharacterOrientation>(stoi(tempConstructorData[1])));
+					// update object position, regardless of the incoming action
+					int x = TILESIZE * (dataPtr->getObjectXPosition());
+					int y = TILESIZE * (dataPtr->getObjectYPosition());
+					(mapPair->second)->moveSprite(x, y);
 					break;
 				}
 				}
@@ -203,6 +210,10 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 					break;
 				}
 				default: {
+					// assume movement
+					int x = TILESIZE * (dataPtr->getObjectXPosition());
+					int y = TILESIZE * (dataPtr->getObjectYPosition());
+					(mapPair->second)->moveSprite(x, y);
 					break;
 				}
 				}
@@ -210,7 +221,6 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			default:
 				switch (action) {
 				case DataUpdate::Action::ELIMINATE: {
-					//animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::APPLE, SpriteAttributes::AnimationTypes::DEATH));
 					deleteList.push_back(thisID); //add to the delete list
 						break;
 				}
@@ -220,11 +230,6 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 				}
 				}
 			}
-
-			// update object position, regardless of the incoming action
-			int x = TILESIZE * (dataPtr->getObjectXPosition());
-			int y = TILESIZE * (dataPtr->getObjectYPosition());
-			(mapPair->second)->moveSprite(x, y);
 		}
 
 	}
@@ -450,9 +455,16 @@ void GraphicOutputManager::drawLives()
 {
 	using namespace SpriteAttributes;
 	for (int i = 0; i < this->lives; i++) {
-		SDL_Rect dst = { SCREEN_HEIGHT * TILESIZE - i * TILESIZE, (SCREEN_HEIGHT -1) * TILESIZE, TILESIZE,
+		SDL_Rect dst = { (SCREEN_WIDTH-1) * TILESIZE - i * TILESIZE, (SCREEN_HEIGHT -1) * TILESIZE, TILESIZE,
 						TILESIZE };
-		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(PACMAN, SpriteAttributes::LEFT), &dst);
+		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(PACMAN, LEFT), &dst);
+	}
+
+	// draw the weapon
+	if (hasWeapon == true)
+	{
+		SDL_Rect dst = { (1) * TILESIZE, (SCREEN_HEIGHT - 2) * TILESIZE, 2 * TILESIZE,2 * TILESIZE };
+		SDL_RenderCopy(renderer, weaponManager->getSheet(), weaponManager->getTile(FIRE_SWORD, DEFAULT), &dst);
 	}
 }
 

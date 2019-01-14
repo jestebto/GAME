@@ -81,7 +81,7 @@ public:
 	void setDescription(SpriteAttributes::Description); ///< set sprite artwork description
 	SpriteAttributes::Description getDescription(); ///< get sprite artwork description
 
-	virtual void moveSprite(int, int); ///< Estimate direction using the new and old co-ordinates
+	virtual void moveSprite(int, int); ///< move sprite to a x and y position, no orientation taken into account
 	virtual void moveSprite(int); ///< Define virtual functions for use with more complex GameSprite child classes
 	void moveSprite(UserInputType,int); ///< For test purposes only, as this is not connected to the logic
 
