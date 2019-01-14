@@ -130,6 +130,24 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 
 				break;
 			}
+			case 4: { // 4 is a Weapon 
+				// erase the part of the string that contains the object type and the ampersand symbol
+				objectVector[i].erase(0, amp + 1);
+
+				// separate the data to construct the new object
+				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+
+				// create a new PowerUp and save a shared vector to it 
+				std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(tempConstructorData[0], stoi(tempConstructorData[1]),
+					stoi(tempConstructorData[2]), stoi(tempConstructorData[3]));
+
+				// store the pointer in the vector poweUps
+				weapons.push_back(std::move(weapon));
+
+				tempConstructorData = {}; // make sure the vector is empty in the next case
+
+				break;
+			}
 		}
 	}
 	this->gameState = GameState::UPANDRUNNING;
@@ -231,6 +249,15 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 				}				
 			}
 		break;
+
+
+		// Add throwing action
+
+	//case UserInputType::Throw: // Throw
+		//if EQUIPPED==1{
+			//destroy equipment
+	//	}
+	//	break;
 	}
 
 	// check whether the movement is valid and if it is perform it 
@@ -242,11 +269,27 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 				player1->dataToString(), DataUpdate::ObjectType::PLAYER, DataUpdate::Action::GET_HIT));
 			output.push_back(update);
 		} // Check for enemy collision
-		else {
-			checkPowerUpCollision(tempX, tempY); // Check for power-up collision
+		else if (checkPowerUpCollision(tempX, tempY)) {
+			//; // Check for power-up collision
 			player1->setXPosition(tempX);     // if no collision, move player
 			player1->setYPosition(tempY);
 		}
+		//Addition of the weapon collision detection
+		
+		else {
+			CheckWeaponCollision(tempX, tempY);
+			player1->setXPosition(tempX);     // if no collision, move player
+			player1->setYPosition(tempY);
+			if EQUIPPED==0 {
+				// add EQUIPED to player and also weapon feature that affects the damage of the player
+				player1->setWeapon(Weapon)
+				// Call the weapons destructor
+			}
+			else {
+				//Nothing happens
+			}
+		}
+		
 	}
 
 	// Update the position of the player for the output
@@ -292,6 +335,22 @@ bool GameLevel::checkEnemyCollision(int tempX, int tempY) {
 		if ((tempX == enemyPtr->getXPosition()) && (tempY == enemyPtr->getYPosition())) {
 			int damage = enemyPtr->getDamage(); // get enemy damage
 			player1->setLives(-damage); // implement damage minus cause of deduction of life
+			collision = true; // collision happened
+		}
+	}
+	return collision;
+}
+
+
+// Check collision with weapons
+
+bool GameLevel::checkWeaponCollision(int tempX, int tempY) {
+	bool collision = false;
+	// Check vector of weapon objects 
+	for (std::unique_ptr<Weapon> &weaponPtr : weapons) {
+		if ((tempX == weaponPtr->getXPosition()) && (tempY == weaponPtr->getYPosition())) {
+			
+			player1->setWeapon(weapon); // set new weapon
 			collision = true; // collision happened
 		}
 	}

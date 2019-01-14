@@ -24,6 +24,7 @@ public:
 
 private:
 	int lives; /// number of lives
+	bool EQUIPPED; //Whether the player holds a weapon
 };
 
 #endif /* CHARACTER_H */
