@@ -190,6 +190,7 @@
     <ClInclude Include="logic\LogicData.h" />
     <ClInclude Include="logic\Player.h" />
     <ClInclude Include="logic\PowerUp.h" />
+    <ClInclude Include="logic\Weapon.h" />
     <ClInclude Include="output\AnimationRequest.h" />
     <ClInclude Include="output\AnimationFrame.h" />
     <ClInclude Include="output\CharSprite.h" />
@@ -205,7 +206,6 @@
     <ClInclude Include="storage\IStorageManager.h" />
     <ClInclude Include="storage\StorageGameData.h" />
     <ClInclude Include="storage\StorageLevelData.h" />
-    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ComponentFactory.cpp" />
@@ -224,6 +224,7 @@
     <ClCompile Include="logic\LogicData.cpp" />
     <ClCompile Include="logic\Player.cpp" />
     <ClCompile Include="logic\PowerUp.cpp" />
+    <ClCompile Include="logic\Weapon.cpp" />
     <ClCompile Include="output\CharSprite.cpp" />
     <ClCompile Include="output\GameSprite.cpp" />
     <ClCompile Include="output\GraphicOutputManager.cpp" />
@@ -242,7 +243,6 @@
     <ClCompile Include="storage\IStorageManager.cpp" />
     <ClCompile Include="storage\StorageGameData.cpp" />
     <ClCompile Include="storage\StorageLevelData.cpp" />
-    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
