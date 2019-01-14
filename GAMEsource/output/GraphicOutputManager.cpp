@@ -107,7 +107,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 						tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
 						int x = TILESIZE * stoi(tempConstructorData[1]);
 						int y = TILESIZE * stoi(tempConstructorData[2]);
-						this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x, y, APPLE,
+						this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x, y, FIRE_SWORD,
 							SpriteAttributes::DEFAULT, TM1);
 			}
 		}
