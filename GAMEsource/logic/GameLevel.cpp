@@ -348,6 +348,7 @@ bool GameLevel::checkWeaponCollision(int tempX, int tempY) {
 			
 			player1->setWeapon(); // set new weapon
 			collision = true; // collision happened
+
 		}
 	}
 	return collision;
