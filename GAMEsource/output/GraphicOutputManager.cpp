@@ -213,6 +213,7 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 						break;
 				}
 				default: {
+					int madafaka = 0;
 					break;
 				}
 				}

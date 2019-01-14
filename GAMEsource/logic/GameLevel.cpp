@@ -347,12 +347,23 @@ bool GameLevel::checkEnemyCollision(int tempX, int tempY) {
 bool GameLevel::checkWeaponCollision(int tempX, int tempY) {
 	bool collision = false;
 	// Check vector of weapon objects 
-	for (std::unique_ptr<Weapon> &weaponPtr : weapons) {
+	/*for (std::unique_ptr<Weapon> &weaponPtr : weapons) {
 		if ((tempX == weaponPtr->getXPosition()) && (tempY == weaponPtr->getYPosition())) {
 			
 			player1->setWeapon(); // set new weapon
 			collision = true; // collision happened
 			//weapons.erase(weapons.begin() + i);
+		}
+	}*/
+	for (int i = 0; i < weapons.size(); i++)
+	{
+		if ((tempX == weapons[i]->getXPosition()) && (tempY == weapons[i]->getYPosition())) {
+			player1->setWeapon(); // set new weapon
+			collision = true;
+			std::shared_ptr<DataUpdate> collectedWeapon(new DataUpdate(weapons[i]->getID(), weapons[i]->getXPosition(), weapons[i]->getYPosition(), weapons[i]->dataToString(), DataUpdate::ObjectType::WEAPON, DataUpdate::Action::ELIMINATE));
+			this->output.push_back(collectedWeapon);
+			weapons.erase(weapons.begin() + i);
+			break;
 		}
 	}
 	return collision;
@@ -362,17 +373,16 @@ bool GameLevel::checkWeaponCollision(int tempX, int tempY) {
 bool GameLevel::checkPowerUpCollision(int tempX, int tempY) {
 	// PowerUp array (0 = no power up, 1 = power up )
 	bool anyPowerUpFound = false;
-	std::vector<int> pickedPowerupsIndexes;
 	for (int i = 0; i < powerUps.size(); i++)
 	{
 		if ((tempX == powerUps[i]->getXPosition()) && (tempY == powerUps[i]->getYPosition())) {
 			int lives = powerUps[i]->getNrOfLives();
 			player1->setLives(lives);  // implement power-up effect
 			anyPowerUpFound = true;
-			pickedPowerupsIndexes.push_back(i);
 			std::shared_ptr<DataUpdate> collectedPowerUp(new DataUpdate(powerUps[i]->getID(), powerUps[i]->getXPosition(), powerUps[i]->getYPosition(), powerUps[i]->dataToString(), DataUpdate::ObjectType::POWERUP, DataUpdate::Action::ELIMINATE));
 			this->output.push_back(collectedPowerUp);
 			powerUps.erase(powerUps.begin() + i);
+			break;
 		}
 	}
 	return anyPowerUpFound;
