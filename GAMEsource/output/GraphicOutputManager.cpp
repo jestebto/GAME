@@ -54,11 +54,13 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 		std::string initialChar{ objectVector[i].at(0) }; // String containing the first character of a string 
 		int objectType{ stoi(initialChar) }; // Conv is the integer corresponding to the first character of a string
 
-		if (objectType >= 0 && objectType <= 3) // these are the symbols used as keys
-		{
-			// erase the part of the string that contains the object type and the ampersand symbol
-			objectVector[i].erase(0, amp + 1);
-		}
+		//if (objectType >= 0 && objectType <= 3) // these are the symbols used as keys
+		//{
+		//	// erase the part of the string that contains the object type and the ampersand symbol
+		//	objectVector[i].erase(0, amp + 1);
+		//}
+		// erase the part of the string that contains the object type and the ampersand symbol
+		objectVector[i].erase(0, amp + 1);
 
 		switch (objectType) {
 			case 0: { // 0 is map
