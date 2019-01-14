@@ -13,3 +13,10 @@ public:
 private:
 	int damageValue;  /// damage added 
 };
+
+class Weapon
+{
+public:
+	Weapon();
+	~Weapon();
+};
