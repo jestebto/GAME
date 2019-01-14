@@ -254,7 +254,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		// Add throwing action
 
 	case UserInputType::Throw: // Throw
-		if EQUIPPED==1{
+		if (player1->EQUIPPED==1){
 			player1->throwWeapon();
 		}
 		break;
@@ -281,14 +281,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			player1->setXPosition(tempX);     // move player...
 			player1->setYPosition(tempY);
 			// If player has a weapon equipped nothing happens... If no weapon is equipped then equip the one encountered and destroy it from the map
-			if player1->EQUIPPED==0 {
-				// add EQUIPED to player and also weapon feature that affects the damage of the player
-				player1->setWeapon(Weapon)
-				// Call the weapons destructor
-			}
-			else {
-				//Nothing happens
-			}
+			
 		}
 		
 	}
@@ -351,7 +344,7 @@ bool GameLevel::checkWeaponCollision(int tempX, int tempY) {
 	for (std::unique_ptr<Weapon> &weaponPtr : weapons) {
 		if ((tempX == weaponPtr->getXPosition()) && (tempY == weaponPtr->getYPosition())) {
 			
-			player1->setWeapon(weapon); // set new weapon
+			player1->setWeapon(); // set new weapon
 			collision = true; // collision happened
 		}
 	}

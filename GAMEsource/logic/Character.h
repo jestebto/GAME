@@ -22,10 +22,13 @@ public:
 	/// save the data in a string
 	virtual std::string dataToString();
 
-	/// set lives
+	/// set weapon
 	void setWeapon();
 
-	/// get lives
+	/// get weapon
+	bool getWeapon();
+
+	/// throw weapon
 	void throwWeapon();
 
 private:

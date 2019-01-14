@@ -31,6 +31,16 @@ void Character::setWeapon() {
 	Character::EQUIPPED = true ;
 }
 
+/// get weapon
+bool Character::getWeapon() {
+	if (Character::EQUIPPED == true){
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 /// get lives
 void Character::throwWeapon() {
 	Character::EQUIPPED = false ;
