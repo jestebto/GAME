@@ -216,74 +216,75 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		output.push_back(update);
 
 
-			switch (tempOrientation) {
-			case CharacterOrientation::Up:
-				tempY--;
-				break;
-			case CharacterOrientation::Right:
-				tempX++;
-				break;
-			case CharacterOrientation::Down:
-				tempY++;
-				break;
-			case CharacterOrientation::Left:
-				tempX--;
-				break;
+		switch (tempOrientation) {
+		case CharacterOrientation::Up:
+			tempY--;
+			break;
+		case CharacterOrientation::Right:
+			tempX++;
+			break;
+		case CharacterOrientation::Down:
+			tempY++;
+			break;
+		case CharacterOrientation::Left:
+			tempX--;
+			break;
+		}
+
+		for (unsigned int i{ 0 }; i < enemies.size(); i++) {
+
+			if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY) {
+				enemies[i]->setLives(-player1->getDmg());
+				//std::cout << enemies[i]->getLives();
 			}
 
-			for (unsigned int i{ 0 }; i < enemies.size(); i++) {
-				
-				if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY) {
-					enemies[i]->setLives(- player1->getDmg());
-					//std::cout << enemies[i]->getLives();
-				}
+			// Try to update a dead enemy
 
-				// Try to update a dead enemy
-				
-				if (enemies[i]->getLives() <= 0) {
-					std::shared_ptr<DataUpdate> deadEnemy(new DataUpdate(enemies[i]->getID(), enemies[i]->getXPosition(), enemies[i]->getYPosition(), enemies[i]->dataToString(), DataUpdate::ObjectType::ENEMY, DataUpdate::Action::ELIMINATE));
+			if (enemies[i]->getLives() <= 0) {
+				std::shared_ptr<DataUpdate> deadEnemy(new DataUpdate(enemies[i]->getID(), enemies[i]->getXPosition(), enemies[i]->getYPosition(), enemies[i]->dataToString(), DataUpdate::ObjectType::ENEMY, DataUpdate::Action::ELIMINATE));
 
-					this->output.push_back(deadEnemy);
+				this->output.push_back(deadEnemy);
 
-					enemies.erase(enemies.begin() + i);
-				}				
+				enemies.erase(enemies.begin() + i);
 			}
+		}
 		break;
 
 
 		// Add throwing action
 
 	case UserInputType::Throw: // Throw
-		if (player1->EQUIPPED==1){
+		if (player1->getWeapon == 1) {
 			player1->throwWeapon();
 		}
 		break;
-	
 
-	// check whether the movement is valid and if it is perform it 
-	if (movement) {// if there is valid input
-		if (checkWallCollision(tempX, tempY)) {}     // Check for wall collision
-		else if (checkEnemyCollision(tempX, tempY)) {
-			//send update to play a GET_HIT animation
-			std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
-				player1->dataToString(), DataUpdate::ObjectType::PLAYER, DataUpdate::Action::GET_HIT));
-			output.push_back(update);
-		} // Check for enemy collision
-		else if (checkPowerUpCollision(tempX, tempY)) {
-			//; // Check for power-up collision
-			player1->setXPosition(tempX);     // if no collision, move player
-			player1->setYPosition(tempY);
+
+		// check whether the movement is valid and if it is perform it 
+		if (movement) {// if there is valid input
+			if (checkWallCollision(tempX, tempY)) {}     // Check for wall collision
+			else if (checkEnemyCollision(tempX, tempY)) {
+				//send update to play a GET_HIT animation
+				std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
+					player1->dataToString(), DataUpdate::ObjectType::PLAYER, DataUpdate::Action::GET_HIT));
+				output.push_back(update);
+			} // Check for enemy collision
+			else if (checkPowerUpCollision(tempX, tempY)) {
+				//; // Check for power-up collision
+				player1->setXPosition(tempX);     // if no collision, move player
+				player1->setYPosition(tempY);
+			}
+			//Addition of the weapon collision detection
+
+			else {
+				checkWeaponCollision(tempX, tempY);
+				player1->setXPosition(tempX);     // move player...
+				player1->setYPosition(tempY);
+				// If player has a weapon equipped nothing happens... If no weapon is equipped then equip the one encountered and destroy it from the map
+
+			}
+
 		}
-		//Addition of the weapon collision detection
-		
-		else {
-			CheckWeaponCollision(tempX, tempY);
-			player1->setXPosition(tempX);     // move player...
-			player1->setYPosition(tempY);
-			// If player has a weapon equipped nothing happens... If no weapon is equipped then equip the one encountered and destroy it from the map
-			
-		}
-		
 	}
 
 	// Update the position of the player for the output
