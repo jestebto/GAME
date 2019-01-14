@@ -84,7 +84,9 @@
     <ClCompile Include="output\TileManagerWeapons.cpp">
       <Filter>Output</Filter>
     </ClCompile>
-    <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ComponentFactory.h">
@@ -175,7 +177,9 @@
     <ClInclude Include="output\TileManagerWeapons.h">
       <Filter>Output</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon.h" />
+    <ClInclude Include="Weapon.h">
+      <Filter>Logic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">

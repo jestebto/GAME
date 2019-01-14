@@ -253,12 +253,12 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 
 		// Add throwing action
 
-	//case UserInputType::Throw: // Throw
-		//if EQUIPPED==1{
-			//destroy equipment
-	//	}
-	//	break;
-	}
+	case UserInputType::Throw: // Throw
+		if EQUIPPED==1{
+			player1->throwWeapon();
+		}
+		break;
+	
 
 	// check whether the movement is valid and if it is perform it 
 	if (movement) {// if there is valid input
@@ -278,8 +278,9 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		
 		else {
 			CheckWeaponCollision(tempX, tempY);
-			player1->setXPosition(tempX);     // if no collision, move player
+			player1->setXPosition(tempX);     // move player...
 			player1->setYPosition(tempY);
+			// If player has a weapon equipped nothing happens... If no weapon is equipped then equip the one encountered and destroy it from the map
 			if player1->EQUIPPED==0 {
 				// add EQUIPED to player and also weapon feature that affects the damage of the player
 				player1->setWeapon(Weapon)

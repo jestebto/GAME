@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "PowerUp.h"
+#include "Weapon.h"
 #include "UserInputType.h"
 #include "DataUpdate.h"
 
