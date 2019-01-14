@@ -215,7 +215,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		}
 		break;
 
-	case UserInputType::Hit: // Attack
+	case UserInputType::Hit: { // Attack
 		movement = false;	//Making sure that hitting does not end up in movement
 		// Send an update to play the attack animation
 		std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
@@ -240,26 +240,34 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 
 		for (unsigned int i{ 0 }; i < enemies.size(); i++) {
 
-			if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY && player1->getWeapon() == true ) {
-				enemies[i]->setLives(-(player1->getDmg() + 10));
-				//std::cout << enemies[i]->getLives();
+			// Process all enemies that are hit
+			if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY) {
+				if (player1->getWeapon() == true) {
+					enemies[i]->setLives(-(player1->getDmg() + 10));
+				}
+				else {//player1->getWeapon() == false
+					enemies[i]->setLives(-player1->getDmg());
+					//std::cout << enemies[i]->getLives();
+				}
+
+				// check if the enemy died
+				if (enemies[i]->getLives() <= 0) {
+					//play the death animation
+					std::shared_ptr<DataUpdate> deadEnemy(new DataUpdate(enemies[i]->getID(), enemies[i]->getXPosition(), enemies[i]->getYPosition(), enemies[i]->dataToString(), DataUpdate::ObjectType::ENEMY, DataUpdate::Action::ELIMINATE));
+					this->output.push_back(deadEnemy);
+					// delete the enemy
+					enemies.erase(enemies.begin() + i);
+				}
+				else // play a get hit animation
+				{
+					std::shared_ptr<DataUpdate> hitEnemy(new DataUpdate(enemies[i]->getID(), enemies[i]->getXPosition(), enemies[i]->getYPosition(), enemies[i]->dataToString(), DataUpdate::ObjectType::ENEMY, DataUpdate::Action::GET_HIT));
+					this->output.push_back(hitEnemy);
+				}
+
 			}
-			if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY && player1->getWeapon() == false) {
-				enemies[i]->setLives(-player1->getDmg());
-				//std::cout << enemies[i]->getLives();
-			}
 
-			// Try to update a dead enemy
-
-			if (enemies[i]->getLives() <= 0) {
-				std::shared_ptr<DataUpdate> deadEnemy(new DataUpdate(enemies[i]->getID(), enemies[i]->getXPosition(), enemies[i]->getYPosition(), enemies[i]->dataToString(), DataUpdate::ObjectType::ENEMY, DataUpdate::Action::ELIMINATE));
-
-				this->output.push_back(deadEnemy);
-
-				enemies.erase(enemies.begin() + i);
-			}
 		}
-		break;
+	} break;
 
 
 		

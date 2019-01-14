@@ -186,12 +186,10 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 				switch (action) {
 				case DataUpdate::Action::ATTACK: {
 					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::ATTACK));
-					break;
-				}
+				} break;
 				case DataUpdate::Action::GET_HIT: {
 					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::GET_HIT));
-					break;
-				}
+				} break;
 				default: {  //assume movement
 					(mapPair->second)->setOrientation(static_cast<CharacterOrientation>(stoi(tempConstructorData[1])));
 					// update object position, regardless of the incoming action
@@ -209,6 +207,10 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 					deleteList.push_back(thisID);
 					break;
 				}
+				case DataUpdate::Action::GET_HIT: {
+					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::SCARED, SpriteAttributes::AnimationTypes::GET_HIT));
+				} break;
+
 				default: {
 					// assume movement
 					int x = TILESIZE * (dataPtr->getObjectXPosition());

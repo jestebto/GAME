@@ -186,8 +186,15 @@ void TileManagerPacman::createAnimationSequences() {
 
 	std::map<AnimationTypes, std::vector<AnimationFrame>> enemyAnimations;
 	enemyAnimations[DEATH] = std::vector<AnimationFrame>{
-		AnimationFrame(SCAREDINV, DEFAULT,0), AnimationFrame(SCARED, DEFAULT,0), // dummy frames since death animation is short
+		// dummy frames since death animation is short
+		AnimationFrame(SCAREDINV, DEFAULT,0), AnimationFrame(SCARED, DEFAULT,0), 
 		AnimationFrame(SCARED, DEFAULT,0), AnimationFrame(SCARED, ELIMINATE,0) };
+	enemyAnimations[GET_HIT] = std::vector<AnimationFrame>{
+		// dummy frames
+		AnimationFrame(SCAREDINV, DEFAULT,0),AnimationFrame(SCAREDINV, DEFAULT,0),
+		// make the enemy disappear and reappear x2
+		AnimationFrame(BLANK, DEFAULT,0),AnimationFrame(SCAREDINV, DEFAULT,0),
+		AnimationFrame(BLANK, DEFAULT,0),AnimationFrame(SCAREDINV, DEFAULT,0) };
 	animationsOther[SCARED] = enemyAnimations;
 
 
