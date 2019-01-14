@@ -280,7 +280,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			CheckWeaponCollision(tempX, tempY);
 			player1->setXPosition(tempX);     // if no collision, move player
 			player1->setYPosition(tempY);
-			if EQUIPPED==0 {
+			if player1->EQUIPPED==0 {
 				// add EQUIPED to player and also weapon feature that affects the damage of the player
 				player1->setWeapon(Weapon)
 				// Call the weapons destructor
