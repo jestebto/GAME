@@ -41,7 +41,7 @@ bool Character::getWeapon() {
 	}
 }
 
-/// get lives
+/// throw weapon
 void Character::throwWeapon() {
 	Character::EQUIPPED = false ;
 }

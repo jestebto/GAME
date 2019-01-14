@@ -208,6 +208,13 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			tempX--;
 		}
 		break;
+
+	case UserInputType::Throw: // Throw 
+		if (player1->getWeapon() == 1) {
+			player1->throwWeapon();
+		}
+		break;
+
 	case UserInputType::Hit: // Attack
 		movement = false;	//Making sure that hitting does not end up in movement
 		// Send an update to play the attack animation
@@ -251,14 +258,10 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		break;
 
 
-		// Add throwing action
+		
 
-	case UserInputType::Throw: // Throw
-		if (player1->getWeapon() == 1) {
-			player1->throwWeapon();
-		}
-		break;
-
+	
+	}
 
 		// check whether the movement is valid and if it is perform it 
 		if (movement) {// if there is valid input
@@ -274,9 +277,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 				player1->setXPosition(tempX);     // if no collision, move player
 				player1->setYPosition(tempY);
 			}
-			//Addition of the weapon collision detection
-
-			else {
+			else {//Addition of the weapon collision detection
 				checkWeaponCollision(tempX, tempY);
 				player1->setXPosition(tempX);     // move player...
 				player1->setYPosition(tempY);
@@ -285,7 +286,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			}
 
 		}
-	}
+	
 
 	// Update the position of the player for the output
 	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
