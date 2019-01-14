@@ -122,8 +122,26 @@ void GameManager::Update()
 }
 
 void GameManager::DistributeData(StorageLevelData* storageLevelData) {
-	logicManager->createLevel(LogicData{ storageLevelData->logicData}, true);
-	outputManager->loadLevel(OutputData{ storageLevelData->outputData });
+	try {
+		logicManager->createLevel(LogicData{ storageLevelData->logicData }, true);
+	}
+	catch (std::exception &e) {
+		std::cout << "Exception at createLevel: "
+			<< e.what();
+		outputManager->showGenericErrorScreen();
+		this->programState = ProgramState::ERROR;
+	}
+	try {
+		if (programState != ProgramState::ERROR) {
+			outputManager->loadLevel(OutputData{ storageLevelData->outputData });
+		}
+	}
+	catch (std::exception &e) {
+		std::cout << "Exception at loadLevel: "
+			<< e.what();
+		outputManager->showGenericErrorScreen();
+		this->programState = ProgramState::ERROR;
+	}
 }
 
 int GameManager::Add(int x, int y) {
