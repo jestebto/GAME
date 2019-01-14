@@ -254,7 +254,7 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		// Add throwing action
 
 	case UserInputType::Throw: // Throw
-		if (player1->getWeapon == 1) {
+		if (player1->getWeapon() == 1) {
 			player1->throwWeapon();
 		}
 		break;

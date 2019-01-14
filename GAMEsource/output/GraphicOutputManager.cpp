@@ -61,47 +61,55 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 		}
 
 		switch (objectType) {
-		case 0: { // 0 is map
-			setBackground(objectVector[i]);
-			break;
-		}
-		case 1: { //1 is player
-			//separate the data to construct the new object
-			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
+			case 0: { // 0 is map
+				setBackground(objectVector[i]);
+				break;
+			}
+			case 1: { //1 is player
+				//separate the data to construct the new object
+				tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
-			// tempConstructorData format: {"ID, x, y, lives"} 
-			int x = TILESIZE * stoi(tempConstructorData[1]);
-			int y = TILESIZE * stoi(tempConstructorData[2]);
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<CharSprite> (x,y,PACMAN, 
-				SpriteAttributes::UP,TM0,CharacterOrientation::Up);
-			this->lives= stoi(tempConstructorData[3]);
+				// tempConstructorData format: {"ID, x, y, lives"} 
+				int x = TILESIZE * stoi(tempConstructorData[1]);
+				int y = TILESIZE * stoi(tempConstructorData[2]);
+				this->spriteObjects[tempConstructorData[0]] = std::make_unique<CharSprite> (x,y,PACMAN, 
+					SpriteAttributes::UP,TM0,CharacterOrientation::Up);
+				this->lives= stoi(tempConstructorData[3]);
 
-			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
-			break;
-		}
-		case 2: { // 2 is an enemy
-			// separate the data to construct the new object
-			// Data format: "ID,x,y,lives,"
-			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
-			// create a new enemy storing a shared pointer to it
-			int x = TILESIZE * stoi(tempConstructorData[1]);
-			int y = TILESIZE * stoi(tempConstructorData[2]);
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, SCAREDINV, 
-				SpriteAttributes::DEFAULT, TM0);
+				tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
+				break;
+			}
+			case 2: { // 2 is an enemy
+				// separate the data to construct the new object
+				// Data format: "ID,x,y,lives,"
+				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+				// create a new enemy storing a shared pointer to it
+				int x = TILESIZE * stoi(tempConstructorData[1]);
+				int y = TILESIZE * stoi(tempConstructorData[2]);
+				this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, SCAREDINV, 
+					SpriteAttributes::DEFAULT, TM0);
 
-			tempConstructorData = {}; // make sure the vector is empty in the next case
-			break;
-		}
-		case 3: { // 3 is a power up
-			// separate the data to construct the new object
-			// Data format: "ID,x,y,livesBonus,"
-			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
-			int x = TILESIZE * stoi(tempConstructorData[1]);
-			int y = TILESIZE * stoi(tempConstructorData[2]);
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, APPLE,
-				SpriteAttributes::DEFAULT, TM1);
-		}
-
+				tempConstructorData = {}; // make sure the vector is empty in the next case
+				break;
+			}
+			case 3: { // 3 is a power up
+				// separate the data to construct the new object
+				// Data format: "ID,x,y,livesBonus,"
+				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+				int x = TILESIZE * stoi(tempConstructorData[1]);
+				int y = TILESIZE * stoi(tempConstructorData[2]);
+				this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, APPLE,
+					SpriteAttributes::DEFAULT, TM1);
+			}
+			case 4: { // 4 is a weapon
+				// separate the data to construct the new object
+				// Data format: "ID,x,y,"
+						tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+						int x = TILESIZE * stoi(tempConstructorData[1]);
+						int y = TILESIZE * stoi(tempConstructorData[2]);
+						this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x, y, APPLE,
+							SpriteAttributes::DEFAULT, TM1);
+			}
 		}
 	}
 
