@@ -240,7 +240,11 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 
 		for (unsigned int i{ 0 }; i < enemies.size(); i++) {
 
-			if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY) {
+			if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY && player1->getWeapon() == true ) {
+				enemies[i]->setLives(-(player1->getDmg() + 10));
+				//std::cout << enemies[i]->getLives();
+			}
+			if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY && player1->getWeapon() == false) {
 				enemies[i]->setLives(-player1->getDmg());
 				//std::cout << enemies[i]->getLives();
 			}
@@ -348,7 +352,7 @@ bool GameLevel::checkWeaponCollision(int tempX, int tempY) {
 			
 			player1->setWeapon(); // set new weapon
 			collision = true; // collision happened
-
+			//weapons.erase(weapons.begin() + i);
 		}
 	}
 	return collision;
