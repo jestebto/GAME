@@ -139,5 +139,5 @@ private:
 	bool hasWeapon = false;
 };
 
-#endif /* GRAPHIC_OUTPUT_MANAGER_H*/
+#endif /* GRAPHIC_OUTPUT_MANAGER_H */
 
