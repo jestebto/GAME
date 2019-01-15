@@ -54,54 +54,66 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 		std::string initialChar{ objectVector[i].at(0) }; // String containing the first character of a string 
 		int objectType{ stoi(initialChar) }; // Conv is the integer corresponding to the first character of a string
 
-		if (objectType >= 0 && objectType <= 3) // these are the symbols used as keys
-		{
-			// erase the part of the string that contains the object type and the ampersand symbol
-			objectVector[i].erase(0, amp + 1);
-		}
+		//if (objectType >= 0 && objectType <= 3) // these are the symbols used as keys
+		//{
+		//	// erase the part of the string that contains the object type and the ampersand symbol
+		//	objectVector[i].erase(0, amp + 1);
+		//}
+		// erase the part of the string that contains the object type and the ampersand symbol
+		objectVector[i].erase(0, amp + 1);
 
 		switch (objectType) {
-		case 0: { // 0 is map
-			setBackground(objectVector[i]);
-			break;
-		}
-		case 1: { //1 is player
-			//separate the data to construct the new object
-			tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
+			case 0: { // 0 is map
+				setBackground(objectVector[i]);
+				break;
+			}
+			case 1: { //1 is player
+				//separate the data to construct the new object
+				tempConstructorData = DataToolkit::getSubs(objectVector[i],',');
 
-			// tempConstructorData format: {"ID, x, y, lives"} 
-			int x = TILESIZE * stoi(tempConstructorData[1]);
-			int y = TILESIZE * stoi(tempConstructorData[2]);
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<CharSprite> (x,y,PACMAN, 
-				SpriteAttributes::UP,TM0,CharacterOrientation::Up);
-			this->lives= stoi(tempConstructorData[3]);
+				// tempConstructorData format: {"ID, x, y, lives"} 
+				int x = TILESIZE * stoi(tempConstructorData[1]);
+				int y = TILESIZE * stoi(tempConstructorData[2]);
+				this->spriteObjects[tempConstructorData[0]] = std::make_unique<CharSprite> (x,y,PACMAN, 
+					SpriteAttributes::UP,TM0,CharacterOrientation::Up);
+				this->lives= stoi(tempConstructorData[3]);
 
-			tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
-			break;
-		}
-		case 2: { // 2 is an enemy
-			// separate the data to construct the new object
-			// Data format: "ID,x,y,lives,"
-			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
-			// create a new enemy storing a shared pointer to it
-			int x = TILESIZE * stoi(tempConstructorData[1]);
-			int y = TILESIZE * stoi(tempConstructorData[2]);
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, SCAREDINV, 
-				SpriteAttributes::DEFAULT, TM0);
+				tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
+				break;
+			}
+			case 2: { // 2 is an enemy
+				// separate the data to construct the new object
+				// Data format: "ID,x,y,lives,"
+				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+				// create a new enemy storing a shared pointer to it
+				int x = TILESIZE * stoi(tempConstructorData[1]);
+				int y = TILESIZE * stoi(tempConstructorData[2]);
+				this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, SCAREDINV, 
+					SpriteAttributes::DEFAULT, TM0);
 
-			tempConstructorData = {}; // make sure the vector is empty in the next case
-			break;
-		}
-		case 3: { // 3 is a power up
-			// separate the data to construct the new object
-			// Data format: "ID,x,y,livesBonus,"
-			tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
-			int x = TILESIZE * stoi(tempConstructorData[1]);
-			int y = TILESIZE * stoi(tempConstructorData[2]);
-			this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, APPLE,
-				SpriteAttributes::DEFAULT, TM1);
-		}
-
+				tempConstructorData = {}; // make sure the vector is empty in the next case
+				break;
+			}
+			case 3: { // 3 is a power up
+				// separate the data to construct the new object
+				// Data format: "ID,x,y,livesBonus,"
+				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+				int x = TILESIZE * stoi(tempConstructorData[1]);
+				int y = TILESIZE * stoi(tempConstructorData[2]);
+				this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, APPLE,
+					SpriteAttributes::DEFAULT, TM1);
+				break;
+			}
+			case 4: { // 4 is a weapon
+				// separate the data to construct the new object
+				// Data format: "ID,x,y,"
+				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+				int x = TILESIZE * stoi(tempConstructorData[1]);
+				int y = TILESIZE * stoi(tempConstructorData[2]);
+				this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x, y, FIRE_SWORD,
+					SpriteAttributes::DEFAULT, TM1);
+				break;
+			}
 		}
 	}
 
@@ -163,22 +175,27 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			DataUpdate::Action action =  dataPtr->getAction();
 			switch (type) {
 			case DataUpdate::ObjectType::PLAYER: {
-				// DataFormat = "lives, (int)CharacterOrientation"
+				// DataFormat = "lives, (int)CharacterOrientation, damage"
 				tempConstructorData = DataToolkit::getSubs(dataPtr->getData(), ',');
 
 				this->lives = stoi(tempConstructorData[0]);
 
+				//Check if the player has a weapon
+				this->hasWeapon = (stoi(tempConstructorData[2]) == 1) ? true : false;
+
 				switch (action) {
 				case DataUpdate::Action::ATTACK: {
 					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::ATTACK));
-					break;
-				}
+				} break;
 				case DataUpdate::Action::GET_HIT: {
 					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::PACMAN, SpriteAttributes::AnimationTypes::GET_HIT));
-					break;
-				}
-				default: { // update the orientation for the moveSprite call below
+				} break;
+				default: {  //assume movement
 					(mapPair->second)->setOrientation(static_cast<CharacterOrientation>(stoi(tempConstructorData[1])));
+					// update object position, regardless of the incoming action
+					int x = TILESIZE * (dataPtr->getObjectXPosition());
+					int y = TILESIZE * (dataPtr->getObjectYPosition());
+					(mapPair->second)->moveSprite(x, y);
 					break;
 				}
 				}
@@ -190,7 +207,15 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 					deleteList.push_back(thisID);
 					break;
 				}
+				case DataUpdate::Action::GET_HIT: {
+					animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::SCARED, SpriteAttributes::AnimationTypes::GET_HIT));
+				} break;
+
 				default: {
+					// assume movement
+					int x = TILESIZE * (dataPtr->getObjectXPosition());
+					int y = TILESIZE * (dataPtr->getObjectYPosition());
+					(mapPair->second)->moveSprite(x, y);
 					break;
 				}
 				}
@@ -198,20 +223,15 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			default:
 				switch (action) {
 				case DataUpdate::Action::ELIMINATE: {
-					//animationList.push_back(AnimationRequest(mapPair->second.get(), SpriteAttributes::APPLE, SpriteAttributes::AnimationTypes::DEATH));
 					deleteList.push_back(thisID); //add to the delete list
 						break;
 				}
 				default: {
+					int madafaka = 0;
 					break;
 				}
 				}
 			}
-
-			// update object position, regardless of the incoming action
-			int x = TILESIZE * (dataPtr->getObjectXPosition());
-			int y = TILESIZE * (dataPtr->getObjectYPosition());
-			(mapPair->second)->moveSprite(x, y);
 		}
 
 	}
@@ -437,9 +457,16 @@ void GraphicOutputManager::drawLives()
 {
 	using namespace SpriteAttributes;
 	for (int i = 0; i < this->lives; i++) {
-		SDL_Rect dst = { SCREEN_HEIGHT * TILESIZE - i * TILESIZE, (SCREEN_HEIGHT -1) * TILESIZE, TILESIZE,
+		SDL_Rect dst = { (SCREEN_WIDTH-1) * TILESIZE - i * TILESIZE, (SCREEN_HEIGHT -1) * TILESIZE, TILESIZE,
 						TILESIZE };
-		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(PACMAN, SpriteAttributes::LEFT), &dst);
+		SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(PACMAN, LEFT), &dst);
+	}
+
+	// draw the weapon
+	if (hasWeapon == true)
+	{
+		SDL_Rect dst = { (1) * TILESIZE, (SCREEN_HEIGHT - 2) * TILESIZE, 2 * TILESIZE,2 * TILESIZE };
+		SDL_RenderCopy(renderer, weaponManager->getSheet(), weaponManager->getTile(FIRE_SWORD, DEFAULT), &dst);
 	}
 }
 

@@ -130,6 +130,24 @@ void GameLevel::createLevel(LogicData inputString, bool keepPlayerState = false)
 
 				break;
 			}
+			case 4: { // 4 is a Weapon 
+				// erase the part of the string that contains the object type and the ampersand symbol
+				objectVector[i].erase(0, amp + 1);
+
+				// separate the data to construct the new object
+				tempConstructorData = DataToolkit::getSubs(objectVector[i], ',');
+
+				// create a new PowerUp and save a shared vector to it 
+				std::unique_ptr<Weapon> weapon = std::make_unique<Weapon>(tempConstructorData[0], stoi(tempConstructorData[1]),
+					stoi(tempConstructorData[2]), stoi(tempConstructorData[3]));
+
+				// store the pointer in the vector poweUps
+				weapons.push_back(std::move(weapon));
+
+				tempConstructorData = {}; // make sure the vector is empty in the next case
+
+				break;
+			}
 		}
 	}
 	this->gameState = GameState::UPANDRUNNING;
@@ -190,7 +208,14 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			tempX--;
 		}
 		break;
-	case UserInputType::Hit: // Attack
+
+	case UserInputType::Throw: // Throw 
+		if (player1->getWeapon() == 1) {
+			player1->throwWeapon();
+		}
+		break;
+
+	case UserInputType::Hit: { // Attack
 		movement = false;	//Making sure that hitting does not end up in movement
 		// Send an update to play the attack animation
 		std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
@@ -198,56 +223,82 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		output.push_back(update);
 
 
-			switch (tempOrientation) {
-			case CharacterOrientation::Up:
-				tempY--;
-				break;
-			case CharacterOrientation::Right:
-				tempX++;
-				break;
-			case CharacterOrientation::Down:
-				tempY++;
-				break;
-			case CharacterOrientation::Left:
-				tempX--;
-				break;
-			}
+		switch (tempOrientation) {
+		case CharacterOrientation::Up:
+			tempY--;
+			break;
+		case CharacterOrientation::Right:
+			tempX++;
+			break;
+		case CharacterOrientation::Down:
+			tempY++;
+			break;
+		case CharacterOrientation::Left:
+			tempX--;
+			break;
+		}
 
-			for (unsigned int i{ 0 }; i < enemies.size(); i++) {
-				
-				if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY) {
-					enemies[i]->setLives(- player1->getDmg());
+		for (unsigned int i{ 0 }; i < enemies.size(); i++) {
+
+			// Process all enemies that are hit
+			if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY) {
+				if (player1->getWeapon() == true) {
+					enemies[i]->setLives(-(player1->getDmg() + 10));
+				}
+				else {//player1->getWeapon() == false
+					enemies[i]->setLives(-player1->getDmg());
 					//std::cout << enemies[i]->getLives();
 				}
 
-				// Try to update a dead enemy
-				
+				// check if the enemy died
 				if (enemies[i]->getLives() <= 0) {
+					//play the death animation
 					std::shared_ptr<DataUpdate> deadEnemy(new DataUpdate(enemies[i]->getID(), enemies[i]->getXPosition(), enemies[i]->getYPosition(), enemies[i]->dataToString(), DataUpdate::ObjectType::ENEMY, DataUpdate::Action::ELIMINATE));
-
 					this->output.push_back(deadEnemy);
-
+					// delete the enemy
 					enemies.erase(enemies.begin() + i);
-				}				
+				}
+				else // play a get hit animation
+				{
+					std::shared_ptr<DataUpdate> hitEnemy(new DataUpdate(enemies[i]->getID(), enemies[i]->getXPosition(), enemies[i]->getYPosition(), enemies[i]->dataToString(), DataUpdate::ObjectType::ENEMY, DataUpdate::Action::GET_HIT));
+					this->output.push_back(hitEnemy);
+				}
+
 			}
-		break;
+
+		}
+	} break;
+
+
+		
+
+	
 	}
 
-	// check whether the movement is valid and if it is perform it 
-	if (movement) {// if there is valid input
-		if (checkWallCollision(tempX, tempY)) {}     // Check for wall collision
-		else if (checkEnemyCollision(tempX, tempY)) {
-			//send update to play a GET_HIT animation
-			std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
-				player1->dataToString(), DataUpdate::ObjectType::PLAYER, DataUpdate::Action::GET_HIT));
-			output.push_back(update);
-		} // Check for enemy collision
-		else {
-			checkPowerUpCollision(tempX, tempY); // Check for power-up collision
-			player1->setXPosition(tempX);     // if no collision, move player
-			player1->setYPosition(tempY);
+		// check whether the movement is valid and if it is perform it 
+		if (movement) {// if there is valid input
+			if (checkWallCollision(tempX, tempY)) {}     // Check for wall collision
+			else if (checkEnemyCollision(tempX, tempY)) {
+				//send update to play a GET_HIT animation
+				std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
+					player1->dataToString(), DataUpdate::ObjectType::PLAYER, DataUpdate::Action::GET_HIT));
+				output.push_back(update);
+			} // Check for enemy collision
+			else if (checkPowerUpCollision(tempX, tempY)) {
+				//; // Check for power-up collision
+				player1->setXPosition(tempX);     // if no collision, move player
+				player1->setYPosition(tempY);
+			}
+			else {//Addition of the weapon collision detection
+				checkWeaponCollision(tempX, tempY);
+				player1->setXPosition(tempX);     // move player...
+				player1->setYPosition(tempY);
+				// If player has a weapon equipped nothing happens... If no weapon is equipped then equip the one encountered and destroy it from the map
+
+			}
+
 		}
-	}
+	
 
 	// Update the position of the player for the output
 	std::shared_ptr<DataUpdate> update(new DataUpdate(player1->getID(), player1->getXPosition(), player1->getYPosition(),
@@ -298,21 +349,48 @@ bool GameLevel::checkEnemyCollision(int tempX, int tempY) {
 	return collision;
 }
 
+
+// Check collision with weapons
+
+bool GameLevel::checkWeaponCollision(int tempX, int tempY) {
+	bool collision = false;
+	// Check vector of weapon objects 
+	/*for (std::unique_ptr<Weapon> &weaponPtr : weapons) {
+		if ((tempX == weaponPtr->getXPosition()) && (tempY == weaponPtr->getYPosition())) {
+			
+			player1->setWeapon(); // set new weapon
+			collision = true; // collision happened
+			//weapons.erase(weapons.begin() + i);
+		}
+	}*/
+	for (int i = 0; i < weapons.size(); i++)
+	{
+		if ((tempX == weapons[i]->getXPosition()) && (tempY == weapons[i]->getYPosition())) {
+			player1->setWeapon(); // set new weapon
+			collision = true;
+			std::shared_ptr<DataUpdate> collectedWeapon(new DataUpdate(weapons[i]->getID(), weapons[i]->getXPosition(), weapons[i]->getYPosition(), weapons[i]->dataToString(), DataUpdate::ObjectType::WEAPON, DataUpdate::Action::ELIMINATE));
+			this->output.push_back(collectedWeapon);
+			weapons.erase(weapons.begin() + i);
+			break;
+		}
+	}
+	return collision;
+}
+
 // check power-up collision
 bool GameLevel::checkPowerUpCollision(int tempX, int tempY) {
 	// PowerUp array (0 = no power up, 1 = power up )
 	bool anyPowerUpFound = false;
-	std::vector<int> pickedPowerupsIndexes;
 	for (int i = 0; i < powerUps.size(); i++)
 	{
 		if ((tempX == powerUps[i]->getXPosition()) && (tempY == powerUps[i]->getYPosition())) {
 			int lives = powerUps[i]->getNrOfLives();
 			player1->setLives(lives);  // implement power-up effect
 			anyPowerUpFound = true;
-			pickedPowerupsIndexes.push_back(i);
 			std::shared_ptr<DataUpdate> collectedPowerUp(new DataUpdate(powerUps[i]->getID(), powerUps[i]->getXPosition(), powerUps[i]->getYPosition(), powerUps[i]->dataToString(), DataUpdate::ObjectType::POWERUP, DataUpdate::Action::ELIMINATE));
 			this->output.push_back(collectedPowerUp);
 			powerUps.erase(powerUps.begin() + i);
+			break;
 		}
 	}
 	return anyPowerUpFound;

@@ -22,8 +22,18 @@ public:
 	/// save the data in a string
 	virtual std::string dataToString();
 
+	/// set weapon
+	void setWeapon();
+
+	/// get weapon
+	bool getWeapon();
+
+	/// throw weapon
+	void throwWeapon();
+
 private:
 	int lives; /// number of lives
+	bool EQUIPPED = false ; //Whether the player holds a weapon
 };
 
 #endif /* CHARACTER_H */

@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "PowerUp.h"
+#include "Weapon.h"
 #include "UserInputType.h"
 #include "DataUpdate.h"
 
@@ -42,6 +43,8 @@ private:
 	/// check if the player would collide with a power up
 	bool checkPowerUpCollision(int, int);
 
+	/// check if the player would collide with a weapon
+	bool checkWeaponCollision(int, int);
 
 
 	GameState gameState;
@@ -50,6 +53,7 @@ private:
 	int mapArray[height][width];   /// map
 	std::vector<std::unique_ptr<Enemy>> enemies;  /// list of enemies
 	std::vector<std::unique_ptr<PowerUp>> powerUps; /// list of Power-Ups
+	std::vector<std::unique_ptr<Weapon>> weapons; /// list of Weapons
 	std::unique_ptr<Player> player1; /// player
 	bool isGameOver{false}; /// indicate if the game is over
 	bool isGameFinished{false}; /// indicate if the level is finished

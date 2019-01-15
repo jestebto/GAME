@@ -77,6 +77,7 @@ void GameSprite::moveSprite(int x, int y)
 
 	setXPosition(x);
 	setYPosition(y);
+	/* //From earlier version where this was used to estimate the direction
 	if (y_old < y) // moving DOWN
 	{
 		description = SpriteAttributes::DOWN;
@@ -93,7 +94,7 @@ void GameSprite::moveSprite(int x, int y)
 	{
 		description = SpriteAttributes::LEFT;
 	}
-
+	*/
 }
 
 void GameSprite::moveSprite(int value)

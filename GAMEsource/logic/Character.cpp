@@ -26,6 +26,26 @@ bool Character::isAlive() {
 		return true;
 }
 
+/// set lives
+void Character::setWeapon() {
+	Character::EQUIPPED = true ;
+}
+
+/// get weapon
+bool Character::getWeapon() {
+	if (Character::EQUIPPED == true){
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+/// throw weapon
+void Character::throwWeapon() {
+	Character::EQUIPPED = false ;
+}
+
 //return a string with the object's data
 std::string Character::dataToString() {
 	std::ostringstream addData;
