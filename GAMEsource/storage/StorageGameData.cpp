@@ -1,4 +1,5 @@
 #include "StorageGameData.h"
+#include <stdexcept>
 
 StorageGameData::StorageGameData()
 {
@@ -12,7 +13,7 @@ StorageGameData::~StorageGameData()
 
 StorageLevelData* StorageGameData::getNextLevel() {
 	this->currentLevel++;
-	if (currentLevel > levels.size()) throw std::exception("Error: tried to access more levels than available."); //TO DO: is this the right type of exception?
+	if (currentLevel > levels.size()) throw std::runtime_error("Error: tried to access more levels than available."); //TO DO: is this the right type of exception?
 	//StorageLevelData l = levels[currentLevel - 1];
 	return &(this->levels[currentLevel - 1]);
 }

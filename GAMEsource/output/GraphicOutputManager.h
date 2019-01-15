@@ -26,6 +26,7 @@
 #include <memory>
 #include <vector>
 #include <memory>
+#include <cstddef> // for size_t
 
 /// An output manager that manages a Window and a Graphic User Interface
 /// This class owns GameSprite objects, SpriteManager(s), SDL textures and a SDL window and renderer.

@@ -1,6 +1,7 @@
 #include <stdexcept>
 #include "PowerUp.h"
 #include <iostream>
+#include <stdexcept>
 
 PowerUp::PowerUp(const std::string ID, int xPos, int yPos, int lives)
 	: GameObject(ID, xPos, yPos) {
@@ -16,7 +17,7 @@ PowerUp::~PowerUp()
 // set nr of lives
 void PowerUp::setNrOfLives(int lives) {
 	if (lives < 0) {
-		throw std::exception("The number of lives of a Power-Up must be a positive integer.");
+		throw std::runtime_error("The number of lives of a Power-Up must be a positive integer.");
 	}
 	nrOfLives = lives; 
 }

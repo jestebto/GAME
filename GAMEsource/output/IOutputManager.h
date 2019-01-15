@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 
 /**
 * Interface to be implemented by a class acting as the manager of the Output Component
