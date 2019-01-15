@@ -146,8 +146,3 @@ void GameManager::DistributeData(StorageLevelData* storageLevelData) {
 	}
 }
 
-int GameManager::Add(int x, int y) {
-	//This is a dummy method to try the GAMEtest project
-	//<TO DO JOSE> remove when we already have other tests
-	return x - y;
-}

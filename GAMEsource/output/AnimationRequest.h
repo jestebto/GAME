@@ -4,8 +4,9 @@
 #include "AnimationFrame.h"
 #include "GameSprite.h"
 
+///Used to store elements associated with an animation, to pass around
 /**
-* Used to store elements associated with an animation. Namely, a GameSprite element, an artType and an action.
+* Namely, a GameSprite element, an artType and an action.
 * This makes passing "animations" around easier.
 */
 class AnimationRequest
@@ -19,9 +20,9 @@ public:
 	~AnimationRequest() {};
 
 public:
-	GameSprite* elementRef;
-	SpriteAttributes::ArtType art;
-	SpriteAttributes::AnimationTypes action;
+	GameSprite* elementRef; ///< the game sprite that should be animated
+	SpriteAttributes::ArtType art; ///< the art type to use when animating that sprite e.g. PACMAN, BLINKY
+	SpriteAttributes::AnimationTypes action; ///< the action that describes the animations e.g. ATTACK, GET_HIT, DEATH etc
 };
 
 #endif /* ANIMATION_REQUEST_H */

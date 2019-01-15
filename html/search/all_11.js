@@ -1,14 +1,12 @@
 var searchData=
 [
-  ['ramp',['ramp',['../union_s_d_l___haptic_effect.html#a1d32ef4c2d1cc89dc938b392f6ad81bd',1,'SDL_HapticEffect']]],
-  ['randominputgenerator',['RandomInputGenerator',['../class_random_input_generator.html',1,'RandomInputGenerator'],['../class_random_input_generator.html#afd6c995d37855154f296050304307ee4',1,'RandomInputGenerator::RandomInputGenerator()']]],
-  ['rate_5fincr',['rate_incr',['../struct_s_d_l___audio_c_v_t.html#ad886122c23a6673073baace31bff3b6c',1,'SDL_AudioCVT']]],
-  ['refcount',['refcount',['../struct_s_d_l___surface.html#a03d10628a359c0674f5ceffd574f1641',1,'SDL_Surface']]],
-  ['refresh_5frate',['refresh_rate',['../struct_s_d_l___display_mode.html#ad1b5783c9b292ebf24ad4e0e7a98e540',1,'SDL_DisplayMode']]],
-  ['repeat',['repeat',['../struct_s_d_l___keyboard_event.html#a3edac3b36304812d533795c9df4ed4c1',1,'SDL_KeyboardEvent']]],
-  ['right_5fcoeff',['right_coeff',['../struct_s_d_l___haptic_condition.html#a3de7f164ef88841255535387d0f100b6',1,'SDL_HapticCondition']]],
-  ['right_5fsat',['right_sat',['../struct_s_d_l___haptic_condition.html#a90427a1e0d464b4b53abc1d419c97b2e',1,'SDL_HapticCondition']]],
-  ['rw_5fseek_5fcur',['RW_SEEK_CUR',['../_s_d_l__rwops_8h.html#aba5f3b60c197def370ffa2ca1ab1348d',1,'SDL_rwops.h']]],
-  ['rw_5fseek_5fend',['RW_SEEK_END',['../_s_d_l__rwops_8h.html#a6cf141faabd1b8f2ec3c03cf76eaf553',1,'SDL_rwops.h']]],
-  ['rw_5fseek_5fset',['RW_SEEK_SET',['../_s_d_l__rwops_8h.html#ac028b032bb8230df64bc6284e04789f5',1,'SDL_rwops.h']]]
+  ['_7echaracter',['~Character',['../class_character.html#a3333a88ae593c36b229c90371e935d42',1,'Character']]],
+  ['_7eenemy',['~Enemy',['../class_enemy.html#aafb628c66008e33afdd750e2f492bd98',1,'Enemy']]],
+  ['_7egameobject',['~GameObject',['../class_game_object.html#a67ae2fa6e7916c799700cd659975d8ea',1,'GameObject']]],
+  ['_7egraphicoutputmanager',['~GraphicOutputManager',['../class_graphic_output_manager.html#a13de402f591b8bfa7a11d4c2b84dfd83',1,'GraphicOutputManager']]],
+  ['_7eiinputmanager',['~IInputManager',['../class_i_input_manager.html#aa81a10b1ddf305df10c4aebe6930ac86',1,'IInputManager']]],
+  ['_7eilogicmanager',['~ILogicManager',['../class_i_logic_manager.html#af522c957cdce66d34eb8264212b413ed',1,'ILogicManager']]],
+  ['_7eioutputmanager',['~IOutputManager',['../class_i_output_manager.html#a7442c5161bf453dc13605f7aaeeea2b5',1,'IOutputManager']]],
+  ['_7eistoragemanager',['~IStorageManager',['../class_i_storage_manager.html#a5e3d6fa4a26ce40e4a23a13138a2c055',1,'IStorageManager']]],
+  ['_7eweapon',['~Weapon',['../class_weapon.html#af06462587d8fd8878be4af2a2479f9bb',1,'Weapon']]]
 ];

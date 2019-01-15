@@ -69,6 +69,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>An output manager that manages a Window and a Graphic User Interface through the <a class="el" href="class_i_output_manager.html" title="Interface to be implemented by a class acting as the manager of the Output Component. ">IOutputManager</a>.  
+ <a href="class_graphic_output_manager.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_graphic_output_manager_8h_source.html">GraphicOutputManager.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GraphicOutputManager:</div>
@@ -76,7 +79,7 @@ Inheritance diagram for GraphicOutputManager:</div>
  <div class="center">
   <img src="class_graphic_output_manager.png" usemap="#GraphicOutputManager_map" alt=""/>
   <map id="GraphicOutputManager_map" name="GraphicOutputManager_map">
-<area href="class_i_output_manager.html" alt="IOutputManager" shape="rect" coords="0,0,145,24"/>
+<area href="class_i_output_manager.html" title="Interface to be implemented by a class acting as the manager of the Output Component. " alt="IOutputManager" shape="rect" coords="0,0,145,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -98,14 +101,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a13de402f591b8bfa7a11d4c2b84dfd83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af2d827a7b2ae16889e66e67c18c731d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphic_output_manager.html#af2d827a7b2ae16889e66e67c18c731d1">loadLevel</a> (<a class="el" href="class_output_data.html">OutputData</a>)</td></tr>
 <tr class="separator:af2d827a7b2ae16889e66e67c18c731d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed60e3ba3328c6ca2ab0b3bf60e9871f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphic_output_manager.html#aed60e3ba3328c6ca2ab0b3bf60e9871f">update</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_data_update.html">DataUpdate</a> &gt;&gt; data)</td></tr>
+<tr class="memitem:aed60e3ba3328c6ca2ab0b3bf60e9871f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphic_output_manager.html#aed60e3ba3328c6ca2ab0b3bf60e9871f">update</a> (std::vector&lt; std::shared_ptr&lt; DataUpdate &gt;&gt; data)</td></tr>
 <tr class="separator:aed60e3ba3328c6ca2ab0b3bf60e9871f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64226361d4d827e5c16b76fcf86f4f6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphic_output_manager.html#a64226361d4d827e5c16b76fcf86f4f6f">update</a> (UserInputType)</td></tr>
 <tr class="separator:a64226361d4d827e5c16b76fcf86f4f6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d86a80cc16bd37fc3dbe29fd1c19ab5"><td class="memItemLeft" align="right" valign="top"><a id="a2d86a80cc16bd37fc3dbe29fd1c19ab5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphic_output_manager.html#a2d86a80cc16bd37fc3dbe29fd1c19ab5">playAnimation</a> (std::unique_ptr&lt; <a class="el" href="class_game_sprite.html">GameSprite</a> &gt; const &amp;, <a class="el" href="namespace_sprite_attributes.html#afb5447c311bc29f0ce8ddfd025c6e998">SpriteAttributes::ArtType</a>, <a class="el" href="namespace_animation_terms.html#a171348588b2b248e71955ad7c5042e67">AnimationTerms::AnimationTypes</a>)</td></tr>
-<tr class="memdesc:a2d86a80cc16bd37fc3dbe29fd1c19ab5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play an animation for a given <a class="el" href="class_game_sprite.html">GameSprite</a> and Animation. <br /></td></tr>
-<tr class="separator:a2d86a80cc16bd37fc3dbe29fd1c19ab5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47d7b9f87ba91f23981a1c3230a51dff"><td class="memItemLeft" align="right" valign="top"><a id="a47d7b9f87ba91f23981a1c3230a51dff"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphic_output_manager.html#a47d7b9f87ba91f23981a1c3230a51dff">playAnimation</a> (<a class="el" href="class_animation_request.html">AnimationRequest</a>)</td></tr>
+<tr class="memdesc:a47d7b9f87ba91f23981a1c3230a51dff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play an animation for a given <a class="el" href="class_game_sprite.html" title="A generic sprite/tile that can be moved around. Compare GameObject. ">GameSprite</a> and Animation. <br /></td></tr>
+<tr class="separator:a47d7b9f87ba91f23981a1c3230a51dff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93fc8f10ed7202b6f5a0ac8dd66a1f4c"><td class="memItemLeft" align="right" valign="top"><a id="a93fc8f10ed7202b6f5a0ac8dd66a1f4c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphic_output_manager.html#a93fc8f10ed7202b6f5a0ac8dd66a1f4c">playAnimationMany</a> (std::vector&lt; <a class="el" href="class_animation_request.html">AnimationRequest</a> &gt;)</td></tr>
+<tr class="memdesc:a93fc8f10ed7202b6f5a0ac8dd66a1f4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play multiple animations at once. <br /></td></tr>
+<tr class="separator:a93fc8f10ed7202b6f5a0ac8dd66a1f4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8284e4b2236216fab0679337016f904"><td class="memItemLeft" align="right" valign="top"><a id="aa8284e4b2236216fab0679337016f904"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_graphic_output_manager.html#aa8284e4b2236216fab0679337016f904">showGameOverScreen</a> ()</td></tr>
 <tr class="memdesc:aa8284e4b2236216fab0679337016f904"><td class="mdescLeft">&#160;</td><td class="mdescRight">Displays the Game Over screen. <br /></td></tr>
@@ -124,12 +131,13 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memdesc:a7442c5161bf453dc13605f7aaeeea2b5 inherit pub_methods_class_i_output_manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">virtual destructor to be implemented in the class implementing the interface <br /></td></tr>
 <tr class="separator:a7442c5161bf453dc13605f7aaeeea2b5 inherit pub_methods_class_i_output_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41892abec0b57bc1244492f42f32901b inherit pub_methods_class_i_output_manager"><td class="memItemLeft" align="right" valign="top"><a id="a41892abec0b57bc1244492f42f32901b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_output_manager.html#a41892abec0b57bc1244492f42f32901b">update</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_data_update.html">DataUpdate</a> &gt;&gt;)=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_output_manager.html#a41892abec0b57bc1244492f42f32901b">update</a> (std::vector&lt; std::shared_ptr&lt; DataUpdate &gt;&gt;)=0</td></tr>
 <tr class="memdesc:a41892abec0b57bc1244492f42f32901b inherit pub_methods_class_i_output_manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">update the screen based on the game state as determined by the logic manager <br /></td></tr>
 <tr class="separator:a41892abec0b57bc1244492f42f32901b inherit pub_methods_class_i_output_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An output manager that manages a Window and a Graphic User Interface This class owns <a class="el" href="class_game_sprite.html">GameSprite</a> objects, <a class="el" href="class_sprite_manager.html">SpriteManager(s)</a>, SDL textures and a SDL window and renderer. It is dependent on <a class="el" href="class_sprite_manager.html">SpriteManager</a> to execute many of the tasks related to dynamic sprites. </p>
+<div class="textblock"><p>An output manager that manages a Window and a Graphic User Interface through the <a class="el" href="class_i_output_manager.html" title="Interface to be implemented by a class acting as the manager of the Output Component. ">IOutputManager</a>. </p>
+<p>This class owns <a class="el" href="class_game_sprite.html" title="A generic sprite/tile that can be moved around. Compare GameObject. ">GameSprite</a> objects, SpriteManager(s), SDL textures and a SDL window and renderer. It is dependent on the <a class="el" href="class_tile_manager.html" title="Pure virtual class that provides an abstract interface for the GraphicOutputManager. ">TileManager(s)</a> to execute many of the tasks related to dynamic sprites. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="adf8a096f7b671b182b74bb130ffd6b99"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf8a096f7b671b182b74bb130ffd6b99">&#9670;&nbsp;</a></span>GraphicOutputManager()</h2>
@@ -206,7 +214,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
         <tr>
           <td class="memname">void GraphicOutputManager::update </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_data_update.html">DataUpdate</a> &gt;&gt;&#160;</td>
+          <td class="paramtype">std::vector&lt; std::shared_ptr&lt; DataUpdate &gt;&gt;&#160;</td>
           <td class="paramname"><em>data</em></td><td>)</td>
           <td></td>
         </tr>
@@ -251,8 +259,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>GAMEsource/<a class="el" href="_graphic_output_manager_8h_source.html">GraphicOutputManager.h</a></li>
-<li>GAMEsource/GraphicOutputManager.cpp</li>
+<li>GAMEsource/output/<a class="el" href="_graphic_output_manager_8h_source.html">GraphicOutputManager.h</a></li>
+<li>GAMEsource/output/GraphicOutputManager.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

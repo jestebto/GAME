@@ -2,9 +2,10 @@
 #define OUTPUTDATA_H
 
 #include <string>
+
+///This is going to be a data package created by GameManager, from StorageData, for IOutputManager
 class OutputData
 {
-	///This is going to be a data package created by GameManager, from StorageData, for IOutputManager
 public:
 	OutputData(std::string); 
 	~OutputData();

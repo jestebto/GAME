@@ -35,13 +35,52 @@ bool \mbox{\hyperlink{class_character_aa49f985b1b05751b2d4b3de74b4acc8c}{is\+Ali
 \begin{DoxyCompactList}\small\item\em check if the character is alive \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_character_ad0d14b85124c5d0da611b2b925968277}\label{class_character_ad0d14b85124c5d0da611b2b925968277}} 
 virtual std\+::string \mbox{\hyperlink{class_character_ad0d14b85124c5d0da611b2b925968277}{data\+To\+String}} ()
-\begin{DoxyCompactList}\small\item\em save the data in a string \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em save the data in a string \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_character_a2f2e942630667cc24ec25e36bde9b1aa}{set\+Weapon}} (std\+::string)
+\begin{DoxyCompactList}\small\item\em set weapon \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_character_aaaa94fe3ab4da7641c7e50ca3a9896d4}{get\+Weapon}} ()
+\begin{DoxyCompactList}\small\item\em get weapon. Returns a weapon ID \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_character_ad7b5e823203c92964c4ff6b3d699ef85}{drop\+Weapon}} ()
+\begin{DoxyCompactList}\small\item\em throw weapon \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 A generic class for objects that correspond to moving characters that can interact with their enviornment. 
 
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_character_ad7b5e823203c92964c4ff6b3d699ef85}\label{class_character_ad7b5e823203c92964c4ff6b3d699ef85}} 
+\index{Character@{Character}!drop\+Weapon@{drop\+Weapon}}
+\index{drop\+Weapon@{drop\+Weapon}!Character@{Character}}
+\subsubsection{\texorpdfstring{drop\+Weapon()}{dropWeapon()}}
+{\footnotesize\ttfamily void Character\+::drop\+Weapon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+throw weapon 
+
+drop weapon \mbox{\Hypertarget{class_character_aaaa94fe3ab4da7641c7e50ca3a9896d4}\label{class_character_aaaa94fe3ab4da7641c7e50ca3a9896d4}} 
+\index{Character@{Character}!get\+Weapon@{get\+Weapon}}
+\index{get\+Weapon@{get\+Weapon}!Character@{Character}}
+\subsubsection{\texorpdfstring{get\+Weapon()}{getWeapon()}}
+{\footnotesize\ttfamily std\+::string Character\+::get\+Weapon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get weapon. Returns a weapon ID 
+
+get weapon \mbox{\Hypertarget{class_character_a2f2e942630667cc24ec25e36bde9b1aa}\label{class_character_a2f2e942630667cc24ec25e36bde9b1aa}} 
+\index{Character@{Character}!set\+Weapon@{set\+Weapon}}
+\index{set\+Weapon@{set\+Weapon}!Character@{Character}}
+\subsubsection{\texorpdfstring{set\+Weapon()}{setWeapon()}}
+{\footnotesize\ttfamily void Character\+::set\+Weapon (\begin{DoxyParamCaption}\item[{std\+::string}]{weapon\+ID }\end{DoxyParamCaption})}
+
+
+
+set weapon 
+
+set lives 
+
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-G\+A\+M\+Esource/Character.\+h\item 
-G\+A\+M\+Esource/Character.\+cpp\end{DoxyCompactItemize}
+G\+A\+M\+Esource/logic/Character.\+h\item 
+G\+A\+M\+Esource/logic/Character.\+cpp\end{DoxyCompactItemize}

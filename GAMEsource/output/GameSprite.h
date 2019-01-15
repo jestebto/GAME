@@ -72,10 +72,8 @@ namespace SpriteAttributes {
  
 }
 
-/** 
-* A generic sprite/tile that can be moved around. Compare GameObject.
-*
-*/
+
+/// A generic sprite/tile that can be moved around. Compare GameObject.
 class GameSprite
 {
 public:

@@ -22,8 +22,8 @@
 #include <thread> //sleep_for()
 #include <chrono> //milliseconds
 
+/// Pure virtual class that provides an abstract interface for the GraphicOutputManager. 
 /**
-* Pure virtual class that manages Sprites for the GraphicOutputManager. It provides an abstract interface for the GraphicOutputManager.
 * Different TileManagers can be instantiated for different tile set images/SDL_Textures.
 * This seperates the complex task of creating and managing a tile set from the relatively simple task of printing sprites.
 * Also contains animation functions (these will be moved to a new another class).

@@ -69,6 +69,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Implements the logic part of the game through the <a class="el" href="class_i_logic_manager.html" title="Interface to be implemented by a class acting as the manager of the Logic Component. ">ILogicManager</a> interface.  
+ <a href="class_game_level.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_game_level_8h_source.html">GameLevel.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for GameLevel:</div>
@@ -76,7 +79,7 @@ Inheritance diagram for GameLevel:</div>
  <div class="center">
   <img src="class_game_level.png" usemap="#GameLevel_map" alt=""/>
   <map id="GameLevel_map" name="GameLevel_map">
-<area href="class_i_logic_manager.html" alt="ILogicManager" shape="rect" coords="0,0,97,24"/>
+<area href="class_i_logic_manager.html" title="Interface to be implemented by a class acting as the manager of the Logic Component. " alt="ILogicManager" shape="rect" coords="0,0,97,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -88,13 +91,13 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5723a38b2b32300d4f071419afacd6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acbabd989c2876a2326e6b69e33e75fa1"><td class="memItemLeft" align="right" valign="top"><a id="acbabd989c2876a2326e6b69e33e75fa1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_level.html#acbabd989c2876a2326e6b69e33e75fa1">createLevel</a> (<a class="el" href="class_logic_data.html">LogicData</a>, bool)</td></tr>
-<tr class="memdesc:acbabd989c2876a2326e6b69e33e75fa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">create all the clases thet form <a class="el" href="class_game_level.html">GameLevel</a> <br /></td></tr>
+<tr class="memdesc:acbabd989c2876a2326e6b69e33e75fa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">create all the clases thet form <a class="el" href="class_game_level.html" title="Implements the logic part of the game through the ILogicManager interface. ">GameLevel</a> <br /></td></tr>
 <tr class="separator:acbabd989c2876a2326e6b69e33e75fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53cd899aa9aeaf3e9579ff32598b0043"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_level.html#a53cd899aa9aeaf3e9579ff32598b0043">executeUserCommand</a> (UserInputType)</td></tr>
 <tr class="memdesc:a53cd899aa9aeaf3e9579ff32598b0043"><td class="mdescLeft">&#160;</td><td class="mdescRight">evaluate and perform the user's command  <a href="#a53cd899aa9aeaf3e9579ff32598b0043">More...</a><br /></td></tr>
 <tr class="separator:a53cd899aa9aeaf3e9579ff32598b0043"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89ddaa1423d19132e8d4c97b36f92895"><td class="memItemLeft" align="right" valign="top"><a id="a89ddaa1423d19132e8d4c97b36f92895"></a>
-std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_data_update.html">DataUpdate</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_level.html#a89ddaa1423d19132e8d4c97b36f92895">getLevelUpdates</a> ()</td></tr>
+std::vector&lt; std::shared_ptr&lt; DataUpdate &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_level.html#a89ddaa1423d19132e8d4c97b36f92895">getLevelUpdates</a> ()</td></tr>
 <tr class="memdesc:a89ddaa1423d19132e8d4c97b36f92895"><td class="mdescLeft">&#160;</td><td class="mdescRight">get objec's data as a vector of strings <br /></td></tr>
 <tr class="separator:a89ddaa1423d19132e8d4c97b36f92895"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a907f82fea7462dbaf47c396cf65e2e89"><td class="memItemLeft" align="right" valign="top"><a id="a907f82fea7462dbaf47c396cf65e2e89"></a>
@@ -108,7 +111,8 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="separator:af522c957cdce66d34eb8264212b413ed inherit pub_methods_class_i_logic_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Owns different GameOject and level data. Implements the logic part of the game. </p>
+<div class="textblock"><p>Implements the logic part of the game through the <a class="el" href="class_i_logic_manager.html" title="Interface to be implemented by a class acting as the manager of the Logic Component. ">ILogicManager</a> interface. </p>
+<p>Owns different GameOject and level data. The most important class of the logic component </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a53cd899aa9aeaf3e9579ff32598b0043"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a53cd899aa9aeaf3e9579ff32598b0043">&#9670;&nbsp;</a></span>executeUserCommand()</h2>
@@ -142,8 +146,8 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>GAMEsource/<a class="el" href="_game_level_8h_source.html">GameLevel.h</a></li>
-<li>GAMEsource/GameLevel.cpp</li>
+<li>GAMEsource/logic/<a class="el" href="_game_level_8h_source.html">GameLevel.h</a></li>
+<li>GAMEsource/logic/GameLevel.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

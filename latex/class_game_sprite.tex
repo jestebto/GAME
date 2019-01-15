@@ -2,6 +2,11 @@
 \label{class_game_sprite}\index{Game\+Sprite@{Game\+Sprite}}
 
 
+A generic sprite/tile that can be moved around. Compare \mbox{\hyperlink{class_game_object}{Game\+Object}}.  
+
+
+
+
 {\ttfamily \#include $<$Game\+Sprite.\+h$>$}
 
 Inheritance diagram for Game\+Sprite\+:\begin{figure}[H]
@@ -13,8 +18,8 @@ Inheritance diagram for Game\+Sprite\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_game_sprite_a9e97eb36451f2609f7ff28a25ea9c09d}\label{class_game_sprite_a9e97eb36451f2609f7ff28a25ea9c09d}} 
-{\bfseries Game\+Sprite} (int, int, \mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, \mbox{\hyperlink{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}{Sprite\+Attributes\+::\+Description}})
+\mbox{\Hypertarget{class_game_sprite_aa5e7e9276033b85ebe41123bf9e203f4}\label{class_game_sprite_aa5e7e9276033b85ebe41123bf9e203f4}} 
+{\bfseries Game\+Sprite} (int, int, \mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, \mbox{\hyperlink{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}{Sprite\+Attributes\+::\+Description}}, \mbox{\hyperlink{namespace_sprite_attributes_a254503d1929a87fa82146c9b7d19c2df}{Sprite\+Attributes\+::\+Tile\+Type}})
 \item 
 \mbox{\Hypertarget{class_game_sprite_a58f1b3fce8064be9921bd37869e9b117}\label{class_game_sprite_a58f1b3fce8064be9921bd37869e9b117}} 
 void \mbox{\hyperlink{class_game_sprite_a58f1b3fce8064be9921bd37869e9b117}{set\+Type}} (\mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}})
@@ -30,9 +35,12 @@ void \mbox{\hyperlink{class_game_sprite_a28d3d766c1f6cacc84445fdfe5b6e25e}{set\+
 \begin{DoxyCompactList}\small\item\em get sprite artwork description \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_game_sprite_a1cb6989acf2cc9666be1bc940b31d7c7}\label{class_game_sprite_a1cb6989acf2cc9666be1bc940b31d7c7}} 
 virtual void \mbox{\hyperlink{class_game_sprite_a1cb6989acf2cc9666be1bc940b31d7c7}{move\+Sprite}} (int, int)
-\begin{DoxyCompactList}\small\item\em Estimate direction using the new and old co-\/ordinates. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_game_sprite_afe8e3f2ec427eaa11e805a13c3e74428}\label{class_game_sprite_afe8e3f2ec427eaa11e805a13c3e74428}} 
-void \mbox{\hyperlink{class_game_sprite_afe8e3f2ec427eaa11e805a13c3e74428}{move\+Sprite}} (User\+Input\+Type)
+\begin{DoxyCompactList}\small\item\em move sprite to a x and y position, no orientation taken into account \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_game_sprite_a35eac21d4f5d7e23d1bdd22b1e6a8517}\label{class_game_sprite_a35eac21d4f5d7e23d1bdd22b1e6a8517}} 
+virtual void \mbox{\hyperlink{class_game_sprite_a35eac21d4f5d7e23d1bdd22b1e6a8517}{move\+Sprite}} (int)
+\begin{DoxyCompactList}\small\item\em Define virtual functions for use with more complex \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} child classes. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_game_sprite_acf5168b8fa90814756fa660aabf6da70}\label{class_game_sprite_acf5168b8fa90814756fa660aabf6da70}} 
+void \mbox{\hyperlink{class_game_sprite_acf5168b8fa90814756fa660aabf6da70}{move\+Sprite}} (User\+Input\+Type, int)
 \begin{DoxyCompactList}\small\item\em For test purposes only, as this is not connected to the logic. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_game_sprite_acb65331428a0ae05f1ef6f521d51e4e7}\label{class_game_sprite_acb65331428a0ae05f1ef6f521d51e4e7}} 
 virtual void \mbox{\hyperlink{class_game_sprite_acb65331428a0ae05f1ef6f521d51e4e7}{set\+Orientation}} (Character\+Orientation)
@@ -52,6 +60,12 @@ void \mbox{\hyperlink{class_game_sprite_a31f481d89973565bb2d0d55d0600c266}{set\+
 \mbox{\Hypertarget{class_game_sprite_aea645d5397fc4cdbd386e3133e33a802}\label{class_game_sprite_aea645d5397fc4cdbd386e3133e33a802}} 
 int \mbox{\hyperlink{class_game_sprite_aea645d5397fc4cdbd386e3133e33a802}{get\+Y\+Position}} ()
 \begin{DoxyCompactList}\small\item\em get Y-\/\+Position \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_game_sprite_a8cba19cb70bb128532903b320a0065c9}\label{class_game_sprite_a8cba19cb70bb128532903b320a0065c9}} 
+\mbox{\hyperlink{namespace_sprite_attributes_a254503d1929a87fa82146c9b7d19c2df}{Sprite\+Attributes\+::\+Tile\+Type}} \mbox{\hyperlink{class_game_sprite_a8cba19cb70bb128532903b320a0065c9}{tm}}
+\begin{DoxyCompactList}\small\item\em define which tile\+Manager to use with this sprite \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -59,5 +73,5 @@ A generic sprite/tile that can be moved around. Compare \mbox{\hyperlink{class_g
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-G\+A\+M\+Esource/Game\+Sprite.\+h\item 
-G\+A\+M\+Esource/Game\+Sprite.\+cpp\end{DoxyCompactItemize}
+G\+A\+M\+Esource/output/Game\+Sprite.\+h\item 
+G\+A\+M\+Esource/output/Game\+Sprite.\+cpp\end{DoxyCompactItemize}

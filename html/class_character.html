@@ -80,7 +80,7 @@ Inheritance diagram for Character:</div>
   <img src="class_character.png" usemap="#Character_map" alt=""/>
   <map id="Character_map" name="Character_map">
 <area href="class_game_object.html" title="A generic game object that can be moved around. Used in the logic component. Compare GameSprite..." alt="GameObject" shape="rect" coords="45,0,126,24"/>
-<area href="class_enemy.html" alt="Enemy" shape="rect" coords="0,112,81,136"/>
+<area href="class_enemy.html" title="An enemy GameObject that can interact with the player. " alt="Enemy" shape="rect" coords="0,112,81,136"/>
 <area href="class_player.html" alt="Player" shape="rect" coords="91,112,172,136"/>
 </map>
  </div></div>
@@ -111,6 +111,15 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ad0d14b85124c5d0da611b2b925968277">dataToString</a> ()</td></tr>
 <tr class="memdesc:ad0d14b85124c5d0da611b2b925968277"><td class="mdescLeft">&#160;</td><td class="mdescRight">save the data in a string <br /></td></tr>
 <tr class="separator:ad0d14b85124c5d0da611b2b925968277"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f2e942630667cc24ec25e36bde9b1aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#a2f2e942630667cc24ec25e36bde9b1aa">setWeapon</a> (std::string)</td></tr>
+<tr class="memdesc:a2f2e942630667cc24ec25e36bde9b1aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">set weapon  <a href="#a2f2e942630667cc24ec25e36bde9b1aa">More...</a><br /></td></tr>
+<tr class="separator:a2f2e942630667cc24ec25e36bde9b1aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaa94fe3ab4da7641c7e50ca3a9896d4"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#aaaa94fe3ab4da7641c7e50ca3a9896d4">getWeapon</a> ()</td></tr>
+<tr class="memdesc:aaaa94fe3ab4da7641c7e50ca3a9896d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">get weapon. Returns a weapon ID  <a href="#aaaa94fe3ab4da7641c7e50ca3a9896d4">More...</a><br /></td></tr>
+<tr class="separator:aaaa94fe3ab4da7641c7e50ca3a9896d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7b5e823203c92964c4ff6b3d699ef85"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_character.html#ad7b5e823203c92964c4ff6b3d699ef85">dropWeapon</a> ()</td></tr>
+<tr class="memdesc:ad7b5e823203c92964c4ff6b3d699ef85"><td class="mdescLeft">&#160;</td><td class="mdescRight">throw weapon  <a href="#ad7b5e823203c92964c4ff6b3d699ef85">More...</a><br /></td></tr>
+<tr class="separator:ad7b5e823203c92964c4ff6b3d699ef85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_game_object"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_game_object')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_game_object.html">GameObject</a></td></tr>
 <tr class="memitem:adf9acb9e2d250f42f322d9b367eb7ff4 inherit pub_methods_class_game_object"><td class="memItemLeft" align="right" valign="top"><a id="adf9acb9e2d250f42f322d9b367eb7ff4"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_object.html#adf9acb9e2d250f42f322d9b367eb7ff4">GameObject</a> (std::string, int, int)</td></tr>
@@ -143,9 +152,71 @@ int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A generic class for objects that correspond to moving characters that can interact with their enviornment. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
-<li>GAMEsource/<a class="el" href="_character_8h_source.html">Character.h</a></li>
-<li>GAMEsource/Character.cpp</li>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad7b5e823203c92964c4ff6b3d699ef85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7b5e823203c92964c4ff6b3d699ef85">&#9670;&nbsp;</a></span>dropWeapon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Character::dropWeapon </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>throw weapon </p>
+<p>drop weapon </p>
+
+</div>
+</div>
+<a id="aaaa94fe3ab4da7641c7e50ca3a9896d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaa94fe3ab4da7641c7e50ca3a9896d4">&#9670;&nbsp;</a></span>getWeapon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Character::getWeapon </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>get weapon. Returns a weapon ID </p>
+<p>get weapon </p>
+
+</div>
+</div>
+<a id="a2f2e942630667cc24ec25e36bde9b1aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f2e942630667cc24ec25e36bde9b1aa">&#9670;&nbsp;</a></span>setWeapon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Character::setWeapon </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>weaponID</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set weapon </p>
+<p>set lives </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>GAMEsource/logic/<a class="el" href="_character_8h_source.html">Character.h</a></li>
+<li>GAMEsource/logic/Character.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

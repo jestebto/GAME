@@ -1,0 +1,48 @@
+\hypertarget{class_tile_manager_pacman}{}\section{Tile\+Manager\+Pacman Class Reference}
+\label{class_tile_manager_pacman}\index{Tile\+Manager\+Pacman@{Tile\+Manager\+Pacman}}
+
+
+A tile manager specifically for the Pacman tiles.  
+
+
+
+
+{\ttfamily \#include $<$Tile\+Manager\+Pacman.\+h$>$}
+
+Inheritance diagram for Tile\+Manager\+Pacman\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_tile_manager_pacman}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_tile_manager_pacman_aefac3ed0dac94e0c902ec6bbf46c80dc}\label{class_tile_manager_pacman_aefac3ed0dac94e0c902ec6bbf46c80dc}} 
+{\bfseries Tile\+Manager\+Pacman} (S\+D\+L\+\_\+\+Texture $\ast$)
+\item 
+\mbox{\Hypertarget{class_tile_manager_pacman_a894bfcc9797ba2fae23fefd5fe8bf746}\label{class_tile_manager_pacman_a894bfcc9797ba2fae23fefd5fe8bf746}} 
+S\+D\+L\+\_\+\+Rect $\ast$ \mbox{\hyperlink{class_tile_manager_pacman_a894bfcc9797ba2fae23fefd5fe8bf746}{get\+Tile}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} $>$ const \&)
+\begin{DoxyCompactList}\small\item\em get\+Tile for a unique Sprite. If not found, return a random tile \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tile_manager_pacman_a568c5ba61e31e85aef39656dc9af1596}\label{class_tile_manager_pacman_a568c5ba61e31e85aef39656dc9af1596}} 
+S\+D\+L\+\_\+\+Rect $\ast$ \mbox{\hyperlink{class_tile_manager_pacman_a568c5ba61e31e85aef39656dc9af1596}{get\+Tile}} (\mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, \mbox{\hyperlink{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}{Sprite\+Attributes\+::\+Description}})
+\begin{DoxyCompactList}\small\item\em get\+Tile for general printing e.\+g. for the background. If not found, return a random tile \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tile_manager_pacman_a95298f9c5f6b308e6425168aa40f9569}\label{class_tile_manager_pacman_a95298f9c5f6b308e6425168aa40f9569}} 
+virtual std\+::vector$<$ \mbox{\hyperlink{class_animation_frame}{Animation\+Frame}} $>$ $\ast$ \mbox{\hyperlink{class_tile_manager_pacman_a95298f9c5f6b308e6425168aa40f9569}{get\+Animation\+Frames}} (\mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} $\ast$, \mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, \mbox{\hyperlink{namespace_sprite_attributes_ae1a753cb32f500b34381aac4b197b3a7}{Sprite\+Attributes\+::\+Animation\+Types}})
+\begin{DoxyCompactList}\small\item\em Get a vector of animation frames. Search through different private map$<$$>$animations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_tile_manager_pacman_ab5bc2042c7f10d1aef3757607722648a}\label{class_tile_manager_pacman_ab5bc2042c7f10d1aef3757607722648a}} 
+const int \mbox{\hyperlink{class_tile_manager_pacman_ab5bc2042c7f10d1aef3757607722648a}{tile\+Size}} = 24
+\begin{DoxyCompactList}\small\item\em tile size for each Sprite. Does not have to be the same as the graphic output manager tile size (but it\textquotesingle{}s better if it is) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A tile manager specifically for the Pacman tiles. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+G\+A\+M\+Esource/output/Tile\+Manager\+Pacman.\+h\item 
+G\+A\+M\+Esource/output/Tile\+Manager\+Pacman.\+cpp\end{DoxyCompactItemize}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['animationterms',['AnimationTerms',['../namespace_animation_terms.html',1,'']]]
+  ['spriteattributes',['SpriteAttributes',['../namespace_sprite_attributes.html',1,'']]]
 ];

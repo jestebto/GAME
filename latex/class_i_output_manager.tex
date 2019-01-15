@@ -2,6 +2,11 @@
 \label{class_i_output_manager}\index{I\+Output\+Manager@{I\+Output\+Manager}}
 
 
+Interface to be implemented by a class acting as the manager of the Output Component.  
+
+
+
+
 {\ttfamily \#include $<$I\+Output\+Manager.\+h$>$}
 
 Inheritance diagram for I\+Output\+Manager\+:\begin{figure}[H]
@@ -20,7 +25,7 @@ virtual \mbox{\hyperlink{class_i_output_manager_a7442c5161bf453dc13605f7aaeeea2b
 virtual void \mbox{\hyperlink{class_i_output_manager_a50a935d76cf10427b0977406a2338146}{load\+Level}} (\mbox{\hyperlink{class_output_data}{Output\+Data}})=0
 \begin{DoxyCompactList}\small\item\em initialise S\+DL screen, read input data and create the maps and gamesprites in use \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_i_output_manager_a41892abec0b57bc1244492f42f32901b}\label{class_i_output_manager_a41892abec0b57bc1244492f42f32901b}} 
-virtual void \mbox{\hyperlink{class_i_output_manager_a41892abec0b57bc1244492f42f32901b}{update}} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_data_update}{Data\+Update}} $>$$>$)=0
+virtual void \mbox{\hyperlink{class_i_output_manager_a41892abec0b57bc1244492f42f32901b}{update}} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Data\+Update $>$$>$)=0
 \begin{DoxyCompactList}\small\item\em update the screen based on the game state as determined by the logic manager \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_i_output_manager_aef1aaf499f3eee5927cb2833af39ce43}\label{class_i_output_manager_aef1aaf499f3eee5927cb2833af39ce43}} 
 virtual void \mbox{\hyperlink{class_i_output_manager_aef1aaf499f3eee5927cb2833af39ce43}{update}} (User\+Input\+Type)=0
@@ -37,9 +42,9 @@ virtual void \mbox{\hyperlink{class_i_output_manager_a9420b7d761af05b5ad23eadf07
 
 
 \subsection{Detailed Description}
-Interface to be implemented by a class acting as the manager of the Output Component 
+Interface to be implemented by a class acting as the manager of the Output Component. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-G\+A\+M\+Esource/I\+Output\+Manager.\+h\item 
-G\+A\+M\+Esource/I\+Output\+Manager.\+cpp\end{DoxyCompactItemize}
+G\+A\+M\+Esource/output/I\+Output\+Manager.\+h\item 
+G\+A\+M\+Esource/output/I\+Output\+Manager.\+cpp\end{DoxyCompactItemize}

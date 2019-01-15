@@ -30,11 +30,11 @@ for /f %%i in ('dir GAMEsource\logic\*.cpp /b /a-d') do (
 echo on
 
 
-mkdir BashVersion\obj
+mkdir BatVersion\obj
 
 
 :: `cl` is the MSVC compiler
 
-cl %cppfiles% /W3 /EHsc /std:c++latest /I GAMEsource\include /I %SDL2dir%\include /Fo.\BashVersion\obj\ /link /SUBSYSTEM:CONSOLE %SDL2libdir%\SDL2.lib %SDL2libdir%\SDL2main.lib /out:BashVersion\GAME.exe
+cl %cppfiles% /W3 /EHsc /std:c++latest /I GAMEsource\include /I %SDL2dir%\include /Fo.\BatVersion\obj\ /link /SUBSYSTEM:CONSOLE %SDL2libdir%\SDL2.lib %SDL2libdir%\SDL2main.lib /out:BatVersion\GAME.exe
 if %errorlevel% neq 0 exit /b %errorlevel%
 

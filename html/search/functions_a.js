@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['randominputgenerator',['RandomInputGenerator',['../class_random_input_generator.html#afd6c995d37855154f296050304307ee4',1,'RandomInputGenerator']]]
+  ['tilemanager',['TileManager',['../class_tile_manager.html#a1cac9e081272aebacdfe9150266f64aa',1,'TileManager']]]
 ];

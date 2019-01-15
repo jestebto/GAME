@@ -6,10 +6,8 @@
 #include "pch.h"
 #include <string>
 
-/**
-* Contains hardcoded level data in the form of strings.
-*
-*/
+
+/// Contains hardcoded level data in the form of strings. Interacts with the IStorageManager Interface.
 class HardCodedStorageManager : public IStorageManager
 {
 public:

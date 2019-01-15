@@ -6,9 +6,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 
-/**
-* Gets input from the keyboard and mouse, and sends it through the IInputManager interface
-*/
+///Gets input from the keyboard and mouse, and sends it through the IInputManager interface
 class KeyboardInputManager : public IInputManager
 {
 public:

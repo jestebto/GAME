@@ -2,6 +2,11 @@
 \label{class_i_logic_manager}\index{I\+Logic\+Manager@{I\+Logic\+Manager}}
 
 
+Interface to be implemented by a class acting as the manager of the Logic Component.  
+
+
+
+
 {\ttfamily \#include $<$I\+Logic\+Manager.\+h$>$}
 
 Inheritance diagram for I\+Logic\+Manager\+:\begin{figure}[H]
@@ -23,7 +28,7 @@ virtual void \mbox{\hyperlink{class_i_logic_manager_a9d09e24fdfa312e3a908c0110e3
 virtual void \mbox{\hyperlink{class_i_logic_manager_a531478a93285f5cdf6f22294638b27b3}{execute\+User\+Command}} (User\+Input\+Type input)=0
 \begin{DoxyCompactList}\small\item\em execute the users input \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_i_logic_manager_a9b783cc9ee7960b67d66549d77c601b5}\label{class_i_logic_manager_a9b783cc9ee7960b67d66549d77c601b5}} 
-virtual std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_data_update}{Data\+Update}} $>$ $>$ \mbox{\hyperlink{class_i_logic_manager_a9b783cc9ee7960b67d66549d77c601b5}{get\+Level\+Updates}} ()=0
+virtual std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Data\+Update $>$ $>$ \mbox{\hyperlink{class_i_logic_manager_a9b783cc9ee7960b67d66549d77c601b5}{get\+Level\+Updates}} ()=0
 \begin{DoxyCompactList}\small\item\em get objec\textquotesingle{}s data as a vector of strings \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_i_logic_manager_a2e7dcfd57979507839aa885d6de2889a}\label{class_i_logic_manager_a2e7dcfd57979507839aa885d6de2889a}} 
 virtual Game\+State \mbox{\hyperlink{class_i_logic_manager_a2e7dcfd57979507839aa885d6de2889a}{get\+Game\+State}} ()=0
@@ -31,9 +36,9 @@ virtual Game\+State \mbox{\hyperlink{class_i_logic_manager_a2e7dcfd57979507839aa
 
 
 \subsection{Detailed Description}
-Interface to be implemented by a class acting as the manager of the Logic Component 
+Interface to be implemented by a class acting as the manager of the Logic Component. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-G\+A\+M\+Esource/I\+Logic\+Manager.\+h\item 
-G\+A\+M\+Esource/I\+Logic\+Manager.\+cpp\end{DoxyCompactItemize}
+G\+A\+M\+Esource/logic/I\+Logic\+Manager.\+h\item 
+G\+A\+M\+Esource/logic/I\+Logic\+Manager.\+cpp\end{DoxyCompactItemize}

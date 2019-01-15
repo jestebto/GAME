@@ -2,7 +2,7 @@
 #define ENEMY_H
 
 #include "Character.h"
-
+/// An enemy GameObject that can interact with the player 
 class Enemy : public Character {
 public:
 	// input: ID,XPOS,YPOS,LIVES,DAMAGE

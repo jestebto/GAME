@@ -317,37 +317,27 @@ void GraphicOutputManager::update(UserInputType userInput)
 
 void GraphicOutputManager::playAnimation(AnimationRequest animationRequest)
 {
-	try {
-		std::vector<AnimationFrame>* animationFrames = spriteManager->getAnimationFrames(animationRequest.elementRef, animationRequest.art, animationRequest.action);
-		// display each frame in the vector of animationFrames 
-		for (AnimationFrame frame : *animationFrames) {
-			//update the renderer
-			drawAnimationFrame(frame, animationRequest.elementRef);
-			SDL_RenderPresent(renderer);
-			std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		}
+	std::vector<AnimationFrame>* animationFrames = spriteManager->getAnimationFrames(animationRequest.elementRef, animationRequest.art, animationRequest.action);
+	// display each frame in the vector of animationFrames 
+	for (AnimationFrame frame : *animationFrames) {
+		//update the renderer
+		drawAnimationFrame(frame, animationRequest.elementRef);
+		SDL_RenderPresent(renderer);
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
-	catch (std::out_of_range) // Animation does not exist in any of the animation maps
-	{
-		throw std::out_of_range("Animation does not exist in this tile manager"); //TO DO: if you catch it and throw a different thing, do we need a custom exception in this case?
-	}
+
 }
 
 void GraphicOutputManager::playAnimationMany(std::vector<AnimationRequest> animationList)
 {
 	std::vector< std::vector<AnimationFrame>* > animationSequences; //all the animation sequences to be displayed
 	size_t longest = 1; // length of the longest animation sequence
-	try {
-		// first get all the animation frames
-		for (AnimationRequest animationRequest : animationList) {
-			animationSequences.push_back(spriteManager->getAnimationFrames(animationRequest.elementRef, animationRequest.art, animationRequest.action));
-			if (animationSequences.back()->size()> longest)
-				longest = animationSequences.back()->size();
-		}
-	}
-	catch (std::out_of_range) // One animation does not exist in the animation maps
-	{
-		throw std::out_of_range("An animation does not exist in this tile manager"); 
+	
+	// first get all the animation frames
+	for (AnimationRequest animationRequest : animationList) {
+		animationSequences.push_back(spriteManager->getAnimationFrames(animationRequest.elementRef, animationRequest.art, animationRequest.action));
+		if (animationSequences.back()->size()> longest)
+			longest = animationSequences.back()->size();
 	}
 
 	size_t numAnimations = animationSequences.size();

@@ -69,6 +69,9 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>Interface to be implemented by a class acting as the manager of the Output Component.  
+ <a href="class_i_output_manager.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_i_output_manager_8h_source.html">IOutputManager.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for IOutputManager:</div>
@@ -76,7 +79,7 @@ Inheritance diagram for IOutputManager:</div>
  <div class="center">
   <img src="class_i_output_manager.png" usemap="#IOutputManager_map" alt=""/>
   <map id="IOutputManager_map" name="IOutputManager_map">
-<area href="class_graphic_output_manager.html" alt="GraphicOutputManager" shape="rect" coords="0,56,145,80"/>
+<area href="class_graphic_output_manager.html" title="An output manager that manages a Window and a Graphic User Interface through the IOutputManager. " alt="GraphicOutputManager" shape="rect" coords="0,56,145,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -91,7 +94,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:a50a935d76cf10427b0977406a2338146"><td class="mdescLeft">&#160;</td><td class="mdescRight">initialise SDL screen, read input data and create the maps and gamesprites in use <br /></td></tr>
 <tr class="separator:a50a935d76cf10427b0977406a2338146"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41892abec0b57bc1244492f42f32901b"><td class="memItemLeft" align="right" valign="top"><a id="a41892abec0b57bc1244492f42f32901b"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_output_manager.html#a41892abec0b57bc1244492f42f32901b">update</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_data_update.html">DataUpdate</a> &gt;&gt;)=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_output_manager.html#a41892abec0b57bc1244492f42f32901b">update</a> (std::vector&lt; std::shared_ptr&lt; DataUpdate &gt;&gt;)=0</td></tr>
 <tr class="memdesc:a41892abec0b57bc1244492f42f32901b"><td class="mdescLeft">&#160;</td><td class="mdescRight">update the screen based on the game state as determined by the logic manager <br /></td></tr>
 <tr class="separator:a41892abec0b57bc1244492f42f32901b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef1aaf499f3eee5927cb2833af39ce43"><td class="memItemLeft" align="right" valign="top"><a id="aef1aaf499f3eee5927cb2833af39ce43"></a>
@@ -112,10 +115,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="separator:a9420b7d761af05b5ad23eadf074337f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Interface to be implemented by a class acting as the manager of the Output Component </p>
+<div class="textblock"><p>Interface to be implemented by a class acting as the manager of the Output Component. </p>
 </div><hr/>The documentation for this class was generated from the following files:<ul>
-<li>GAMEsource/<a class="el" href="_i_output_manager_8h_source.html">IOutputManager.h</a></li>
-<li>GAMEsource/IOutputManager.cpp</li>
+<li>GAMEsource/output/<a class="el" href="_i_output_manager_8h_source.html">IOutputManager.h</a></li>
+<li>GAMEsource/output/IOutputManager.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

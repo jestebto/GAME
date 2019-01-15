@@ -3,7 +3,11 @@
 
 #include "TileManager.h"
 #include  <memory>
-
+///A tile manager specifically for the Weapon tiles.
+/**
+* A tile manager specifically for the Weapon tiles.
+* Artwork by 7Soul1. https://7soul.itch.io. The icons in this pack are free for commercial use
+*/
 class TileManagerWeapons :
 	public TileManager
 {

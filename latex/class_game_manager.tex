@@ -1,18 +1,26 @@
 \hypertarget{class_game_manager}{}\section{Game\+Manager Class Reference}
 \label{class_game_manager}\index{Game\+Manager@{Game\+Manager}}
+
+
+The main class which controls runs during the programs execution.  
+
+
+
+
+{\ttfamily \#include $<$Game\+Manager.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_game_manager_a3af49a72977052275a1217c5018c737f}\label{class_game_manager_a3af49a72977052275a1217c5018c737f}} 
 void \mbox{\hyperlink{class_game_manager_a3af49a72977052275a1217c5018c737f}{Start\+Game}} ()
 \begin{DoxyCompactList}\small\item\em This is the one and only call that needs to be done to run the game from the main() function, and will last until the end of the program. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Static Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-\mbox{\Hypertarget{class_game_manager_acf7198ccac2dde4da381867356136896}\label{class_game_manager_acf7198ccac2dde4da381867356136896}} 
-static int {\bfseries Add} (int x, int y)
-\end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+The main class which controls runs during the programs execution. 
+
+It owns an \mbox{\hyperlink{class_i_storage_manager}{I\+Storage\+Manager}}, an \mbox{\hyperlink{class_i_input_manager}{I\+Input\+Manager}}, an \mbox{\hyperlink{class_i_logic_manager}{I\+Logic\+Manager}} and an \mbox{\hyperlink{class_i_output_manager}{I\+Output\+Manager}}. It passes information between all 4 interfaces. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

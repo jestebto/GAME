@@ -4,7 +4,9 @@
 #include "GameSprite.h"
 
 /// A more complex GameSprite that can handle orientations.
-/// This is important for playing animations in the right direction
+/**
+*This is important for playing animations in the right direction
+*/
 class CharSprite : public GameSprite
 {
 public:

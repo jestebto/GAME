@@ -2,6 +2,11 @@
 \label{class_graphic_output_manager}\index{Graphic\+Output\+Manager@{Graphic\+Output\+Manager}}
 
 
+An output manager that manages a Window and a Graphic User Interface through the \mbox{\hyperlink{class_i_output_manager}{I\+Output\+Manager}}.  
+
+
+
+
 {\ttfamily \#include $<$Graphic\+Output\+Manager.\+h$>$}
 
 Inheritance diagram for Graphic\+Output\+Manager\+:\begin{figure}[H]
@@ -28,13 +33,16 @@ Inheritance diagram for Graphic\+Output\+Manager\+:\begin{figure}[H]
 \item 
 void \mbox{\hyperlink{class_graphic_output_manager_af2d827a7b2ae16889e66e67c18c731d1}{load\+Level}} (\mbox{\hyperlink{class_output_data}{Output\+Data}})
 \item 
-void \mbox{\hyperlink{class_graphic_output_manager_aed60e3ba3328c6ca2ab0b3bf60e9871f}{update}} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_data_update}{Data\+Update}} $>$$>$ data)
+void \mbox{\hyperlink{class_graphic_output_manager_aed60e3ba3328c6ca2ab0b3bf60e9871f}{update}} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Data\+Update $>$$>$ data)
 \item 
 void \mbox{\hyperlink{class_graphic_output_manager_a64226361d4d827e5c16b76fcf86f4f6f}{update}} (User\+Input\+Type)
 \item 
-\mbox{\Hypertarget{class_graphic_output_manager_a2d86a80cc16bd37fc3dbe29fd1c19ab5}\label{class_graphic_output_manager_a2d86a80cc16bd37fc3dbe29fd1c19ab5}} 
-void \mbox{\hyperlink{class_graphic_output_manager_a2d86a80cc16bd37fc3dbe29fd1c19ab5}{play\+Animation}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} $>$ const \&, \mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, \mbox{\hyperlink{namespace_animation_terms_a171348588b2b248e71955ad7c5042e67}{Animation\+Terms\+::\+Animation\+Types}})
+\mbox{\Hypertarget{class_graphic_output_manager_a47d7b9f87ba91f23981a1c3230a51dff}\label{class_graphic_output_manager_a47d7b9f87ba91f23981a1c3230a51dff}} 
+void \mbox{\hyperlink{class_graphic_output_manager_a47d7b9f87ba91f23981a1c3230a51dff}{play\+Animation}} (\mbox{\hyperlink{class_animation_request}{Animation\+Request}})
 \begin{DoxyCompactList}\small\item\em Play an animation for a given \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} and Animation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graphic_output_manager_a93fc8f10ed7202b6f5a0ac8dd66a1f4c}\label{class_graphic_output_manager_a93fc8f10ed7202b6f5a0ac8dd66a1f4c}} 
+void \mbox{\hyperlink{class_graphic_output_manager_a93fc8f10ed7202b6f5a0ac8dd66a1f4c}{play\+Animation\+Many}} (std\+::vector$<$ \mbox{\hyperlink{class_animation_request}{Animation\+Request}} $>$)
+\begin{DoxyCompactList}\small\item\em Play multiple animations at once. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_graphic_output_manager_aa8284e4b2236216fab0679337016f904}\label{class_graphic_output_manager_aa8284e4b2236216fab0679337016f904}} 
 void \mbox{\hyperlink{class_graphic_output_manager_aa8284e4b2236216fab0679337016f904}{show\+Game\+Over\+Screen}} ()
 \begin{DoxyCompactList}\small\item\em Displays the Game Over screen. \end{DoxyCompactList}\item 
@@ -47,7 +55,9 @@ void \mbox{\hyperlink{class_graphic_output_manager_a085da086f62be4c985cfa1dfb5cb
 
 
 \subsection{Detailed Description}
-An output manager that manages a Window and a Graphic User Interface This class owns \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} objects, \mbox{\hyperlink{class_sprite_manager}{Sprite\+Manager(s)}}, S\+DL textures and a S\+DL window and renderer. It is dependent on \mbox{\hyperlink{class_sprite_manager}{Sprite\+Manager}} to execute many of the tasks related to dynamic sprites. 
+An output manager that manages a Window and a Graphic User Interface through the \mbox{\hyperlink{class_i_output_manager}{I\+Output\+Manager}}. 
+
+This class owns \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} objects, Sprite\+Manager(s), S\+DL textures and a S\+DL window and renderer. It is dependent on the \mbox{\hyperlink{class_tile_manager}{Tile\+Manager(s)}} to execute many of the tasks related to dynamic sprites. 
 
 \subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{class_graphic_output_manager_adf8a096f7b671b182b74bb130ffd6b99}\label{class_graphic_output_manager_adf8a096f7b671b182b74bb130ffd6b99}} 
@@ -79,7 +89,7 @@ Implements \mbox{\hyperlink{class_i_output_manager_a50a935d76cf10427b0977406a233
 \index{Graphic\+Output\+Manager@{Graphic\+Output\+Manager}!update@{update}}
 \index{update@{update}!Graphic\+Output\+Manager@{Graphic\+Output\+Manager}}
 \subsubsection{\texorpdfstring{update()}{update()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void Graphic\+Output\+Manager\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_data_update}{Data\+Update}} $>$$>$}]{data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Graphic\+Output\+Manager\+::update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Data\+Update $>$$>$}]{data }\end{DoxyParamCaption})}
 
 Update the screen
 \begin{DoxyItemize}
@@ -101,5 +111,5 @@ Implements \mbox{\hyperlink{class_i_output_manager_aef1aaf499f3eee5927cb2833af39
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-G\+A\+M\+Esource/Graphic\+Output\+Manager.\+h\item 
-G\+A\+M\+Esource/Graphic\+Output\+Manager.\+cpp\end{DoxyCompactItemize}
+G\+A\+M\+Esource/output/Graphic\+Output\+Manager.\+h\item 
+G\+A\+M\+Esource/output/Graphic\+Output\+Manager.\+cpp\end{DoxyCompactItemize}

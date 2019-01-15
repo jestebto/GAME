@@ -2,6 +2,11 @@
 \label{class_game_level}\index{Game\+Level@{Game\+Level}}
 
 
+Implements the logic part of the game through the \mbox{\hyperlink{class_i_logic_manager}{I\+Logic\+Manager}} interface.  
+
+
+
+
 {\ttfamily \#include $<$Game\+Level.\+h$>$}
 
 Inheritance diagram for Game\+Level\+:\begin{figure}[H]
@@ -22,7 +27,7 @@ void \mbox{\hyperlink{class_game_level_acbabd989c2876a2326e6b69e33e75fa1}{create
 void \mbox{\hyperlink{class_game_level_a53cd899aa9aeaf3e9579ff32598b0043}{execute\+User\+Command}} (User\+Input\+Type)
 \begin{DoxyCompactList}\small\item\em evaluate and perform the user\textquotesingle{}s command \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_game_level_a89ddaa1423d19132e8d4c97b36f92895}\label{class_game_level_a89ddaa1423d19132e8d4c97b36f92895}} 
-std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_data_update}{Data\+Update}} $>$ $>$ \mbox{\hyperlink{class_game_level_a89ddaa1423d19132e8d4c97b36f92895}{get\+Level\+Updates}} ()
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ Data\+Update $>$ $>$ \mbox{\hyperlink{class_game_level_a89ddaa1423d19132e8d4c97b36f92895}{get\+Level\+Updates}} ()
 \begin{DoxyCompactList}\small\item\em get objec\textquotesingle{}s data as a vector of strings \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_game_level_a907f82fea7462dbaf47c396cf65e2e89}\label{class_game_level_a907f82fea7462dbaf47c396cf65e2e89}} 
 Game\+State \mbox{\hyperlink{class_game_level_a907f82fea7462dbaf47c396cf65e2e89}{get\+Game\+State}} ()
@@ -30,7 +35,9 @@ Game\+State \mbox{\hyperlink{class_game_level_a907f82fea7462dbaf47c396cf65e2e89}
 
 
 \subsection{Detailed Description}
-Owns different Game\+Oject and level data. Implements the logic part of the game. 
+Implements the logic part of the game through the \mbox{\hyperlink{class_i_logic_manager}{I\+Logic\+Manager}} interface. 
+
+Owns different Game\+Oject and level data. The most important class of the logic component 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{class_game_level_a53cd899aa9aeaf3e9579ff32598b0043}\label{class_game_level_a53cd899aa9aeaf3e9579ff32598b0043}} 
@@ -51,5 +58,5 @@ Implements \mbox{\hyperlink{class_i_logic_manager_a531478a93285f5cdf6f22294638b2
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-G\+A\+M\+Esource/Game\+Level.\+h\item 
-G\+A\+M\+Esource/Game\+Level.\+cpp\end{DoxyCompactItemize}
+G\+A\+M\+Esource/logic/Game\+Level.\+h\item 
+G\+A\+M\+Esource/logic/Game\+Level.\+cpp\end{DoxyCompactItemize}

@@ -9,9 +9,7 @@
 #include <memory>
 #include "GameState.h"
 
-/**
-* Interface to be implemented by a class acting as the manager of the Logic Component
-*/
+/// Interface to be implemented by a class acting as the manager of the Logic Component
 class ILogicManager
 {
 public:

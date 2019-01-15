@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['datatoolkit',['DataToolkit',['../class_data_toolkit.html',1,'']]],
-  ['dataupdate',['DataUpdate',['../class_data_update.html',1,'']]]
+  ['character',['Character',['../class_character.html',1,'']]],
+  ['charsprite',['CharSprite',['../class_char_sprite.html',1,'']]],
+  ['componentfactory',['ComponentFactory',['../class_component_factory.html',1,'']]]
 ];

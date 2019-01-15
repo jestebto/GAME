@@ -4,11 +4,10 @@
 #include "IInputManager.h"
 #include <cstdlib>
 #include "pch.h"
-
+/// Test class
 class RandomInputGenerator : public IInputManager
 {
 public:
-	/// Test class
 	RandomInputGenerator();
 	~RandomInputGenerator();
 	UserInputType getInput();

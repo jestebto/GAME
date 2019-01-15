@@ -4,9 +4,7 @@
 #include "StorageLevelData.h"
 #include "StorageGameData.h"
 
-/**
-* Interface to be implemented by a class acting as the manager of the Storage Component
-*/
+/// Interface to be implemented by a class acting as the manager of the Storage Component
 class IStorageManager
 {
 public:

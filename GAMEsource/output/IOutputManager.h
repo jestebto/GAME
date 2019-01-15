@@ -9,9 +9,7 @@
 #include <string>
 #include <memory>
 
-/**
-* Interface to be implemented by a class acting as the manager of the Output Component
-*/
+/// Interface to be implemented by a class acting as the manager of the Output Component
 class IOutputManager
 {
 public:

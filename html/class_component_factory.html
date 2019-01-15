@@ -69,29 +69,33 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
+<p>The purpose of this class is to determine which specific implementations of the components to be used.  
+ <a href="class_component_factory.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_component_factory_8h_source.html">ComponentFactory.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa6178ddfecc39747ef12f11606735e09"><td class="memItemLeft" align="right" valign="top"><a id="aa6178ddfecc39747ef12f11606735e09"></a>
 <a class="el" href="class_i_storage_manager.html">IStorageManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_component_factory.html#aa6178ddfecc39747ef12f11606735e09">GetStorageManager</a> ()</td></tr>
-<tr class="memdesc:aa6178ddfecc39747ef12f11606735e09"><td class="mdescLeft">&#160;</td><td class="mdescRight">will return a pointer to an object implementing the <a class="el" href="class_i_storage_manager.html">IStorageManager</a> <br /></td></tr>
+<tr class="memdesc:aa6178ddfecc39747ef12f11606735e09"><td class="mdescLeft">&#160;</td><td class="mdescRight">will return a pointer to an object implementing the <a class="el" href="class_i_storage_manager.html" title="Interface to be implemented by a class acting as the manager of the Storage Component. ">IStorageManager</a> <br /></td></tr>
 <tr class="separator:aa6178ddfecc39747ef12f11606735e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84613a5a5f11003abd9d10620ca72b5b"><td class="memItemLeft" align="right" valign="top"><a id="a84613a5a5f11003abd9d10620ca72b5b"></a>
 <a class="el" href="class_i_input_manager.html">IInputManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_component_factory.html#a84613a5a5f11003abd9d10620ca72b5b">GetInputManager</a> ()</td></tr>
-<tr class="memdesc:a84613a5a5f11003abd9d10620ca72b5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">will return a pointer to an object implementing the <a class="el" href="class_i_input_manager.html">IInputManager</a> <br /></td></tr>
+<tr class="memdesc:a84613a5a5f11003abd9d10620ca72b5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">will return a pointer to an object implementing the <a class="el" href="class_i_input_manager.html" title="Interface to be implemented by a class acting as the manager of the Input Component. ">IInputManager</a> <br /></td></tr>
 <tr class="separator:a84613a5a5f11003abd9d10620ca72b5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa8a3b17c86c562cc69f50f283ed3cc28"><td class="memItemLeft" align="right" valign="top"><a id="aa8a3b17c86c562cc69f50f283ed3cc28"></a>
 <a class="el" href="class_i_logic_manager.html">ILogicManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_component_factory.html#aa8a3b17c86c562cc69f50f283ed3cc28">GetLogicManager</a> ()</td></tr>
-<tr class="memdesc:aa8a3b17c86c562cc69f50f283ed3cc28"><td class="mdescLeft">&#160;</td><td class="mdescRight">will return a pointer to an object implementing the <a class="el" href="class_i_logic_manager.html">ILogicManager</a> <br /></td></tr>
+<tr class="memdesc:aa8a3b17c86c562cc69f50f283ed3cc28"><td class="mdescLeft">&#160;</td><td class="mdescRight">will return a pointer to an object implementing the <a class="el" href="class_i_logic_manager.html" title="Interface to be implemented by a class acting as the manager of the Logic Component. ">ILogicManager</a> <br /></td></tr>
 <tr class="separator:aa8a3b17c86c562cc69f50f283ed3cc28"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a19583d4fc53d5942e5c0558a52809086"><td class="memItemLeft" align="right" valign="top"><a id="a19583d4fc53d5942e5c0558a52809086"></a>
 <a class="el" href="class_i_output_manager.html">IOutputManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_component_factory.html#a19583d4fc53d5942e5c0558a52809086">GetOutputManager</a> ()</td></tr>
-<tr class="memdesc:a19583d4fc53d5942e5c0558a52809086"><td class="mdescLeft">&#160;</td><td class="mdescRight">will return a pointer to an object implementing the <a class="el" href="class_i_output_manager.html">IOutputManager</a> <br /></td></tr>
+<tr class="memdesc:a19583d4fc53d5942e5c0558a52809086"><td class="mdescLeft">&#160;</td><td class="mdescRight">will return a pointer to an object implementing the <a class="el" href="class_i_output_manager.html" title="Interface to be implemented by a class acting as the manager of the Output Component. ">IOutputManager</a> <br /></td></tr>
 <tr class="separator:a19583d4fc53d5942e5c0558a52809086"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The purpose of this class is to determine which specific implementations of the components to be used. Example: GetStorageComponent might return a <a class="el" href="class_hard_coded_storage_manager.html">HardCodedStorageManager</a>, or a FileSystemStorageManager, which both implement the <a class="el" href="class_i_storage_manager.html">IStorageManager</a> interface. </p>
+<div class="textblock"><p>The purpose of this class is to determine which specific implementations of the components to be used. </p>
+<p>Example: GetStorageComponent might return a <a class="el" href="class_hard_coded_storage_manager.html" title="Contains hardcoded level data in the form of strings. Interacts with the IStorageManager Interface...">HardCodedStorageManager</a>, or a FileSystemStorageManager, which both implement the <a class="el" href="class_i_storage_manager.html" title="Interface to be implemented by a class acting as the manager of the Storage Component. ">IStorageManager</a> interface. </p>
 </div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>GAMEsource/<a class="el" href="_component_factory_8h_source.html">ComponentFactory.h</a></li>
 <li>GAMEsource/ComponentFactory.cpp</li>

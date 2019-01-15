@@ -1,0 +1,65 @@
+\hypertarget{class_tile_manager}{}\section{Tile\+Manager Class Reference}
+\label{class_tile_manager}\index{Tile\+Manager@{Tile\+Manager}}
+
+
+Pure virtual class that provides an abstract interface for the \mbox{\hyperlink{class_graphic_output_manager}{Graphic\+Output\+Manager}}.  
+
+
+
+
+{\ttfamily \#include $<$Tile\+Manager.\+h$>$}
+
+Inheritance diagram for Tile\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_tile_manager}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_tile_manager_a1cac9e081272aebacdfe9150266f64aa}\label{class_tile_manager_a1cac9e081272aebacdfe9150266f64aa}} 
+\mbox{\hyperlink{class_tile_manager_a1cac9e081272aebacdfe9150266f64aa}{Tile\+Manager}} (S\+D\+L\+\_\+\+Texture $\ast$)
+\begin{DoxyCompactList}\small\item\em Functions to be called by \mbox{\hyperlink{class_graphic_output_manager}{Graphic\+Output\+Manager}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tile_manager_a12b83eb0369a54b3abe87477c98fb40a}\label{class_tile_manager_a12b83eb0369a54b3abe87477c98fb40a}} 
+S\+D\+L\+\_\+\+Texture $\ast$ \mbox{\hyperlink{class_tile_manager_a12b83eb0369a54b3abe87477c98fb40a}{get\+Sheet}} ()
+\begin{DoxyCompactList}\small\item\em pass the sheet so that it can be used in a renderer (in the \mbox{\hyperlink{class_graphic_output_manager}{Graphic\+Output\+Manager}}) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tile_manager_aa9094370bebe03d18969c7ca2e98ce61}\label{class_tile_manager_aa9094370bebe03d18969c7ca2e98ce61}} 
+virtual S\+D\+L\+\_\+\+Rect $\ast$ \mbox{\hyperlink{class_tile_manager_aa9094370bebe03d18969c7ca2e98ce61}{get\+Tile}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} $>$ const \&)=0
+\begin{DoxyCompactList}\small\item\em get\+Tile for a unique Sprite \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tile_manager_a35eb6807fd296270fef400dae3e0628c}\label{class_tile_manager_a35eb6807fd296270fef400dae3e0628c}} 
+virtual S\+D\+L\+\_\+\+Rect $\ast$ \mbox{\hyperlink{class_tile_manager_a35eb6807fd296270fef400dae3e0628c}{get\+Tile}} (\mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, \mbox{\hyperlink{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}{Sprite\+Attributes\+::\+Description}})=0
+\begin{DoxyCompactList}\small\item\em get\+Tile for general printing e.\+g. for the background \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tile_manager_aef74e8eb370f1b61729144ab67132735}\label{class_tile_manager_aef74e8eb370f1b61729144ab67132735}} 
+virtual std\+::vector$<$ \mbox{\hyperlink{class_animation_frame}{Animation\+Frame}} $>$ $\ast$ \mbox{\hyperlink{class_tile_manager_aef74e8eb370f1b61729144ab67132735}{get\+Animation\+Frames}} (\mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} $\ast$, \mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, \mbox{\hyperlink{namespace_sprite_attributes_ae1a753cb32f500b34381aac4b197b3a7}{Sprite\+Attributes\+::\+Animation\+Types}})=0
+\begin{DoxyCompactList}\small\item\em Get a vector of animation frames. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, std\+::map$<$ \mbox{\hyperlink{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}{Sprite\+Attributes\+::\+Description}}, S\+D\+L\+\_\+\+Rect $>$ $>$ \mbox{\hyperlink{class_tile_manager_a0ac2270018950604d7f6c817cc17434d}{tile\+Set}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Pure virtual class that provides an abstract interface for the \mbox{\hyperlink{class_graphic_output_manager}{Graphic\+Output\+Manager}}. 
+
+Different Tile\+Managers can be instantiated for different tile set images/\+S\+D\+L\+\_\+\+Textures. This seperates the complex task of creating and managing a tile set from the relatively simple task of printing sprites. Also contains animation functions (these will be moved to a new another class). 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_tile_manager_a0ac2270018950604d7f6c817cc17434d}\label{class_tile_manager_a0ac2270018950604d7f6c817cc17434d}} 
+\index{Tile\+Manager@{Tile\+Manager}!tile\+Set@{tile\+Set}}
+\index{tile\+Set@{tile\+Set}!Tile\+Manager@{Tile\+Manager}}
+\subsubsection{\texorpdfstring{tile\+Set}{tileSet}}
+{\footnotesize\ttfamily std\+::map$<$\mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, std\+::map$<$\mbox{\hyperlink{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}{Sprite\+Attributes\+::\+Description}}, S\+D\+L\+\_\+\+Rect$>$ $>$ Tile\+Manager\+::tile\+Set\hspace{0.3cm}{\ttfamily [protected]}}
+
+Stores tiles to use wtih get\+Tile tile\+Set\mbox{[}$<$\+Art\+Type$>$\mbox{]}\mbox{[}\mbox{]} \begin{DoxySeeAlso}{See also}
+Art\+Type 
+
+Description 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+G\+A\+M\+Esource/output/Tile\+Manager.\+h\item 
+G\+A\+M\+Esource/output/Tile\+Manager.\+cpp\end{DoxyCompactItemize}

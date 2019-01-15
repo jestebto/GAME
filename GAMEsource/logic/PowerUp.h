@@ -2,7 +2,7 @@
 #define POWERUP_H
 
 #include "GameObject.h"
-
+/// A GameObject that can be consumed by the player to change its attributes
 class PowerUp : public GameObject {
 public:
 	PowerUp(const std::string, int, int, int);

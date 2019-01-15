@@ -1,0 +1,58 @@
+\hypertarget{class_tile_manager_weapons}{}\section{Tile\+Manager\+Weapons Class Reference}
+\label{class_tile_manager_weapons}\index{Tile\+Manager\+Weapons@{Tile\+Manager\+Weapons}}
+
+
+A tile manager specifically for the \mbox{\hyperlink{class_weapon}{Weapon}} tiles.  
+
+
+
+
+{\ttfamily \#include $<$Tile\+Manager\+Weapons.\+h$>$}
+
+Inheritance diagram for Tile\+Manager\+Weapons\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_tile_manager_weapons}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_tile_manager_weapons_aff0bab701aeb812f37b88c0cb3d180f5}\label{class_tile_manager_weapons_aff0bab701aeb812f37b88c0cb3d180f5}} 
+{\bfseries Tile\+Manager\+Weapons} (S\+D\+L\+\_\+\+Texture $\ast$)
+\item 
+\mbox{\Hypertarget{class_tile_manager_weapons_afbf96a64907bbc1d69c19dc081c997f8}\label{class_tile_manager_weapons_afbf96a64907bbc1d69c19dc081c997f8}} 
+S\+D\+L\+\_\+\+Rect $\ast$ \mbox{\hyperlink{class_tile_manager_weapons_afbf96a64907bbc1d69c19dc081c997f8}{get\+Tile}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} $>$ const \&)
+\begin{DoxyCompactList}\small\item\em get\+Tile for a unique Sprite \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tile_manager_weapons_a372744159940b7d869d4dbd452d690d3}\label{class_tile_manager_weapons_a372744159940b7d869d4dbd452d690d3}} 
+S\+D\+L\+\_\+\+Rect $\ast$ \mbox{\hyperlink{class_tile_manager_weapons_a372744159940b7d869d4dbd452d690d3}{get\+Tile}} (\mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, \mbox{\hyperlink{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}{Sprite\+Attributes\+::\+Description}})
+\begin{DoxyCompactList}\small\item\em get\+Tile for general printing e.\+g. for the background \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_tile_manager_weapons_ac68c5a47b1eabb20b0fca74fda223693}\label{class_tile_manager_weapons_ac68c5a47b1eabb20b0fca74fda223693}} 
+std\+::vector$<$ \mbox{\hyperlink{class_animation_frame}{Animation\+Frame}} $>$ $\ast$ \mbox{\hyperlink{class_tile_manager_weapons_ac68c5a47b1eabb20b0fca74fda223693}{get\+Animation\+Frames}} (\mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} $\ast$, \mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}}, \mbox{\hyperlink{namespace_sprite_attributes_ae1a753cb32f500b34381aac4b197b3a7}{Sprite\+Attributes\+::\+Animation\+Types}})
+\begin{DoxyCompactList}\small\item\em Returns an empty vector, since no animations are defined for this tile set. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const int \mbox{\hyperlink{class_tile_manager_weapons_ad8a290753e453499f6b10535a58c39b7}{tile\+Size}} = 16
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+A tile manager specifically for the \mbox{\hyperlink{class_weapon}{Weapon}} tiles. 
+
+A tile manager specifically for the \mbox{\hyperlink{class_weapon}{Weapon}} tiles. Artwork by 7\+Soul1. \href{https://7soul.itch.io}{\tt https\+://7soul.\+itch.\+io}. The icons in this pack are free for commercial use 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{class_tile_manager_weapons_ad8a290753e453499f6b10535a58c39b7}\label{class_tile_manager_weapons_ad8a290753e453499f6b10535a58c39b7}} 
+\index{Tile\+Manager\+Weapons@{Tile\+Manager\+Weapons}!tile\+Size@{tile\+Size}}
+\index{tile\+Size@{tile\+Size}!Tile\+Manager\+Weapons@{Tile\+Manager\+Weapons}}
+\subsubsection{\texorpdfstring{tile\+Size}{tileSize}}
+{\footnotesize\ttfamily const int Tile\+Manager\+Weapons\+::tile\+Size = 16}
+
+tile size for each Sprite. This is N\+OT the same as the graphic output manager tile size Therefore the renderer has to stretch the tile -\/$>$ slows down rendering if there are too many sprites 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+G\+A\+M\+Esource/output/Tile\+Manager\+Weapons.\+h\item 
+G\+A\+M\+Esource/output/Tile\+Manager\+Weapons.\+cpp\end{DoxyCompactItemize}

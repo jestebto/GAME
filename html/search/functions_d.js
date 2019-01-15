@@ -1,12 +1,4 @@
 var searchData=
 [
-  ['_7echaracter',['~Character',['../class_character.html#a3333a88ae593c36b229c90371e935d42',1,'Character']]],
-  ['_7edatatoolkit',['~DataToolkit',['../class_data_toolkit.html#aa792776c124aaf39bde19cb57bfcab38',1,'DataToolkit']]],
-  ['_7eenemy',['~Enemy',['../class_enemy.html#aafb628c66008e33afdd750e2f492bd98',1,'Enemy']]],
-  ['_7egameobject',['~GameObject',['../class_game_object.html#a67ae2fa6e7916c799700cd659975d8ea',1,'GameObject']]],
-  ['_7egraphicoutputmanager',['~GraphicOutputManager',['../class_graphic_output_manager.html#a13de402f591b8bfa7a11d4c2b84dfd83',1,'GraphicOutputManager']]],
-  ['_7eiinputmanager',['~IInputManager',['../class_i_input_manager.html#aa81a10b1ddf305df10c4aebe6930ac86',1,'IInputManager']]],
-  ['_7eilogicmanager',['~ILogicManager',['../class_i_logic_manager.html#af522c957cdce66d34eb8264212b413ed',1,'ILogicManager']]],
-  ['_7eioutputmanager',['~IOutputManager',['../class_i_output_manager.html#a7442c5161bf453dc13605f7aaeeea2b5',1,'IOutputManager']]],
-  ['_7eistoragemanager',['~IStorageManager',['../class_i_storage_manager.html#a5e3d6fa4a26ce40e4a23a13138a2c055',1,'IStorageManager']]]
+  ['update',['update',['../class_graphic_output_manager.html#aed60e3ba3328c6ca2ab0b3bf60e9871f',1,'GraphicOutputManager::update(std::vector&lt; std::shared_ptr&lt; DataUpdate &gt;&gt; data)'],['../class_graphic_output_manager.html#a64226361d4d827e5c16b76fcf86f4f6f',1,'GraphicOutputManager::update(UserInputType)'],['../class_i_output_manager.html#a41892abec0b57bc1244492f42f32901b',1,'IOutputManager::update(std::vector&lt; std::shared_ptr&lt; DataUpdate &gt;&gt;)=0'],['../class_i_output_manager.html#aef1aaf499f3eee5927cb2833af39ce43',1,'IOutputManager::update(UserInputType)=0']]]
 ];

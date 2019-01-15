@@ -10,10 +10,10 @@
 #include "Weapon.h"
 #include "UserInputType.h"
 #include "DataUpdate.h"
-
+/// Implements the logic part of the game through the ILogicManager interface
 /**
 * Owns different GameOject and level data. 
-* Implements the logic part of the game.
+* The most important class of the logic component
 */
 class GameLevel : public ILogicManager {
 public:

@@ -3,9 +3,7 @@
 
 #include "TileManager.h"
 #include <memory>
-/**
-* A tile manager specifically for the Pacman tiles
-*/
+/// A tile manager specifically for the Pacman tiles
 class TileManagerPacman :
 	public TileManager
 {

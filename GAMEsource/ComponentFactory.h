@@ -4,11 +4,10 @@
 #include "input/IInputManager.h"
 #include "logic/ILogicManager.h"
 #include "output/IOutputManager.h"
-
+///The purpose of this class is to determine which specific implementations of the components to be used.
 /**
-The purpose of this class is to determine which specific implementations of the components to be used.
-Example: GetStorageComponent might return a HardCodedStorageManager, or a FileSystemStorageManager, which
-both implement the IStorageManager interface.
+*Example: GetStorageComponent might return a HardCodedStorageManager, or a FileSystemStorageManager, which
+*both implement the IStorageManager interface.
 */
 class ComponentFactory
 {

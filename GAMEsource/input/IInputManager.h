@@ -4,9 +4,7 @@
 #include "UserInputType.h"
 #include "pch.h"
 
-/**
-* Interface to be implemented by a class acting as the manager of the Input Component
-*/
+/// Interface to be implemented by a class acting as the manager of the Input Component. 
 class IInputManager
 {
 	//<TO DO JOSE> find out if the destructor still needs to be =0 when the interface is properly implemented.

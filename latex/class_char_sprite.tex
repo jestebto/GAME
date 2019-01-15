@@ -2,6 +2,11 @@
 \label{class_char_sprite}\index{Char\+Sprite@{Char\+Sprite}}
 
 
+A more complex \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} that can handle orientations.  
+
+
+
+
 {\ttfamily \#include $<$Char\+Sprite.\+h$>$}
 
 Inheritance diagram for Char\+Sprite\+:\begin{figure}[H]
@@ -13,8 +18,8 @@ Inheritance diagram for Char\+Sprite\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_char_sprite_af37365a1d2728992c4ea4614f7cefe80}\label{class_char_sprite_af37365a1d2728992c4ea4614f7cefe80}} 
-{\bfseries Char\+Sprite} (int x\+Pos, int y\+Pos, \mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}} art\+Type, \mbox{\hyperlink{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}{Sprite\+Attributes\+::\+Description}} des, Character\+Orientation ori)
+\mbox{\Hypertarget{class_char_sprite_ab2fc7e388ec050c1fa842ae544a1abdc}\label{class_char_sprite_ab2fc7e388ec050c1fa842ae544a1abdc}} 
+{\bfseries Char\+Sprite} (int x\+Pos, int y\+Pos, \mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e998}{Sprite\+Attributes\+::\+Art\+Type}} art\+Type, \mbox{\hyperlink{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}{Sprite\+Attributes\+::\+Description}} des, \mbox{\hyperlink{namespace_sprite_attributes_a254503d1929a87fa82146c9b7d19c2df}{Sprite\+Attributes\+::\+Tile\+Type}}, Character\+Orientation ori)
 \item 
 \mbox{\Hypertarget{class_char_sprite_aa1abdd6c5c23e4f9fc387c6366e614f4}\label{class_char_sprite_aa1abdd6c5c23e4f9fc387c6366e614f4}} 
 void \mbox{\hyperlink{class_char_sprite_aa1abdd6c5c23e4f9fc387c6366e614f4}{set\+Orientation}} (Character\+Orientation)
@@ -24,16 +29,22 @@ Character\+Orientation \mbox{\hyperlink{class_char_sprite_a90884802c77985e34839c
 \begin{DoxyCompactList}\small\item\em Override virtual function in \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}}. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_char_sprite_ac4d0cb62e37461baff3fa1aa31de5878}\label{class_char_sprite_ac4d0cb62e37461baff3fa1aa31de5878}} 
 void \mbox{\hyperlink{class_char_sprite_ac4d0cb62e37461baff3fa1aa31de5878}{move\+Sprite}} (int, int)
-\begin{DoxyCompactList}\small\item\em Override virtual function in \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}}, so that the artwork is change to match the orientation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Override virtual function in \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}}, so that the artwork is change to match the orientation. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_char_sprite_a4e20c37553161593c1170f47021d431c}\label{class_char_sprite_a4e20c37553161593c1170f47021d431c}} 
+void \mbox{\hyperlink{class_char_sprite_a4e20c37553161593c1170f47021d431c}{move\+Sprite}} (int)
+\begin{DoxyCompactList}\small\item\em move Sprite based on the current orientation \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 static \mbox{\hyperlink{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}{Sprite\+Attributes\+::\+Description}} \mbox{\hyperlink{class_char_sprite_a7556b4b4123dbd51b13ec46fc11c0810}{map\+Orientation\+To\+Description}} (Character\+Orientation Ori)
 \end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
 
 
 \subsection{Detailed Description}
-A more complex \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} that can handle orientations. This is important for playing animations in the right direction 
+A more complex \mbox{\hyperlink{class_game_sprite}{Game\+Sprite}} that can handle orientations. 
+
+This is important for playing animations in the right direction 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{class_char_sprite_a7556b4b4123dbd51b13ec46fc11c0810}\label{class_char_sprite_a7556b4b4123dbd51b13ec46fc11c0810}} 
@@ -46,5 +57,5 @@ Map enums of the smaller Character\+Orientation enum class to the bigger Descrip
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-G\+A\+M\+Esource/Char\+Sprite.\+h\item 
-G\+A\+M\+Esource/Char\+Sprite.\+cpp\end{DoxyCompactItemize}
+G\+A\+M\+Esource/output/Char\+Sprite.\+h\item 
+G\+A\+M\+Esource/output/Char\+Sprite.\+cpp\end{DoxyCompactItemize}

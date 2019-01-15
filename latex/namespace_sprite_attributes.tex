@@ -30,19 +30,23 @@ enum \mbox{\hyperlink{namespace_sprite_attributes_afb5447c311bc29f0ce8ddfd025c6e
 {\bfseries D\+OT}, 
 {\bfseries E\+N\+E\+R\+G\+I\+Z\+ER}, 
 \newline
+{\bfseries B\+L\+A\+NK}, 
 {\bfseries W\+A\+LL}, 
 {\bfseries Z\+E\+RO}, 
 {\bfseries O\+NE}, 
-{\bfseries T\+WO}, 
 \newline
+{\bfseries T\+WO}, 
 {\bfseries T\+H\+R\+EE}, 
 {\bfseries F\+O\+UR}, 
 {\bfseries F\+I\+VE}, 
-{\bfseries S\+IX}, 
 \newline
+{\bfseries S\+IX}, 
 {\bfseries S\+E\+V\+EN}, 
 {\bfseries E\+I\+G\+HT}, 
-{\bfseries N\+I\+NE}
+{\bfseries N\+I\+NE}, 
+\newline
+{\bfseries F\+I\+R\+E\+\_\+\+S\+W\+O\+RD}, 
+{\bfseries E\+R\+R\+OR}
  \}
 \begin{DoxyCompactList}\small\item\em Artwork Type used for each sprite. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}\label{namespace_sprite_attributes_a3ece96d6288b14d53d84e2138392395c}} 
@@ -61,8 +65,34 @@ enum \mbox{\hyperlink{namespace_sprite_attributes_a3ece96d6288b14d53d84e21383923
 {\bfseries A\+T\+T\+A\+C\+K\+\_\+\+R\+I\+G\+HT}, 
 {\bfseries E\+L\+I\+M\+I\+N\+A\+TE}
  \}
-\begin{DoxyCompactList}\small\item\em For descriptions/actions for each artwork. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em For descriptions/actions for each artwork. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{namespace_sprite_attributes_ae1a753cb32f500b34381aac4b197b3a7}\label{namespace_sprite_attributes_ae1a753cb32f500b34381aac4b197b3a7}} 
+enum \mbox{\hyperlink{namespace_sprite_attributes_ae1a753cb32f500b34381aac4b197b3a7}{Animation\+Types}} \{ \newline
+{\bfseries N\+O\+T\+H\+I\+NG}, 
+{\bfseries I\+D\+LE}, 
+{\bfseries A\+T\+T\+A\+CK}, 
+{\bfseries D\+E\+A\+TH}, 
+\newline
+{\bfseries G\+E\+T\+\_\+\+H\+IT}, 
+{\bfseries L\+O\+O\+K\+\_\+\+L\+E\+FT}, 
+{\bfseries L\+O\+O\+K\+\_\+\+R\+I\+G\+HT}, 
+{\bfseries W\+A\+LK}
+ \}
+\begin{DoxyCompactList}\small\item\em For different types of animations. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{namespace_sprite_attributes_a254503d1929a87fa82146c9b7d19c2df}{Tile\+Type}} \{ {\bfseries T\+M0}, 
+{\bfseries T\+M1}
+ \}
+\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 Define attributes important only for Sprite objects in the graphic user interface. 
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespace_sprite_attributes_a254503d1929a87fa82146c9b7d19c2df}\label{namespace_sprite_attributes_a254503d1929a87fa82146c9b7d19c2df}} 
+\index{Sprite\+Attributes@{Sprite\+Attributes}!Tile\+Type@{Tile\+Type}}
+\index{Tile\+Type@{Tile\+Type}!Sprite\+Attributes@{Sprite\+Attributes}}
+\subsubsection{\texorpdfstring{Tile\+Type}{TileType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespace_sprite_attributes_a254503d1929a87fa82146c9b7d19c2df}{Sprite\+Attributes\+::\+Tile\+Type}}}
+
+Specify the tile set to use for each game sprites T\+M0-\/$>$use Pacman sprites T\+M1-\/$>$use 7\+Soul1 sprites (but not for animations!!) 

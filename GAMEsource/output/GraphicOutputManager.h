@@ -28,9 +28,10 @@
 #include <memory>
 #include <cstddef> // for size_t
 
-/// An output manager that manages a Window and a Graphic User Interface
-/// This class owns GameSprite objects, SpriteManager(s), SDL textures and a SDL window and renderer.
-/// It is dependent on SpriteManager to execute many of the tasks related to dynamic sprites.
+/// An output manager that manages a Window and a Graphic User Interface through the IOutputManager.
+/** This class owns GameSprite objects, SpriteManager(s), SDL textures and a SDL window and renderer.
+* It is dependent on the TileManager(s) to execute many of the tasks related to dynamic sprites.
+*/
 class GraphicOutputManager: public IOutputManager
 {
 public:

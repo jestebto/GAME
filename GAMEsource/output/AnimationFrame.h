@@ -4,6 +4,7 @@
 #include <vector>
 #include "GameSprite.h"
 
+/// A set of instructions to display a single animation frame
 /**
 * Each animation frame consists of a single sprite artwork, which can be uniquely identified 
 * by an artType and a description e.g. PACMAN UP.
@@ -22,7 +23,6 @@ public:
 	~AnimationFrame() {};
 	
 	/// An artwork type and an artwork description uniquely defines an animation frame
-	//typedef std::pair<SpriteAttributes::ArtType, SpriteAttributes::Description> AnimationFrame;
 
 	SpriteAttributes::ArtType art; ///< An artwork type to identify the sprite
 	SpriteAttributes::Description description; ///< further description to identify the sprite
