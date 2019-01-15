@@ -8,7 +8,7 @@
 class CharSprite : public GameSprite
 {
 public:
-	CharSprite(int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Description des, int, CharacterOrientation ori);
+	CharSprite(int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Description des, SpriteAttributes::TileType, CharacterOrientation ori);
 	~CharSprite();
 
 	void setOrientation(CharacterOrientation); 	///< Override virtual function in GameSprite

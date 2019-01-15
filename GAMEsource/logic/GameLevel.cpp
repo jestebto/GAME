@@ -211,10 +211,36 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 		}
 		break;
 
-	case UserInputType::Throw: // Throw 
-		if (player1->getWeapon() == 1) {
-			player1->throwWeapon();
+	case UserInputType::Drop: // Drop a weapon
+		// put the weapon back in the game
+		if (player1->getWeapon() != "0") {
+			for (int i = 0; i < weapons.size(); i++) {
+				if (weapons[i]->getID() == player1->getWeapon())
+				{
+					int weaponX = player1->getXPosition();
+					int weaponY = player1->getYPosition();
+					bool wall = checkWallCollision(weaponX, weaponY);
+						// find the first free spot to put it
+					for (int dely : {0, -1, 1}) {
+						for (int delx : {-1, 0, 1}) {
+							if (!checkWallCollision(weaponX + delx, weaponY + dely) && !(delx==0 && dely==0)) {
+								weaponX += delx;
+								weaponY += dely;
+								goto setPos;
+							}
+						}
+					}
+					setPos:
+					weapons[i]->setXPosition(weaponX);
+					weapons[i]->setYPosition(weaponY);
+					std::shared_ptr<DataUpdate> dropWeapon(new DataUpdate(weapons[i]->getID(), weapons[i]->getXPosition(), weapons[i]->getYPosition(), weapons[i]->dataToString(), DataUpdate::ObjectType::WEAPON, DataUpdate::Action::NOTHING));
+					this->output.push_back(dropWeapon);
+					break;
+				}
+			}		
 		}
+		// remove the weapon from the player
+		player1->dropWeapon();
 		break;
 
 	case UserInputType::Hit: { // Attack
@@ -244,10 +270,10 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 
 			// Process all enemies that are hit
 			if (enemies[i]->getXPosition() == tempX && enemies[i]->getYPosition() == tempY) {
-				if (player1->getWeapon() == true) {
+				if (player1->getWeapon() != "0") {
 					enemies[i]->setLives(-(player1->getDmg() + 10));
 				}
-				else {//player1->getWeapon() == false
+				else {//player1->getWeapon() returns an ID
 					enemies[i]->setLives(-player1->getDmg());
 					//std::cout << enemies[i]->getLives();
 				}
@@ -368,11 +394,14 @@ bool GameLevel::checkWeaponCollision(int tempX, int tempY) {
 	for (int i = 0; i < weapons.size(); i++)
 	{
 		if ((tempX == weapons[i]->getXPosition()) && (tempY == weapons[i]->getYPosition())) {
-			player1->setWeapon(); // set new weapon
+			player1->setWeapon(weapons[i]->getID()); // set new weapon
+			//Move off the screen
+			weapons[i]->setXPosition(-100);
+			weapons[i]->setYPosition(-100);
 			collision = true;
-			std::shared_ptr<DataUpdate> collectedWeapon(new DataUpdate(weapons[i]->getID(), weapons[i]->getXPosition(), weapons[i]->getYPosition(), weapons[i]->dataToString(), DataUpdate::ObjectType::WEAPON, DataUpdate::Action::ELIMINATE));
+			std::shared_ptr<DataUpdate> collectedWeapon(new DataUpdate(weapons[i]->getID(), weapons[i]->getXPosition(), weapons[i]->getYPosition(), weapons[i]->dataToString(), DataUpdate::ObjectType::WEAPON, DataUpdate::Action::GET_WEAPON));
 			this->output.push_back(collectedWeapon);
-			weapons.erase(weapons.begin() + i);
+			//weapons.erase(weapons.begin() + i); don't erase, because can drop it later
 			break;
 		}
 	}
