@@ -7,14 +7,14 @@
 
 #include "GameSprite.h"
 
-GameSprite::GameSprite(int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Description des,int select) {
+GameSprite::GameSprite(int xPos, int yPos, SpriteAttributes::ArtType artType, SpriteAttributes::Description des, SpriteAttributes::TileType select) {
 	//objectID = ID;
 	//objectType = objectType;
 	xPosition = xPos;
 	yPosition = yPos;
 	art = artType;
 	description = des;
-	tileManager = select;
+	tm = select;
 }
 
 GameSprite::~GameSprite() {

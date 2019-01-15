@@ -75,7 +75,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 				int x = TILESIZE * stoi(tempConstructorData[1]);
 				int y = TILESIZE * stoi(tempConstructorData[2]);
 				this->spriteObjects[tempConstructorData[0]] = std::make_unique<CharSprite> (x,y,PACMAN, 
-					SpriteAttributes::UP,TM0,CharacterOrientation::Up);
+					SpriteAttributes::UP, TileType::TM0,CharacterOrientation::Up);
 				this->lives= stoi(tempConstructorData[3]);
 
 				tempConstructorData = {}; //make sure the vector is empty in the next case <TO DO> make sure if this is needed
@@ -89,7 +89,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 				int x = TILESIZE * stoi(tempConstructorData[1]);
 				int y = TILESIZE * stoi(tempConstructorData[2]);
 				this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, SCAREDINV, 
-					SpriteAttributes::DEFAULT, TM0);
+					SpriteAttributes::DEFAULT, TileType::TM0);
 
 				tempConstructorData = {}; // make sure the vector is empty in the next case
 				break;
@@ -101,7 +101,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 				int x = TILESIZE * stoi(tempConstructorData[1]);
 				int y = TILESIZE * stoi(tempConstructorData[2]);
 				this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x,y, APPLE,
-					SpriteAttributes::DEFAULT, TM1);
+					SpriteAttributes::DEFAULT, TileType::TM1);
 				break;
 			}
 			case 4: { // 4 is a weapon
@@ -111,7 +111,7 @@ void GraphicOutputManager::loadLevel(OutputData inputString) {
 				int x = TILESIZE * stoi(tempConstructorData[1]);
 				int y = TILESIZE * stoi(tempConstructorData[2]);
 				this->spriteObjects[tempConstructorData[0]] = std::make_unique<GameSprite>(x, y, FIRE_SWORD,
-					SpriteAttributes::DEFAULT, TM1);
+					SpriteAttributes::DEFAULT, TileType::TM1);
 				break;
 			}
 		}
@@ -257,13 +257,13 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 		SDL_Rect dst = { x  + xOffset, y  + yOffset, TILESIZE,TILESIZE }; //note: will stretch weaponManager tiles
 
 		// select which tile manager to to use to print the sprites
-		if (mapPair.second->tileManager == TM0) {
-			SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
+		if (mapPair.second->tm == SpriteAttributes::TileType::TM1) {
+			SDL_RenderCopy(renderer, weaponManager->getSheet(), weaponManager->getTile(mapPair.second),
 				&dst);
 		}
 		else
 		{
-			SDL_RenderCopy(renderer, weaponManager->getSheet(), weaponManager->getTile(mapPair.second),
+			SDL_RenderCopy(renderer, spriteManager->getSheet(), spriteManager->getTile(mapPair.second),
 				&dst);
 		}
 	}

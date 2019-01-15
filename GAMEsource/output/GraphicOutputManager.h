@@ -117,11 +117,8 @@ private:
 
 	/**
 	* Declare constants used to keep the screen and tile size fixed
-	* Also declare enums to specify the tile manager to use for each game sprites
-	* TM0 -> use spriteManager
-	* TM1 -> use weaponManager (but not for animations!!)
 	*/
-	enum { TILESIZE = 24, SCREEN_WIDTH = 22, SCREEN_HEIGHT = 21, TM0,TM1 }; // note: title bar is an effective +1 to the screen height
+	enum { TILESIZE = 24, SCREEN_WIDTH = 22, SCREEN_HEIGHT = 21}; // note: title bar is an effective +1 to the screen height
 
 	/// 2d array containing the map, a 1 is a wall.
 	std::vector<std::vector<int>> levelMap;
