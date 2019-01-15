@@ -71,10 +71,10 @@ void GameSprite::moveSprite(int x, int y)
 	*   v
 	*   +y
 	*/
-
+	/*
 	int x_old = getXPosition();
 	int y_old = getYPosition();
-
+	*/
 	setXPosition(x);
 	setYPosition(y);
 	/* //From earlier version where this was used to estimate the direction

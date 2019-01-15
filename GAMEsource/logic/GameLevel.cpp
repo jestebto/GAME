@@ -219,7 +219,6 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 				{
 					int weaponX = player1->getXPosition();
 					int weaponY = player1->getYPosition();
-					bool wall = checkWallCollision(weaponX, weaponY);
 						// find the first free spot to put it
 					for (int dely : {0, -1, 1}) {
 						for (int delx : {-1, 0, 1}) {
