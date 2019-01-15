@@ -52,7 +52,7 @@ UserInputType KeyboardInputManager::getInput()
 				case SDLK_j:
 				case SDLK_l:
 					//std::cout << ">>>Pressed THROW!\n";
-					inputType = UserInputType::Throw;
+					inputType = UserInputType::Drop;
 					break;
 				case SDLK_ESCAPE:
 					//std::cout << ">>>Pressed QUIT!\n"; //<TO DO> comment out or remove (DEBUG)

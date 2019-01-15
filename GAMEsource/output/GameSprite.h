@@ -62,6 +62,13 @@ namespace SpriteAttributes {
 	 enum AnimationTypes {
 		 NOTHING, IDLE, ATTACK, DEATH, GET_HIT, LOOK_LEFT, LOOK_RIGHT, WALK
 	 };
+
+	 /**
+	 * Specify the tile set to use for each game sprites
+	 * TM0->use Pacman sprites
+	 * TM1->use 7Soul1 sprites (but not for animations!!)
+	*/
+	 enum TileType { TM0, TM1 };
  
 }
 
@@ -72,7 +79,7 @@ namespace SpriteAttributes {
 class GameSprite
 {
 public:
-	GameSprite(int, int, SpriteAttributes::ArtType, SpriteAttributes::Description,int);
+	GameSprite(int, int, SpriteAttributes::ArtType, SpriteAttributes::Description, SpriteAttributes::TileType);
 	~GameSprite(); // vitual destructor
 
 	void setType(SpriteAttributes::ArtType); ///< set sprite artwork
@@ -96,7 +103,7 @@ public:
 	void setYPosition(int); ///< get Y-Position
 	int getYPosition(); ///< get Y-Position
 
-	int tileManager;///< define which tileManager to use with this sprite
+	SpriteAttributes::TileType tm;///< define which tileManager to use with this sprite
 	
 private:
 	SpriteAttributes::ArtType art;
