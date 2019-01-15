@@ -3,6 +3,8 @@
 
 #include <string>
 #include <sstream>
+#include <exception>
+#include <stdexcept>
 
 /// A generic game object that can be moved around. Used in the logic component. Compare GameSprite.
 class GameObject {

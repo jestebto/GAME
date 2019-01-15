@@ -350,7 +350,7 @@ void GraphicOutputManager::playAnimationMany(std::vector<AnimationRequest> anima
 		throw std::out_of_range("An animation does not exist in this tile manager"); 
 	}
 
-	size_t numAnimations = size(animationSequences);
+	size_t numAnimations = animationSequences.size();
 
 	// play animations concurrently
 	for (size_t j = 0; j < longest; j++) { // j = index of frame
