@@ -23,16 +23,17 @@ public:
 	virtual std::string dataToString();
 
 	/// set weapon
-	void setWeapon();
+	void setWeapon(std::string);
 
-	/// get weapon
-	bool getWeapon();
+	/// get weapon. Returns a weapon ID
+	std::string getWeapon();
 
 	/// throw weapon
-	void throwWeapon();
+	void dropWeapon();
 
 private:
 	int lives; /// number of lives
+	std::string weaponID;
 	bool EQUIPPED = false ; //Whether the player holds a weapon
 };
 

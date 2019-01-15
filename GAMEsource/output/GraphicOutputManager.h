@@ -136,7 +136,7 @@ private:
 	std::map<std::string, std::unique_ptr<GameSprite>> spriteObjects;
 
 	int lives;//<store number of lives the character has
-	bool hasWeapon = false;
+	std::string playerWeaponID = "0";
 };
 
 #endif /* GRAPHIC_OUTPUT_MANAGER_H */

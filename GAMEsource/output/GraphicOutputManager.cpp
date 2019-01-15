@@ -166,7 +166,7 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 		auto mapPair = spriteObjects.find(thisID);
 
 		if (mapPair == spriteObjects.end())
-			std::cout << "Element not found" << '\n';
+			std::cout << "Element with ID " << thisID <<" not found" << '\n';
 		else {
 			// Look at ObjectType specific data
 			std::vector <std::string> tempConstructorData;
@@ -175,13 +175,11 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 			DataUpdate::Action action =  dataPtr->getAction();
 			switch (type) {
 			case DataUpdate::ObjectType::PLAYER: {
-				// DataFormat = "lives, (int)CharacterOrientation, damage"
+				// DataFormat = "lives, (int)CharacterOrientation, weaponID"
 				tempConstructorData = DataToolkit::getSubs(dataPtr->getData(), ',');
 
 				this->lives = stoi(tempConstructorData[0]);
-
-				//Check if the player has a weapon
-				this->hasWeapon = (stoi(tempConstructorData[2]) == 1) ? true : false;
+				this->playerWeaponID = tempConstructorData[2];//( != "0") ? true : false;
 
 				switch (action) {
 				case DataUpdate::Action::ATTACK: {
@@ -216,8 +214,7 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 					int x = TILESIZE * (dataPtr->getObjectXPosition());
 					int y = TILESIZE * (dataPtr->getObjectYPosition());
 					(mapPair->second)->moveSprite(x, y);
-					break;
-				}
+				} break;
 				}
 			} break;
 			default:
@@ -227,9 +224,11 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 						break;
 				}
 				default: {
-					int madafaka = 0;
-					break;
-				}
+					// assume movement
+					int x = TILESIZE * (dataPtr->getObjectXPosition());
+					int y = TILESIZE * (dataPtr->getObjectYPosition());
+					(mapPair->second)->moveSprite(x, y);
+				}break;
 				}
 			}
 		}
@@ -463,10 +462,16 @@ void GraphicOutputManager::drawLives()
 	}
 
 	// draw the weapon
-	if (hasWeapon == true)
+	if (playerWeaponID != "0")
 	{
-		SDL_Rect dst = { (1) * TILESIZE, (SCREEN_HEIGHT - 2) * TILESIZE, 2 * TILESIZE,2 * TILESIZE };
-		SDL_RenderCopy(renderer, weaponManager->getSheet(), weaponManager->getTile(FIRE_SWORD, DEFAULT), &dst);
+		auto mapPair = spriteObjects.find(this->playerWeaponID);
+
+		if (mapPair == spriteObjects.end())
+			std::cout << "Element with ID " << playerWeaponID << " not found" << '\n';
+		else {
+			SDL_Rect dst = { (1) * TILESIZE, (SCREEN_HEIGHT - 2) * TILESIZE, 2 * TILESIZE,2 * TILESIZE };
+			SDL_RenderCopy(renderer, weaponManager->getSheet(), weaponManager->getTile(mapPair->second), &dst);
+		}
 	}
 }
 

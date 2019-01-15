@@ -27,23 +27,25 @@ bool Character::isAlive() {
 }
 
 /// set lives
-void Character::setWeapon() {
+void Character::setWeapon(std::string weaponID) {
 	Character::EQUIPPED = true ;
+	Character::weaponID = weaponID;
 }
 
 /// get weapon
-bool Character::getWeapon() {
+std::string Character::getWeapon() {
 	if (Character::EQUIPPED == true){
-		return true;
+		return this->weaponID;
 	}
 	else {
-		return false;
+		return "0";
 	}
 }
 
-/// throw weapon
-void Character::throwWeapon() {
+/// drop weapon
+void Character::dropWeapon() {
 	Character::EQUIPPED = false ;
+	this->weaponID = "0";
 }
 
 //return a string with the object's data
