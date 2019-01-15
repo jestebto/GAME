@@ -2,6 +2,7 @@
 #define GAMELEVEL_H
 
 #include <vector>
+#include <memory>
 #include "ILogicManager.h"
 #include "Player.h"
 #include "Enemy.h"

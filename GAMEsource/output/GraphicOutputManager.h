@@ -23,7 +23,9 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <map>
+#include <memory>
 #include <vector>
+#include <memory>
 
 /// An output manager that manages a Window and a Graphic User Interface
 /// This class owns GameSprite objects, SpriteManager(s), SDL textures and a SDL window and renderer.

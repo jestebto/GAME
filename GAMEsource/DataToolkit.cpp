@@ -1,5 +1,6 @@
 #include "DataToolkit.h"
-
+#include <exception>
+#include <stdexcept>
 
 
 DataToolkit::DataToolkit()
@@ -14,7 +15,7 @@ DataToolkit::~DataToolkit()
 std::vector<std::string> DataToolkit::getSubs(std::string s, char delimiter) {
 	std::vector <std::string> subsVector; // Creating a vector which stores string values
 	std::size_t del;
-	if (s.back() != delimiter)throw std::exception("DataToolkit: the final character of the string has to be the delimiter");
+	if (s.back() != delimiter)throw std::runtime_error("DataToolkit: the final character of the string has to be the delimiter");
 
 	for (unsigned int i{ 0 }; s.size() > 0; i++) {
 		// find the symbol that separates objects (semicolon)

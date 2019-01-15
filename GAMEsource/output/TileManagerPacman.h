@@ -2,6 +2,7 @@
 #define TILEMANAGERPACMAN_H
 
 #include "TileManager.h"
+#include <memory>
 /**
 * A tile manager specifically for the Pacman tiles
 */

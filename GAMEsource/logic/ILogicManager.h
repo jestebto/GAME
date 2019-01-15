@@ -6,6 +6,7 @@
 #include "DataUpdate.h"
 #include <vector>
 #include <string>
+#include <memory>
 #include "GameState.h"
 
 /**

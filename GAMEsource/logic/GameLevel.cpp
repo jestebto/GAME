@@ -3,9 +3,11 @@
 #include <sstream>
 #include <cmath>
 #include <array>
+#include <memory>
 #include "GameLevel.h"
 #include "DataToolkit.h"
 #include "CharacterOrientation.h"
+
 
 // constructor
 GameLevel::GameLevel() {

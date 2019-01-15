@@ -16,6 +16,7 @@
 #include <SDL2/SDL.h>
 #include <map>
 #include <vector>
+#include <memory>
 
 // For the animations:
 #include <thread> //sleep_for()

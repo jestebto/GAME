@@ -2,6 +2,8 @@
 #define TILEMANAGERWEAPONS_H
 
 #include "TileManager.h"
+#include  <memory>
+
 class TileManagerWeapons :
 	public TileManager
 {

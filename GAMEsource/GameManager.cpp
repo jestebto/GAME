@@ -6,6 +6,8 @@
 #include <chrono> //milliseconds
 #include <string>
 #include <iostream> //printing the debug console text when game over.
+#include <exception>
+#include <stdexcept>
 
 
 GameManager::GameManager()
@@ -115,7 +117,7 @@ void GameManager::Update()
 			DistributeData(currentLevel);
 			break;
 		default:
-			throw std::exception("A not expected state "); //TO DO: create custom exception?
+			throw std::runtime_error("A not expected state "); //TO DO: create custom exception?
 			break;
 		}
 	}	
