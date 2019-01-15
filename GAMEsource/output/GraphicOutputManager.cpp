@@ -181,7 +181,7 @@ void GraphicOutputManager::update(std::vector<std::shared_ptr<DataUpdate>> data)
 				this->lives = stoi(tempConstructorData[0]);
 
 				//Check if the player has a weapon
-				if (stoi(tempConstructorData[2])==true) this->hasWeapon= true;
+				this->hasWeapon = (stoi(tempConstructorData[2]) == 1) ? true : false;
 
 				switch (action) {
 				case DataUpdate::Action::ATTACK: {
