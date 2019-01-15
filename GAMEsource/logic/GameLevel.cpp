@@ -215,8 +215,22 @@ void GameLevel::executeUserCommand(UserInputType userInput) {
 			for (int i = 0; i < weapons.size(); i++) {
 				if (weapons[i]->getID() == player1->getWeapon())
 				{
-					weapons[i]->setXPosition(player1->getXPosition());
-					weapons[i]->setYPosition(player1->getYPosition()-1);
+					int weaponX = player1->getXPosition();
+					int weaponY = player1->getYPosition();
+					bool wall = checkWallCollision(weaponX, weaponY);
+						// find the first free spot to put it
+					for (int dely : {0, -1, 1}) {
+						for (int delx : {-1, 0, 1}) {
+							if (!checkWallCollision(weaponX + delx, weaponY + dely) && !(delx==0 && dely==0)) {
+								weaponX += delx;
+								weaponY += dely;
+								goto setPos;
+							}
+						}
+					}
+					setPos:
+					weapons[i]->setXPosition(weaponX);
+					weapons[i]->setYPosition(weaponY);
 					std::shared_ptr<DataUpdate> dropWeapon(new DataUpdate(weapons[i]->getID(), weapons[i]->getXPosition(), weapons[i]->getYPosition(), weapons[i]->dataToString(), DataUpdate::ObjectType::WEAPON, DataUpdate::Action::NOTHING));
 					this->output.push_back(dropWeapon);
 					break;
