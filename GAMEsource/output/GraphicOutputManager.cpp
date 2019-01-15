@@ -39,8 +39,15 @@ GraphicOutputManager::~GraphicOutputManager()
 void GraphicOutputManager::loadLevel(OutputData inputString) {
 	using namespace SpriteAttributes;
 
+	std::map<std::string, std::unique_ptr<GameSprite>> saveObjects;
+	if (playerWeaponID!="0")
+		saveObjects[playerWeaponID] = std::move(spriteObjects[playerWeaponID]);
+
 	spriteObjects.clear();
 	levelMap.clear();
+
+	if (playerWeaponID != "0")
+		spriteObjects[playerWeaponID] = std::move(saveObjects[playerWeaponID]);
 
 	//Parse data
 	std::vector <std::string> objectVector; // temporary string for storing the current object
