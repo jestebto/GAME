@@ -3,6 +3,8 @@
 
 #include <vector>
 #include "StorageLevelData.h"
+#include <exception>
+#include <stdexcept>
 
 /// Store data for multiple levels
 class StorageGameData
